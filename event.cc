@@ -20,7 +20,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
 
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
-  man->FillNtupleDColumn(2, 0, fEdep);
+  man->FillNtupleDColumn(0, 0, fEdep);
 
   man->AddNtupleRow(2);
 }
