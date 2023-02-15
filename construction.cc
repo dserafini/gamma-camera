@@ -152,7 +152,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	physCollimator = new G4PVPlacement(0,  // no rotation
 																											G4ThreeVector(0.,0.,0.), // at (0,0,0)
 																											logicCollimator,             // its logical volume
-																											"pCollimator",           // its name
+																											"physCollimator",           // its name
 																											logicWorld,                  // its mother volume
 																											false,                   // no boolean operations
 																											0,                       // copy number
@@ -172,7 +172,7 @@ void MyDetectorConstruction::ConstructCase()
 	physCase = new G4PVPlacement(0,  // no rotation
 																								G4ThreeVector(0.,0.,-collimator_thickness/2-case_thickness/2), // at (0,0,0)
 																								logicCase,             // its logical volume
-																								"pLaBr3",           // its name
+																								"physCase",           // its name
 																								logicWorld,                  // its mother volume
 																								false,                   // no boolean operations
 																								0,                       // copy number
@@ -189,13 +189,15 @@ void MyDetectorConstruction::ConstructScintillator()
 	logicScintillator = new G4LogicalVolume(sLaBr3, materialLanthanumBromide, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
-																								G4ThreeVector(0.,0.,1.5*mm), // at (0,0,0)
-																								logicScintillator,             // its logical volume
-																								"pLaBr3",           // its name
-																								logicCase,                  // its mother volume
-																								false,                   // no boolean operations
-																								0,                       // copy number
-																								1); // checking overlaps
+																				G4ThreeVector(0.,0.,1.5*mm), // at (0,0,0)
+																				logicScintillator,             // its logical volume
+																				"physScintillator",           // its name
+																				logicWorld,                  // its mother volume
+																				false,                   // no boolean operations
+																				0,                       // copy number
+																				1); // checking overlaps
+
+	fScoringVolume = logicScintillator;
 }
 
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
@@ -204,20 +206,20 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	G4double world_half_XY = 5*cm;
 
 	G4Box * sWorld = new G4Box("solidWorld", world_half_XY, world_half_XY, world_half_Z);
-	logicWorld = new G4LogicalVolume(sWorld, materialAir, "logicalogicWorld", 0, 0, 0, true);
+	logicWorld = new G4LogicalVolume(sWorld, materialAir, "logicWorld", 0, 0, 0, true);
 
 	physWorld = new G4PVPlacement(0,
-																												G4ThreeVector(),
-																												logicWorld,
-																												"physicalogicWorld",
-																												0,
-																												false,
-																												0,
-																												true);
+																G4ThreeVector(),
+																logicWorld,
+																"physWorld",
+																0,
+																false,
+																0,
+																true);
 
 	ConstructScintillator();
-	ConstructCollimator();
-	ConstructCase();
+	// ConstructCollimator();
+	// ConstructCase(); // se lo attivi ricordati di metterlo come mother del logicScintillator
 
 	return physWorld;
 }

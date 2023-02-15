@@ -10,6 +10,7 @@ MySteppingAction::~MySteppingAction()
 
 void MySteppingAction::UserSteppingAction(const G4Step *step)
 {
+  // G4cout << "MySteppingAction::UserSteppingAction" << G4endl;
   // we take the energy of the whole volume
   // or we take the energy of a single scoring volume
 
@@ -19,10 +20,12 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
 
   G4LogicalVolume *fScoringVolume = detectorConstruction->GetScoringVolume();
+  // G4cout << "volume: " << volume->GetName() << G4endl;
+  // G4cout << "fScoringVolume: " << fScoringVolume->GetName() << G4endl;
 
   if(volume != fScoringVolume)
     return; // not saving energy
 
-  G4double edep = step->GetTotalEnergyDeposit();
+  G4double edep = step->GetTotalEnergyDeposit() / keV;
   fEventAction->AddEdep(edep);
 }
