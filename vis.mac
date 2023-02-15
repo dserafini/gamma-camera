@@ -1,0 +1,31 @@
+/run/numberOfThreads 1
+
+# initalize if not done in the main
+/run/initialize
+
+# tell Geant4 to show the scene
+/vis/open OGL
+
+# decide the initial position of the detector
+/vis/viewer/set/viewpointVector 1 1 1
+
+# tell Geant4 to draw the volumes
+/vis/drawVolume
+
+# tell Geant4 to update every time it creates an event
+/vis/viewer/set/autoRefresh true
+
+# tell Geant4 to draw the trajectories of the particles
+/vis/scene/add/trajectories smooth
+
+# insert a scale that is 10 cm long in our program
+/vis/scene/add/scale 10 cm
+
+# add a coordinate system
+/vis/scene/add/axes
+
+# always shows which event is just generated, for debugging
+/vis/scene/add/eventID
+
+# tell Geant4 to draw all the events without deleting the previous ones
+/vis/scene/endOfEventAction accumulate

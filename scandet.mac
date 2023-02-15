@@ -1,0 +1,6 @@
+/detector/nCols {cols}
+
+/run/reinitializeGeometry
+# he does not advise to add the parameter true since destrying all the previous geometry can lead to problems
+
+/run/beamOn 100
