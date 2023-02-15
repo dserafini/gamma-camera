@@ -10,11 +10,6 @@ MyPhysicsList::MyPhysicsList()
   //
   G4OpticalPhysics * opticalPhysics = new G4OpticalPhysics();
   RegisterPhysics(opticalPhysics);
-
-  opticalPhysics->SetScintillationYieldFactor(1.0);
-  opticalPhysics->SetScintillationExcitationRatio(0.);
-
-  opticalPhysics->SetTrackSecondariesFirst(kScintillation, true);
 }
 
 MyPhysicsList::~MyPhysicsList()
