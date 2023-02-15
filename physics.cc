@@ -2,17 +2,19 @@
 
 MyPhysicsList::MyPhysicsList()
 {
-	// the aim here is to produce Cerenkov effect
-	// so we need two interactions
-	// he advises to use only the physics that is required for your application
-	// the more physics you implement the longer it takes for calculations
-	RegisterPhysics (new G4EmStandardPhysics());
-	RegisterPhysics (new G4OpticalPhysics());
+  // Decay Phisics
+  RegisterPhysics(new G4DecayPhysics());
+  RegisterPhysics(new G4RadioactiveDecayPhysics());
+  // EM 3
+  RegisterPhysics(new G4EmStandardPhysics_option3());
+  //
+  G4OpticalPhysics * opticalPhysics = new G4OpticalPhysics();
+  RegisterPhysics(opticalPhysics);
 
-	// for any type of particle decay
-	RegisterPhysics (new G4DecayPhysics());
-	// for decay of radioactive ions
-	RegisterPhysics (new G4RadioactiveDecayPhysics());
+  opticalPhysics->SetScintillationYieldFactor(1.0);
+  opticalPhysics->SetScintillationExcitationRatio(0.);
+
+  opticalPhysics->SetTrackSecondariesFirst(kScintillation, true);
 }
 
 MyPhysicsList::~MyPhysicsList()
