@@ -27,6 +27,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 
 	// define materials just once
 	DefineMaterials();
+	DefineMaterialsProperties();
 
 	// define world lengths
 	xWorld = 5*m;
@@ -44,94 +45,52 @@ MyDetectorConstruction::~MyDetectorConstruction()
 // to define material only once
 void MyDetectorConstruction::DefineMaterials()
 {
-		// do not reinvent the wheel (materials)
-		G4NistManager *nist = G4NistManager::Instance();
+	G4NistManager *nist = G4NistManager::Instance();
 
-		// define material to use in the aerogel detector
-		// fused silica
-		SiO2 = new G4Material("SiO2", 2.201*g/cm3, 2);
-		SiO2->AddElement(nist->FindOrBuildElement("Si"), 1);
-		SiO2->AddElement(nist->FindOrBuildElement("O"), 2);
+	materialAir      = nist->FindOrBuildMaterial("G4_AIR");
+	materialTungsten = nist->FindOrBuildMaterial("G4_W");
+	materialPMT      = nist->FindOrBuildMaterial("G4_SILICON_DIOXIDE");
+	materialAluminum = nist->FindOrBuildMaterial("G4_Al");
 
-		// water
-		H2O = new G4Material("H2O", 1.000*g/cm3, 2);
-		H2O->AddElement(nist->FindOrBuildElement("H"), 2);
-		H2O->AddElement(nist->FindOrBuildElement("O"), 1);
+	elLa = new G4Element("Lanthanum", "La", 57, 138.905*g/mole);
+	elBr = new G4Element("Bromine", "Br", 35, 79.904*g/mole);
 
-		// carbon
-		C = nist->FindOrBuildElement("C");
+	G4double density     = 5.08 * g / cm3;
+	G4int    ncomponents = 2;
+	G4int natoms;
+	G4String name;
 
-		// build the aerogel material
-		Aerogel = new G4Material("Aerogel", 0.200*g/cm3, 3);
-		Aerogel->AddMaterial(SiO2, 62.5*perCent);
-		Aerogel->AddMaterial(H2O, 37.4*perCent);
-		Aerogel->AddElement(C, 0.1*perCent);
+	materialLanthanumBromide = new G4Material(name="LaBr3", density, ncomponents);
+	materialLanthanumBromide->AddElement(elLa,natoms=1);
+	materialLanthanumBromide->AddElement(elBr, natoms=3);
+}
 
-		worldMat = nist->FindOrBuildMaterial("G4_AIR");
-		// all physics happens within a boundary called world volume
-		// the world volume is what we have to return at the end of this method so it is necessary
 
-		// I do not need to move the properties of the materials into DefineMaterials method
-		// but I put also these commands regarding material in this method so that the code is more clear
-		// set optical properties of aerogel
-		G4double energy[2] = {1.2398*eV*um/0.2/um, 1.2398*eV*um/0.9/um};
-		G4double rindexAerogel[2] = {1.1, 1.1};
-		G4double rindexWorld[2] = {1.0, 1.0};
-		G4double rindexNaI[2] = {1.78, 1.78};
-		G4double reflectivity[2] = {1., 1.};
-		// wa want all photons reflected
+void MyDetectorConstruction::DefineMaterialsProperties()
+{
+  const G4int nEntries = 2;
 
-		G4MaterialPropertiesTable *mptAerogel = new G4MaterialPropertiesTable();
-		mptAerogel->AddProperty("RINDEX", energy, rindexAerogel, 2);
+  G4double PhotonEnergy[nEntries] = {1.0*eV, 7.0*eV};
 
-		Aerogel->SetMaterialPropertiesTable(mptAerogel);
+  G4double LaBr3RefracionIndex[nEntries] = {1.9,1.9};
+  G4double LaBr3AbsorptionLength[nEntries] = {50.*cm,50.*cm};
 
-		G4MaterialPropertiesTable *mptWorld = new G4MaterialPropertiesTable();
-		mptWorld->AddProperty("RINDEX", energy, rindexWorld, 2);
+  G4MaterialPropertiesTable* materialLanthanumBromideMPT = new G4MaterialPropertiesTable();
 
-		worldMat->SetMaterialPropertiesTable(mptWorld);
+  materialLanthanumBromideMPT->AddProperty("RINDEX", PhotonEnergy, LaBr3RefracionIndex, nEntries);
+  materialLanthanumBromideMPT->AddProperty("ABSLENGTH", PhotonEnergy, LaBr3AbsorptionLength, nEntries);
 
-		Na = nist->FindOrBuildElement("Na");
+  G4double ScintEnergy[nEntries] = {3.25*eV, 3.44*eV};
+  G4double ScintFast[nEntries] = {1.0,1.0};
 
-		I = nist->FindOrBuildElement("I");
+  materialLanthanumBromideMPT->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
 
-		NaI = new G4Material("NaI", 3.67*g/cm3, 2);
-		NaI->AddElement(Na, 1);
-		NaI->AddElement(I, 1);
+  materialLanthanumBromideMPT->AddConstProperty("SCINTILLATIONYIELD", 63./keV);
+  materialLanthanumBromideMPT->AddConstProperty("RESOLUTIONSCALE", 1.0);
+  materialLanthanumBromideMPT->AddConstProperty("FASTTIMECONSTANT",20.0*ns);
+  materialLanthanumBromideMPT->AddConstProperty("YIELDRATIO",1.0);
 
-		// assume same amount of red and blue photons
-		G4double fraction[2] = {1.0, 1.0};
-
-		G4MaterialPropertiesTable *mptNaI = new G4MaterialPropertiesTable();
-		mptNaI->AddProperty("RINDEX", energy, rindexNaI, 2);
-		mptNaI->AddProperty("FASTCOMPONENT", energy, fraction, 2);
-
-		// how many photons per energy loss of the particle we create
-		// no array, it is a constant property
-		mptNaI->AddConstProperty("SCINTILLATIONYIELD", 38./keV);
-
-		// the photons are emitted in time according to an exponential function
-		// this is practically the decay time of the scintillator
-		mptNaI->AddConstProperty("FASTTIMECONSTANT", 250*ns);
-
-		mptNaI->AddConstProperty("YIELDRATIO", 1.);
-		mptNaI->AddConstProperty("RESOLUTIONSCALE", 1.);
-
-		NaI->SetMaterialPropertiesTable(mptNaI);
-
-		// we want to make a reflective coating for the scintillators
-		mirrorSurface = new G4OpticalSurface("mirrorSurface");
-
-		mirrorSurface->SetType(dielectric_metal);
-		// he finds dielectric_metal type works the best
-		mirrorSurface->SetFinish(ground);
-		mirrorSurface->SetModel(unified);
-
-		G4MaterialPropertiesTable *mptMirror = new G4MaterialPropertiesTable();
-
-		mptMirror->AddProperty("REFLECTIVITY", energy, reflectivity, 2);
-
-		mirrorSurface->SetMaterialPropertiesTable(mptMirror);
+  materialLanthanumBromide->SetMaterialPropertiesTable(materialLanthanumBromideMPT);
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
@@ -147,107 +106,134 @@ void MyDetectorConstruction::DefineMaterials()
 // run one event
 // now you should see the changes
 
-void MyDetectorConstruction::ConstructCherenkov()
+void MyDetectorConstruction::ConstructCollimator()
 {
-	// create the physical radiator
-	solidRadiator = new G4Box("solidRadiator", .4*m, .4*m, .01*m);
+	// Collimator Characteristics
+	collimator_thickness = 30*mm;
+	collimator_size = 48.5*mm;
+	pinhole_size = 1.5*mm;
+	pinhole_number = 21;
 
-	logicRadiator = new G4LogicalVolume(solidRadiator, Aerogel, "logicRadiator");
+	// PinHole Geomtry
+	G4Box * pinhole = new G4Box("pinhole", pinhole_size/2., pinhole_size/2., collimator_thickness/2.+2);
 
-	// the scoring volume is the radiator
-	fScoringVolume = logicRadiator;
+	// Holes Positioning
+	std::vector<std::pair<double,double>> holes_coordinates;
 
-	physRadiator = new G4PVPlacement(0, G4ThreeVector(.0, .0, .25*m), logicRadiator, "physRadiator", logicWorld, false, 0, true);
-
-	// I need it to understand
-	G4double xCell = xWorld/nCols;
-	G4double yCell = yWorld/nRows;
-	G4double zCell = 0.01*m;
-
-	// construction of the sensitive volume
-	solidDetector = new G4Box("solidDetector", xCell, yCell, zCell);
-
-	// the material of the detector it does not matter because we only need it to sense the optical photons
-	logicDetector = new G4LogicalVolume(solidDetector, worldMat, "logicDetector");
-
-	// we have to create arrays of sensitive detectors
-	for(G4int i = 0; i < nRows; i++)
+	for(int i = 0; i < pinhole_number; i++)
 	{
-		for(G4int j = 0; j < nCols; j++)
+		for(int j = 0; j < pinhole_number; j++)
 		{
-			physDetector = new G4PVPlacement(0, G4ThreeVector(-xWorld + 2*xCell*(.5 + j), -yWorld + 2*yCell*(.5 + i), zWorld - zCell), logicDetector, "physDetector", logicWorld, false, j + i*nCols, false);
+			holes_coordinates.emplace_back(-collimator_size/2.+(4.25+i*2)*mm, -collimator_size/2.+(4.25+j*2)*mm);
 		}
 	}
+
+	// Multiunion Solid Definition
+	G4MultiUnion* sHole_placement = new G4MultiUnion("sHole_placement");
+
+	for(auto & p : holes_coordinates)
+	{
+			G4RotationMatrix rot = G4RotationMatrix();
+			G4ThreeVector    pos = G4ThreeVector(p.first, p.second, 0);
+			G4Transform3D    tr  = G4Transform3D(rot, pos);
+			sHole_placement->AddNode(*pinhole, tr);
+	}
+
+	sHole_placement->Voxelize();
+
+	// Collimator solid definition
+	G4Box* sCollimatorCore = new G4Box("Collimator Core Solid", collimator_size/2, collimator_size/2, collimator_thickness/2);
+
+	G4SubtractionSolid * sCollimator = new G4SubtractionSolid("Collimator Solid", sCollimatorCore, sHole_placement, 0, G4ThreeVector());
+
+	logicCollimator = new G4LogicalVolume(sCollimator, materialTungsten, "logicCollimator");
+
+	// Collimator
+	physCollimator = new G4PVPlacement(0,  // no rotation
+																											G4ThreeVector(0.,0.,0.), // at (0,0,0)
+																											logicCollimator,             // its logical volume
+																											"pCollimator",           // its name
+																											logicWorld,                  // its mother volume
+																											false,                   // no boolean operations
+																											0,                       // copy number
+																											1); // checking overlaps
+}
+
+void MyDetectorConstruction::ConstructCase()
+{
+	G4double case_width  = 51 * mm;
+	G4double case_heigth = 51 * mm;
+	G4double case_thickness = 9 * mm;
+
+	G4Box * sCase = new G4Box("Case solid", case_width/2, case_heigth/2, case_thickness/2);
+
+	logicCase =  new G4LogicalVolume(sCase, materialAluminum, "logicCase");
+
+	physCase = new G4PVPlacement(0,  // no rotation
+																								G4ThreeVector(0.,0.,-collimator_thickness/2-case_thickness/2), // at (0,0,0)
+																								logicCase,             // its logical volume
+																								"pLaBr3",           // its name
+																								logicWorld,                  // its mother volume
+																								false,                   // no boolean operations
+																								0,                       // copy number
+																							1); // checking overlaps
 }
 
 void MyDetectorConstruction::ConstructScintillator()
 {
-	solidScintillator = new G4Box("solidScintillator", 5*cm, 5*cm, 6*cm);
+	G4double slab_width  = 50 * mm;
+	G4double slab_heigth = 50 * mm;
+	G4double slab_thickness = 5 * mm;
 
-	logicScintillator = new G4LogicalVolume(solidScintillator, NaI, "logicScintillator");
+	G4Box * sLaBr3 = new G4Box("LYSO solid", slab_width/2, slab_heigth/2, slab_thickness/2);
+	logicScintillator = new G4LogicalVolume(sLaBr3, materialLanthanumBromide, "logicScintillator");
 
-	// we make the world reflecting so that it keeps the photons trapped in the scintillator
-	G4LogicalSkinSurface *skin = new G4LogicalSkinSurface("skin", logicWorld, mirrorSurface);
-
-	solidDetector = new G4Box("solidDetector", 1*cm, 5*cm, 6*cm);
-
-	logicDetector = new G4LogicalVolume(solidDetector, worldMat, "logicDetector");
-
-	fScoringVolume = logicScintillator;
-
-	for (G4int i=0; i<6; i++)
-	{
-		for (G4int j=0; j<16; j++)
-		{
-			G4Rotate3D rotZ(j*22.5*deg, G4ThreeVector(0,0,1));
-			G4Translate3D transXScint(G4ThreeVector(5./tan(22.5/2*deg)*cm + 5.*cm, 0*cm, -40*cm +i*15*cm));
-			G4Translate3D transXDet(G4ThreeVector(5./tan(22.5/2*deg)*cm + 6.*cm + 5.*cm, 0*cm, -40*cm +i*15*cm));
-
-			G4Transform3D transformScint = (rotZ)*(transXScint);
-			G4Transform3D transformDet = (rotZ)*(transXDet);
-
-			physScintillator = new G4PVPlacement(transformScint, logicScintillator, "physScintillator", logicWorld, false, 16*i + j, true);
-			physDetector = new G4PVPlacement(transformDet, logicDetector, "physDetector", logicWorld, false, 16*i + j, true);
-		}
-	}
-}
-
-void MyDetectorConstruction::ConstructTOF()
-{
-	solidDetector = new G4Box("solidDetector", 1.*m, 1.*m, 0.1*m);
-
-	logicDetector = new G4LogicalVolume(solidDetector, worldMat, "logicDetector");
-
-	physDetector = new G4PVPlacement(0, G4ThreeVector(0.*m, 0.*m, -4.*m), logicDetector, "physDetector", logicWorld, false, 0, true);
-	physDetector = new G4PVPlacement(0, G4ThreeVector(0.*m, 0.*m, 3.*m), logicDetector, "physDetector", logicWorld, false, 1, true);
+	physScintillator = new G4PVPlacement(0,  // no rotation
+																								G4ThreeVector(0.,0.,1.5*mm), // at (0,0,0)
+																								logicScintillator,             // its logical volume
+																								"pLaBr3",           // its name
+																								logicCase,                  // its mother volume
+																								false,                   // no boolean operations
+																								0,                       // copy number
+																								1); // checking overlaps
 }
 
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
 {
-	solidWorld = new G4Box("solidWorld", xWorld, yWorld, zWorld);
+	G4double world_half_Z  = 5*cm;
+	G4double world_half_XY = 5*cm;
 
-	logicWorld = new G4LogicalVolume(solidWorld, worldMat, "logicWorld");
+	G4Box * sWorld = new G4Box("solidWorld", world_half_XY, world_half_XY, world_half_Z);
+	logicWorld = new G4LogicalVolume(sWorld, materialAir, "logicalogicWorld", 0, 0, 0, true);
 
-	// we want the world to be centered in the origin of our coordinate system
-	// always check for overlaps in the last argument
-	physWorld = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), logicWorld, "PhysWorld", 0, false, 0, true);
+	physWorld = new G4PVPlacement(0,
+																												G4ThreeVector(),
+																												logicWorld,
+																												"physicalogicWorld",
+																												0,
+																												false,
+																												0,
+																												true);
 
-	if(isCherenkov)
-		ConstructCherenkov();
-
-	if(isScintillator)
-		ConstructScintillator();
-
-	if(isTOF)
-		ConstructTOF();
+	ConstructScintillator();
+	ConstructCollimator();
+	ConstructCase();
 
 	return physWorld;
+}
+
+void MyDetectorConstruction::SetVisualizationFeatures()
+{
+	logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
+	logicCollimator->SetVisAttributes(new G4VisAttributes(G4Colour(200./255, 200./255, 200./255,1)));
+	logicCase->SetVisAttributes(new G4VisAttributes(G4Colour(50./255, 100./255, 200./255,1)));
+	logicScintillator->SetVisAttributes(new G4VisAttributes(G4Colour(100./255, 100./255, 100./255,1)));
 }
 
 void MyDetectorConstruction::ConstructSDandField()
 {
 	MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector");
 
-	if(logicDetector != NULL)
-		logicDetector->SetSensitiveDetector(sensDet);
+	if(logicScintillator != NULL)
+		logicScintillator->SetSensitiveDetector(sensDet);
 }

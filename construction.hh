@@ -16,6 +16,9 @@
 #include "G4GenericMessenger.hh"
 #include "G4OpticalSurface.hh"
 #include "G4LogicalSkinSurface.hh"
+#include "G4MultiUnion.hh"
+#include "G4SubtractionSolid.hh"
+#include "G4VisAttributes.hh"
 
 #include "detector.hh"
 
@@ -41,18 +44,19 @@ private:
 
 	// declare some things here to modify geometry on the run
 	G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator;
-	G4LogicalVolume *logicWorld, *logicRadiator, *logicScintillator;
-	G4VPhysicalVolume *physWorld, *physRadiator, *physDetector, *physScintillator;
+	G4LogicalVolume *logicWorld, *logicCase, *logicScintillator, *logicCollimator;
+	G4VPhysicalVolume *physWorld, *physCollimator, *physCase, *physScintillator;
 
-	G4Material *SiO2, *H2O, *Aerogel, *worldMat, *NaI;
-	G4Element *C, *Na, *I;
+	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide;
+	G4Element *elLa, *elBr;
 
 	void DefineMaterials();
+	void DefineMaterialsProperties();
 
-	// later the user should be able to decide whether the Cerenkov or the scintillator setup should be used
-	void ConstructCherenkov();
 	void ConstructScintillator();
-	void ConstructTOF();
+	void ConstructCollimator();
+	void ConstructCase();
+	void SetVisualizationFeatures();
 
 	// we do not need to access the messenger from outside
 	G4GenericMessenger *fMessenger;
@@ -68,6 +72,9 @@ private:
 	G4bool isTOF;
 
 	G4OpticalSurface *mirrorSurface;
+
+	G4double collimator_thickness, collimator_size, pinhole_size;
+	G4int pinhole_number;
 };
 
 #endif
