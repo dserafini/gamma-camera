@@ -28,4 +28,5 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
 
   G4double edep = step->GetTotalEnergyDeposit() / keV;
   fEventAction->AddEdep(edep);
+  // G4cout << "adding " << edep << " keV" << G4endl;
 }
