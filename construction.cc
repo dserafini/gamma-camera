@@ -220,16 +220,21 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	ConstructScintillator();
 	// ConstructCollimator();
 	// ConstructCase(); // se lo attivi ricordati di metterlo come mother del logicScintillator
+	// SetVisualizationFeatures();
 
 	return physWorld;
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
 {
-	logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
-	logicCollimator->SetVisAttributes(new G4VisAttributes(G4Colour(200./255, 200./255, 200./255,1)));
-	logicCase->SetVisAttributes(new G4VisAttributes(G4Colour(50./255, 100./255, 200./255,1)));
-	logicScintillator->SetVisAttributes(new G4VisAttributes(G4Colour(100./255, 100./255, 100./255,1)));
+	if (logicWorld)
+		logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
+	if (logicCollimator)
+		logicCollimator->SetVisAttributes(new G4VisAttributes(G4Colour(200./255, 200./255, 200./255,1)));
+	if (logicCase)
+		logicCase->SetVisAttributes(new G4VisAttributes(G4Colour(50./255, 100./255, 200./255,1)));
+	if (logicScintillator)
+		logicScintillator->SetVisAttributes(new G4VisAttributes(G4Colour(100./255, 100./255, 100./255,1)));
 }
 
 void MyDetectorConstruction::ConstructSDandField()
