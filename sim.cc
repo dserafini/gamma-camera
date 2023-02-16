@@ -25,6 +25,9 @@ int main(int argc, char** argv)
 	// for multithreading
 	#ifdef G4MULTITHREADED
 		G4MTRunManager *runManager = new G4MTRunManager();
+	  // Setting up the number of threads
+	  G4int nThreads = 1;
+	  runManager->SetNumberOfThreads(nThreads);
 		std::cout << "multithreaded" << std::endl;
 	#else
 		// the hearth of Geant is the G4RunManager, it takes care of everything
