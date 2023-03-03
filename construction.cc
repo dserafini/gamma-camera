@@ -108,11 +108,20 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 
 void MyDetectorConstruction::ConstructCollimator()
 {
-	// Collimator Characteristics
-	collimator_thickness = 30*mm;
-	collimator_size = 48.5*mm;
-	pinhole_size = 1.5*mm;
-	pinhole_number = 21;
+	// Collimator parameters
+	hole_length = 30*mm;
+	septa_thickness = 2*mm;
+	hole_thickness = 3*mm;
+	collimator_width = 10*cm; // fixed
+	wall_thickness = 5*mm; // fixed
+	
+	// Derived parameters
+	wall_thickness -= septa_thickness / 2.;
+	holes_number = TMath::Floor((collimator_width - 2*wall_thickness) / (hole_thickness + septa_thickness));
+	
+	// pixel
+	G4double * pixel_size = (hole_thickness + septa_thickness)/2.;
+	G4Box * pixel = new G4Box("pixel", pixel_size/2., pixel_size/2., hole_length/2.);
 
 	// PinHole Geomtry
 	G4Box * pinhole = new G4Box("pinhole", pinhole_size/2., pinhole_size/2., collimator_thickness/2.+2);
