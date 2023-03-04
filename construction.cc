@@ -112,60 +112,25 @@ void MyDetectorConstruction::ConstructCollimator()
 	hole_length = 30*mm;
 	septa_thickness = 2*mm;
 	hole_thickness = 3*mm;
-	collimator_width = 10*cm; // fixed
-	wall_thickness = 5*mm; // fixed
+	case_side = 10*cm; // fixed
+	case_wall_thickness = 5*mm; // fixed
 	
 	// Derived parameters
-	wall_thickness -= septa_thickness / 2.;
-	holes_number = TMath::Floor((collimator_width - 2*wall_thickness) / (hole_thickness + septa_thickness));
+	case_wall_thickness -= septa_thickness / 2.; // the wall comprehend the most outer pixels
+	holes_number = TMath::Floor((case_side - 2*case_wall_thickness) / (hole_thickness + septa_thickness));
+	pixel_size = hole_thickness + septa_thickness;
+	
+	// case
+	solidCase = new G4Box("solidCase", case_side/2., case_side/2., hole_length/2.);
+	logicCase = new G4LogicalVolume(solidCase, materialTungsten, "logicCase");
+	G4PVPlacement(0, logicCase, "physCase", logicWorld, false, 0, true);
 	
 	// pixel
-	G4double * pixel_size = (hole_thickness + septa_thickness)/2.;
-	G4Box * pixel = new G4Box("pixel", pixel_size/2., pixel_size/2., hole_length/2.);
-
-	// PinHole Geomtry
-	G4Box * pinhole = new G4Box("pinhole", pinhole_size/2., pinhole_size/2., collimator_thickness/2.+2);
-
-	// Holes Positioning
-	std::vector<std::pair<double,double>> holes_coordinates;
-
-	for(int i = 0; i < pinhole_number; i++)
-	{
-		for(int j = 0; j < pinhole_number; j++)
-		{
-			holes_coordinates.emplace_back(-collimator_size/2.+(4.25+i*2)*mm, -collimator_size/2.+(4.25+j*2)*mm);
-		}
-	}
-
-	// Multiunion Solid Definition
-	G4MultiUnion* sHole_placement = new G4MultiUnion("sHole_placement");
-
-	for(auto & p : holes_coordinates)
-	{
-			G4RotationMatrix rot = G4RotationMatrix();
-			G4ThreeVector    pos = G4ThreeVector(p.first, p.second, 0);
-			G4Transform3D    tr  = G4Transform3D(rot, pos);
-			sHole_placement->AddNode(*pinhole, tr);
-	}
-
-	sHole_placement->Voxelize();
-
-	// Collimator solid definition
-	G4Box* sCollimatorCore = new G4Box("Collimator Core Solid", collimator_size/2, collimator_size/2, collimator_thickness/2);
-
-	G4SubtractionSolid * sCollimator = new G4SubtractionSolid("Collimator Solid", sCollimatorCore, sHole_placement, 0, G4ThreeVector());
-
-	logicCollimator = new G4LogicalVolume(sCollimator, materialTungsten, "logicCollimator");
-
-	// Collimator
-	physCollimator = new G4PVPlacement(0,  // no rotation
-																											G4ThreeVector(0.,0.,0.), // at (0,0,0)
-																											logicCollimator,             // its logical volume
-																											"physCollimator",           // its name
-																											logicWorld,                  // its mother volume
-																											false,                   // no boolean operations
-																											0,                       // copy number
-																											1); // checking overlaps
+	solidCollimatorPixel = new G4Box("solidCollimatorPixel", pixel_size/2., pixel_size/2., hole_length/2.);
+	logicCollimatorPixel = new G4LogicalVolume(solidCollimatorPixel, materialTungsten, "logicCollimatorPixel");
+	
+	// matrix
+	G4PVReplica("physicalCollimatorString", logicCollimatorPixel, logicCase, kXAxis, holes_number, pixel_size, 0);
 }
 
 void MyDetectorConstruction::ConstructCase()
