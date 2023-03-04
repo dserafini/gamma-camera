@@ -136,7 +136,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	// case
 	solidCase = new G4Box("solidCase", case_side/2., case_side/2., hole_length/2.);
 	logicCase = new G4LogicalVolume(solidCase, materialTungsten, "logicCase");
-	G4PVPlacement(0, logicCase, "physCase", logicWorld, false, 0, true);
+	G4PVPlacement(0, G4ThreeVector(0,0,0), logicCase, "physCase", logicWorld, false, 0, true);
 	
 	// pixel
 	solidCollimatorPixel = new G4Box("solidCollimatorPixel", pixel_size/2., pixel_size/2., hole_length/2.);
