@@ -236,6 +236,7 @@ void MyDetectorConstruction::SetVisualizationFeatures()
 
 void MyDetectorConstruction::ConstructSDandField()
 {
+	G4cout << "MyDetectorConstruction::ConstructSDandField" << G4endl;
 	MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector");
 
 	if(logicScintillator != NULL)
