@@ -150,7 +150,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	
 	// matrix
 	G4cout << "defining the collimator string element" << G4endl;
-	G4PVPlacement(0, G4ThreeVector(0,0,0), logicCollimatorPixel, "physCollimatorPixel", logicCase, false, 0, true);
+	new G4PVPlacement(0, G4ThreeVector(0,0,0), logicCollimatorPixel, "physCollimatorPixel", logicCase, false, 0, true);
 	// G4PVReplica("physicalCollimatorString", logicCollimatorPixel, logicCase, kXAxis, holes_number, pixel_size, 0);
 }
 
