@@ -28,7 +28,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name) : G4VSensitiveDetector(n
   // close data file
   datafile.close();
 
-  quEff->SetSpline(false);
+  // quEff->SetSpline(false);
   // in standard configuration Spline is set to on
   // it means that interpolates distances between data points with splines
   // he said it sometimes creates problem if u use splines
