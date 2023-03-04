@@ -4,7 +4,8 @@
 #include "G4UserEventAction.hh"
 #include "G4Event.hh"
 
-#include "g4root.hh"
+// #include "g4root.hh"
+#include "g4root_defs.hh"
 
 #include "run.hh"
 
