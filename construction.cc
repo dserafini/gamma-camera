@@ -76,8 +76,12 @@ void MyDetectorConstruction::DefineMaterials()
 	G4cout << "Add Element Ga" << G4endl;
 	materialGAGG->AddElement(nist->FindOrBuildElement("G4_Ga"), 3);
 	G4cout << "Add Element O" << G4endl;
-	materialGAGG->AddElement(nist->FindOrBuildElement("G4_F"), 12);
+	materialGAGG->AddElement(nist->FindOrBuildElement("G4_O"), 12);
 	G4cout << "Added Element O" << G4endl;
+	
+	G4Material *materialWater = new G4Material("water", 1.0*g/cm3, 2);
+	materialWater->AddElement(nist->FindOrBuildElement("G4_H"), 2);
+	materialWater->AddElement(nist->FindOrBuildElement("G4_O"), 1);
 }
 
 
@@ -215,7 +219,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 																true);
 
 	ConstructScintillator();
-	// ConstructCollimator();
+	ConstructCollimator();
 	// ConstructCase(); // se lo attivi ricordati di metterlo come mother del logicScintillator
 	// SetVisualizationFeatures();
 
