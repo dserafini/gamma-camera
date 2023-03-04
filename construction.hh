@@ -47,7 +47,7 @@ private:
 	G4LogicalVolume *logicWorld, *logicCase, *logicScintillator, *logicCollimator, *logicCollimatorPixel;
 	G4VPhysicalVolume *physWorld, *physCollimator, *physCase, *physScintillator;
 
-	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide;
+	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
 	G4Element *elLa, *elBr;
 
 	void DefineMaterials();
@@ -73,7 +73,7 @@ private:
 
 	G4OpticalSurface *mirrorSurface;
 
-	G4double collimator_thickness, case_side, case_wall_thickness, pinhole_size, pixel_size;
+	G4double collimator_thickness, case_side, case_wall_thickness, hole_thickness, pixel_size, hole_length, septa_thickness, holes_number;
 	G4int pinhole_number;
 };
 
