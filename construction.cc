@@ -225,7 +225,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 void MyDetectorConstruction::SetVisualizationFeatures()
 {
 	if (logicWorld)
-		logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
+		logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible());
 	if (logicCollimator)
 		logicCollimator->SetVisAttributes(new G4VisAttributes(G4Colour(200./255, 200./255, 200./255,1)));
 	if (logicCase)
