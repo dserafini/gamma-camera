@@ -6,6 +6,7 @@
 
 // #include "g4root.hh"
 #include "g4root_defs.hh"
+#include "G4AnalysisManager.hh"
 
 #include "run.hh"
 
