@@ -12,12 +12,11 @@
 #include "G4Material.hh"
 #include "G4NistManager.hh"
 #include "G4PVPlacement.hh"
+#include "G4PVReplica.hh"
 // per cambiare geometria on the way
 #include "G4GenericMessenger.hh"
 #include "G4OpticalSurface.hh"
 #include "G4LogicalSkinSurface.hh"
-#include "G4MultiUnion.hh"
-#include "G4SubtractionSolid.hh"
 #include "G4VisAttributes.hh"
 
 #include "detector.hh"
