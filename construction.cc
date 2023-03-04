@@ -68,7 +68,7 @@ void MyDetectorConstruction::DefineMaterials()
 	// GaGG
 	// the difference between the types of GaGGs involves only the properties and not the constituents
 	G4cout << "Define Material GAGG" << G4endl;
-	//materialGAGG = new G4Material("GaGG", 6.6*g/cm3, 5);
+	materialGAGG = new G4Material("GaGG", 6.6*g/cm3, 5);
 	G4cout << "Add Element Gd" << G4endl;
 	//materialGAGG->AddElement(nist->FindOrBuildElement("G4_Gd"), 3);
 	G4cout << "Add Element Al" << G4endl;
