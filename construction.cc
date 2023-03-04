@@ -79,7 +79,7 @@ void MyDetectorConstruction::DefineMaterials()
 	materialGAGG->AddElement(nist->FindOrBuildElement("G4_O"), 12);
 	G4cout << "Added Element O" << G4endl;
 	
-	G4Material *materialWater = new G4Material("water", 1.0*g/cm3, 2);
+	G4Material *materialWater = new G4Material("water", 1.0*g/cm3, 3);
 	materialWater->AddElement(nist->FindOrBuildElement("G4_H"), 2);
 	materialWater->AddElement(nist->FindOrBuildElement("G4_O"), 1);
 }
