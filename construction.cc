@@ -18,8 +18,6 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessenger->DeclareProperty("nRows", nRows, "Number of rows");
 
 	fMessenger->DeclareProperty("isCherenkov", isCherenkov, "Toggle Cherenkov setup");
-	fMessenger->DeclareProperty("isScintillator", isScintillator, "Toggle Scintillator setup");
-	fMessenger->DeclareProperty("isTOF", isTOF, "Construct Time Of Flight");
 
 	// defualt values for the number of rows and columns
 	nCols = 10;
@@ -35,8 +33,6 @@ MyDetectorConstruction::MyDetectorConstruction()
 	zWorld = 5*m;
 
 	isCherenkov = false;
-	isScintillator = false;
-	isTOF = true;
 }
 
 MyDetectorConstruction::~MyDetectorConstruction()
@@ -158,26 +154,6 @@ void MyDetectorConstruction::ConstructCollimator()
 	// G4PVReplica("physicalCollimatorString", logicCollimatorPixel, logicCase, kXAxis, holes_number, pixel_size, 0);
 }
 
-void MyDetectorConstruction::ConstructCase()
-{
-	G4double case_width  = 51 * mm;
-	G4double case_heigth = 51 * mm;
-	G4double case_thickness = 9 * mm;
-
-	G4Box * sCase = new G4Box("Case solid", case_width/2, case_heigth/2, case_thickness/2);
-
-	logicCase =  new G4LogicalVolume(sCase, materialAluminum, "logicCase");
-
-	physCase = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,-collimator_thickness/2-case_thickness/2), // at (0,0,0)
-		logicCase,             // its logical volume
-		"physCase",           // its name
-		logicWorld,                  // its mother volume
-		false,                   // no boolean operations
-		0,                       // copy number
-		1); // checking overlaps
-}
-
 void MyDetectorConstruction::ConstructScintillator()
 {
 	G4double slab_width  = 50 * mm;
@@ -202,8 +178,8 @@ void MyDetectorConstruction::ConstructScintillator()
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
 {
 	G4cout << "MyDetectorConstruction::Construct" << G4endl;
-	G4double world_half_Z  = 7.5*cm;
-	G4double world_half_XY = 7.5*cm;
+	G4double world_half_Z  = 10*cm;
+	G4double world_half_XY = 10*cm;
 
 	G4Box * sWorld = new G4Box("solidWorld", world_half_XY, world_half_XY, world_half_Z);
 	logicWorld = new G4LogicalVolume(sWorld, materialAir, "logicWorld", 0, 0, 0, true);
