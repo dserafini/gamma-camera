@@ -7,6 +7,7 @@
 // it includes the class G4AnalysisManager class
 // #include "g4root.hh" // v10.7
 #include "g4root_defs.hh" // v11.0
+#include "G4AnalysisManager.hh"
 #include "G4Run.hh"
 
 
