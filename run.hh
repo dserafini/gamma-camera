@@ -5,7 +5,8 @@
 // include standalone root functions in Geant4 with g4root.hh
 // that is to avoid to include ROOT dependencies
 // it includes the class G4AnalysisManager class
-#include "g4root.hh"
+// #include "g4root.hh" // v10.7
+#include "g4root_defs.hh" // v11.0
 #include "G4Run.hh"
 
 
