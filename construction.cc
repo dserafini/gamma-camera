@@ -76,7 +76,7 @@ void MyDetectorConstruction::DefineMaterials()
 	G4cout << "Add Element Ga" << G4endl;
 	materialGAGG->AddElement(nist->FindOrBuildElement("G4_Ga"), 3);
 	G4cout << "Add Element O" << G4endl;
-	materialGAGG->AddElement(nist->FindOrBuildElement("G4_O"), 12);
+	materialGAGG->AddElement(nist->FindOrBuildElement("G4_F"), 12);
 	G4cout << "Added Element O" << G4endl;
 }
 
