@@ -150,8 +150,8 @@ void MyDetectorConstruction::ConstructCollimator()
 	
 	// matrix
 	G4cout << "defining the collimator string element" << G4endl;
-	new G4PVPlacement(0, G4ThreeVector(0,0,0), logicCollimatorPixel, "physCollimatorPixel", logicCase, false, 0, true);
-	// G4PVReplica("physicalCollimatorString", logicCollimatorPixel, logicCase, kXAxis, holes_number, pixel_size, 0);
+	// new G4PVPlacement(0, G4ThreeVector(0,0,0), logicCollimatorPixel, "physCollimatorPixel", logicCase, false, 0, true);
+	new G4PVReplica("physicalCollimatorString", logicCollimatorPixel, logicCase, kXAxis, holes_number, pixel_size, 0);
 }
 
 void MyDetectorConstruction::ConstructScintillator()
@@ -186,7 +186,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 
 	physWorld = new G4PVPlacement(0, G4ThreeVector(), logicWorld, "physWorld", 0, false, 0, true);
 
-	// ConstructScintillator();
+	ConstructScintillator();
 	ConstructCollimator();
 	// ConstructCase(); // se lo attivi ricordati di metterlo come mother del logicScintillator
 	// SetVisualizationFeatures();
