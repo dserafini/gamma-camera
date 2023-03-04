@@ -68,20 +68,20 @@ void MyDetectorConstruction::DefineMaterials()
 	// GaGG
 	// the difference between the types of GaGGs involves only the properties and not the constituents
 	G4cout << "Define Material GAGG" << G4endl;
-	materialGAGG = new G4Material("GaGG", 6.6*g/cm3, 5);
+	//materialGAGG = new G4Material("GaGG", 6.6*g/cm3, 5);
 	G4cout << "Add Element Gd" << G4endl;
-	materialGAGG->AddElement(nist->FindOrBuildElement("G4_Gd"), 3);
+	//materialGAGG->AddElement(nist->FindOrBuildElement("G4_Gd"), 3);
 	G4cout << "Add Element Al" << G4endl;
-	materialGAGG->AddElement(nist->FindOrBuildElement("G4_Al"), 2);
+	//materialGAGG->AddElement(nist->FindOrBuildElement("G4_Al"), 2);
 	G4cout << "Add Element Ga" << G4endl;
-	materialGAGG->AddElement(nist->FindOrBuildElement("G4_Ga"), 3);
+	//materialGAGG->AddElement(nist->FindOrBuildElement("G4_Ga"), 3);
 	G4cout << "Add Element O" << G4endl;
-	materialGAGG->AddElement(nist->FindOrBuildElement("G4_O"), 12);
+	//materialGAGG->AddElement(nist->FindOrBuildElement("G4_O"), 12);
 	G4cout << "Added Element O" << G4endl;
 	
-	G4Material *materialWater = new G4Material("water", 1.0*g/cm3, 3);
-	materialWater->AddElement(nist->FindOrBuildElement("G4_H"), 2);
-	materialWater->AddElement(nist->FindOrBuildElement("G4_O"), 1);
+	//G4Material *materialWater = new G4Material("water", 1.0*g/cm3, 3);
+	//materialWater->AddElement(nist->FindOrBuildElement("G4_H"), 2);
+	//materialWater->AddElement(nist->FindOrBuildElement("G4_O"), 1);
 }
 
 
@@ -166,13 +166,13 @@ void MyDetectorConstruction::ConstructCase()
 	logicCase =  new G4LogicalVolume(sCase, materialAluminum, "logicCase");
 
 	physCase = new G4PVPlacement(0,  // no rotation
-																								G4ThreeVector(0.,0.,-collimator_thickness/2-case_thickness/2), // at (0,0,0)
-																								logicCase,             // its logical volume
-																								"physCase",           // its name
-																								logicWorld,                  // its mother volume
-																								false,                   // no boolean operations
-																								0,                       // copy number
-																							1); // checking overlaps
+		G4ThreeVector(0.,0.,-collimator_thickness/2-case_thickness/2), // at (0,0,0)
+		logicCase,             // its logical volume
+		"physCase",           // its name
+		logicWorld,                  // its mother volume
+		false,                   // no boolean operations
+		0,                       // copy number
+		1); // checking overlaps
 }
 
 void MyDetectorConstruction::ConstructScintillator()
@@ -185,13 +185,13 @@ void MyDetectorConstruction::ConstructScintillator()
 	logicScintillator = new G4LogicalVolume(sLaBr3, materialLanthanumBromide, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
-																				G4ThreeVector(0.,0.,1.5*mm), // at (0,0,0)
-																				logicScintillator,             // its logical volume
-																				"physScintillator",           // its name
-																				logicWorld,                  // its mother volume
-																				false,                   // no boolean operations
-																				0,                       // copy number
-																				1); // checking overlaps
+		G4ThreeVector(0.,0.,1.5*mm), // at (0,0,0)
+		logicScintillator,             // its logical volume
+		"physScintillator",           // its name
+		logicWorld,                  // its mother volume
+		false,                   // no boolean operations
+		0,                       // copy number
+		1); // checking overlaps
 
 	fScoringVolume = logicScintillator;
 }
@@ -206,13 +206,13 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	logicWorld = new G4LogicalVolume(sWorld, materialAir, "logicWorld", 0, 0, 0, true);
 
 	physWorld = new G4PVPlacement(0,
-																G4ThreeVector(),
-																logicWorld,
-																"physWorld",
-																0,
-																false,
-																0,
-																true);
+		G4ThreeVector(),
+		logicWorld,
+		"physWorld",
+		0,
+		false,
+		0,
+		true);
 
 	ConstructScintillator();
 	// ConstructCollimator();
