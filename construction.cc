@@ -63,6 +63,14 @@ void MyDetectorConstruction::DefineMaterials()
 	materialLanthanumBromide = new G4Material(name="LaBr3", density, ncomponents);
 	materialLanthanumBromide->AddElement(elLa,natoms=1);
 	materialLanthanumBromide->AddElement(elBr, natoms=3);
+	
+	// GaGG
+	// the difference between the types of GaGGs involves only the properties and not the constituents
+	materialGAGG = new G4Material("GaGG", 6.6*g/cm3, 4);
+	materialGAGG->AddElement(nist->FindOrBuildElement("G4_Gd"), 3);
+	materialGAGG->AddElement(nist->FindOrBuildElement("G4_Al"), 2);
+	materialGAGG->AddElement(nist->FindOrBuildElement("G4_Ga"), 3);
+	materialGAGG->AddElement(nist->FindOrBuildElement("G4_O"), 12);
 }
 
 
