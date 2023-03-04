@@ -182,7 +182,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	G4double world_half_XY = 10*cm;
 
 	solidWorld = new G4Box("solidWorld", world_half_XY, world_half_XY, world_half_Z);
-	logicWorld = new G4LogicalVolume(sWorld, materialAir, "logicWorld", 0, 0, 0, true);
+	logicWorld = new G4LogicalVolume(solidWorld, materialAir, "logicWorld", 0, 0, 0, true);
 
 	physWorld = new G4PVPlacement(0, G4ThreeVector(), logicWorld, "physWorld", 0, false, 0, true);
 
