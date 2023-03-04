@@ -43,12 +43,12 @@ private:
 	virtual void ConstructSDandField();
 
 	// declare some things here to modify geometry on the run
-	G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator;
-	G4LogicalVolume *logicWorld, *logicCase, *logicScintillator, *logicCollimator;
+	G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator, *solidCollimatorPixel, *solidCase;
+	G4LogicalVolume *logicWorld, *logicCase, *logicScintillator, *logicCollimator, *logicCollimatorPixel;
 	G4VPhysicalVolume *physWorld, *physCollimator, *physCase, *physScintillator;
 
-	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
-	G4Element *elLa, *elBr, *elementGadolinium, *elementGallium, *elementAluminium, *elementOxygen;
+	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide;
+	G4Element *elLa, *elBr;
 
 	void DefineMaterials();
 	void DefineMaterialsProperties();
@@ -73,7 +73,7 @@ private:
 
 	G4OpticalSurface *mirrorSurface;
 
-	G4double collimator_thickness, collimator_size, pinhole_size;
+	G4double collimator_thickness, case_side, case_wall_thickness, pinhole_size, pixel_size;
 	G4int pinhole_number;
 };
 
