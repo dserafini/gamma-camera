@@ -45,6 +45,7 @@ MyDetectorConstruction::~MyDetectorConstruction()
 // to define material only once
 void MyDetectorConstruction::DefineMaterials()
 {
+	G4cout << "MyDetectorConstruction::DefineMaterials" << G4endl;
 	G4NistManager *nist = G4NistManager::Instance();
 
 	materialAir      = nist->FindOrBuildMaterial("G4_AIR");
@@ -116,6 +117,7 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 
 void MyDetectorConstruction::ConstructCollimator()
 {
+	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
 	// Collimator parameters
 	hole_length = 30*mm;
 	septa_thickness = 2*mm;
