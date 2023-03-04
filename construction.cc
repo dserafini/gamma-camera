@@ -160,8 +160,8 @@ void MyDetectorConstruction::ConstructScintillator()
 	G4double slab_heigth = 50 * mm;
 	G4double slab_thickness = 5 * mm;
 
-	G4Box * sLaBr3 = new G4Box("LYSO solid", slab_width/2, slab_heigth/2, slab_thickness/2);
-	logicScintillator = new G4LogicalVolume(sLaBr3, materialLanthanumBromide, "logicScintillator");
+	G4Box * solidScintillator = new G4Box("solidScintillator", slab_width/2, slab_heigth/2, slab_thickness/2);
+	logicScintillator = new G4LogicalVolume(solidScintillator, materialLanthanumBromide, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
 		G4ThreeVector(0.,0.,1.5*mm), // at (0,0,0)
@@ -181,17 +181,10 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	G4double world_half_Z  = 10*cm;
 	G4double world_half_XY = 10*cm;
 
-	G4Box * sWorld = new G4Box("solidWorld", world_half_XY, world_half_XY, world_half_Z);
+	solidWorld = new G4Box("solidWorld", world_half_XY, world_half_XY, world_half_Z);
 	logicWorld = new G4LogicalVolume(sWorld, materialAir, "logicWorld", 0, 0, 0, true);
 
-	physWorld = new G4PVPlacement(0,
-		G4ThreeVector(),
-		logicWorld,
-		"physWorld",
-		0,
-		false,
-		0,
-		true);
+	physWorld = new G4PVPlacement(0, G4ThreeVector(), logicWorld, "physWorld", 0, false, 0, true);
 
 	ConstructScintillator();
 	// ConstructCollimator();
