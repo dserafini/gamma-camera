@@ -139,11 +139,6 @@ void MyDetectorConstruction::ConstructCollimator()
 	// Derived parameters
 	case_wall_thickness -= septa_thickness / 2.; // the wall comprehend the most outer pixels
 	holes_number = (case_side - 2*case_wall_thickness) / (hole_thickness + septa_thickness);
-	G4cout << "7.0: " << (G4int) 7.0 << G4endl;
-	G4cout << "7.1: " << (G4int) 7.1 << G4endl;
-	G4cout << "7.5: " << (G4int) 7.5 << G4endl;
-	G4cout << "7.6: " << (G4int) 7.6 << G4endl;
-	G4cout << "8.0: " << (G4int) 8.0 << G4endl;
 	pixel_size = hole_thickness + septa_thickness;
 	
 	// case
@@ -156,7 +151,8 @@ void MyDetectorConstruction::ConstructCollimator()
 	logicCollimatorPixel = new G4LogicalVolume(solidCollimatorPixel, materialTungsten, "logicCollimatorPixel");
 	
 	// matrix
-	G4PVReplica("physicalCollimatorString", logicCollimatorPixel, logicCase, kXAxis, holes_number, pixel_size, 0);
+	G4PVPlacement(0, G4ThreeVector(0,0,0), logicCollimatorPixel, "physCollimatorPixel", logicCase, false, 0, true);
+	// G4PVReplica("physicalCollimatorString", logicCollimatorPixel, logicCase, kXAxis, holes_number, pixel_size, 0);
 }
 
 void MyDetectorConstruction::ConstructCase()
