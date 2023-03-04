@@ -142,15 +142,18 @@ void MyDetectorConstruction::ConstructCollimator()
 	pixel_size = hole_thickness + septa_thickness;
 	
 	// case
+	G4cout << "defining the collimator case" << G4endl;
 	solidCase = new G4Box("solidCase", case_side/2., case_side/2., hole_length/2.);
 	logicCase = new G4LogicalVolume(solidCase, materialTungsten, "logicCase");
 	G4PVPlacement(0, G4ThreeVector(0,0,-2.5*mm), logicCase, "physCase", logicWorld, false, 0, true);
 	
 	// pixel
+	G4cout << "defining the collimator pixel element" << G4endl;
 	solidCollimatorPixel = new G4Box("solidCollimatorPixel", pixel_size/2., pixel_size/2., hole_length/2.);
 	logicCollimatorPixel = new G4LogicalVolume(solidCollimatorPixel, materialTungsten, "logicCollimatorPixel");
 	
 	// matrix
+	G4cout << "defining the collimator string element" << G4endl;
 	G4PVPlacement(0, G4ThreeVector(0,0,0), logicCollimatorPixel, "physCollimatorPixel", logicCase, false, 0, true);
 	// G4PVReplica("physicalCollimatorString", logicCollimatorPixel, logicCase, kXAxis, holes_number, pixel_size, 0);
 }
@@ -199,8 +202,8 @@ void MyDetectorConstruction::ConstructScintillator()
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
 {
 	G4cout << "MyDetectorConstruction::Construct" << G4endl;
-	G4double world_half_Z  = 5*cm;
-	G4double world_half_XY = 5*cm;
+	G4double world_half_Z  = 7.5*cm;
+	G4double world_half_XY = 7.5*cm;
 
 	G4Box * sWorld = new G4Box("solidWorld", world_half_XY, world_half_XY, world_half_Z);
 	logicWorld = new G4LogicalVolume(sWorld, materialAir, "logicWorld", 0, 0, 0, true);
