@@ -215,7 +215,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 																true);
 
 	ConstructScintillator();
-	ConstructCollimator();
+	// ConstructCollimator();
 	// ConstructCase(); // se lo attivi ricordati di metterlo come mother del logicScintillator
 	// SetVisualizationFeatures();
 
