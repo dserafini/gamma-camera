@@ -82,29 +82,30 @@ void MyDetectorConstruction::DefineMaterials()
 
 void MyDetectorConstruction::DefineMaterialsProperties()
 {
-  const G4int nEntries = 2;
+	G4cout << "MyDetectorConstruction::DefineMaterialsProperties" << G4endl;
+	const G4int nEntries = 2;
 
-  G4double PhotonEnergy[nEntries] = {1.0*eV, 7.0*eV};
+	G4double PhotonEnergy[nEntries] = {1.0*eV, 7.0*eV};
 
-  G4double LaBr3RefracionIndex[nEntries] = {1.9,1.9};
-  G4double LaBr3AbsorptionLength[nEntries] = {50.*cm,50.*cm};
+	G4double LaBr3RefracionIndex[nEntries] = {1.9,1.9};
+	G4double LaBr3AbsorptionLength[nEntries] = {50.*cm,50.*cm};
 
-  G4MaterialPropertiesTable* materialLanthanumBromideMPT = new G4MaterialPropertiesTable();
+	G4MaterialPropertiesTable* materialLanthanumBromideMPT = new G4MaterialPropertiesTable();
 
-  materialLanthanumBromideMPT->AddProperty("RINDEX", PhotonEnergy, LaBr3RefracionIndex, nEntries);
-  materialLanthanumBromideMPT->AddProperty("ABSLENGTH", PhotonEnergy, LaBr3AbsorptionLength, nEntries);
+	materialLanthanumBromideMPT->AddProperty("RINDEX", PhotonEnergy, LaBr3RefracionIndex, nEntries);
+	materialLanthanumBromideMPT->AddProperty("ABSLENGTH", PhotonEnergy, LaBr3AbsorptionLength, nEntries);
 
-  G4double ScintEnergy[nEntries] = {3.25*eV, 3.44*eV};
-  G4double ScintFast[nEntries] = {1.0,1.0};
+	G4double ScintEnergy[nEntries] = {3.25*eV, 3.44*eV};
+	G4double ScintFast[nEntries] = {1.0,1.0};
 
-  materialLanthanumBromideMPT->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
+	materialLanthanumBromideMPT->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
 
-  materialLanthanumBromideMPT->AddConstProperty("SCINTILLATIONYIELD", 63./keV);
-  materialLanthanumBromideMPT->AddConstProperty("RESOLUTIONSCALE", 1.0);
-  materialLanthanumBromideMPT->AddConstProperty("FASTTIMECONSTANT",20.0*ns);
-  materialLanthanumBromideMPT->AddConstProperty("YIELDRATIO",1.0);
+	materialLanthanumBromideMPT->AddConstProperty("SCINTILLATIONYIELD", 63./keV);
+	materialLanthanumBromideMPT->AddConstProperty("RESOLUTIONSCALE", 1.0);
+	materialLanthanumBromideMPT->AddConstProperty("FASTTIMECONSTANT",20.0*ns);
+	materialLanthanumBromideMPT->AddConstProperty("YIELDRATIO",1.0);
 
-  materialLanthanumBromide->SetMaterialPropertiesTable(materialLanthanumBromideMPT);
+	materialLanthanumBromide->SetMaterialPropertiesTable(materialLanthanumBromideMPT);
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
@@ -196,6 +197,7 @@ void MyDetectorConstruction::ConstructScintillator()
 
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
 {
+	G4cout << "MyDetectorConstruction::Construct" << G4endl;
 	G4double world_half_Z  = 5*cm;
 	G4double world_half_XY = 5*cm;
 
