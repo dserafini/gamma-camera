@@ -19,7 +19,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name) : G4VSensitiveDetector(n
       break;
 
     // make sure everything work fine by printing
-    G4cout << wlen << " " << queff << G4endl;
+    // G4cout << wlen << " " << queff << G4endl;
 
     quEff->InsertValues(wlen, queff/100.);
   }
