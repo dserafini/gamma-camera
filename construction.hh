@@ -47,8 +47,8 @@ private:
 	G4LogicalVolume *logicWorld, *logicCase, *logicScintillator, *logicCollimator;
 	G4VPhysicalVolume *physWorld, *physCollimator, *physCase, *physScintillator;
 
-	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide;
-	G4Element *elLa, *elBr;
+	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
+	G4Element *elLa, *elBr, *elementGadolinium, *elementGallium, *elementAluminium, *elementOxygen;
 
 	void DefineMaterials();
 	void DefineMaterialsProperties();
