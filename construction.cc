@@ -194,7 +194,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 
 	ConstructScintillator();
 	ConstructCollimator();
-	// SetVisualizationFeatures();
+	SetVisualizationFeatures();
 
 	return physWorld;
 }
@@ -209,6 +209,8 @@ void MyDetectorConstruction::SetVisualizationFeatures()
 		logicCase->SetVisAttributes(new G4VisAttributes(G4Colour(50./255, 100./255, 200./255,1)));
 	if (logicScintillator)
 		logicScintillator->SetVisAttributes(new G4VisAttributes(G4Colour(100./255, 100./255, 100./255,1)));
+	if (logicCollimatorPinhole)
+		logicScintillator->SetVisAttributes(G4VisAttributes::GetInvisible());
 }
 
 void MyDetectorConstruction::ConstructSDandField()
