@@ -203,14 +203,12 @@ void MyDetectorConstruction::SetVisualizationFeatures()
 {
 	if (logicWorld)
 		logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible());
-	if (logicCollimator)
-		logicCollimator->SetVisAttributes(new G4VisAttributes(G4Colour(200./255, 200./255, 200./255,1)));
-	if (logicCase)
-		logicCase->SetVisAttributes(new G4VisAttributes(G4Colour(50./255, 100./255, 200./255,1)));
+	if (logicCollimatorPixel)
+		logicCollimatorPixel->SetVisAttributes(new G4VisAttributes(G4Colour(200./255, 200./255, 200./255,1)));
+	if (logicCollimatorPinhole)
+		logicCollimatorPinhole->SetVisAttributes(G4VisAttributes::GetInvisible());
 	if (logicScintillator)
 		logicScintillator->SetVisAttributes(new G4VisAttributes(G4Colour(100./255, 100./255, 100./255,1)));
-	if (logicCollimatorPinhole)
-		logicScintillator->SetVisAttributes(G4VisAttributes::GetInvisible());
 }
 
 void MyDetectorConstruction::ConstructSDandField()
