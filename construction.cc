@@ -129,17 +129,16 @@ void MyDetectorConstruction::ConstructCollimator()
 	hole_length = 30*mm;
 	septa_thickness = 2*mm;
 	hole_thickness = 3*mm;
-	case_side = 10*cm; // fixed
-	case_wall_thickness = 5*mm; // fixed
+	case_side = 10*cm; // fixed but not necessarily precise
 	
 	// Derived parameters
-	case_wall_thickness -= septa_thickness / 2.; // the wall comprehend the most outer pixels
-	holes_number = (case_side - 2*case_wall_thickness) / (hole_thickness + septa_thickness);
 	pixel_size = hole_thickness + septa_thickness;
+	holes_number = case_side / pixel_size;
+	case_side = pixel_size * holes_number;
 	
 	// case
 	G4cout << "defining the collimator case" << G4endl;
-	solidCase = new G4Box("solidCase", case_side/2., case_side/2., hole_length/2.);
+	solidCase = new G4Box("solidCase", case_side/2., pixel_size/2., hole_length/2.);
 	logicCase = new G4LogicalVolume(solidCase, materialTungsten, "logicCase");
 	new G4PVPlacement(0, G4ThreeVector(0,0,-2.5*mm), logicCase, "physCase", logicWorld, false, 0, true);
 	
