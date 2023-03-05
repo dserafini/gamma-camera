@@ -171,7 +171,7 @@ void MyDetectorConstruction::ConstructScintillator()
 	G4double slab_thickness = 5 * mm;
 
 	solidScintillator = new G4Box("solidScintillator", slab_width/2, slab_heigth/2, slab_thickness/2);
-	logicScintillator = new G4LogicalVolume(solidScintillator, materialLanthanumBromide, "logicScintillator");
+	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
 		G4ThreeVector(0.,0.,slab_thickness/2.), // at (0,0,0)
