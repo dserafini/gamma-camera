@@ -42,8 +42,8 @@ private:
 	virtual void ConstructSDandField();
 
 	// declare some things here to modify geometry on the run
-	G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator, *solidCollimatorPixel, *solidCollimatorArray, *solidCase;
-	G4LogicalVolume *logicWorld, *logicCase, *logicScintillator, *logicCollimator, *logicCollimatorPixel, *logicCollimatorArray;
+	G4Box *solidWorld, *solidDetector, *solidScintillator, *solidCollimatorPixel, *solidCollimatorArray, *solidCase, *solidCollimatorPinhole;
+	G4LogicalVolume *logicWorld, *logicCase, *logicScintillator, *logicCollimator, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
 	G4VPhysicalVolume *physWorld, *physCollimator, *physCase, *physScintillator;
 
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
