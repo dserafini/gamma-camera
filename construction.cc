@@ -140,7 +140,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "defining the collimator case" << G4endl;
 	solidCase = new G4Box("solidCase", case_side/2., case_side/2., hole_length/2.);
 	logicCase = new G4LogicalVolume(solidCase, materialTungsten, "logicCase");
-	new G4PVPlacement(0, G4ThreeVector(0,0,-2.5*mm), logicCase, "physCase", logicWorld, false, 0, true);
+	new G4PVPlacement(0, G4ThreeVector(0,0,-hole_length/2.), logicCase, "physCase", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the collimator array element" << G4endl;
@@ -169,7 +169,7 @@ void MyDetectorConstruction::ConstructScintillator()
 	logicScintillator = new G4LogicalVolume(solidScintillator, materialLanthanumBromide, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,5.5*mm), // at (0,0,0)
+		G4ThreeVector(0.,0.,slab_thickness/2.), // at (0,0,0)
 		logicScintillator,             // its logical volume
 		"physScintillator",           // its name
 		logicWorld,                  // its mother volume
@@ -193,7 +193,6 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 
 	ConstructScintillator();
 	ConstructCollimator();
-	// ConstructCase(); // se lo attivi ricordati di metterlo come mother del logicScintillator
 	// SetVisualizationFeatures();
 
 	return physWorld;
