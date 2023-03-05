@@ -42,3 +42,11 @@
 /vis/set/textColour green
 /vis/set/textLayout right
 /vis/scene/add/text2D 0.9 -.9 24 ! ! Gamma Camera
+
+# Frame
+/vis/set/colour red
+/vis/set/lineWidth 2
+/vis/scene/add/frame   # Simple frame around the view
+/vis/set/colour        # Revert to default colour (white)
+/vis/set/lineWidth     # Revert to default line width (1.)
+
