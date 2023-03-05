@@ -146,7 +146,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "defining the collimator array element" << G4endl;
 	solidCollimatorArray = new G4Box("solidCollimatorArray", case_side/2., pixel_size/2., hole_length/2.);
 	logicCollimatorArray = new G4LogicalVolume(solidCollimatorArray, materialTungsten, "logicCollimatorArray");
-	new G4PVReplica("physCollimatorArray", logicCollimatorArray, logicCase, kYAxis, holes_number, pixel_size, 0);
+	new G4PVReplica("physCollimatorArray", logicCollimatorArray, logicCollimatorMatrix, kYAxis, holes_number, pixel_size, 0);
 	
 	// pixel
 	G4cout << "defining the collimator pixel element" << G4endl;

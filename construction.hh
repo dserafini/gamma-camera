@@ -44,7 +44,7 @@ private:
 	// declare some things here to modify geometry on the run
 	G4Box *solidWorld, *solidDetector, *solidScintillator, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix, *solidCollimatorPinhole;
 	G4LogicalVolume *logicWorld, *logicCollimatorMatrix, *logicScintillator, *logicCollimator, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
-	G4VPhysicalVolume *physWorld, *physCollimator, *logicCollimatorMatrix, *physScintillator;
+	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator;
 
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
 	G4Element *elLa, *elBr;

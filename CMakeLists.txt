@@ -1,5 +1,5 @@
 # which is the minimum version of cmake that we need to compile our code
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.6...3.22.1)
 
 # what is the name of the project that we want to start
 project(Simulation)
