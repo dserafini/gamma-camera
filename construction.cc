@@ -142,15 +142,21 @@ void MyDetectorConstruction::ConstructCollimator()
 	logicCase = new G4LogicalVolume(solidCase, materialTungsten, "logicCase");
 	new G4PVPlacement(0, G4ThreeVector(0,0,-2.5*mm), logicCase, "physCase", logicWorld, false, 0, true);
 	
+	// array
+	G4cout << "defining the collimator array element" << G4endl;
+	solidCollimatorArray = new G4Box("solidCollimatorArray", case_side/2., pixel_size/2., hole_length/2.);
+	logicCollimatorArray = new G4LogicalVolume(solidCollimatorArray, materialTungsten, "logicCollimatorArray");
+	new G4PVReplica("physCollimatorArray", logicCollimatorArray, logicCase, kYAxis, holes_number, pixel_size, 0);
+	
 	// pixel
 	G4cout << "defining the collimator pixel element" << G4endl;
 	solidCollimatorPixel = new G4Box("solidCollimatorPixel", pixel_size/2., pixel_size/2., hole_length/2.);
 	logicCollimatorPixel = new G4LogicalVolume(solidCollimatorPixel, materialTungsten, "logicCollimatorPixel");
+	new G4PVReplica("physCollimatorString", logicCollimatorPixel, logicCase, kXAxis, holes_number, pixel_size, 0);
 	
 	// matrix
 	G4cout << "defining the collimator string element" << G4endl;
 	// new G4PVPlacement(0, G4ThreeVector(0,0,0), logicCollimatorPixel, "physCollimatorPixel", logicCase, false, 0, true);
-	new G4PVReplica("physicalCollimatorString", logicCollimatorPixel, logicCase, kXAxis, holes_number, pixel_size, 0);
 }
 
 void MyDetectorConstruction::ConstructScintillator()
@@ -163,7 +169,7 @@ void MyDetectorConstruction::ConstructScintillator()
 	logicScintillator = new G4LogicalVolume(solidScintillator, materialLanthanumBromide, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,1.5*mm), // at (0,0,0)
+		G4ThreeVector(0.,0.,5.5*mm), // at (0,0,0)
 		logicScintillator,             // its logical volume
 		"physScintillator",           // its name
 		logicWorld,                  // its mother volume
