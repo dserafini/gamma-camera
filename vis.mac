@@ -46,3 +46,9 @@
 /vis/set/colour        # Revert to default colour (white)
 /vis/set/lineWidth     # Revert to default line width (1.)
 
+# generate gamma
+/gps/particle gamma
+/gps/energy 340 keV
+/gps/position 0 0 -7.5 cm
+/gps/direction 0 0 1
+# /gps/ang/type iso
