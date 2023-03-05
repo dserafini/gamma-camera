@@ -127,20 +127,20 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
 	// Collimator parameters
 	hole_length = 30.*mm;
-	septa_thickness = 2.*mm; // 2*mm;
-	hole_thickness = 3.*mm; // 3*mm;
+	septa_thickness = 4.*mm; // 2*mm;
+	hole_thickness = 6.*mm; // 3*mm;
 	case_side = 10.*cm; // fixed but not necessarily precise
 	
 	// Derived parameters
 	pixel_size = hole_thickness + septa_thickness;
 	holes_number = case_side / pixel_size;
-	case_side = pixel_size * holes_number;
+	case_side = (G4double) pixel_size * holes_number;
 	
 	// case
 	G4cout << "defining the collimator case" << G4endl;
-	solidCase = new G4Box("solidCase", case_side/2., case_side/2., hole_length/2.);
-	logicCase = new G4LogicalVolume(solidCase, materialTungsten, "logicCase");
-	new G4PVPlacement(0, G4ThreeVector(0,0,-hole_length/2.), logicCase, "physCase", logicWorld, false, 0, true);
+	solidCollimatorMatrix = new G4Box("solidCollimatorMatrix", case_side/2., case_side/2., hole_length/2.);
+	logicCollimatorMatrix = new G4LogicalVolume(solidCollimatorMatrix, materialTungsten, "logicCase");
+	new G4PVPlacement(0, G4ThreeVector(0,0,-hole_length/2.), logicCollimatorMatrix, "physCollimatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the collimator array element" << G4endl;
@@ -152,7 +152,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "defining the collimator pixel element" << G4endl;
 	solidCollimatorPixel = new G4Box("solidCollimatorPixel", pixel_size/2., pixel_size/2., hole_length/2.);
 	logicCollimatorPixel = new G4LogicalVolume(solidCollimatorPixel, materialTungsten, "logicCollimatorPixel");
-	new G4PVReplica("physCollimatorString", logicCollimatorPixel, logicCollimatorArray, kXAxis, holes_number, pixel_size, 0);
+	new G4PVReplica("physCollimatorPixel", logicCollimatorPixel, logicCollimatorArray, kXAxis, holes_number, pixel_size, 0);
 	
 	// pinhole
 	solidCollimatorPinhole = new G4Box("solidCollimatorPinhole", hole_thickness/2., hole_thickness/2., hole_length/2.);
