@@ -38,12 +38,6 @@
 # tell Geant4 to draw all the events without deleting the previous ones
 /vis/scene/endOfEventAction accumulate
 
-# Decorations
-# Name
-/vis/set/textColour green
-/vis/set/textLayout right
-/vis/scene/add/text2D 0.9 -.9 24 ! ! Gamma Camera
-
 # Frame
 /vis/set/colour red
 /vis/set/lineWidth 2
