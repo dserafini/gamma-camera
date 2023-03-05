@@ -127,8 +127,8 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
 	// Collimator parameters
 	hole_length = 30.*mm;
-	septa_thickness = 5.*mm; // 2*mm;
-	hole_thickness = 6.*mm; // 3*mm;
+	septa_thickness = 20.*mm; // 2*mm;
+	hole_thickness = 30.*mm; // 3*mm;
 	case_side = 10.*cm; // fixed but not necessarily precise
 	
 	// Derived parameters
