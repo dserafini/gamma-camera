@@ -206,7 +206,7 @@ void MyDetectorConstruction::SetVisualizationFeatures()
 	if (logicCollimatorPixel)
 		logicCollimatorPixel->SetVisAttributes(new G4VisAttributes(G4Colour(200./255, 200./255, 200./255,1)));
 	if (logicCollimatorPinhole)
-		logicCollimatorPinhole->SetVisAttributes(new G4VisAttributes(G4Colour(1.,.5.,1.)));
+		logicCollimatorPinhole->SetVisAttributes(new G4VisAttributes(G4Colour(1.,.5,1.)));
 	if (logicScintillator)
 		logicScintillator->SetVisAttributes(new G4VisAttributes(G4Colour(100./255, 100./255, 100./255,1)));
 }
