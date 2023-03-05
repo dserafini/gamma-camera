@@ -72,8 +72,8 @@ private:
 
 	G4OpticalSurface *mirrorSurface;
 
-	G4double collimator_thickness, case_side, case_wall_thickness, hole_thickness, pixel_size, hole_length, septa_thickness, holes_number;
-	G4int pinhole_number;
+	G4double collimator_thickness, case_side, case_wall_thickness, hole_thickness, pixel_size, hole_length, septa_thickness;
+	G4int holes_number;
 };
 
 #endif
