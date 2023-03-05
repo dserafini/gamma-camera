@@ -4,7 +4,7 @@
 /run/initialize
 
 # tell Geant4 to show the scene
-/vis/open OGL
+/vis/open OGL 600x600-0+0
 
 # decide the initial position of the detector
 # /vis/viewer/set/viewpointVector -1 -1 0
