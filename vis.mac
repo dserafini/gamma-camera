@@ -4,19 +4,18 @@
 /run/initialize
 
 # tell Geant4 to show the scene
-/vis/open OGL 600x600-0+0
+/vis/open OGL
 
 # decide the initial position of the detector
 /vis/viewer/set/viewpointVector -1 -1 0
 /vis/viewer/set/lightsVector -1 0 0
 
 # Specify style (surface, wireframe, auxiliary edges,...)
-# /vis/viewer/set/style surface
-/vis/viewer/set/style wireframe
-/vis/viewer/set/hiddenMarker true
+/vis/viewer/set/style surface
+# /vis/viewer/set/style wireframe
 /vis/viewer/set/auxiliaryEdge true
 # /vis/viewer/set/lineSegmentsPerCircle 100
-
+/vis/viewer/colourByDensity 1 g/cm3 1.2 7.0 10
 
 # tell Geant4 to draw the volumes
 /vis/drawVolume
