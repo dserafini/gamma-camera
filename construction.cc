@@ -127,8 +127,8 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
 	// Collimator parameters
 	hole_length = 30.*mm;
-	septa_thickness = 10.*mm; // 2*mm;
-	hole_thickness = 20.*mm; // 3*mm;
+	septa_thickness = 1.*mm; // 2*mm;
+	hole_thickness = 2.*mm; // 3*mm;
 	case_side = 10.*cm; // fixed but not necessarily precise
 	
 	// Derived parameters
@@ -165,9 +165,9 @@ void MyDetectorConstruction::ConstructCollimator()
 
 void MyDetectorConstruction::ConstructScintillator()
 {
-	G4double slab_width  = 50 * mm;
-	G4double slab_heigth = 50 * mm;
-	G4double slab_thickness = 5 * mm;
+	G4double slab_width  = case_side;
+	G4double slab_heigth = case_side;
+	G4double slab_thickness = hole_length/3.;
 
 	solidScintillator = new G4Box("solidScintillator", slab_width/2, slab_heigth/2, slab_thickness/2);
 	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
