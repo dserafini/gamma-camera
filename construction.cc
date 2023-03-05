@@ -127,8 +127,8 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
 	// Collimator parameters
 	hole_length = 30.*mm;
-	septa_thickness = 5.*mm; // 2*mm;
-	hole_thickness = 6.*mm; // 3*mm;
+	septa_thickness = 1.*cm; // 2*mm;
+	hole_thickness = 2.*cm; // 3*mm;
 	case_side = 10.*cm; // fixed but not necessarily precise
 	
 	// Derived parameters
@@ -206,7 +206,7 @@ void MyDetectorConstruction::SetVisualizationFeatures()
 	if (logicCollimatorPixel)
 		logicCollimatorPixel->SetVisAttributes(new G4VisAttributes(G4Colour(200./255, 200./255, 200./255,1)));
 	if (logicCollimatorPinhole)
-		logicCollimatorPinhole->SetVisAttributes(G4VisAttributes::GetInvisible());
+		logicCollimatorPinhole->SetVisAttributes(new G4VisAttributes(G4Colour(1.,.5.,1.)));
 	if (logicScintillator)
 		logicScintillator->SetVisAttributes(new G4VisAttributes(G4Colour(100./255, 100./255, 100./255,1)));
 }
