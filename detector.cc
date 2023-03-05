@@ -2,6 +2,7 @@
 
 MySensitiveDetector::MySensitiveDetector(G4String name) : G4VSensitiveDetector(name)
 {
+  G4cout << "MySensitiveDetector::MySensitiveDetector" << G4endl;
   quEff = new G4PhysicsOrderedFreeVector();
 
   // read the data files
@@ -19,7 +20,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name) : G4VSensitiveDetector(n
       break;
 
     // make sure everything work fine by printing
-    G4cout << wlen << " " << queff << G4endl;
+    // G4cout << wlen << " " << queff << G4endl;
 
     quEff->InsertValues(wlen, queff/100.);
   }
@@ -27,7 +28,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name) : G4VSensitiveDetector(n
   // close data file
   datafile.close();
 
-  quEff->SetSpline(false);
+  // quEff->SetSpline(false);
   // in standard configuration Spline is set to on
   // it means that interpolates distances between data points with splines
   // he said it sometimes creates problem if u use splines

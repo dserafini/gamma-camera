@@ -12,12 +12,11 @@
 #include "G4Material.hh"
 #include "G4NistManager.hh"
 #include "G4PVPlacement.hh"
+#include "G4PVReplica.hh"
 // per cambiare geometria on the way
 #include "G4GenericMessenger.hh"
 #include "G4OpticalSurface.hh"
 #include "G4LogicalSkinSurface.hh"
-#include "G4MultiUnion.hh"
-#include "G4SubtractionSolid.hh"
 #include "G4VisAttributes.hh"
 
 #include "detector.hh"
@@ -43,11 +42,11 @@ private:
 	virtual void ConstructSDandField();
 
 	// declare some things here to modify geometry on the run
-	G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator, *solidCollimatorPixel, *solidCase;
-	G4LogicalVolume *logicWorld, *logicCase, *logicScintillator, *logicCollimator, *logicCollimatorPixel;
+	G4Box *solidWorld, *solidDetector, *solidScintillator, *solidCollimatorPixel, *solidCollimatorArray, *solidCase, *solidCollimatorPinhole;
+	G4LogicalVolume *logicWorld, *logicCase, *logicScintillator, *logicCollimator, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
 	G4VPhysicalVolume *physWorld, *physCollimator, *physCase, *physScintillator;
 
-	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide;
+	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
 	G4Element *elLa, *elBr;
 
 	void DefineMaterials();
@@ -73,7 +72,7 @@ private:
 
 	G4OpticalSurface *mirrorSurface;
 
-	G4double collimator_size, collimator_thickness, case_side, case_wall_thickness, pinhole_size, pixel_size;
+	G4double collimator_thickness, case_side, case_wall_thickness, hole_thickness, pixel_size, hole_length, septa_thickness, holes_number;
 	G4int pinhole_number;
 };
 

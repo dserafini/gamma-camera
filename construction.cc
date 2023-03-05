@@ -18,8 +18,6 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessenger->DeclareProperty("nRows", nRows, "Number of rows");
 
 	fMessenger->DeclareProperty("isCherenkov", isCherenkov, "Toggle Cherenkov setup");
-	fMessenger->DeclareProperty("isScintillator", isScintillator, "Toggle Scintillator setup");
-	fMessenger->DeclareProperty("isTOF", isTOF, "Construct Time Of Flight");
 
 	// defualt values for the number of rows and columns
 	nCols = 10;
@@ -35,8 +33,6 @@ MyDetectorConstruction::MyDetectorConstruction()
 	zWorld = 5*m;
 
 	isCherenkov = false;
-	isScintillator = false;
-	isTOF = true;
 }
 
 MyDetectorConstruction::~MyDetectorConstruction()
@@ -45,6 +41,7 @@ MyDetectorConstruction::~MyDetectorConstruction()
 // to define material only once
 void MyDetectorConstruction::DefineMaterials()
 {
+	G4cout << "MyDetectorConstruction::DefineMaterials" << G4endl;
 	G4NistManager *nist = G4NistManager::Instance();
 
 	materialAir      = nist->FindOrBuildMaterial("G4_AIR");
@@ -63,34 +60,53 @@ void MyDetectorConstruction::DefineMaterials()
 	materialLanthanumBromide = new G4Material(name="LaBr3", density, ncomponents);
 	materialLanthanumBromide->AddElement(elLa,natoms=1);
 	materialLanthanumBromide->AddElement(elBr, natoms=3);
+	
+	// GaGG
+	// the difference between the types of GaGGs involves only the properties and not the constituents
+	G4cout << "Define Material GAGG" << G4endl;
+	// materialGAGG = new G4Material("materialGAGG", 6.6*g/cm3, 1);
+	G4cout << "Add Element Gd" << G4endl;
+	// materialGAGG->AddElement(nist->FindOrBuildElement("G4_Gd"), 3);
+	G4cout << "Add Element Al" << G4endl;
+	//materialGAGG->AddElement(nist->FindOrBuildElement("G4_Al"), 2);
+	G4cout << "Add Element Ga" << G4endl;
+	//materialGAGG->AddElement(nist->FindOrBuildElement("G4_Ga"), 3);
+	G4cout << "Add Element O" << G4endl;
+	//materialGAGG->AddElement(nist->FindOrBuildElement("G4_O"), 12);
+	G4cout << "Added Element O" << G4endl;
+	
+	//G4Material *materialWater = new G4Material("water", 1.0*g/cm3, 3);
+	//materialWater->AddElement(nist->FindOrBuildElement("G4_H"), 2);
+	//materialWater->AddElement(nist->FindOrBuildElement("G4_O"), 1);
 }
 
 
 void MyDetectorConstruction::DefineMaterialsProperties()
 {
-  const G4int nEntries = 2;
+	G4cout << "MyDetectorConstruction::DefineMaterialsProperties" << G4endl;
+	const G4int nEntries = 2;
 
-  G4double PhotonEnergy[nEntries] = {1.0*eV, 7.0*eV};
+	G4double PhotonEnergy[nEntries] = {1.0*eV, 7.0*eV};
 
-  G4double LaBr3RefracionIndex[nEntries] = {1.9,1.9};
-  G4double LaBr3AbsorptionLength[nEntries] = {50.*cm,50.*cm};
+	G4double LaBr3RefracionIndex[nEntries] = {1.9,1.9};
+	G4double LaBr3AbsorptionLength[nEntries] = {50.*cm,50.*cm};
 
-  G4MaterialPropertiesTable* materialLanthanumBromideMPT = new G4MaterialPropertiesTable();
+	G4MaterialPropertiesTable* materialLanthanumBromideMPT = new G4MaterialPropertiesTable();
 
-  materialLanthanumBromideMPT->AddProperty("RINDEX", PhotonEnergy, LaBr3RefracionIndex, nEntries);
-  materialLanthanumBromideMPT->AddProperty("ABSLENGTH", PhotonEnergy, LaBr3AbsorptionLength, nEntries);
+	materialLanthanumBromideMPT->AddProperty("RINDEX", PhotonEnergy, LaBr3RefracionIndex, nEntries);
+	materialLanthanumBromideMPT->AddProperty("ABSLENGTH", PhotonEnergy, LaBr3AbsorptionLength, nEntries);
 
-  G4double ScintEnergy[nEntries] = {3.25*eV, 3.44*eV};
-  G4double ScintFast[nEntries] = {1.0,1.0};
+	G4double ScintEnergy[nEntries] = {3.25*eV, 3.44*eV};
+	G4double ScintFast[nEntries] = {1.0,1.0};
 
-  materialLanthanumBromideMPT->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
+	materialLanthanumBromideMPT->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
 
-  materialLanthanumBromideMPT->AddConstProperty("SCINTILLATIONYIELD", 63./keV);
-  materialLanthanumBromideMPT->AddConstProperty("RESOLUTIONSCALE", 1.0);
-  materialLanthanumBromideMPT->AddConstProperty("FASTTIMECONSTANT",20.0*ns);
-  materialLanthanumBromideMPT->AddConstProperty("YIELDRATIO",1.0);
+	materialLanthanumBromideMPT->AddConstProperty("SCINTILLATIONYIELD", 63./keV);
+	materialLanthanumBromideMPT->AddConstProperty("RESOLUTIONSCALE", 1.0);
+	materialLanthanumBromideMPT->AddConstProperty("FASTTIMECONSTANT",20.0*ns);
+	materialLanthanumBromideMPT->AddConstProperty("YIELDRATIO",1.0);
 
-  materialLanthanumBromide->SetMaterialPropertiesTable(materialLanthanumBromideMPT);
+	materialLanthanumBromide->SetMaterialPropertiesTable(materialLanthanumBromideMPT);
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
@@ -108,75 +124,40 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 
 void MyDetectorConstruction::ConstructCollimator()
 {
-	// Collimator Characteristics
-	collimator_thickness = 30*mm;
-	collimator_size = 48.5*mm;
-	pinhole_size = 1.5*mm;
-	pinhole_number = 21;
-
-	// PinHole Geomtry
-	G4Box * pinhole = new G4Box("pinhole", pinhole_size/2., pinhole_size/2., collimator_thickness/2.+2);
-
-	// Holes Positioning
-	std::vector<std::pair<double,double>> holes_coordinates;
-
-	for(int i = 0; i < pinhole_number; i++)
-	{
-		for(int j = 0; j < pinhole_number; j++)
-		{
-			holes_coordinates.emplace_back(-collimator_size/2.+(4.25+i*2)*mm, -collimator_size/2.+(4.25+j*2)*mm);
-		}
-	}
-
-	// Multiunion Solid Definition
-	G4MultiUnion* sHole_placement = new G4MultiUnion("sHole_placement");
-
-	for(auto & p : holes_coordinates)
-	{
-			G4RotationMatrix rot = G4RotationMatrix();
-			G4ThreeVector    pos = G4ThreeVector(p.first, p.second, 0);
-			G4Transform3D    tr  = G4Transform3D(rot, pos);
-			sHole_placement->AddNode(*pinhole, tr);
-	}
-
-	sHole_placement->Voxelize();
-
-	// Collimator solid definition
-	G4Box* sCollimatorCore = new G4Box("Collimator Core Solid", collimator_size/2, collimator_size/2, collimator_thickness/2);
-
-	G4SubtractionSolid * sCollimator = new G4SubtractionSolid("Collimator Solid", sCollimatorCore, sHole_placement, 0, G4ThreeVector());
-
-	logicCollimator = new G4LogicalVolume(sCollimator, materialTungsten, "logicCollimator");
-
-	// Collimator
-	physCollimator = new G4PVPlacement(0,  // no rotation
-																											G4ThreeVector(0.,0.,0.), // at (0,0,0)
-																											logicCollimator,             // its logical volume
-																											"physCollimator",           // its name
-																											logicWorld,                  // its mother volume
-																											false,                   // no boolean operations
-																											0,                       // copy number
-																											1); // checking overlaps
-}
-
-void MyDetectorConstruction::ConstructCase()
-{
-	G4double case_width  = 51 * mm;
-	G4double case_heigth = 51 * mm;
-	G4double case_thickness = 9 * mm;
-
-	G4Box * sCase = new G4Box("Case solid", case_width/2, case_heigth/2, case_thickness/2);
-
-	logicCase =  new G4LogicalVolume(sCase, materialAluminum, "logicCase");
-
-	physCase = new G4PVPlacement(0,  // no rotation
-																								G4ThreeVector(0.,0.,-collimator_thickness/2-case_thickness/2), // at (0,0,0)
-																								logicCase,             // its logical volume
-																								"physCase",           // its name
-																								logicWorld,                  // its mother volume
-																								false,                   // no boolean operations
-																								0,                       // copy number
-																							1); // checking overlaps
+	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
+	// Collimator parameters
+	hole_length = 30*mm;
+	septa_thickness = 2*mm;
+	hole_thickness = 3*mm;
+	case_side = 10*cm; // fixed but not necessarily precise
+	
+	// Derived parameters
+	pixel_size = hole_thickness + septa_thickness;
+	holes_number = case_side / pixel_size;
+	case_side = pixel_size * holes_number;
+	
+	// case
+	G4cout << "defining the collimator case" << G4endl;
+	solidCase = new G4Box("solidCase", case_side/2., case_side/2., hole_length/2.);
+	logicCase = new G4LogicalVolume(solidCase, materialTungsten, "logicCase");
+	new G4PVPlacement(0, G4ThreeVector(0,0,-hole_length/2.), logicCase, "physCase", logicWorld, false, 0, true);
+	
+	// array
+	G4cout << "defining the collimator array element" << G4endl;
+	solidCollimatorArray = new G4Box("solidCollimatorArray", case_side/2., pixel_size/2., hole_length/2.);
+	logicCollimatorArray = new G4LogicalVolume(solidCollimatorArray, materialTungsten, "logicCollimatorArray");
+	new G4PVReplica("physCollimatorArray", logicCollimatorArray, logicCase, kYAxis, holes_number, pixel_size, 0);
+	
+	// pixel
+	G4cout << "defining the collimator pixel element" << G4endl;
+	solidCollimatorPixel = new G4Box("solidCollimatorPixel", pixel_size/2., pixel_size/2., hole_length/2.);
+	logicCollimatorPixel = new G4LogicalVolume(solidCollimatorPixel, materialTungsten, "logicCollimatorPixel");
+	new G4PVReplica("physCollimatorString", logicCollimatorPixel, logicCollimatorArray, kXAxis, holes_number, pixel_size, 0);
+	
+	// pinhole
+	solidCollimatorPinhole = new G4Box("solidCollimatorPinhole", hole_thickness/2., hole_thickness/2., hole_length/2.);
+	logicCollimatorPinhole = new G4LogicalVolume(solidCollimatorPinhole, materialAir, "logicCollimatorPinhole");
+	new G4PVPlacement(0, G4ThreeVector(), logicCollimatorPinhole, "physCollimatorPinhole", logicCollimatorPixel, false, 0, true);
 }
 
 void MyDetectorConstruction::ConstructScintillator()
@@ -185,42 +166,35 @@ void MyDetectorConstruction::ConstructScintillator()
 	G4double slab_heigth = 50 * mm;
 	G4double slab_thickness = 5 * mm;
 
-	G4Box * sLaBr3 = new G4Box("LYSO solid", slab_width/2, slab_heigth/2, slab_thickness/2);
-	logicScintillator = new G4LogicalVolume(sLaBr3, materialLanthanumBromide, "logicScintillator");
+	solidScintillator = new G4Box("solidScintillator", slab_width/2, slab_heigth/2, slab_thickness/2);
+	logicScintillator = new G4LogicalVolume(solidScintillator, materialLanthanumBromide, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
-																				G4ThreeVector(0.,0.,1.5*mm), // at (0,0,0)
-																				logicScintillator,             // its logical volume
-																				"physScintillator",           // its name
-																				logicWorld,                  // its mother volume
-																				false,                   // no boolean operations
-																				0,                       // copy number
-																				1); // checking overlaps
+		G4ThreeVector(0.,0.,slab_thickness/2.), // at (0,0,0)
+		logicScintillator,             // its logical volume
+		"physScintillator",           // its name
+		logicWorld,                  // its mother volume
+		false,                   // no boolean operations
+		0,                       // copy number
+		1); // checking overlaps
 
 	fScoringVolume = logicScintillator;
 }
 
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
 {
-	G4double world_half_Z  = 5*cm;
-	G4double world_half_XY = 5*cm;
+	G4cout << "MyDetectorConstruction::Construct" << G4endl;
+	G4double world_half_Z  = 10*cm;
+	G4double world_half_XY = 10*cm;
 
-	G4Box * sWorld = new G4Box("solidWorld", world_half_XY, world_half_XY, world_half_Z);
-	logicWorld = new G4LogicalVolume(sWorld, materialAir, "logicWorld", 0, 0, 0, true);
+	solidWorld = new G4Box("solidWorld", world_half_XY, world_half_XY, world_half_Z);
+	logicWorld = new G4LogicalVolume(solidWorld, materialAir, "logicWorld", 0, 0, 0, true);
 
-	physWorld = new G4PVPlacement(0,
-																G4ThreeVector(),
-																logicWorld,
-																"physWorld",
-																0,
-																false,
-																0,
-																true);
+	physWorld = new G4PVPlacement(0, G4ThreeVector(), logicWorld, "physWorld", 0, false, 0, true);
 
 	ConstructScintillator();
-	// ConstructCollimator();
-	// ConstructCase(); // se lo attivi ricordati di metterlo come mother del logicScintillator
-	// SetVisualizationFeatures();
+	ConstructCollimator();
+	SetVisualizationFeatures();
 
 	return physWorld;
 }
@@ -228,17 +202,18 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 void MyDetectorConstruction::SetVisualizationFeatures()
 {
 	if (logicWorld)
-		logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
-	if (logicCollimator)
-		logicCollimator->SetVisAttributes(new G4VisAttributes(G4Colour(200./255, 200./255, 200./255,1)));
-	if (logicCase)
-		logicCase->SetVisAttributes(new G4VisAttributes(G4Colour(50./255, 100./255, 200./255,1)));
+		logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible());
+	if (logicCollimatorPixel)
+		logicCollimatorPixel->SetVisAttributes(new G4VisAttributes(G4Colour(200./255, 200./255, 200./255,1)));
+	if (logicCollimatorPinhole)
+		logicCollimatorPinhole->SetVisAttributes(G4VisAttributes::GetInvisible());
 	if (logicScintillator)
 		logicScintillator->SetVisAttributes(new G4VisAttributes(G4Colour(100./255, 100./255, 100./255,1)));
 }
 
 void MyDetectorConstruction::ConstructSDandField()
 {
+	G4cout << "MyDetectorConstruction::ConstructSDandField" << G4endl;
 	MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector");
 
 	if(logicScintillator != NULL)
