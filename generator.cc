@@ -2,7 +2,7 @@
 
 MyPrimaryGenerator::MyPrimaryGenerator()
 {
-  fParticleGPS = new G4GeneralParticleSource();
+	fParticleGPS = new G4GeneralParticleSource();
 }
 
 MyPrimaryGenerator::~MyPrimaryGenerator()

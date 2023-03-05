@@ -88,25 +88,25 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 
 	G4double PhotonEnergy[nEntries] = {1.0*eV, 7.0*eV};
 
-	G4double LaBr3RefracionIndex[nEntries] = {1.9,1.9};
-	G4double LaBr3AbsorptionLength[nEntries] = {50.*cm,50.*cm};
+	G4double refractiveIndexGAGG[nEntries] = {1.9,1.9};
+	G4double absorptionLengthGAGG[nEntries] = {50.*cm,50.*cm};
 
-	G4MaterialPropertiesTable* materialLanthanumBromideMPT = new G4MaterialPropertiesTable();
+	G4MaterialPropertiesTable* mptGAGG = new G4MaterialPropertiesTable();
 
-	materialLanthanumBromideMPT->AddProperty("RINDEX", PhotonEnergy, LaBr3RefracionIndex, nEntries);
-	materialLanthanumBromideMPT->AddProperty("ABSLENGTH", PhotonEnergy, LaBr3AbsorptionLength, nEntries);
+	mptGAGG->AddProperty("RINDEX", PhotonEnergy, refractiveIndexGAGG, nEntries);
+	mptGAGG->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthGAGG, nEntries);
 
 	G4double ScintEnergy[nEntries] = {3.25*eV, 3.44*eV};
 	G4double ScintFast[nEntries] = {1.0,1.0};
 
-	materialLanthanumBromideMPT->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
+	mptGAGG->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
 
-	materialLanthanumBromideMPT->AddConstProperty("SCINTILLATIONYIELD", 63./keV);
-	materialLanthanumBromideMPT->AddConstProperty("RESOLUTIONSCALE", 1.0);
-	materialLanthanumBromideMPT->AddConstProperty("FASTTIMECONSTANT",20.0*ns);
-	materialLanthanumBromideMPT->AddConstProperty("YIELDRATIO",1.0);
+	mptGAGG->AddConstProperty("SCINTILLATIONYIELD", 42000/MeV);
+	mptGAGG->AddConstProperty("RESOLUTIONSCALE", 1.0);
+	mptGAGG->AddConstProperty("FASTTIMECONSTANT",90.0*ns);
+	mptGAGG->AddConstProperty("YIELDRATIO",1.0);
 
-	materialLanthanumBromide->SetMaterialPropertiesTable(materialLanthanumBromideMPT);
+	materialGAGG->SetMaterialPropertiesTable(mptGAGG);
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
@@ -127,8 +127,8 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
 	// Collimator parameters
 	hole_length = 30.*mm;
-	septa_thickness = 10.*mm; // 2*mm;
-	hole_thickness = 20.*mm; // 3*mm;
+	septa_thickness = 1.*mm; // 2*mm;
+	hole_thickness = 2.*mm; // 3*mm;
 	case_side = 10.*cm; // fixed but not necessarily precise
 	
 	// Derived parameters
@@ -165,9 +165,9 @@ void MyDetectorConstruction::ConstructCollimator()
 
 void MyDetectorConstruction::ConstructScintillator()
 {
-	G4double slab_width  = 50 * mm;
-	G4double slab_heigth = 50 * mm;
-	G4double slab_thickness = 5 * mm;
+	G4double slab_width  = case_side;
+	G4double slab_heigth = case_side;
+	G4double slab_thickness = hole_length/3.;
 
 	solidScintillator = new G4Box("solidScintillator", slab_width/2, slab_heigth/2, slab_thickness/2);
 	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
@@ -195,8 +195,8 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 
 	physWorld = new G4PVPlacement(0, G4ThreeVector(), logicWorld, "physWorld", 0, false, 0, true);
 
-	ConstructScintillator();
 	ConstructCollimator();
+	ConstructScintillator();
 	// SetVisualizationFeatures();
 
 	return physWorld;
