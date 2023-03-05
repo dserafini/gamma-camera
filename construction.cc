@@ -135,6 +135,9 @@ void MyDetectorConstruction::ConstructCollimator()
 	pixel_size = hole_thickness + septa_thickness;
 	holes_number = (G4int) case_side / pixel_size;
 	case_side = (G4double) pixel_size * holes_number;
+	G4cout << "pixel_size: " << pixel_size << " mm" << G4endl;
+	G4cout << "holes_number: " << holes_number << " " << G4endl;
+	G4cout << "case_side: " << case_side << " mm" << G4endl;
 	
 	// case
 	G4cout << "defining the collimator case" << G4endl;
