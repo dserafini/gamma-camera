@@ -157,7 +157,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	// pinhole
 	solidCollimatorPinhole = new G4Box("solidCollimatorPinhole", hole_thickness/2., hole_thickness/2., hole_length/2.);
 	logicCollimatorPinhole = new G4LogicalVolume(solidCollimatorPinhole, materialAir, "logicCollimatorPinhole");
-	new G4PVPlacement(0, G4ThreeVector()), logicCollimatorPinhole, "physCollimatorPinhole", logicCollimatorPixel, false, 0, true);
+	new G4PVPlacement(0, G4ThreeVector(), logicCollimatorPinhole, "physCollimatorPinhole", logicCollimatorPixel, false, 0, true);
 }
 
 void MyDetectorConstruction::ConstructScintillator()
