@@ -197,7 +197,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 
 	ConstructScintillator();
 	ConstructCollimator();
-	SetVisualizationFeatures();
+	// SetVisualizationFeatures();
 
 	return physWorld;
 }
