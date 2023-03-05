@@ -67,7 +67,7 @@ void MyDetectorConstruction::DefineMaterials()
 	materialGAGG = new G4Material("materialGAGG", 6.6*g/cm3, 1);
 	// materialGAGG = nist->FindOrBuildMaterial("G4_BGO");
 	G4cout << "Add Element Gd" << G4endl;
-	// materialGAGG->AddElement(nist->FindOrBuildElement("G4_Gd"), 3);
+	materialGAGG->AddElement(nist->FindOrBuildElement("G4_Gd"), 3);
 	G4cout << "Add Element Al" << G4endl;
 	//materialGAGG->AddElement(nist->FindOrBuildElement("G4_Al"), 2);
 	G4cout << "Add Element Ga" << G4endl;
