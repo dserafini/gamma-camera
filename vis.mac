@@ -1,9 +1,10 @@
 
 # change geometry
+# usa solo i mm che l'unità di misura non funziona
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
-/collimator/case_side 10. cm
+/collimator/case_side 100. mm
 /run/reinitializeGeometry
 
 # initalize if not done in the main
