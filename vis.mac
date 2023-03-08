@@ -2,6 +2,9 @@
 # change geometry
 /run/reinitializeGeometry
 /collimator/hole_length 1. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 1. mm
+/collimator/case_side 10. mm
 
 # initalize if not done in the main
 /run/initialize
