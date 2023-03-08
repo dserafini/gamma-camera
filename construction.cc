@@ -2,7 +2,7 @@
 
 MyDetectorConstruction::MyDetectorConstruction()
 {
-	fMessenger = new G4GenericMessenger(this, "/detector/", "Detector Construction");
+	fMessenger = new G4GenericMessenger(this, "/collimator/", "Collimator Construction");
 	// first argument is the object to which it refers, this class
 	// the slashes in the folder argument are mandatory
 	// third argument is help text
