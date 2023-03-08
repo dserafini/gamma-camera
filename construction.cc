@@ -8,8 +8,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// third argument is help text
 
 	// define our command
-	// we want to change the number of photon sensors in our column
-	fMessenger->DeclareProperty("nCols", nCols, "Number of columns");
+	fMessenger->DeclareProperty("hole_length", hole_length, "Length of the collimator holes");
 	// first argument is the name of the command
 	// second argument is a variable
 	// third argument is help text
@@ -20,7 +19,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessenger->DeclareProperty("isCherenkov", isCherenkov, "Toggle Cherenkov setup");
 
 	// defualt values for the number of rows and columns
-	nCols = 10;
+	hole_length = 30 * mm;
 	nRows = 10;
 
 	// define materials just once
@@ -126,7 +125,7 @@ void MyDetectorConstruction::ConstructCollimator()
 {
 	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
 	// Collimator parameters
-	hole_length = 30.*mm;
+	// hole_length = 30.*mm;
 	septa_thickness = 1.*mm; // 2*mm;
 	hole_thickness = 2.*mm; // 3*mm;
 	case_side = 10.*cm; // fixed but not necessarily precise
