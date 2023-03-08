@@ -28,10 +28,10 @@
 /vis/scene/add/trajectories smooth
 
 # insert a scale that is 10 cm long in our program
-/vis/scene/add/scale 10 cm
+# /vis/scene/add/scale 10 cm
 
 # add a coordinate system
-/vis/scene/add/axes
+# /vis/scene/add/axes
 
 # always shows which event is just generated, for debugging
 /vis/scene/add/eventID
