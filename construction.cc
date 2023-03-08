@@ -13,14 +13,17 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// second argument is a variable
 	// third argument is help text
 
-	// same for the rows
-	fMessenger->DeclareProperty("nRows", nRows, "Number of rows");
+	fMessenger->DeclareProperty("hole_thickness", hole_thickness, "Thickness of the collimator holes");
 
-	fMessenger->DeclareProperty("isCherenkov", isCherenkov, "Toggle Cherenkov setup");
+	fMessenger->DeclareProperty("septa_thickness", septa_thickness, "Thickness of the collimator septa");
 
-	// defualt values for the number of rows and columns
-	hole_length = 30 * mm;
-	nRows = 10;
+	fMessenger->DeclareProperty("case_side", case_side, "Side of the collimator case");
+
+	// Collimator parameters
+	hole_length = 30.*mm;
+	septa_thickness = 1.*mm; // 2*mm;
+	hole_thickness = 2.*mm; // 3*mm;
+	case_side = 10.*cm; // fixed but not necessarily precise
 
 	// define materials just once
 	DefineMaterials();
@@ -124,11 +127,6 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 void MyDetectorConstruction::ConstructCollimator()
 {
 	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
-	// Collimator parameters
-	// hole_length = 30.*mm;
-	septa_thickness = 1.*mm; // 2*mm;
-	hole_thickness = 2.*mm; // 3*mm;
-	case_side = 10.*cm; // fixed but not necessarily precise
 	
 	// Derived parameters
 	pixel_size = hole_thickness + septa_thickness;
