@@ -1,4 +1,8 @@
 
+# change geometry
+/run/reinitializeGeometry
+/collimator/hole_length 1. mm
+
 # initalize if not done in the main
 /run/initialize
 
