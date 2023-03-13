@@ -18,8 +18,6 @@
 #include "G4VisAttributes.hh"
 // per cambiare geometria on the way
 #include "G4GenericMessenger.hh"
-#include "G4UIdirectory.hh"
-#include "G4UIcmdWithADouble.hh"
 
 #include "detector.hh"
 
@@ -62,9 +60,6 @@ private:
 
 	// we do not need to access the messenger from outside
 	G4GenericMessenger *fMessenger;
-	G4UIdirectory* collimatorCmdDir;
-	G4UIcmdWithADouble* selectHoleLengthCmd;
-	
 
 	G4LogicalVolume *fScoringVolume;
 
