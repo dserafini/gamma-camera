@@ -24,6 +24,14 @@ MyDetectorConstruction::MyDetectorConstruction()
 	septa_thickness = 1.*mm; // 2*mm;
 	hole_thickness = 2.*mm; // 3*mm;
 	case_side = 10.*cm; // fixed but not necessarily precise
+	
+	collimatorCmdDir = new G4UIdirectory("/collimator1/");
+	fDir->SetGuidance("this example");
+	selectHoleLengthCmd = new G4UIcmdWithADouble("/collimator1/hole_length",this);
+	selectHoleLengthCmd->SetGuidance("Hole length");
+	selectHoleLengthCmd->SetParameterName("hole_length",false,false);
+	selectHoleLengthCmd->SetDefaultValue(30. * mm);
+	selectHoleLengthCmd->SetRange("hole_length>0");
 
 	// define materials just once
 	DefineMaterials();
