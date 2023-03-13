@@ -8,7 +8,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// third argument is help text
 
 	// define our command
-	fMessenger->DeclareProperty("hole_length", hole_length, "Length of the collimator holes");
+	fMessenger->DeclarePropertyWithUnit("hole_length", hole_length, "Length of the collimator holes");
 	// first argument is the name of the command
 	// second argument is a variable
 	// third argument is help text
