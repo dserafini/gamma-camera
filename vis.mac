@@ -7,6 +7,9 @@
 /collimator/case_side 10. cm
 /run/reinitializeGeometry
 
+# initalize if not done in the main
+/run/initialize
+
 ################################################################################
 # change source
 ################################################################################
@@ -19,9 +22,6 @@
 ################################################################################
 # other visualization settings
 ################################################################################
-
-# initalize if not done in the main
-/run/initialize
 
 # tell Geant4 to show the scene
 /vis/open OGL
