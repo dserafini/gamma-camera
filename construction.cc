@@ -27,8 +27,8 @@ MyDetectorConstruction::MyDetectorConstruction()
 	
 	// scintillator commands
 	fMessengerCollimator = new G4GenericMessenger(this, "/scintillator/", "Scintillator Construction");
-	fMessengerCollimator->DeclarePropertyWithUnit("scintillator_side", "mm", slab_side, "Side of the collimator");
-	fMessengerCollimator->DeclarePropertyWithUnit("scintillator_depth", "mm", slab_depth, "Depth of the collimator");
+	fMessengerCollimator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the collimator");
+	fMessengerCollimator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
 	
 	// scintillator parameters
 	slab_side  = case_side;
