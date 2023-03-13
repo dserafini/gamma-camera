@@ -26,7 +26,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	case_side = 10.*cm; // fixed but not necessarily precise
 	
 	collimatorCmdDir = new G4UIdirectory("/collimator1/");
-	fDir->SetGuidance("this example");
+	collimatorCmdDir->SetGuidance("this example");
 	selectHoleLengthCmd = new G4UIcmdWithADouble("/collimator1/hole_length",this);
 	selectHoleLengthCmd->SetGuidance("Hole length");
 	selectHoleLengthCmd->SetParameterName("hole_length",false,false);
