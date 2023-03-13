@@ -1,6 +1,34 @@
+################################################################################
+# change geometry collimator
+################################################################################
+/collimator/hole_length 30. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+/collimator/case_side 10. cm
+
+################################################################################
+# change scintillator collimator
+################################################################################
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 3. cm
+
+/run/reinitializeGeometry
 
 # initalize if not done in the main
 /run/initialize
+
+################################################################################
+# change source
+################################################################################
+/gps/particle gamma
+/gps/energy 340 keV
+/gps/position 0 0 -3.5 cm
+# /gps/direction 0 0 1
+/gps/ang/type iso
+
+################################################################################
+# other visualization settings
+################################################################################
 
 # tell Geant4 to show the scene
 /vis/open OGL
@@ -28,10 +56,10 @@
 /vis/scene/add/trajectories smooth
 
 # insert a scale that is 10 cm long in our program
-/vis/scene/add/scale 10 cm
+# /vis/scene/add/scale 10 cm
 
 # add a coordinate system
-/vis/scene/add/axes
+# /vis/scene/add/axes
 
 # always shows which event is just generated, for debugging
 /vis/scene/add/eventID
@@ -45,10 +73,3 @@
 /vis/scene/add/frame   # Simple frame around the view
 /vis/set/colour        # Revert to default colour (white)
 /vis/set/lineWidth     # Revert to default line width (1.)
-
-# generate gamma
-/gps/particle gamma
-/gps/energy 340 keV
-/gps/position 0 0 -7.5 cm
-# /gps/direction 0 0 1
-/gps/ang/type iso

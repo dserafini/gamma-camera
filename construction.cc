@@ -2,26 +2,37 @@
 
 MyDetectorConstruction::MyDetectorConstruction()
 {
-	fMessenger = new G4GenericMessenger(this, "/detector/", "Detector Construction");
+	fMessengerCollimator = new G4GenericMessenger(this, "/collimator/", "Collimator Construction");
 	// first argument is the object to which it refers, this class
 	// the slashes in the folder argument are mandatory
 	// third argument is help text
 
 	// define our command
-	// we want to change the number of photon sensors in our column
-	fMessenger->DeclareProperty("nCols", nCols, "Number of columns");
+	fMessengerCollimator->DeclarePropertyWithUnit("hole_length", "mm", hole_length, "Length of the collimator holes");
 	// first argument is the name of the command
 	// second argument is a variable
 	// third argument is help text
 
-	// same for the rows
-	fMessenger->DeclareProperty("nRows", nRows, "Number of rows");
+	fMessengerCollimator->DeclarePropertyWithUnit("hole_thickness", "mm", hole_thickness, "Thickness of the collimator holes");
 
-	fMessenger->DeclareProperty("isCherenkov", isCherenkov, "Toggle Cherenkov setup");
+	fMessengerCollimator->DeclarePropertyWithUnit("septa_thickness", "mm", septa_thickness, "Thickness of the collimator septa");
 
-	// defualt values for the number of rows and columns
-	nCols = 10;
-	nRows = 10;
+	fMessengerCollimator->DeclarePropertyWithUnit("case_side", "mm", case_side, "Side of the collimator case");
+
+	// Collimator parameters
+	hole_length = 30.*mm;
+	septa_thickness = 1.*mm; // 2*mm;
+	hole_thickness = 2.*mm; // 3*mm;
+	case_side = 10.*cm; // fixed but not necessarily precise
+	
+	// scintillator commands
+	fMessengerCollimator = new G4GenericMessenger(this, "/scintillator/", "Scintillator Construction");
+	fMessengerCollimator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the collimator");
+	fMessengerCollimator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
+	
+	// scintillator parameters
+	slab_side  = case_side;
+	slab_depth = hole_length/3.;
 
 	// define materials just once
 	DefineMaterials();
@@ -36,7 +47,9 @@ MyDetectorConstruction::MyDetectorConstruction()
 }
 
 MyDetectorConstruction::~MyDetectorConstruction()
-{}
+{
+	delete fMessengerCollimator;
+}
 
 // to define material only once
 void MyDetectorConstruction::DefineMaterials()
@@ -125,11 +138,6 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 void MyDetectorConstruction::ConstructCollimator()
 {
 	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
-	// Collimator parameters
-	hole_length = 30.*mm;
-	septa_thickness = 1.*mm; // 2*mm;
-	hole_thickness = 2.*mm; // 3*mm;
-	case_side = 10.*cm; // fixed but not necessarily precise
 	
 	// Derived parameters
 	pixel_size = hole_thickness + septa_thickness;
@@ -165,15 +173,11 @@ void MyDetectorConstruction::ConstructCollimator()
 
 void MyDetectorConstruction::ConstructScintillator()
 {
-	G4double slab_width  = case_side;
-	G4double slab_heigth = case_side;
-	G4double slab_thickness = hole_length/3.;
-
-	solidScintillator = new G4Box("solidScintillator", slab_width/2, slab_heigth/2, slab_thickness/2);
+	solidScintillator = new G4Box("solidScintillator", slab_side/2., slab_side/2., slab_depth/2.);
 	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,slab_thickness/2.), // at (0,0,0)
+		G4ThreeVector(0.,0.,slab_depth/2.), // at (0,0,0)
 		logicScintillator,             // its logical volume
 		"physScintillator",           // its name
 		logicWorld,                  // its mother volume

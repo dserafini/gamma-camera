@@ -13,11 +13,11 @@
 #include "G4NistManager.hh"
 #include "G4PVPlacement.hh"
 #include "G4PVReplica.hh"
-// per cambiare geometria on the way
-#include "G4GenericMessenger.hh"
 #include "G4OpticalSurface.hh"
 #include "G4LogicalSkinSurface.hh"
 #include "G4VisAttributes.hh"
+// per cambiare geometria on the way
+#include "G4GenericMessenger.hh"
 
 #include "detector.hh"
 
@@ -59,7 +59,8 @@ private:
 	void SetVisualizationFeatures();
 
 	// we do not need to access the messenger from outside
-	G4GenericMessenger *fMessenger;
+	G4GenericMessenger *fMessengerCollimator;
+	G4GenericMessenger *fMessengerScintillator;
 
 	G4LogicalVolume *fScoringVolume;
 
@@ -73,8 +74,12 @@ private:
 
 	G4OpticalSurface *mirrorSurface;
 
+	// collimator
 	G4double collimator_thickness, case_side, case_wall_thickness, hole_thickness, pixel_size, hole_length, septa_thickness;
 	G4int holes_number;
+	
+	// scintillator
+	G4double slab_depth, slab_side;
 };
 
 #endif
