@@ -5,6 +5,8 @@
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
 /collimator/case_side 10. cm
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 3. cm
 /run/reinitializeGeometry
 
 # initalize if not done in the main
