@@ -21,6 +21,7 @@ public:
 private:
 	G4GeneralParticleSource* fParticleGPS;
 	G4GenericMessenger *fMessenger;
+	G4double sourceDistance;
 };
 
 #endif
