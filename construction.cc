@@ -13,25 +13,17 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// second argument is a variable
 	// third argument is help text
 
-	fMessenger->DeclareProperty("hole_thickness", hole_thickness, "Thickness of the collimator holes");
+	fMessenger->DeclarePropertyWithUnit("hole_thickness", "mm", hole_thickness, "Thickness of the collimator holes");
 
-	fMessenger->DeclareProperty("septa_thickness", septa_thickness, "Thickness of the collimator septa");
+	fMessenger->DeclarePropertyWithUnit("septa_thickness", "mm", septa_thickness, "Thickness of the collimator septa");
 
-	fMessenger->DeclareProperty("case_side", case_side, "Side of the collimator case");
+	fMessenger->DeclarePropertyWithUnit("case_side", "mm", case_side, "Side of the collimator case");
 
 	// Collimator parameters
 	hole_length = 30.*mm;
 	septa_thickness = 1.*mm; // 2*mm;
 	hole_thickness = 2.*mm; // 3*mm;
 	case_side = 10.*cm; // fixed but not necessarily precise
-	
-	collimatorCmdDir = new G4UIdirectory("/collimator1/");
-	collimatorCmdDir->SetGuidance("this example");
-	//selectHoleLengthCmd = new G4UIcmdWithADouble("/collimator1/hole_length",this);
-	//selectHoleLengthCmd->SetGuidance("Hole length");
-	//selectHoleLengthCmd->SetParameterName("hole_length",false,false);
-	//selectHoleLengthCmd->SetDefaultValue(30. * mm);
-	//selectHoleLengthCmd->SetRange("hole_length>0");
 
 	// define materials just once
 	DefineMaterials();
