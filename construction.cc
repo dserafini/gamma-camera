@@ -27,11 +27,11 @@ MyDetectorConstruction::MyDetectorConstruction()
 	
 	collimatorCmdDir = new G4UIdirectory("/collimator1/");
 	collimatorCmdDir->SetGuidance("this example");
-	selectHoleLengthCmd = new G4UIcmdWithADouble("/collimator1/hole_length",this);
-	selectHoleLengthCmd->SetGuidance("Hole length");
-	selectHoleLengthCmd->SetParameterName("hole_length",false,false);
-	selectHoleLengthCmd->SetDefaultValue(30. * mm);
-	selectHoleLengthCmd->SetRange("hole_length>0");
+	#selectHoleLengthCmd = new G4UIcmdWithADouble("/collimator1/hole_length",this);
+	#selectHoleLengthCmd->SetGuidance("Hole length");
+	#selectHoleLengthCmd->SetParameterName("hole_length",false,false);
+	#selectHoleLengthCmd->SetDefaultValue(30. * mm);
+	#selectHoleLengthCmd->SetRange("hole_length>0");
 
 	// define materials just once
 	DefineMaterials();
