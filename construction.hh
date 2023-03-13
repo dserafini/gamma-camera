@@ -59,7 +59,8 @@ private:
 	void SetVisualizationFeatures();
 
 	// we do not need to access the messenger from outside
-	G4GenericMessenger *fMessenger;
+	G4GenericMessenger *fMessengerCollimator;
+	G4GenericMessenger *fMessengerScintillator;
 
 	G4LogicalVolume *fScoringVolume;
 
