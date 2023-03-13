@@ -31,8 +31,8 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerCollimator->DeclarePropertyWithUnit("scintillator_depth", "mm", scintillator_depth, "Depth of the collimator");
 	
 	// scintillator parameters
-	scintillator_side  = case_side;
-	scintillator_depth = hole_length/3.;
+	slab_side  = case_side;
+	slab_depth = hole_length/3.;
 
 	// define materials just once
 	DefineMaterials();
@@ -173,11 +173,11 @@ void MyDetectorConstruction::ConstructCollimator()
 
 void MyDetectorConstruction::ConstructScintillator()
 {
-	solidScintillator = new G4Box("solidScintillator", scintillator_side/2., scintillator_side/2., scintillator_depth/2.);
+	solidScintillator = new G4Box("solidScintillator", slab_side/2., slab_side/2., slab_depth/2.);
 	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,scintillator_depth/2.), // at (0,0,0)
+		G4ThreeVector(0.,0.,slab_depth/2.), // at (0,0,0)
 		logicScintillator,             // its logical volume
 		"physScintillator",           // its name
 		logicWorld,                  // its mother volume
