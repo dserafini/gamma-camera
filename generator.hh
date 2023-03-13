@@ -9,6 +9,7 @@
 #include "G4Geantino.hh"
 #include "G4IonTable.hh"
 #include "G4GenericMessenger.hh"
+#include "G4UImanager.hh"
 
 class MyPrimaryGenerator : public G4VUserPrimaryGeneratorAction
 {
@@ -22,6 +23,7 @@ private:
 	G4GeneralParticleSource* fParticleGPS;
 	G4GenericMessenger *fMessenger;
 	G4double sourceDistance;
+	G4UImanager * uiManager;
 };
 
 #endif
