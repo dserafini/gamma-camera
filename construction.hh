@@ -79,7 +79,7 @@ private:
 	G4int holes_number;
 	
 	// scintillator
-	G4double scintillator_depth, scintillator_side;
+	G4double slab_depth, slab_side;
 };
 
 #endif
