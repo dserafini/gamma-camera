@@ -32,4 +32,12 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   G4double edep = step->GetTotalEnergyDeposit() / keV;
   fEventAction->AddEdep(edep);
   // G4cout << "adding " << edep << " keV" << G4endl;
+
+  // only gammas are kept
+  if (step->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition())
+    return;
+  
+  G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
+  fEventAction->SetPosition(position);
+  fEventAction->AddEdep(edep);
 }
