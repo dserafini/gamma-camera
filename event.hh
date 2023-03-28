@@ -24,6 +24,9 @@ public:
 
 private:
   G4double fEdep;
+  G4double fX;
+  G4double fY;
+  G4double fZ;
 };
 
 #endif
