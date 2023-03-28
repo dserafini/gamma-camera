@@ -24,9 +24,7 @@ public:
 
 private:
   G4double fEdep;
-  G4double fX;
-  G4double fY;
-  G4double fZ;
+  G4ThreeVector fPosition;
 };
 
 #endif
