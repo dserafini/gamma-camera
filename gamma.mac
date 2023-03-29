@@ -1,3 +1,6 @@
+/collimator/exist 0
+/run/reinitializeGeometry
+
 /run/initialize
 
 /gps/particle gamma
