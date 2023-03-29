@@ -199,7 +199,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 
 	physWorld = new G4PVPlacement(0, G4ThreeVector(), logicWorld, "physWorld", 0, false, 0, true);
 
-	ConstructCollimator();
+	//ConstructCollimator();
 	ConstructScintillator();
 	// SetVisualizationFeatures();
 

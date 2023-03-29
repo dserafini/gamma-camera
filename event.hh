@@ -21,9 +21,11 @@ public:
 
   // accumulate energy deposited
   void AddEdep(G4double edep) { fEdep += edep; }
+  void SetPosition(G4ThreeVector position) { fPosition = position; }
 
 private:
   G4double fEdep;
+  G4ThreeVector fPosition;
 };
 
 #endif
