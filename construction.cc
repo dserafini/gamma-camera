@@ -202,6 +202,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 
 	physWorld = new G4PVPlacement(0, G4ThreeVector(), logicWorld, "physWorld", 0, false, 0, true);
 
+	G4cout << "Do I construct the collimator? " << collimatorExist << G4endl;
 	if(collimatorExist)
 		ConstructCollimator();
 	
