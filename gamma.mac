@@ -1,4 +1,4 @@
-/collimator/exist 1
+/collimator/exist 0
 /run/reinitializeGeometry
 
 /run/initialize
