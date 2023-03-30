@@ -1,4 +1,4 @@
-/collimator/exist 1
+/collimator/exist 0
 /run/reinitializeGeometry
 
 /run/initialize
@@ -12,4 +12,4 @@
 
 /run/initialize
 /run/printProgress 10000
-/run/beamOn 1000000
+/run/beamOn 100000
