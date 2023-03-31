@@ -1,7 +1,7 @@
 /collimator/exist 1
 /collimator/hole_length 30. mm
-/collimator/septa_thickness 100. mm
-/collimator/hole_thickness 0. mm
+/collimator/septa_thickness 10. mm
+/collimator/hole_thickness 10. mm
 /collimator/case_side 10. cm
 
 ################################################################################
@@ -16,11 +16,11 @@
 /gps/particle gamma
 /gps/energy 342 keV
 /gps/position 0 0 2.5 cm
-/gps/direction 0 0 1
-#/gps/ang/type iso
+# /gps/direction 0 0 1
+/gps/ang/type iso
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
 
-/run/initialize
+# /run/initialize
 /run/printProgress 10000
 /run/beamOn 100000
