@@ -4,7 +4,7 @@
 /collimator/exist 1
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 50. mm
-/collimator/hole_thickness 2. mm
+/collimator/hole_thickness 0. mm
 /collimator/case_side 10. cm
 
 ################################################################################
