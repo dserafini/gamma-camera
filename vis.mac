@@ -3,7 +3,7 @@
 ################################################################################
 /collimator/exist 0
 /collimator/hole_length 30. mm
-/collimator/septa_thickness 1. mm
+/collimator/septa_thickness 50. mm
 /collimator/hole_thickness 2. mm
 /collimator/case_side 10. cm
 
@@ -24,8 +24,8 @@
 /gps/particle gamma
 /gps/energy 340 keV
 /gps/position 0 0 -3.5 cm
-# /gps/direction 0 0 1
-/gps/ang/type iso
+/gps/direction 0 0 1
+# /gps/ang/type iso
 
 ################################################################################
 # other visualization settings
