@@ -6,6 +6,8 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// first argument is the object to which it refers, this class
 	// the slashes in the folder argument are mandatory
 	// third argument is help text
+	
+	fMessengerCollimator->DeclareProperty("exist", collimatorExist, "0 no, 1 yes");
 
 	// define our command
 	fMessengerCollimator->DeclarePropertyWithUnit("hole_length", "mm", hole_length, "Length of the collimator holes");
@@ -20,6 +22,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerCollimator->DeclarePropertyWithUnit("case_side", "mm", case_side, "Side of the collimator case");
 
 	// Collimator parameters
+	collimatorExist = 1; // by default the collimator is built
 	hole_length = 30.*mm;
 	septa_thickness = 1.*mm; // 2*mm;
 	hole_thickness = 2.*mm; // 3*mm;
@@ -199,7 +202,10 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 
 	physWorld = new G4PVPlacement(0, G4ThreeVector(), logicWorld, "physWorld", 0, false, 0, true);
 
-	//ConstructCollimator();
+	G4cout << "Do I construct the collimator? " << collimatorExist << G4endl;
+	if(collimatorExist)
+		ConstructCollimator();
+	
 	ConstructScintillator();
 	// SetVisualizationFeatures();
 
