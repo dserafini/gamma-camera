@@ -21,6 +21,10 @@
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
 
-# /run/initialize
 /run/printProgress 10000
-#/run/beamOn 100000
+/run/beamOn 100000
+
+/collimator/exist 0
+/run/reinitializeGeometry
+/run/initialize
+/run/beamOn 100000
