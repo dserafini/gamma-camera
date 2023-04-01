@@ -22,4 +22,4 @@
 # devo lanciare il primo evento che ha l'energia sbagliata
 
 /run/printProgress 1000000
-/run/beamOn 10000000
+/run/beamOn 100000000
