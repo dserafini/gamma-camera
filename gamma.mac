@@ -1,7 +1,7 @@
 /collimator/exist 1
 /collimator/hole_length 30. mm
-/collimator/septa_thickness 10. mm
-/collimator/hole_thickness 10. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
 /collimator/case_side 10. cm
 
 ################################################################################
@@ -22,9 +22,4 @@
 # devo lanciare il primo evento che ha l'energia sbagliata
 
 /run/printProgress 1000000
-/run/beamOn 10000000
-
-/collimator/exist 0
-/run/reinitializeGeometry
-/run/initialize
 /run/beamOn 10000000
