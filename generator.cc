@@ -2,6 +2,7 @@
 
 MyPrimaryGenerator::MyPrimaryGenerator()
 {
+	G4cout << "MyPrimaryGenerator::MyPrimaryGenerator" << G4endl;
 	fParticleGPS = new G4GeneralParticleSource();
 }
 

@@ -145,6 +145,19 @@ void MyDetectorConstruction::ConstructCollimator()
 	// Derived parameters
 	pixel_size = hole_thickness + septa_thickness;
 	holes_number = (G4int) case_side / pixel_size;
+	
+	// check proper parameters
+	if (holes_number < 1)
+	{
+		G4cout << "Error: pixel larger than case!" << G4endl;
+		G4cout << "return to default values" << G4endl;
+		septa_thickness = 1.*mm;
+		hole_thickness = 2.*mm;
+		pixel_size = hole_thickness + septa_thickness;
+		holes_number = (G4int) case_side / pixel_size;
+	}
+	
+	// derived parameters
 	case_side = (G4double) pixel_size * holes_number;
 	G4cout << "pixel_size: " << pixel_size << " mm" << G4endl;
 	G4cout << "holes_number: " << holes_number << " " << G4endl;
@@ -154,7 +167,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "defining the collimator case" << G4endl;
 	solidCollimatorMatrix = new G4Box("solidCollimatorMatrix", case_side/2., case_side/2., hole_length/2.);
 	logicCollimatorMatrix = new G4LogicalVolume(solidCollimatorMatrix, materialTungsten, "logicCollimatorMatrix");
-	new G4PVPlacement(0, G4ThreeVector(0,0,-hole_length/2.), logicCollimatorMatrix, "physCollimatorMatrix", logicWorld, false, 0, true);
+	new G4PVPlacement(0, G4ThreeVector(0,0,+hole_length/2.), logicCollimatorMatrix, "physCollimatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the collimator array element" << G4endl;
@@ -180,7 +193,7 @@ void MyDetectorConstruction::ConstructScintillator()
 	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,slab_depth/2.), // at (0,0,0)
+		G4ThreeVector(0.,0.,hole_length + slab_depth/2.), // at (0,0,0)
 		logicScintillator,             // its logical volume
 		"physScintillator",           // its name
 		logicWorld,                  // its mother volume
