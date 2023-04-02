@@ -145,6 +145,19 @@ void MyDetectorConstruction::ConstructCollimator()
 	// Derived parameters
 	pixel_size = hole_thickness + septa_thickness;
 	holes_number = (G4int) case_side / pixel_size;
+	
+	// check proper parameters
+	if (holes_number < 1)
+	{
+		G4cout << "Error: pixel larger than case!" << G4endl;
+		G4cout << "return to default values" << G4endl;
+		septa_thickness = 1.*mm;
+		hole_thickness = 2.*mm;
+		pixel_size = hole_thickness + septa_thickness;
+		holes_number = (G4int) case_side / pixel_size;
+	}
+	
+	// derived parameters
 	case_side = (G4double) pixel_size * holes_number;
 	G4cout << "pixel_size: " << pixel_size << " mm" << G4endl;
 	G4cout << "holes_number: " << holes_number << " " << G4endl;
