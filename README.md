@@ -1,4 +1,4 @@
-# gamma-camera-mustafa
+# gamma-camera
 Geant4 project for a gamma camera
 
 # Short description
