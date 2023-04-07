@@ -1,17 +1,28 @@
+
+################################################################################
+# define scintillator
+################################################################################
+
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 3. cm
+
+################################################################################
+# define collimator
+################################################################################
+
 /collimator/exist 1
+/collimator/case_side 10. cm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
-/collimator/case_side 10. cm
 
-################################################################################
-# change scintillator collimator
-################################################################################
-/scintillator/slab_side 10. cm
-/scintillator/slab_depth 3. cm
 /run/reinitializeGeometry
 
 /run/initialize
+
+################################################################################
+# define primary
+################################################################################
 
 /gps/particle gamma
 /gps/energy 342 keV
@@ -20,6 +31,18 @@
 /gps/ang/type iso
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
-
 /run/printProgress 100000
+
+################################################################################
+# runs
+################################################################################
+
+/analysis/setFileName septa0p8mmHole2mm1Mevents.root
+/collimator/septa_thickness 0.8 mm
+/collimator/hole_thickness 2. mm
+/run/beamOn 1000000
+
+/analysis/setFileName septa1p2mmHole2mm1Mevents.root
+/collimator/septa_thickness 1.2 mm
+/collimator/hole_thickness 2. mm
 /run/beamOn 1000000
