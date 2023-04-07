@@ -36,6 +36,6 @@
 # run
 ################################################################################
 
-/analysis/setFileName simple.root
+/analysis/setFileName direct.root
 /run/printProgress 100000
 /run/beamOn 100000
