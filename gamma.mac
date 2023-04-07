@@ -29,6 +29,7 @@
 /gps/position 0 0 -4. cm
 # /gps/direction 0 0 1
 /gps/ang/type iso
+/analysis/setFileName discard.root
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
 /run/printProgress 100000
