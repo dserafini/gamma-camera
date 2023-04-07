@@ -14,6 +14,7 @@ void MyEventAction::BeginOfEventAction(const G4Event*)
   // whenever a new event starts the energy accumulated in the previous event should be set to 0
   fEdep = 0.;
   fPosition = G4ThreeVector(0.,0.,0.);
+  savedPosition = false;
 }
 
 void MyEventAction::EndOfEventAction(const G4Event*)
