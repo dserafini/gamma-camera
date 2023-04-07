@@ -37,5 +37,5 @@
 ################################################################################
 
 /analysis/setFileName direct.root
-/run/printProgress 100
-/run/beamOn 1000
+/run/printProgress 1
+/run/beamOn 1
