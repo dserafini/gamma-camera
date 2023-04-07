@@ -40,9 +40,9 @@
 /analysis/setFileName septa0p8mmHole2mm1Mevents.root
 /collimator/septa_thickness 0.8 mm
 /collimator/hole_thickness 2. mm
-/run/beamOn 1000000
+/run/beamOn 100000
 
 /analysis/setFileName septa1p2mmHole2mm1Mevents.root
 /collimator/septa_thickness 1.2 mm
 /collimator/hole_thickness 2. mm
-/run/beamOn 1000000
+/run/beamOn 100000
