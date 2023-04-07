@@ -32,6 +32,7 @@ void MyRunAction::BeginOfRunAction(const G4Run* run)
   strRunID << runID;
 
   //man->OpenFile("output" + strRunID.str() + ".root");
+  // I prefer to give the file name from macro
   man->OpenFile();
 }
 
