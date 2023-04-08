@@ -5,7 +5,7 @@ void outh2(TString fileName, Int_t xBins = 500, TString drawOption = "colz", Boo
   else
   {
     if (fileName.EndsWith(".root"))
-      fileName.Resize(fileName.Length()-5)
+      fileName.Resize(fileName.Length()-5);
     
     TTree* t1 = (TTree*)file->Get("Scoring");
     if (!t1) cout << "No tree found!" << endl;
