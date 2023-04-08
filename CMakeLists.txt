@@ -26,11 +26,11 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/*.hh)
 # copy all the macro files in the build folder
 # but I have to cmake .. every change I make
 # but I do not have to make
-file(GLOB MACRO_FILES
+file(GLOB MACRO_GEANT_FILES
   "*.mac"
 )
 
-file(COPY ${MACRO_FILES} DESTINATION ${PROJECT_BINARY_DIR})
+file(COPY ${MACRO_GEANT_FILES} DESTINATION ${PROJECT_BINARY_DIR})
 
 # we create the executable with a certain name: sim
 # we have to write the main file where the source code is added: sim.cc
@@ -48,3 +48,9 @@ file(GLOB DATA_FILES
   "*.dat"
 )
 file(COPY ${DATA_FILES} DESTINATION ${PROJECT_BINARY_DIR})
+
+# copy C macro files for root
+file(GLOB MACRO_ROOT_FILES
+  "*.C"
+)
+file(COPY ${MACRO_ROOT_FILES} DESTINATION ${PROJECT_BINARY_DIR})
