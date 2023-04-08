@@ -4,6 +4,9 @@ void outh2(TString fileName, Int_t xBins = 500, TString drawOption = "colz", Boo
   if (!file) cout << "No file found!" << endl;
   else
   {
+    if (fileName.EndsWith(".root"))
+      fileName = fileName.Resize(fileName.Length()-5)
+    
     TTree* t1 = (TTree*)file->Get("Scoring");
     if (!t1) cout << "No tree found!" << endl;
     else
@@ -23,7 +26,7 @@ void outh2(TString fileName, Int_t xBins = 500, TString drawOption = "colz", Boo
         if (logz)
           c1->SetLogz();
         h2->Draw(drawOption);
-        c1->SaveAs("c1.png");
+        c1->SaveAs("c1"+fileName+".png");
       }
     }
   }
