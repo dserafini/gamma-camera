@@ -24,7 +24,9 @@ void MyEventAction::EndOfEventAction(const G4Event*)
 
   man->FillNtupleDColumn(0, 0, fEdep);
   
-  fPosition = fPosition/fEdep; // normalize on the total energy
+  if (fEdep>0)
+    fPosition = fPosition/fEdep; // normalize on the total energy
+  
   man->FillNtupleDColumn(0, 1, fPosition.getX());
   man->FillNtupleDColumn(0, 2, fPosition.getY());
   man->FillNtupleDColumn(0, 3, fPosition.getZ());
