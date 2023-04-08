@@ -25,7 +25,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
 
   G4LogicalVolume *fScoringVolume = detectorConstruction->GetScoringVolume();
   G4cout << "volume: " << volume->GetName() << G4endl;
-  G4cout << "fScoringVolume: " << fScoringVolume->GetName() << G4endl;
+  // G4cout << "fScoringVolume: " << fScoringVolume->GetName() << G4endl;
 
   if(volume != fScoringVolume)
     return; // not saving energy outside scoring volume
