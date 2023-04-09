@@ -38,37 +38,67 @@
 # runs
 ################################################################################
 
-/analysis/setFileName septa0p8mmHole2p0mm1Mevents.root
+/analysis/setFileName septa0p8mmHole2p0mm100Mevents.root
 /collimator/septa_thickness 0.8 mm
 /collimator/hole_thickness 2. mm
-/run/beamOn 100000000
+#/run/beamOn 100000000
 
-/analysis/setFileName septa0p8mmHole2p2mm1Mevents.root
+/analysis/setFileName septa0p8mmHole2p2mm100Mevents.root
 /collimator/septa_thickness 0.8 mm
 /collimator/hole_thickness 2.2 mm
-/run/beamOn 100000000
+#/run/beamOn 100000000
 
-/analysis/setFileName septa1p0mmHole2p0mm1Mevents.root
+/analysis/setFileName septa1p0mmHole2p0mm100Mevents.root
 /collimator/septa_thickness 1.0 mm
 /collimator/hole_thickness 2. mm
-/run/beamOn 100000000
+#/run/beamOn 100000000
 
-/analysis/setFileName septa1p2mmHole2p0mm1Mevents.root
+/analysis/setFileName septa1p2mmHole2p0mm100Mevents.root
 /collimator/septa_thickness 1.2 mm
 /collimator/hole_thickness 2. mm
-/run/beamOn 100000000
+#/run/beamOn 100000000
 
-/analysis/setFileName septa1p2mmHole1p8mm1Mevents.root
+/analysis/setFileName septa1p2mmHole1p8mm100Mevents.root
 /collimator/septa_thickness 1.2 mm
 /collimator/hole_thickness 1.8 mm
-/run/beamOn 100000000
+#/run/beamOn 100000000
 
-/analysis/setFileName septa1p4mmHole2p0mm1Mevents.root
+/analysis/setFileName septa1p4mmHole2p0mm100Mevents.root
 /collimator/septa_thickness 1.4 mm
+/collimator/hole_thickness 2. mm
+#/run/beamOn 100000000
+
+/analysis/setFileName septa1p4mmHole1p6mm100Mevents.root
+/collimator/septa_thickness 1.4 mm
+/collimator/hole_thickness 1.6 mm
+#/run/beamOn 100000000
+
+/analysis/setFileName septa2p0mmHole2p0mm100Mevents.root
+/collimator/septa_thickness 2. mm
 /collimator/hole_thickness 2. mm
 /run/beamOn 100000000
 
-/analysis/setFileName septa1p4mmHole1p6mm1Mevents.root
-/collimator/septa_thickness 1.4 mm
-/collimator/hole_thickness 1.6 mm
+/analysis/setFileName septa2p0mmHole1p0mm100Mevents.root
+/collimator/septa_thickness 2. mm
+/collimator/hole_thickness 1. mm
+/run/beamOn 100000000
+
+/analysis/setFileName septa3p0mmHole2p0mm100Mevents.root
+/collimator/septa_thickness 3. mm
+/collimator/hole_thickness 2. mm
+/run/beamOn 100000000
+
+/analysis/setFileName septa3p0mmHole1p0mm100Mevents.root
+/collimator/septa_thickness 3. mm
+/collimator/hole_thickness 1. mm
+/run/beamOn 100000000
+
+/analysis/setFileName septa4p0mmHole1p0mm100Mevents.root
+/collimator/septa_thickness 4. mm
+/collimator/hole_thickness 1. mm
+/run/beamOn 100000000
+
+/analysis/setFileName septa4p0mmHole2p0mm100Mevents.root
+/collimator/septa_thickness 4. mm
+/collimator/hole_thickness 2. mm
 /run/beamOn 100000000
