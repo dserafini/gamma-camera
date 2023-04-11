@@ -26,9 +26,10 @@
 /gps/particle gamma
 /gps/energy 342 keV
 /gps/position 0 0 -4. cm
-/gps/direction 0 0 1
-# /gps/ang/type iso
+# /gps/direction 0 0 1
+/gps/ang/type iso
 /analysis/setFileName discard.root
+/run/numberOfThreads 3
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
 
