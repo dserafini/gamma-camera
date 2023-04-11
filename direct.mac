@@ -19,7 +19,7 @@
 
 /run/reinitializeGeometry
 
-/run/numberOfThreads 3
+/run/numberOfThreads 4
 
 /run/initialize
 
@@ -41,5 +41,5 @@
 ################################################################################
 
 /analysis/setFileName direct.root
-/run/printProgress 10000
-/run/beamOn 100000
+/run/printProgress 100000
+/run/beamOn 1000000
