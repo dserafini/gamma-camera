@@ -1,5 +1,4 @@
 
-/run/numberOfThreads 3
 
 ################################################################################
 # define scintillator
@@ -19,6 +18,8 @@
 /collimator/hole_thickness 2. mm
 
 /run/reinitializeGeometry
+
+/run/numberOfThreads 3
 
 /run/initialize
 
