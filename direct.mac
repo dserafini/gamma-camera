@@ -19,7 +19,7 @@
 
 /run/reinitializeGeometry
 
-/run/numberOfThreads 4
+/run/numberOfThreads 3
 
 /run/initialize
 
