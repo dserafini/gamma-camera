@@ -31,7 +31,9 @@ void MyRunAction::BeginOfRunAction(const G4Run* run)
   std::stringstream strRunID;
   strRunID << runID;
 
-  man->OpenFile("output" + strRunID.str() + ".root");
+  //man->OpenFile("output" + strRunID.str() + ".root");
+  // I prefer to give the file name from macro
+  man->OpenFile();
 }
 
 void MyRunAction::EndOfRunAction(const G4Run*)
