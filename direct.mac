@@ -11,7 +11,7 @@
 # define collimator
 ################################################################################
 
-/collimator/exist 0
+/collimator/exist 1
 /collimator/case_side 10. cm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
