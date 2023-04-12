@@ -156,6 +156,8 @@ void MyDetectorConstruction::ConstructCollimator()
 		pixel_size = hole_thickness + septa_thickness;
 		holes_number = (G4int) case_side / pixel_size;
 	}
+	if ((holes_number % 2) < 1)
+		holes_number = holes_number - 1;
 	
 	// derived parameters
 	case_side = (G4double) pixel_size * holes_number;
