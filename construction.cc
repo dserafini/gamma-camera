@@ -143,7 +143,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "MyDetectorConstruction::ConstructCollimator" << G4endl;
 	
 	// always restart the case side
-	case_side = 10.*cm
+	case_side = 10.*cm;
 	
 	// Derived parameters
 	pixel_size = hole_thickness + septa_thickness;
