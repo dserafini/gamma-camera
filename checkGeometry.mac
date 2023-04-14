@@ -28,7 +28,7 @@
 /gps/energy 342 keV
 /gps/direction 0 0 1
 /gps/position 0 0 -1. cm
-#/gps/pos/type Plane
+/gps/pos/type Plane
 /gps/pos/shape Square
 /gps/pos/halfx 50 mm
 /gps/pos/halfy 50 mm
