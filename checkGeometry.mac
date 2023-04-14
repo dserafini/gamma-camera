@@ -45,4 +45,4 @@
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
 /run/reinitializeGeometry
-/run/beamOn 1000
+/run/beamOn 1000000
