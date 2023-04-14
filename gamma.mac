@@ -26,7 +26,7 @@
 
 /gps/particle gamma
 /gps/energy 342 keV
-/gps/position 0 0 -4. cm
+/gps/position 0 0 -0. cm
 # /gps/direction 0 0 1
 /gps/ang/type iso
 /analysis/setFileName discard.root
@@ -89,29 +89,5 @@
 /analysis/setFileName septa2p0mmHole1p0mm100Mevents.root
 /collimator/septa_thickness 2. mm
 /collimator/hole_thickness 1. mm
-/run/reinitializeGeometry
-/run/beamOn 100000000
-
-/analysis/setFileName septa3p0mmHole2p0mm100Mevents.root
-/collimator/septa_thickness 3. mm
-/collimator/hole_thickness 2. mm
-/run/reinitializeGeometry
-/run/beamOn 100000000
-
-/analysis/setFileName septa3p0mmHole1p0mm100Mevents.root
-/collimator/septa_thickness 3. mm
-/collimator/hole_thickness 1. mm
-/run/reinitializeGeometry
-/run/beamOn 100000000
-
-/analysis/setFileName septa4p0mmHole1p0mm100Mevents.root
-/collimator/septa_thickness 4. mm
-/collimator/hole_thickness 1. mm
-/run/reinitializeGeometry
-/run/beamOn 100000000
-
-/analysis/setFileName septa4p0mmHole2p0mm100Mevents.root
-/collimator/septa_thickness 4. mm
-/collimator/hole_thickness 2. mm
 /run/reinitializeGeometry
 /run/beamOn 100000000
