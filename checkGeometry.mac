@@ -35,7 +35,7 @@
 /analysis/setFileName discard.root
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
-/run/printProgress 1000000
+/run/printProgress 100000
 
 ################################################################################
 # runs
@@ -45,4 +45,4 @@
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
 /run/reinitializeGeometry
-/run/beamOn 10000000
+/run/beamOn 1000000
