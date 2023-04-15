@@ -14,6 +14,7 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "fY"); // [mm]
   man->CreateNtupleDColumn(0, "fZ"); // [mm]
   // and optical photon positions
+  man->CreateNtupleIColumn(0, "pNumber"); // [1]
   man->CreateNtupleDColumn(0, "pMeanX"); // [mm]
   man->CreateNtupleDColumn(0, "pSigmaX"); // [mm]
   man->CreateNtupleDColumn(0, "pMeanY"); // [mm]
