@@ -34,7 +34,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   // gammas
   man->FillNtupleDColumn(0, 0, fEdep);
   
-  G4cout << "fPosition: " << fPosition << " vector" << G4endl;
+  // G4cout << "fPosition: " << fPosition << " vector" << G4endl;
   if (fEdep>0)
     fPosition = fPosition/fEdep; // normalize on the total energy
   
@@ -45,8 +45,8 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   // optical photons
   man->FillNtupleIColumn(0, 4, pNum);
   
-  G4cout << "pPosition: " << pPosition << " vector" << G4endl;
-  G4cout << "pNumber: " << pNum << G4endl;
+  // G4cout << "pPosition: " << pPosition << " vector" << G4endl;
+  // G4cout << "pNumber: " << pNum << G4endl;
   if (pNum>0)
   {
     pPosition = pPosition/pNum; // normalize on the number of optical photons
