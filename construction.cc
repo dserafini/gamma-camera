@@ -224,7 +224,7 @@ void MyDetectorConstruction::ConstructDetector()
 {
 	G4cout << "MyDetectorConstruction::ConstructDetector" << G4endl;
 	
-	solidDetector = new G4Box("solidDetector", detector_side/2., detector_side/2., detector_side/2.);
+	solidDetector = new G4Box("solidDetector", detector_side/2., detector_side/2., detector_depth/2.);
 	logicDetector = new G4LogicalVolume(solidDetector, materialGAGG, "logicDetector");
 
 	physDetector = new G4PVPlacement(0,  // no rotation
