@@ -13,10 +13,6 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // G4cout << "MySteppingAction::UserSteppingAction" << G4endl;
   // we take the energy of the whole volume
   // or we take the energy of a single scoring volume
-
-  // only gammas are kept
-  if (step->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition())
-    return; // not saving optical photons energy, I think to preserve energy conservation
   
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
 
@@ -28,7 +24,13 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // G4cout << "fScoringVolume: " << fScoringVolume->GetName() << G4endl;
 
   if(volume != fScoringVolume)
-    return; // not saving energy outside scoring volume
+  {
+    if (step->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
+      return; // not saving energy outside scoring volume
+  }
+  
+  if(volume == detectorConstruction->GetDetectorVolume())
+    return;
   
   ////////////////////////////////////////
   // checks above, what to do below
