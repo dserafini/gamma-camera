@@ -13,6 +13,10 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "fX"); // [mm]
   man->CreateNtupleDColumn(0, "fY"); // [mm]
   man->CreateNtupleDColumn(0, "fZ"); // [mm]
+  man->CreateNtupleDColumn(0, "pMeanX"); // [mm]
+  man->CreateNtupleDColumn(0, "pSigmaX"); // [mm]
+  man->CreateNtupleDColumn(0, "pMeanY"); // [mm]
+  man->CreateNtupleDColumn(0, "pSigmaY"); // [mm]
   man->FinishNtuple(0);
 }
 
