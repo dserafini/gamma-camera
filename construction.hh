@@ -35,10 +35,6 @@ public:
 	// virtual because it is defined in G4USerDetectorConstruction
 
 private:
-	// the logicDetector defined in Construct method must be available also in other methods
-	// so we define it here
-	G4LogicalVolume *logicDetector;
-
 	virtual void ConstructSDandField();
 
 	// declare some things here to modify geometry on the run
