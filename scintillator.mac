@@ -24,7 +24,7 @@
 ################################################################################
 
 /gps/particle gamma
-/gps/energy 511 keV
+/gps/energy 140 keV
 /gps/position 0 0 -. mm
 /gps/direction 0 0 1
 # /gps/ang/type iso
