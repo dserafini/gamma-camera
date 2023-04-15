@@ -46,6 +46,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   
   if (pNumber>0)
   {
+    G4cout << "pPosition: " << pPosition << " vector" << G4endl;
     pPosition = pPosition/pNumber; // normalize on the number of optical photons
     pSigma = pSigma/pNumber;
   }
