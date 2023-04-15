@@ -7,7 +7,7 @@ MyEventAction::MyEventAction(MyRunAction*)
   fPosition = G4ThreeVector(0.,0.,0.);
   
   // optical photons
-  pNumber = 0.;
+  pNum = 0;
   pPosition = G4ThreeVector(0.,0.,0.);
   pSigma = G4ThreeVector(0.,0.,0.);
 }
@@ -20,7 +20,7 @@ void MyEventAction::BeginOfEventAction(const G4Event*)
   // whenever a new event starts the energy accumulated in the previous event should be set to 0
   fEdep = 0.;
   fPosition = G4ThreeVector(0.,0.,0.);
-  pNumber = 0.;
+  pNum = 0;
   pPosition = G4ThreeVector(0.,0.,0.);
   pSigma = G4ThreeVector(0.,0.,0.);
 }
@@ -43,14 +43,14 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   man->FillNtupleDColumn(0, 3, fPosition.getZ());
   
   // optical photons
-  man->FillNtupleIColumn(0, 4, pNumber);
+  man->FillNtupleIColumn(0, 4, pNum);
   
   G4cout << "pPosition: " << pPosition << " vector" << G4endl;
-  G4cout << "pNumber: " << pNumber << G4endl;
-  if (pNumber>0)
+  G4cout << "pNumber: " << pNum << G4endl;
+  if (pNum>0)
   {
-    pPosition = pPosition/pNumber; // normalize on the number of optical photons
-    pSigma = pSigma/pNumber;
+    pPosition = pPosition/pNum; // normalize on the number of optical photons
+    pSigma = pSigma/pNum;
   }
   
   man->FillNtupleDColumn(0, 5, pPosition.getX());
