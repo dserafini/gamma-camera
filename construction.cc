@@ -47,6 +47,10 @@ MyDetectorConstruction::MyDetectorConstruction()
 	zWorld = 5*m;
 
 	isCherenkov = false;
+	
+	// detector parameters
+	detector_side = slab_side;
+	detector_depth = 1*mm;
 }
 
 MyDetectorConstruction::~MyDetectorConstruction()
@@ -104,6 +108,7 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 
 	G4double PhotonEnergy[nEntries] = {1.0*eV, 7.0*eV};
 
+	// gagg
 	G4double refractiveIndexGAGG[nEntries] = {1.9,1.9};
 	G4double absorptionLengthGAGG[nEntries] = {50.*cm,50.*cm};
 
@@ -123,6 +128,12 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	mptGAGG->AddConstProperty("YIELDRATIO",1.0);
 
 	materialGAGG->SetMaterialPropertiesTable(mptGAGG);
+	
+	// air
+	G4double refractiveIndexAir[nEntries] = {1.000,1.000};
+	G4MaterialPropertiesTable* mptAir = new G4MaterialPropertiesTable();
+	mptAir->AddProperty("RINDEX", PhotonEnergy, refractiveIndexAir, nEntries);
+	materialAir->SetMaterialPropertiesTable(mptAir);
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
@@ -198,7 +209,7 @@ void MyDetectorConstruction::ConstructScintillator()
 	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,hole_length + slab_depth/2.), // at (0,0,0)
+		G4ThreeVector(0.,0.,hole_length + slab_depth/2.),
 		logicScintillator,             // its logical volume
 		"physScintillator",           // its name
 		logicWorld,                  // its mother volume
@@ -207,6 +218,23 @@ void MyDetectorConstruction::ConstructScintillator()
 		1); // checking overlaps
 
 	fScoringVolume = logicScintillator;
+}
+
+void MyDetectorConstruction::ConstructDetector()
+{
+	G4cout << "MyDetectorConstruction::ConstructDetector" << G4endl;
+	
+	solidDetector = new G4Box("solidDetector", detector_side/2., detector_side/2., detector_depth/2.);
+	logicDetector = new G4LogicalVolume(solidDetector, materialGAGG, "logicDetector");
+
+	physDetector = new G4PVPlacement(0,  // no rotation
+		G4ThreeVector(0.,0.,hole_length + slab_depth + detector_depth/2.),
+		logicDetector,             // its logical volume
+		"physDetector",           // its name
+		logicWorld,                  // its mother volume
+		false,                   // no boolean operations
+		0,                       // copy number
+		1); // checking overlaps
 }
 
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
@@ -225,6 +253,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		ConstructCollimator();
 	
 	ConstructScintillator();
+	ConstructDetector();
 	// SetVisualizationFeatures();
 
 	return physWorld;

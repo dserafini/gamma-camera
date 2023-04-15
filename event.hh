@@ -22,10 +22,19 @@ public:
   // accumulate energy deposited
   void AddEdep(G4double edep) { fEdep += edep; }
   void AddPosition(G4ThreeVector position, G4double edep) { fPosition += position*edep; }
+  // accumulate number of optical photons
+  void AddNum(G4int num) { pNum += num; }
+  void AddPhotonPosition(G4ThreeVector position, G4int num) { pPosition += position*num; }
 
 private:
+  // for gammas
   G4double fEdep;
   G4ThreeVector fPosition;
+  
+  // for optical photons
+  G4int pNum;
+  G4ThreeVector pPosition;
+  G4ThreeVector pSigma;
 };
 
 #endif

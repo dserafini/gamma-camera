@@ -30,23 +30,20 @@ public:
 
 	// create a scoring volume to store only the energy deposited in the radiator
 	G4LogicalVolume *GetScoringVolume() const { return fScoringVolume; }
+	G4LogicalVolume *GetDetectorVolume() const { return logicDetector; }
 
 	virtual G4VPhysicalVolume *Construct();
 	// virtual because it is defined in G4USerDetectorConstruction
 
 private:
-	// the logicDetector defined in Construct method must be available also in other methods
-	// so we define it here
-	G4LogicalVolume *logicDetector;
-
 	virtual void ConstructSDandField();
 
 	// declare some things here to modify geometry on the run
-	G4Box *solidWorld, *solidDetector, *solidScintillator;
+	G4Box *solidWorld, *solidScintillator, *solidDetector;
 	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
-	G4LogicalVolume *logicWorld, *logicScintillator;
+	G4LogicalVolume *logicWorld, *logicScintillator, *logicDetector;
 	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
-	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator;
+	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator, *physDetector;
 
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
 	G4Element *elLa, *elBr;
@@ -56,6 +53,7 @@ private:
 
 	void ConstructScintillator();
 	void ConstructCollimator();
+	void ConstructDetector();
 	void SetVisualizationFeatures();
 
 	// we do not need to access the messenger from outside
@@ -80,6 +78,9 @@ private:
 	
 	// scintillator
 	G4double slab_depth, slab_side;
+	
+	// detector
+	G4double detector_depth, detector_side;
 };
 
 #endif
