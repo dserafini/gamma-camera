@@ -24,8 +24,14 @@ public:
   void AddPosition(G4ThreeVector position, G4double edep) { fPosition += position*edep; }
 
 private:
+  // for gammas
   G4double fEdep;
   G4ThreeVector fPosition;
+  
+  // for optical photons
+  G4int pNumber;
+  G4ThreeVector pPosition;
+  G4ThreeVector pSigma;
 };
 
 #endif
