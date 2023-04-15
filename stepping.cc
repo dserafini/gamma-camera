@@ -39,5 +39,6 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     fEventAction->AddNum(num);
     G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
     fEventAction->AddPosition(position, num);
+    G4cout << "position " << position << " vector" << G4endl;
   }
 }
