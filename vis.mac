@@ -75,3 +75,6 @@
 /vis/scene/add/frame   # Simple frame around the view
 /vis/set/colour        # Revert to default colour (white)
 /vis/set/lineWidth     # Revert to default line width (1.)
+
+# Set file name
+/analysis/setFileName output.root
