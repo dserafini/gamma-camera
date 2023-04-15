@@ -27,7 +27,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   {
     G4double edep = step->GetTotalEnergyDeposit() / keV;
     fEventAction->AddEdep(edep);
-    G4cout << "adding " << edep << " keV" << G4endl;
+    // G4cout << "adding " << edep << " keV" << G4endl;
 
     G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
     fEventAction->AddPosition(position, edep);
@@ -41,10 +41,10 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     fEventAction->AddNum(num);
     G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
     fEventAction->AddPosition(position, num);
-    G4cout << "step position " << position << " vector" << G4endl;
+    // G4cout << "step position " << position << " vector" << G4endl;
     
     return;
   }
   else
-    G4cout << "n" ;
+    // G4cout << "n" ;
 }
