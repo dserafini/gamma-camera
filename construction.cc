@@ -104,6 +104,7 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 
 	G4double PhotonEnergy[nEntries] = {1.0*eV, 7.0*eV};
 
+	// gagg
 	G4double refractiveIndexGAGG[nEntries] = {1.9,1.9};
 	G4double absorptionLengthGAGG[nEntries] = {50.*cm,50.*cm};
 
@@ -123,6 +124,12 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	mptGAGG->AddConstProperty("YIELDRATIO",1.0);
 
 	materialGAGG->SetMaterialPropertiesTable(mptGAGG);
+	
+	// air
+	G4double refractiveIndexAir[nEntries] = {1.000,1.000};
+	G4MaterialPropertiesTable* mptAir = new G4MaterialPropertiesTable();
+	mptAir->AddProperty("RINDEX", PhotonEnergy, refractiveIndexAir, nEntries);
+	materialAir->SetMaterialPropertiesTable(mptAir);
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
