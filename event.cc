@@ -46,6 +46,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   man->FillNtupleIColumn(0, 4, pNumber);
   
   G4cout << "pPosition: " << pPosition << " vector" << G4endl;
+  G4cout << "pNumber: " << pNumber << G4endl;
   if (pNumber>0)
   {
     pPosition = pPosition/pNumber; // normalize on the number of optical photons
