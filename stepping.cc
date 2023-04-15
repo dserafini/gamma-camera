@@ -31,6 +31,8 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
 
     G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
     fEventAction->AddPosition(position, edep);
+    
+    return;
   }
   
   if((volume == detectorConstruction->GetDetectorVolume()) && (step->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition()))
@@ -40,5 +42,9 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
     fEventAction->AddPosition(position, num);
     G4cout << "position " << position << " vector" << G4endl;
+    
+    return;
   }
+  else
+    G4cout << "n" << G4endl;
 }
