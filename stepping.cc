@@ -45,6 +45,4 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     
     return;
   }
-  else
-    // G4cout << "n" ;
 }
