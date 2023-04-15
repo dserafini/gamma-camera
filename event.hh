@@ -24,7 +24,7 @@ public:
   void AddPosition(G4ThreeVector position, G4double edep) { fPosition += position*edep; }
   // accumulate number of optical photons
   void AddNum(G4int num) { pNum += num; }
-  void AddPhotonPosition(G4ThreeVector position, G4int pnum) { pPosition += position*num; }
+  void AddPhotonPosition(G4ThreeVector position, G4int num) { pPosition += position*num; }
 
 private:
   // for gammas
