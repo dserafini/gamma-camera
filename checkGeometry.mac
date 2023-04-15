@@ -1,0 +1,48 @@
+
+################################################################################
+# define scintillator
+################################################################################
+
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 3. cm
+
+################################################################################
+# define collimator
+################################################################################
+
+/collimator/exist 1
+/collimator/case_side 10. cm
+/collimator/hole_length 30. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+
+/run/reinitializeGeometry
+
+/run/initialize
+
+################################################################################
+# define primary
+################################################################################
+
+/gps/particle gamma
+/gps/energy 342 keV
+/gps/direction 0 0 1
+/gps/position 0 0 -1. cm
+/gps/pos/type Plane
+/gps/pos/shape Square
+/gps/pos/halfx 50 mm
+/gps/pos/halfy 50 mm
+/analysis/setFileName discard.root
+/run/beamOn 1
+# devo lanciare il primo evento che ha l'energia sbagliata
+/run/printProgress 100000
+
+################################################################################
+# runs
+################################################################################
+
+/analysis/setFileName checkGeometrySquare.root
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+/run/reinitializeGeometry
+/run/beamOn 1000000

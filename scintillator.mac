@@ -1,0 +1,41 @@
+
+
+################################################################################
+# define scintillator
+################################################################################
+
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 30. cm
+
+################################################################################
+# define collimator
+################################################################################
+
+/collimator/exist 0
+
+/run/reinitializeGeometry
+
+/run/numberOfThreads 1
+
+/run/initialize
+
+################################################################################
+# define primary
+################################################################################
+
+/gps/particle gamma
+/gps/energy 140 keV
+/gps/position 0 0 -. mm
+/gps/direction 0 0 1
+# /gps/ang/type iso
+/analysis/setFileName discard.root
+/run/beamOn 1
+# devo lanciare il primo evento che ha l'energia sbagliata
+
+################################################################################
+# run
+################################################################################
+
+/analysis/setFileName outScintillator.root
+/run/printProgress 100000
+/run/beamOn 1000000
