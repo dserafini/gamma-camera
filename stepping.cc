@@ -23,23 +23,21 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // G4cout << "volume: " << volume->GetName() << G4endl;
   // G4cout << "fScoringVolume: " << fScoringVolume->GetName() << G4endl;
 
-  if(volume != fScoringVolume)
+  if((volume == fScoringVolume) && (step->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition()))
   {
-    if (step->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
-      return; // not saving energy outside scoring volume
+    G4double edep = step->GetTotalEnergyDeposit() / keV;
+    fEventAction->AddEdep(edep);
+    // G4cout << "adding " << edep << " keV" << G4endl;
+
+    G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
+    fEventAction->AddPosition(position, edep);
   }
   
-  if(volume == detectorConstruction->GetDetectorVolume())
-    return;
-  
-  ////////////////////////////////////////
-  // checks above, what to do below
-  ////////////////////////////////////////
-
-  G4double edep = step->GetTotalEnergyDeposit() / keV;
-  fEventAction->AddEdep(edep);
-  // G4cout << "adding " << edep << " keV" << G4endl;
-  
-  G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
-  fEventAction->AddPosition(position, edep);
+  if((volume == detectorConstruction->GetDetectorVolume()) && (step->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition()))
+  {
+    G4int num = 1;
+    fEventAction->AddNum(num);
+    G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
+    fEventAction->AddPosition(position, num);
+  }
 }
