@@ -46,17 +46,13 @@ MySensitiveDetector::~MySensitiveDetector()
 
 void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
 {
-  G4cout << "MySensitiveDetector::Initialize" << G4endl;
+  // G4cout << "MySensitiveDetector::Initialize" << G4endl;
   
   // Create hits collection
-
-  fHitsCollection
-    = new detectorHitsCollection(SensitiveDetectorName, collectionName[0]);
+  fHitsCollection = new detectorHitsCollection(SensitiveDetectorName, collectionName[0]);
 
   // Add this collection in hce
-
-  G4int hcID
-    = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
+  G4int hcID = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
   hce->AddHitsCollection( hcID, fHitsCollection );
 }
 
@@ -88,7 +84,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 {
-  G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
+  // G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
   
   if ( verboseLevel>1 ) {
      G4int nofHits = fHitsCollection->entries();
