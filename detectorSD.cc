@@ -93,6 +93,18 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
             << " hits in the tracker chambers: " << G4endl;
      for ( G4int i=0; i<nofHits; i++ ) (*fHitsCollection)[i]->Print();
   }
+  
+  // calculate mean position
+  G4ThreeVector mean = G4ThreeVector(0.,0.,0.);
+  for ( G4int i=0; i<nofHits; i++ )
+    mean += (*fHitsCollection)[i]->GetPosition();
+  mean /= nofHits;
+  
+  // calculate standard deviation of position
+  G4ThreeVector sigma = G4ThreeVector(0.,0.,0.);
+  for ( G4int i=0; i<nofHits; i++ )
+    sigma += (mean - (*fHitsCollection)[i]->GetPosition()).mag();
+  sigma = sqrt(sigma / (nofHits - 1));
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
