@@ -39,6 +39,9 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   
   fHitsCollection = nullptr;
   collectionName.insert(hitsCollectionName);
+  fMeanPos = G4ThreeVector();
+  fSigma = 0.;
+  nofHits = 0;
 }
 
 MySensitiveDetector::~MySensitiveDetector()
@@ -54,6 +57,11 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
   // Add this collection in hce
   G4int hcID = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
   hce->AddHitsCollection( hcID, fHitsCollection );
+  
+  // reset for each event
+  fMeanPos = G4ThreeVector();
+  fSigma = 0.;
+  nofHits = 0;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -90,27 +98,29 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 {
   G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
   
-  G4int nofHits = fHitsCollection->entries();
+  nofHits = fHitsCollection->entries();
   if ( verboseLevel>1 ) {
      G4cout << G4endl
             << "-------->Hits Collection: in this event they are " << nofHits
-            << " hits in the tracker chambers: " << G4endl;
+            << " hits in the SiPM detector: " << G4endl;
      for ( G4int i=0; i<nofHits; i++ ) (*fHitsCollection)[i]->Print();
   }
   
-  // calculate mean position
-  G4ThreeVector mean = G4ThreeVector(0.,0.,0.);
-  for ( G4int i=0; i<nofHits; i++ )
-    mean += (*fHitsCollection)[i]->GetPos();
-  mean /= nofHits;
+  if (nofHits > 0)
+  {
+    // calculate mean position
+    for ( G4int i=0; i<nofHits; i++ )
+      fMeanPos += (*fHitsCollection)[i]->GetPos();
+    fMeanPos /= nofHits;
+
+    // calculate standard deviation of position
+    for ( G4int i=0; i<nofHits; i++ )
+      fSigma += (fMeanPos - (*fHitsCollection)[i]->GetPos()).mag();
+    fSigma = sqrt(fSigma / (nofHits - 1));
+  }
   
-  // calculate standard deviation of position
-  G4double sigma = 0.;
-  for ( G4int i=0; i<nofHits; i++ )
-    sigma += (mean - (*fHitsCollection)[i]->GetPos()).mag();
-  sigma = sqrt(sigma / (nofHits - 1));
-  
-  G4cout << "mean: " << mean << ",\t sigma: " << sigma << G4endl;
+  G4cout << "mean: " << mean << ",\t sigma: " << sigma 
+  << ",\t nofHits: " << nofHits << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
