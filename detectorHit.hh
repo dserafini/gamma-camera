@@ -26,7 +26,6 @@ class detectorHit : public G4VHit
     inline void  operator delete(void*);
 
     // methods from base class
-    void Draw() override;
     void Print() override;
 
     // Set methods
