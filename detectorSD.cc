@@ -57,7 +57,7 @@ void TrackerSD::Initialize(G4HCofThisEvent* hce)
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-G4bool TrackerSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
+G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
   // energy deposit
   G4double edep = aStep->GetTotalEnergyDeposit();
@@ -81,7 +81,7 @@ G4bool TrackerSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void TrackerSD::EndOfEvent(G4HCofThisEvent*)
+void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 {
   if ( verboseLevel>1 ) {
      G4int nofHits = fHitsCollection->entries();
