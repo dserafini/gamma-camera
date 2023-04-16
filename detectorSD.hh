@@ -1,5 +1,5 @@
-#ifndef DETECTOR_HH
-#define DETECTOR_HH
+#ifndef DETECTORSD_HH
+#define DETECTORSD_HH
 
 #include "G4VSensitiveDetector.hh"
 // #include "g4root.hh" // ok with geant version 10.7
