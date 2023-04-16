@@ -44,6 +44,8 @@ MySensitiveDetector::~MySensitiveDetector()
 
 void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
 {
+  G4cout << "MySensitiveDetector::Initialize" << G4endl;
+  
   // Create hits collection
 
   fHitsCollection
@@ -59,6 +61,8 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
+  G4cout << "MySensitiveDetector::ProcessHits" << G4endl;
+  
   // energy deposit
   G4double edep = aStep->GetTotalEnergyDeposit();
 
@@ -81,6 +85,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 {
+  G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
+  
   if ( verboseLevel>1 ) {
      G4int nofHits = fHitsCollection->entries();
      G4cout << G4endl
