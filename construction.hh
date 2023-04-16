@@ -18,6 +18,7 @@
 #include "G4VisAttributes.hh"
 // per cambiare geometria on the way
 #include "G4GenericMessenger.hh"
+#include "G4SDManager.hh"
 
 #include "detectorSD.hh"
 
