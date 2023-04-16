@@ -14,7 +14,7 @@
 class MySensitiveDetector : public G4VSensitiveDetector
 {
 public:
-	MySensitiveDetector(G4String);
+	MySensitiveDetector(G4String, const G4String&);
 	~MySensitiveDetector();
 	void   Initialize(G4HCofThisEvent* hitCollection) override;
 	void   EndOfEvent(G4HCofThisEvent* hitCollection) override;
