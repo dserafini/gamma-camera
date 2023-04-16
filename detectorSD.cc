@@ -119,7 +119,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     fSigma = sqrt(fSigma / (nofHits - 1));
   }
   
-  G4cout << "mean: " << mean << ",\t sigma: " << sigma 
+  G4cout << "mean: " << fMean << ",\t sigma: " << fSigma 
   << ",\t nofHits: " << nofHits << G4endl;
 }
 
