@@ -38,7 +38,7 @@ void detectorHit::Draw()
 void detectorHit::Print()
 {
   G4cout
-     << "  trackID: " << fTrackID << " chamberNb: " << fChamberNb
+     << "  trackID: " << fTrackID
      << "Edep: "
      << std::setw(7) << G4BestUnit(fEdep,"Energy")
      << " Position: "
