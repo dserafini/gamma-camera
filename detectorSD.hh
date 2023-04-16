@@ -8,15 +8,20 @@
 #include "G4SystemOfUnits.hh"
 #include "G4PhysicsOrderedFreeVector.hh"
 
+#include "detectorHit.hh"
 
 class MySensitiveDetector : public G4VSensitiveDetector
 {
 public:
 	MySensitiveDetector(G4String);
 	~MySensitiveDetector();
+	void   Initialize(G4HCofThisEvent* hitCollection) override;
+	G4bool ProcessHits(G4Step* step, G4TouchableHistory* history) override;
+	void   EndOfEvent(G4HCofThisEvent* hitCollection) override;
 
 private:
-  virtual G4bool ProcessHits(G4Step*, G4TouchableHistory*);
+	virtual G4bool ProcessHits(G4Step*, G4TouchableHistory*);
+	TrackerHitsCollection* fHitsCollection = nullptr;
 
 	// quantum efficiency
 	G4PhysicsOrderedFreeVector *quEff;
