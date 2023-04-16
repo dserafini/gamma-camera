@@ -30,20 +30,17 @@ class detectorHit : public G4VHit
     // Set methods
     void SetTrackID  (G4int track)      { fTrackID = track; };
     void SetEdep     (G4double de)      { fEdep = de; };
-    void SetPosMean      (G4ThreeVector xyz){ fPosMean = xyz; };
-    void SetPosSigma      (G4ThreeVector xyz){ fPosSigma = xyz; };
+    void SetPos      (G4ThreeVector xyz){ fPos = xyz; };
 
     // Get methods
     G4int GetTrackID() const     { return fTrackID; };
     G4double GetEdep() const     { return fEdep; };
-    G4ThreeVector GetPosMean() const { return fPosMean; };
-    G4ThreeVector GetPosSigma() const { return fPosSigma; };
+    G4ThreeVector GetPos() const { return fPos; };
 
   private:
     G4int         fTrackID = -1;
     G4double      fEdep = 0.;
-    G4ThreeVector fPosMean;
-    G4ThreeVector fPosSigma;
+    G4ThreeVector fPos;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
