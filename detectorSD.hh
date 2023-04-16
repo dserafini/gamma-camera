@@ -24,6 +24,8 @@ private:
 	void EndOfEvent(G4HCofThisEvent* hitCollection) override;
 	
 	detectorHitsCollection* fHitsCollection;
+	G4ThreeVector fMeanPos;
+	G4double fSigma;
 
 	// quantum efficiency
 	G4PhysicsOrderedFreeVector *quEff;
