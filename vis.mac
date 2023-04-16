@@ -21,7 +21,8 @@
 ################################################################################
 # change source
 ################################################################################
-/gps/particle gamma
+# /gps/particle gamma
+/gps/particle opticalphoton
 /gps/energy 342 keV
 # position must be < 0 
 /gps/position 0 0. -1. mm
