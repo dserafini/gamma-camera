@@ -72,13 +72,17 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
   auto newHit = new detectorHit();
 
-  newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
-  newHit->SetEdep(edep);
-  newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
+  if(newHit)
+  {
+    newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
+    newHit->SetEdep(edep);
+    newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
 
-  fHitsCollection->insert( newHit );
+    fHitsCollection->insert( newHit );
 
-  newHit->Print();
+    newHit->Print();
+  }
+  
   G4cout << "MySensitiveDetector::EndOfProcessHits" << G4endl;
 
   return true;
