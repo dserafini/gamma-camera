@@ -1,6 +1,7 @@
 #include "detectorSD.hh"
 
-MySensitiveDetector::MySensitiveDetector(G4String name) : G4VSensitiveDetector(name)
+MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsCollectionName)
+  : G4VSensitiveDetector(name)
 {
   G4cout << "MySensitiveDetector::MySensitiveDetector" << G4endl;
   quEff = new G4PhysicsOrderedFreeVector();
