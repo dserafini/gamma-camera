@@ -65,29 +65,21 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
   G4cout << "MySensitiveDetector::ProcessHits" << G4endl;
   
-  if (aStep)
-  {
-    // energy deposit
-    G4double edep = aStep->GetTotalEnergyDeposit();
+  // energy deposit
+  G4double edep = aStep->GetTotalEnergyDeposit();
 
-    // if (edep==0.) return false;
+  // if (edep==0.) return false;
 
-    auto newHit = new detectorHit();
+  auto newHit = new detectorHit();
 
-    if(newHit)
-    {
-      newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
-      newHit->SetEdep(edep);
-      newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
+  newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
+  newHit->SetEdep(edep);
+  newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
 
-      if (fHitsCollection)
-        fHitsCollection->insert( newHit );
+  if (fHitsCollection)
+    fHitsCollection->insert( newHit );
 
-      newHit->Print();
-    }
-  }
-  
-  G4cout << "MySensitiveDetector::EndOfProcessHits" << G4endl;
+  newHit->Print();
 
   return true;
 }
