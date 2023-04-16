@@ -42,7 +42,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name) : G4VSensitiveDetector(n
 MySensitiveDetector::~MySensitiveDetector()
 {}
 
-void TrackerSD::Initialize(G4HCofThisEvent* hce)
+void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
 {
   // Create hits collection
 
