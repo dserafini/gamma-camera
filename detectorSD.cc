@@ -62,8 +62,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   G4cout << "MySensitiveDetector::ProcessHits" << G4endl;
   
   // process hits only for optical photons
-  if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Defintion())
-    return;
+  if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
+    return false;
   
   // energy deposit
   G4double edep = aStep->GetTotalEnergyDeposit();
@@ -90,8 +90,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 {
   G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
   
+  G4int nofHits = fHitsCollection->entries();
   if ( verboseLevel>1 ) {
-     G4int nofHits = fHitsCollection->entries();
      G4cout << G4endl
             << "-------->Hits Collection: in this event they are " << nofHits
             << " hits in the tracker chambers: " << G4endl;
@@ -101,13 +101,13 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   // calculate mean position
   G4ThreeVector mean = G4ThreeVector(0.,0.,0.);
   for ( G4int i=0; i<nofHits; i++ )
-    mean += (*fHitsCollection)[i]->GetPosition();
+    mean += (*fHitsCollection)[i]->GetPos();
   mean /= nofHits;
   
   // calculate standard deviation of position
   G4double sigma = 0.;
   for ( G4int i=0; i<nofHits; i++ )
-    sigma += (mean - (*fHitsCollection)[i]->GetPosition()).mag();
+    sigma += (mean - (*fHitsCollection)[i]->GetPos()).mag();
   sigma = sqrt(sigma / (nofHits - 1));
   
   G4cout << "mean: " << mean << ",\t sigma: " << sigma << G4endl;
