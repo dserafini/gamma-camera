@@ -31,19 +31,16 @@ class detectorHit : public G4VHit
 
     // Set methods
     void SetTrackID  (G4int track)      { fTrackID = track; };
-    void SetChamberNb(G4int chamb)      { fChamberNb = chamb; };
     void SetEdep     (G4double de)      { fEdep = de; };
     void SetPos      (G4ThreeVector xyz){ fPos = xyz; };
 
     // Get methods
     G4int GetTrackID() const     { return fTrackID; };
-    G4int GetChamberNb() const   { return fChamberNb; };
     G4double GetEdep() const     { return fEdep; };
     G4ThreeVector GetPos() const { return fPos; };
 
   private:
     G4int         fTrackID = -1;
-    G4int         fChamberNb = -1;
     G4double      fEdep = 0.;
     G4ThreeVector fPos;
 };
