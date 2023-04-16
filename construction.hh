@@ -19,7 +19,7 @@
 // per cambiare geometria on the way
 #include "G4GenericMessenger.hh"
 
-#include "detector.hh"
+#include "detectorSD.hh"
 
 class MyDetectorConstruction : public G4VUserDetectorConstruction
 {
