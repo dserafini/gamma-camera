@@ -6,7 +6,6 @@
 #include "G4Allocator.hh"
 #include "G4ThreeVector.hh"
 #include "tls.hh"
-
 /// It defines data members to store the trackID, chamberNb, energy deposit,
 /// and position of charged particles in a selected volume:
 /// - fTrackID, fChamberNB, fEdep, fPos
@@ -31,17 +30,20 @@ class detectorHit : public G4VHit
     // Set methods
     void SetTrackID  (G4int track)      { fTrackID = track; };
     void SetEdep     (G4double de)      { fEdep = de; };
-    void SetPos      (G4ThreeVector xyz){ fPos = xyz; };
+    void SetPosMean      (G4ThreeVector xyz){ fPosMean = xyz; };
+    void SetPosSigma      (G4ThreeVector xyz){ fPosSigma = xyz; };
 
     // Get methods
     G4int GetTrackID() const     { return fTrackID; };
     G4double GetEdep() const     { return fEdep; };
-    G4ThreeVector GetPos() const { return fPos; };
+    G4ThreeVector GetPosMean() const { return fPosMean; };
+    G4ThreeVector GetPosSigma() const { return fPosSigma; };
 
   private:
     G4int         fTrackID = -1;
     G4double      fEdep = 0.;
-    G4ThreeVector fPos;
+    G4ThreeVector fPosMean;
+    G4ThreeVector fPosSigma;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
