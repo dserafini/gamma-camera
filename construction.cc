@@ -274,8 +274,11 @@ void MyDetectorConstruction::SetVisualizationFeatures()
 void MyDetectorConstruction::ConstructSDandField()
 {
 	G4cout << "MyDetectorConstruction::ConstructSDandField" << G4endl;
-	MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector","SensitiveDetectorHitsCollection");
 
 	if(logicDetector != NULL)
+	{
+		MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector","SensitiveDetectorHitsCollection");
+		G4SDManager::GetSDMpointer()->AddNewDetector(sensDet);
 		logicDetector->SetSensitiveDetector(sensDet);
+	}
 }
