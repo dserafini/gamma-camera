@@ -77,6 +77,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   fHitsCollection->insert( newHit );
 
   //newHit->Print();
+  G4cout << "MySensitiveDetector::EndOfProcessHits" << G4endl;
 
   return true;
 }
