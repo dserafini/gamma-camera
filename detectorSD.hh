@@ -16,11 +16,12 @@ class MySensitiveDetector : public G4VSensitiveDetector
 public:
 	MySensitiveDetector(G4String, const G4String&);
 	~MySensitiveDetector();
-	virtual void Initialize(G4HCofThisEvent* hitCollection);
-	void   EndOfEvent(G4HCofThisEvent* hitCollection) override;
+	void Initialize(G4HCofThisEvent* hitCollection) override;
 
 private:
 	G4bool ProcessHits(G4Step*, G4TouchableHistory*) override;
+	void EndOfEvent(G4HCofThisEvent* hitCollection) override;
+	
 	detectorHitsCollection* fHitsCollection;
 
 	// quantum efficiency
