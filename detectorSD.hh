@@ -20,7 +20,7 @@ public:
 
 private:
 	G4bool ProcessHits(G4Step*, G4TouchableHistory*) override;
-	detectorHitsCollection* fHitsCollection = nullptr;
+	detectorHitsCollection* fHitsCollection;
 
 	// quantum efficiency
 	G4PhysicsOrderedFreeVector *quEff;
