@@ -37,6 +37,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name) : G4VSensitiveDetector(n
   // this will lead to less problems
   
   fHitsCollection = nullptr;
+  collectionName.insert(hitsCollectionName);
 }
 
 MySensitiveDetector::~MySensitiveDetector()
