@@ -122,6 +122,14 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   
   G4cout << "mean: " << fMeanPos << ",\t sigma: " << fSigma 
   << ",\t nofHits: " << nofHits << G4endl;
+  
+  // fill the Ntuple
+  G4AnalysisManager *man = G4AnalysisManager::Instance();
+  man->FillNtupleIColumn(0, 4, nofHits);
+  man->FillNtupleDColumn(0, 5, fMeanPos.getX());
+  man->FillNtupleDColumn(0, 6, fSigma);
+  man->FillNtupleDColumn(0, 7, fMeanPos.getY());
+  man->FillNtupleDColumn(0, 8, fSigma);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
