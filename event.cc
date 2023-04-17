@@ -46,7 +46,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   man->FillNtupleDColumn(0, 3, fPosition.getZ());
   
   // optical photons
-  man->FillNtupleIColumn(0, 4, pNum);
+  // man->FillNtupleIColumn(0, 4, pNum);
   
   // G4cout << "pPosition: " << pPosition << " vector" << G4endl;
   // G4cout << "pNumber: " << pNum << G4endl;
@@ -56,10 +56,10 @@ void MyEventAction::EndOfEventAction(const G4Event*)
     pSigma = pSigma/pNum;
   }
   
-  man->FillNtupleDColumn(0, 5, pPosition.getX());
-  man->FillNtupleDColumn(0, 6, pSigma.getX());
-  man->FillNtupleDColumn(0, 7, pPosition.getY());
-  man->FillNtupleDColumn(0, 8, pSigma.getY());
+  // man->FillNtupleDColumn(0, 5, pPosition.getX());
+  // man->FillNtupleDColumn(0, 6, pSigma.getX());
+  // man->FillNtupleDColumn(0, 7, pPosition.getY());
+  // man->FillNtupleDColumn(0, 8, pSigma.getY());
 
   man->AddNtupleRow(0);
 }
