@@ -75,10 +75,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   
   // process hits only at z = 61 mm
   if (aStep->GetPostStepPoint()->GetPosition().getZ() != 61*mm)
-  {
-    G4cout << "wrong z: " << aStep->GetPostStepPoint()->GetPosition().getZ() << G4endl;
     return false;
-  }
   
   // energy deposit
   G4double edep = aStep->GetTotalEnergyDeposit();
