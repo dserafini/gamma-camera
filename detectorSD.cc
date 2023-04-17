@@ -88,7 +88,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
     fHitsCollection->insert( newHit );
 
   // newHit->Print();
-  newHit->Draw();
+  // newHit->Draw();
 
   return true;
 }
