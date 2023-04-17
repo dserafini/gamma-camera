@@ -22,7 +22,7 @@ void detectorHit::Print()
 {
   G4cout
      << "SD trackID:\t" << fTrackID
-     << " Position:\t" << fPos
+     << ",\tPosition:\t" << fPos
      << G4endl;
 }
 
