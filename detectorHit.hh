@@ -26,6 +26,7 @@ class detectorHit : public G4VHit
 
     // methods from base class
     void Print() override;
+    void Draw() override;
 
     // Set methods
     void SetTrackID  (G4int track)      { fTrackID = track; };
