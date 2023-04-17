@@ -101,7 +101,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 {
-  G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
+  // G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
   
   nofHits = fHitsCollection->entries();
   if ( verboseLevel>1 ) {
@@ -124,8 +124,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     fSigma = sqrt(fSigma / (nofHits - 1));
   }
   
-  G4cout << "mean: " << fMeanPos << ",\t sigma: " << fSigma 
-  << ",\t nofHits: " << nofHits << G4endl;
+  // G4cout << "mean: " << fMeanPos << ",\t sigma: " << fSigma 
+  // << ",\t nofHits: " << nofHits << G4endl;
   
   // fill the Ntuple
   G4AnalysisManager *man = G4AnalysisManager::Instance();
