@@ -44,6 +44,8 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     // G4cout << "step trID:\t" << step->GetTrack()->GetTrackID()
     // << ",\tPreposition:  " << step->GetPreStepPoint()->GetPosition()
     // << ",\tPostposition: " << step->GetPostStepPoint()->GetPosition() << G4endl;
+    if (step->GetPostStepPoint()->GetPosition().getZ() == 61*mm)
+      step->GetTrack()->SetStatus(fStopAndKill);
     
     return;
   }
