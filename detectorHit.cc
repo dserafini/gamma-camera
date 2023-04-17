@@ -21,9 +21,8 @@ G4bool detectorHit::operator==(const detectorHit& right) const
 void detectorHit::Print()
 {
   G4cout
-     << "trackID: " << fTrackID
-     << " Position: "
-     << std::setw(7) << G4BestUnit( fPos,"Length")
+     << "SD trackID:\t" << fTrackID
+     << " Position:\t" << fPos
      << G4endl;
 }
 
