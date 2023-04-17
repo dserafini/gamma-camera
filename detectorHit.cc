@@ -22,8 +22,6 @@ void detectorHit::Print()
 {
   G4cout
      << "  trackID: " << fTrackID
-     << "Edep: "
-     << std::setw(7) << G4BestUnit(fEdep,"Energy")
      << " Position: "
      << std::setw(7) << G4BestUnit( fPos,"Length")
      << G4endl;
