@@ -31,7 +31,7 @@ void detectorHit::Print()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void B2TrackerHit::Draw()
+void detectorHit::Draw()
 {
   G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
   if(pVVisManager)
