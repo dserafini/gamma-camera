@@ -41,8 +41,8 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     fEventAction->AddNum(num);
     G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
     fEventAction->AddPhotonPosition(position, num);
-    G4cout << "trID: " << step->GetTrack()->GetTrackID()
-    << ",\tstep position: " << position << " vector" << G4endl;
+    G4cout << "step trID:\t" << step->GetTrack()->GetTrackID()
+    << ",\tposition: " << position << G4endl;
     
     return;
   }
