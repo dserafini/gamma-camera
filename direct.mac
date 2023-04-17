@@ -30,8 +30,8 @@
 /gps/particle gamma
 /gps/energy 342 keV
 /gps/position 0 0 -. mm
-/gps/direction 0 0 1
-# /gps/ang/type iso
+# /gps/direction 0 0 1
+/gps/ang/type iso
 /analysis/setFileName discard.root
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
@@ -41,5 +41,5 @@
 ################################################################################
 
 /analysis/setFileName direct.root
-/run/printProgress 100
-/run/beamOn 1000
+/run/printProgress 10000
+/run/beamOn 1000000
