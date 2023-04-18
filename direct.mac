@@ -5,7 +5,7 @@
 ################################################################################
 
 /scintillator/slab_side 10. cm
-/scintillator/slab_depth 30. cm
+/scintillator/slab_depth 3. cm
 
 ################################################################################
 # define collimator
