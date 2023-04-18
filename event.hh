@@ -34,6 +34,7 @@ private:
   G4ThreeVector fPrePosition;
   G4ThreeVector fPostPosition;
   G4int fCross;
+  G4int fCopyNumber;
   
   // for optical photons
   G4int pNum;
