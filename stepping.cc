@@ -15,7 +15,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // or we take the energy of a single scoring volume
   
   const G4ReferenceCountedHandle<G4VTouchable> touch = step->GetPreStepPoint()->GetTouchableHandle();
-  G4cout << "copyno: " << touch->GetCopyNumber(0) << G4endl;
+  G4int copyno = touch->GetCopyNumber(2) * 1000 + touch->GetCopyNumber(1); // così ho al limite 1000 pixel per lato penso
   G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
 
@@ -25,7 +25,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   if(step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
     G4cout << "collimator is mother? " << volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume()) << G4endl;
-    G4cout << "copy number: " << physvolume->GetCopyNo() << G4endl;
+    G4cout << "copy number: " << copyno << G4endl;
   }
   
   if((volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume())) && 
@@ -33,10 +33,10 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
      (fEventAction->GetCross() < 1))
   {
     if(fEventAction->GetCopyNumber() == -1)
-      fEventAction->SetCopyNumber(physvolume->GetCopyNo());
+      fEventAction->SetCopyNumber(copyno);
     else
     {
-      if(fEventAction->GetCopyNumber() != physvolume->GetCopyNo())
+      if(fEventAction->GetCopyNumber() != copyno)
         fEventAction->SetCross(1);
     }
   }
