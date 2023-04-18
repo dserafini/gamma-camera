@@ -21,7 +21,10 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
   
   if(step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
+  {
     G4cout << "collimator is mother? " << volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume()) << G4endl;
+    G4cout << "copy number: " << physvolume->GetCopyNo() << G4endl;
+  }
   
   if((volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume())) && 
      (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()) && 
