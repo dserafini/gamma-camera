@@ -14,10 +14,22 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // we take the energy of the whole volume
   // or we take the energy of a single scoring volume
   
+  G4LogicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
 
   // check if the volume where the step is in is also our scoring volume
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
+
+  if((volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume())) && (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()))
+  {
+    if(fEventAction->GetCopyNumber() == -1)
+      fEventAction->SetCopyNumber(physvolume->GetCopyNumber())
+    else
+    {
+      if(fEventAction->GetCopyNumber() != physvolume->GetCopyNumber())
+        fEventAction->SetCross(1);
+    }
+  }
 
   G4LogicalVolume *fScoringVolume = detectorConstruction->GetScoringVolume();
   // G4cout << "volume: " << volume->GetName() << G4endl;
@@ -29,8 +41,10 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     fEventAction->AddEdep(edep);
     // G4cout << "adding " << edep << " keV" << G4endl;
 
-    G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
-    fEventAction->AddPosition(position, edep);
+    G4ThreeVector preposition = step->GetPreStepPoint()->GetPosition();
+    G4ThreeVector postposition = step->GetPostStepPoint()->GetPosition();
+    fEventAction->AddPrePosition(preposition, edep);
+    fEventAction->AddPostPosition(postposition, edep);
     
     return;
   }
