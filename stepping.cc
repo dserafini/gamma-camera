@@ -23,7 +23,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   if((volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume())) && (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()))
   {
     if(fEventAction->GetCopyNumber() == -1)
-      fEventAction->SetCopyNumber(physvolume->GetCopyNo())
+      fEventAction->SetCopyNumber(physvolume->GetCopyNo());
     else
     {
       if(fEventAction->GetCopyNumber() != physvolume->GetCopyNo())
