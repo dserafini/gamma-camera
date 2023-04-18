@@ -14,6 +14,12 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // we take the energy of the whole volume
   // or we take the energy of a single scoring volume
   
+  if (!step)
+    G4cout << "no step!!" << G4endl;
+  
+  if (!step->GetPreStepPoint())
+    G4cout << "no PreStepPoint!!" << G4endl;
+  
   const G4ReferenceCountedHandle<G4VTouchable> touch = step->GetPreStepPoint()->GetTouchableHandle();
   if (!touch)
     G4cout << "no touch!!" << G4endl;
