@@ -183,7 +183,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "defining the collimator case" << G4endl;
 	solidCollimatorMatrix = new G4Box("solidCollimatorMatrix", case_side/2., case_side/2., hole_length/2.);
 	logicCollimatorMatrix = new G4LogicalVolume(solidCollimatorMatrix, materialTungsten, "logicCollimatorMatrix");
-	new G4PVPlacement(0, G4ThreeVector(0,0,+hole_length/2.), logicCollimatorMatrix, "physCollimatorMatrix", logicWorld, false, 0, true);
+	physCollimator = new G4PVPlacement(0, G4ThreeVector(0,0,+hole_length/2.), logicCollimatorMatrix, "physCollimatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the collimator array element" << G4endl;
