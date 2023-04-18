@@ -14,11 +14,10 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "fY"); // [mm]
   man->CreateNtupleDColumn(0, "fZ"); // [mm]
   // and optical photon positions
-  man->CreateNtupleIColumn(0, "pNumber"); // [1]
-  man->CreateNtupleDColumn(0, "pMeanX"); // [mm]
-  man->CreateNtupleDColumn(0, "pSigmaX"); // [mm]
-  man->CreateNtupleDColumn(0, "pMeanY"); // [mm]
-  man->CreateNtupleDColumn(0, "pSigmaY"); // [mm]
+  man->CreateNtupleIColumn(0, "cross"); // [1]
+  man->CreateNtupleDColumn(0, "pX"); // [mm]
+  man->CreateNtupleDColumn(0, "pY"); // [mm]
+  man->CreateNtupleDColumn(0, "pZ"); // [mm]
   man->FinishNtuple(0);
 }
 
