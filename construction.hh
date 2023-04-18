@@ -32,6 +32,7 @@ public:
 	G4LogicalVolume *GetScoringVolume() const { return fScoringVolume; }
 	G4LogicalVolume *GetDetectorVolume() const { return logicDetector; }
 	G4LogicalVolume *GetCollimatorVolume() const { return logicCollimatorMatrix; }
+	G4LogicalVolume *GetCollimatorPhysVolume() const { return physCollimator; }
 
 	virtual G4VPhysicalVolume *Construct();
 	// virtual because it is defined in G4USerDetectorConstruction
