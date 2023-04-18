@@ -24,6 +24,8 @@ public:
   void AddPrePosition(G4ThreeVector position, G4double edep) { fPrePosition += position*edep; }
   void AddPostPosition(G4ThreeVector position, G4double edep) { fPostPosition += position*edep; }
   void SetCross(G4int cross) { fCross = cross; }
+  void SetCopyNumber(G4int copy) { fCopyNumber = copy; }
+  G4int GetCopyNumber() { return fCopyNumber; }
   // accumulate number of optical photons
   void AddNum(G4int num) { pNum += num; }
   void AddPhotonPosition(G4ThreeVector position, G4int num) { pPosition += position*num; }
