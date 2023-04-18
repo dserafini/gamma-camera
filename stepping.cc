@@ -15,6 +15,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // or we take the energy of a single scoring volume
   
   const G4ReferenceCountedHandle<G4VTouchable> touch = step->GetPreStepPoint()->GetTouchableHandle();
+  G4cout << "copyno: " << touch->GetCopyNumber(0) << G4endl;
   G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
 
