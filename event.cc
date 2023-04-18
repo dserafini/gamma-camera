@@ -42,7 +42,10 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   
   // G4cout << "fPosition: " << fPosition << " vector" << G4endl;
   if (fEdep>0)
-    fPosition = fPosition/fEdep; // normalize on the total energy
+  {
+    fPrePosition = fPrePosition/fEdep; // normalize on the total energy
+    fPostPosition = fPostPosition/fEdep;
+  }
   
   man->FillNtupleDColumn(0, 1, fPrePosition.getX());
   man->FillNtupleDColumn(0, 2, fPrePosition.getY());
