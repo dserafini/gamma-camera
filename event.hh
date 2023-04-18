@@ -29,7 +29,9 @@ public:
 private:
   // for gammas
   G4double fEdep;
-  G4ThreeVector fPosition;
+  G4ThreeVector fPrePosition;
+  G4ThreeVector fPostPosition;
+  G4int fCross;
   
   // for optical photons
   G4int pNum;
