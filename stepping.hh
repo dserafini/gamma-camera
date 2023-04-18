@@ -4,6 +4,7 @@
 #include "G4UserSteppingAction.hh"
 #include "G4Step.hh"
 #include "G4OpticalPhoton.hh"
+#include "G4Gamma.hh"
 
 #include "g4root.hh"
 // #include "g4root_defs.hh"
