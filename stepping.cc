@@ -25,6 +25,10 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   G4cout << "touch declared" << G4endl;
   if (!touch)
     G4cout << "no touch!!" << G4endl;
+
+  G4cout << "touch: " << touch << G4endl;
+  G4cout << "copy: " << touch->GetCopyNumber() << G4endl;
+  G4cout << "copy0: " << touch->GetCopyNumber(0) << G4endl;
   G4cout << "copy1: " << touch->GetCopyNumber(1) << G4endl;
   G4cout << "copy2: " << touch->GetCopyNumber(2) << G4endl;
   G4int copyno = touch->GetCopyNumber(2) * 1000 + touch->GetCopyNumber(1); // così ho al limite 1000 pixel per lato penso
