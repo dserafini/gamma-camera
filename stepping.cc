@@ -26,8 +26,11 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   if (!touch)
     G4cout << "no touch!!" << G4endl;
   G4int copyno = touch->GetCopyNumber(2) * 1000 + touch->GetCopyNumber(1); // così ho al limite 1000 pixel per lato penso
+  G4cout << "a" << G4endl;
   G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
+  G4cout << "b" << G4endl;
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
+  G4cout << "c" << G4endl;
 
   // check if the volume where the step is in is also our scoring volume
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
@@ -50,6 +53,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
         fEventAction->SetCross(1);
     }
   }
+  G4cout << "d" << G4endl;
 
   G4LogicalVolume *fScoringVolume = detectorConstruction->GetScoringVolume();
   // G4cout << "volume: " << volume->GetName() << G4endl;
