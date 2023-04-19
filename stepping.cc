@@ -21,7 +21,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     G4cout << "no PreStepPoint!!" << G4endl;
   
   G4cout << "declare touch" << G4endl;
-  const G4ReferenceCountedHandle<G4VTouchable> touch = step->GetPreStepPoint()->GetTouchableHandle();
+  auto touch = step->GetPreStepPoint()->GetTouchable();
   G4cout << "touch declared" << G4endl;
   if (!touch)
     G4cout << "no touch!!" << G4endl;
