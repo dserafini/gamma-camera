@@ -56,14 +56,14 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   if ((volume == logicPixel || volume == logicPinhole) && 
      (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()))
   {
-    if(pos.getZ() == 30.*mm)
+    if(pos.getZ() == 0.*mm)
     {
       fEventAction->SetCopyNumber(copyno);
       G4cout << "start: " << copyno;
     }
     else
     {
-      if (pos.getZ() == 60.*mm)
+      if (pos.getZ() == 30.*mm)
       {
         if(fEventAction->GetCopyNumber() != copyno)
           fEventAction->SetCross(1);
