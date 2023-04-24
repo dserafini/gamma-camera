@@ -51,7 +51,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     ",\ty: " << copyObject->GetCopyNoY() << G4endl;
   }*/
   
-  if (volume == logicPixel || volume == logicPinhole) && 
+  if ((volume == logicPixel || volume == logicPinhole) && 
      (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()))
   {
     if(pos.getZ() == 30.*mm)
