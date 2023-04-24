@@ -16,7 +16,7 @@ MyCopyNumber::~MyCopyNumber()
 
 G4int MyCopyNumber::GetCopyNoForSquareSide(G4double value, G4double maxValue, G4int maxNo)
 {
-  copyNo = G4int((value + maxValue/2.) / maxValue * maxNo);
+  G4int copyNo = G4int((value + maxValue/2.) / maxValue * maxNo);
   return copyNo;
 }
 
