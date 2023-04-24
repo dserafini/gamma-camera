@@ -24,7 +24,7 @@ void MyEventAction::BeginOfEventAction(const G4Event*)
   fEdep = 0.;
   fPrePosition = G4ThreeVector(0.,0.,0.);
   fPostPosition = G4ThreeVector(0.,0.,0.);
-  fCross = 0;
+  fCross = -2;
   pNum = 0;
   pPosition = G4ThreeVector(0.,0.,0.);
   pSigma = G4ThreeVector(0.,0.,0.);
