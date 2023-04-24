@@ -24,41 +24,43 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
    
-  if (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition() &&
-     ((volume == logicPixel || volume == logicPinhole) || (volume == logicScintillator)))
+  if (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
-    // check if the volume where the step is in is also our scoring volume
-    G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
-    G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
-    G4LogicalVolume *logicScintillator = detectorConstruction->GetScoringVolume();
-    
-    MyCopyNumber *copyObject = new MyCopyNumber();
-    copyObject->SetMaxX(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetXHalfLength()*2.);
-    copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength()*2.);
-    copyObject->SetMaxNoX(detectorConstruction->GetHolesSideNumber());
-    copyObject->SetMaxNoY(detectorConstruction->GetHolesSideNumber());
-    G4int copyno = copyObject->GetCopyNo(step->GetPreStepPoint()->GetPosition().getX(), step->GetPreStepPoint()->GetPosition().getY());
-    
-    // G4cout << "a gamma" << G4endl;
-    if ((volume == logicPixel || volume == logicPinhole) && 
-       (pos.getZ() == 0.*mm))
+    if ((volume == logicPixel || volume == logicPinhole) || (volume == logicScintillator))
     {
-      // G4cout << "enter" << G4endl;
-      enterCopyNo = copyno;
-      fEventAction->SetCopyNumber(copyno);
-    }
+      // check if the volume where the step is in is also our scoring volume
+      G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
+      G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
+      G4LogicalVolume *logicScintillator = detectorConstruction->GetScoringVolume();
 
-    if ((volume == logicScintillator) &&
-       (pos.getZ() == 30.*mm))
-    {
-        exitCopyNo = copyno;
-        G4cout << "start: " << enterCopyNo;
-        G4cout << ",\t stop: " << exitCopyNo << G4endl;
-        if(enterCopyNo != exitCopyNo)
-          fEventAction->SetCross(1);
+      MyCopyNumber *copyObject = new MyCopyNumber();
+      copyObject->SetMaxX(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetXHalfLength()*2.);
+      copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength()*2.);
+      copyObject->SetMaxNoX(detectorConstruction->GetHolesSideNumber());
+      copyObject->SetMaxNoY(detectorConstruction->GetHolesSideNumber());
+      G4int copyno = copyObject->GetCopyNo(step->GetPreStepPoint()->GetPosition().getX(), step->GetPreStepPoint()->GetPosition().getY());
+
+      // G4cout << "a gamma" << G4endl;
+      if ((volume == logicPixel || volume == logicPinhole) && 
+         (pos.getZ() == 0.*mm))
+      {
+        // G4cout << "enter" << G4endl;
+        enterCopyNo = copyno;
+        fEventAction->SetCopyNumber(copyno);
+      }
+
+      if ((volume == logicScintillator) &&
+         (pos.getZ() == 30.*mm))
+      {
+          exitCopyNo = copyno;
+          G4cout << "start: " << enterCopyNo;
+          G4cout << ",\t stop: " << exitCopyNo << G4endl;
+          if(enterCopyNo != exitCopyNo)
+            fEventAction->SetCross(1);
+      }
+      if (copyno == -3)
+      G4cout << "vec: " << pos << " in " << volume->GetName() << G4endl;
     }
-    if (copyno == -3)
-    G4cout << "vec: " << pos << " in " << volume->GetName() << G4endl;
   }
 
   G4LogicalVolume *fScoringVolume = detectorConstruction->GetScoringVolume();
