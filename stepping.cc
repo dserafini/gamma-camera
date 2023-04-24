@@ -53,8 +53,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
          (pos.getZ() == 30.*mm))
       {
           exitCopyNo = copyno;
-          G4cout << "start: " << enterCopyNo;
-          G4cout << ",\t stop: " << exitCopyNo << G4endl;
+          // G4cout << "start: " << enterCopyNo << ",\t stop: " << exitCopyNo << G4endl;
           if(enterCopyNo != exitCopyNo)
             fEventAction->SetCross(1);
       }
