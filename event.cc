@@ -52,8 +52,6 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   man->FillNtupleDColumn(0, 3, fPrePosition.getZ());
   
   // optical photons
-  if (fCross>0)
-    G4cout << "fCross is " << fCross << G4endl;
   man->FillNtupleIColumn(0, 4, fCross);
   
   // G4cout << "pPosition: " << pPosition << " vector" << G4endl;
