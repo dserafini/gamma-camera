@@ -49,7 +49,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
     G4LogicalVolume *logicScintillator = detectorConstruction->GetScoringVolume();
     
-    copyObject = new MyCopyNumber();
+    MyCopyNumber *copyObject = new MyCopyNumber();
     copyObject->SetMaxX(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetXHalfLength()*2.);
     copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength()*2.);
     copyObject->SetMaxNoX(detectorConstruction->GetHolesSideNumber());
