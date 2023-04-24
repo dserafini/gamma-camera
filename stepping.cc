@@ -38,6 +38,8 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   if(step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
     G4cout << "collimator is mother? " << volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume()) << G4endl;
+  G4cout << "x: " << step->GetPreStepPoint()->GetPosition().getX() <<
+    ",\ty: " << step->GetPreStepPoint()->GetPosition().getY() << G4endl;
     G4cout << "copy number: " << copyno << G4endl;
   }
   
