@@ -40,7 +40,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   copyObject->SetMaxNoY(detectorConstruction->GetHolesSideNumber());
   copyno = copyObject->GetCopyNo(step->GetPreStepPoint()->GetPosition().getX(), step->GetPreStepPoint()->GetPosition().getY());
   
-  if(step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
+/*  if(step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
     G4cout << "collimator is mother? " << volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume()) << G4endl;
   G4cout << "holesnumber: " << detectorConstruction->GetHolesSideNumber() <<
@@ -49,22 +49,26 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     G4cout << "copy number: " << copyno << 
     ",\tx: " << copyObject->GetCopyNoX() << 
     ",\ty: " << copyObject->GetCopyNoY() << G4endl;
-  }
+  }*/
   
-  if((volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume())) && 
-     (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()) && 
-     (fEventAction->GetCross() < 1))
+  if (volume == logicPixel || volume == logicPinhole) && 
+     (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()))
   {
     if(pos.getZ() == 30.*mm)
+    {
       fEventAction->SetCopyNumber(copyno);
+      G4cout << "start: " << copyno;
+    }
     else
     {
       if (pos.getZ() == 60.*mm)
       {
         if(fEventAction->GetCopyNumber() != copyno)
           fEventAction->SetCross(1);
+        G4cout << ",\t stop: " << fEventAction->GetCopyNumber();
       }
     }
+    G4cout << G4endl;
   }
 
   G4LogicalVolume *fScoringVolume = detectorConstruction->GetScoringVolume();
