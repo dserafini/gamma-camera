@@ -55,7 +55,10 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
           exitCopyNo = copyno;
           G4cout << "start: " << enterCopyNo << ",\t stop: " << exitCopyNo << G4endl;
           if(enterCopyNo != exitCopyNo)
+          {
             fEventAction->SetCross(1);
+            G4cout << "got one: " << fEventAction->GetCross() << G4endl;
+          }
       }
     }
   }
