@@ -27,6 +27,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   G4cout << "logicvol:\t" << volume->GetName() << G4endl;
   
   G4ThreeVector pos = step->GetPreStepPoint()->GetPosition();
+  G4cout << "vec: " << pos << G4endl;
   
 
   // check if the volume where the step is in is also our scoring volume
