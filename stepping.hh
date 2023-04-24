@@ -23,7 +23,6 @@ public:
 
 private:
   MyEventAction *fEventAction;
-  MyCopyNumber *copyObject;
   G4int enterCopyNo, exitCopyNo;
 };
 
