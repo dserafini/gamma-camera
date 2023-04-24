@@ -25,9 +25,14 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
   
+  G4ThreeVector pos = step->GetPreStepPoint()->GetPosition();
+  
 
   // check if the volume where the step is in is also our scoring volume
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
+  G4LogicalVolume *logicCollimatorMatrix = detectorConstruction->GetCollimatorVolume()->GetLogicalVolume();
+  G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
+  G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
   
   copyObject->SetMaxX(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetXHalfLength()*2.);
   copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength()*2.);
@@ -50,12 +55,15 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
      (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()) && 
      (fEventAction->GetCross() < 1))
   {
-    if(fEventAction->GetCopyNumber() == -1)
+    if(pos.getZ() == 30.*mm)
       fEventAction->SetCopyNumber(copyno);
     else
     {
-      if(fEventAction->GetCopyNumber() != copyno)
-        fEventAction->SetCross(1);
+      if (pos.getZ() == 60.*mm)
+      {
+        if(fEventAction->GetCopyNumber() != copyno)
+          fEventAction->SetCross(1);
+      }
     }
   }
 
