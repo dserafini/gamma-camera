@@ -7,7 +7,9 @@ MySteppingAction::MySteppingAction(MyEventAction* eventAction)
 }
 
 MySteppingAction::~MySteppingAction()
-{}
+{
+  delete copyObject;
+}
 
 void MySteppingAction::UserSteppingAction(const G4Step *step)
 {
