@@ -32,3 +32,19 @@ G4int MyCopyNumber::GetCopyNo(G4double valueX, G4double valueY)
   MyCopyNumber::UpdateCopyNo();
   return fCopyNo;
 }
+
+void SetCopyNoX(G4double valueX)
+{
+  if (valueX >= -fMaxX/2. && valueX <= fMaxX/2.)
+    fCopyNoX = GetCopyNoForSquareSide(valueX, fMaxX, fMaxNoX);
+  else
+    G4cout << "x point outside volume" << G4endl;
+}
+
+void SetCopyNoY(G4double valueY)
+{
+  if (valueY >= -fMaxY/2. && valueY <= fMaxY/2.)
+    fCopyNoY = GetCopyNoForSquareSide(valueY, fMaxY, fMaxNoY);
+  else
+    G4cout << "y point outside volume" << G4endl;
+}
