@@ -56,7 +56,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
         if(enterCopyNo != exitCopyNo)
           fEventAction->SetCross(1);
     }
-    if (copyno == -1)
+    if (copyno == -3)
     G4cout << "vec: " << pos << " in " << volume->GetName() << G4endl;
   }
 
