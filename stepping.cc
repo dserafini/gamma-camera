@@ -24,7 +24,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // G4cout << "copy0: " << touch->GetCopyNumber(0) << G4endl;
   // G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
-  G4cout << "logicvol:\t" << volume->GetName() << G4endl;
+  // G4cout << "logicvol:\t" << volume->GetName() << G4endl;
   
   G4ThreeVector pos = step->GetPreStepPoint()->GetPosition();
   // G4cout << "vec: " << pos << G4endl;
@@ -56,11 +56,11 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   
   if (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
-    G4cout << "a gamma" << G4endl;
+    // G4cout << "a gamma" << G4endl;
     if ((volume == logicPixel || volume == logicPinhole) && 
        (pos.getZ() == 0.*mm))
     {
-      G4cout << "enter" << G4endl;
+      // G4cout << "enter" << G4endl;
       enterCopyNo = copyno;
       fEventAction->SetCopyNumber(copyno);
     }
@@ -70,7 +70,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     {
         exitCopyNo = copyno;
         G4cout << "start: " << enterCopyNo;
-        G4cout << ",\t stop: " << exitCopyNo;
+        G4cout << ",\t stop: " << exitCopyNo << G4endl;
         if(enterCopyNo != exitCopyNo)
           fEventAction->SetCross(1);
     }
