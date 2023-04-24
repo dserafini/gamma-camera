@@ -31,7 +31,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   G4cout << "copy0: " << touch->GetCopyNumber(0) << G4endl;
   G4cout << "copy1: " << touch->GetCopyNumber(-1) << G4endl;
   G4cout << "copy2: " << touch->GetCopyNumber(-2) << G4endl;
-  G4int copyno = touch->GetCopyNumber(2) * 1000 + touch->GetCopyNumber(1); // così ho al limite 1000 pixel per lato penso
+  G4int copyno = touch->GetCopyNumber(-2) * 1000 - touch->GetCopyNumber(-1); // così ho al limite 1000 pixel per lato penso
   G4cout << "a" << G4endl;
   G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4cout << "b" << G4endl;
