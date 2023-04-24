@@ -30,7 +30,11 @@ G4int MyCopyNumber::GetCopyNo(G4double valueX, G4double valueY)
   SetCopyNoX(valueX);
   MyCopyNumber::SetCopyNoY(valueY);
   MyCopyNumber::UpdateCopyNo();
-  return fCopyNo;
+  
+  if (valueX < -fMaxX/2. || valueX > fMaxX/2. || valueY >= -fMaxY/2. || valueY > fMaxY/2.)
+    return -1;
+  else
+    return fCopyNo;
 }
 
 void MyCopyNumber::SetCopyNoX(G4double valueX)
