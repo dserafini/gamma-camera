@@ -20,20 +20,19 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // or we take the energy of a single scoring volume
   
   auto touch = step->GetPreStepPoint()->GetTouchable();
-  G4cout << "physvol:\t" << touch->GetVolume()->GetName() << G4endl;
+  // G4cout << "physvol:\t" << touch->GetVolume()->GetName() << G4endl;
   // G4cout << "copy: " << touch->GetCopyNumber() << G4endl;
   // G4cout << "copy0: " << touch->GetCopyNumber(0) << G4endl;
   // G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
-  G4cout << "logicvol:\t" << volume->GetName() << G4endl;
+  // G4cout << "logicvol:\t" << volume->GetName() << G4endl;
   
   G4ThreeVector pos = step->GetPreStepPoint()->GetPosition();
-  G4cout << "vec: " << pos << G4endl;
+  // G4cout << "vec: " << pos << G4endl;
   
 
   // check if the volume where the step is in is also our scoring volume
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
-  G4LogicalVolume *logicCollimatorMatrix = detectorConstruction->GetCollimatorVolume();
   G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
   G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
   G4LogicalVolume *logicScintillator = detectorConstruction->GetScoringVolume();
