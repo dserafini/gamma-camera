@@ -3,6 +3,7 @@
 MySteppingAction::MySteppingAction(MyEventAction* eventAction)
 {
   fEventAction = eventAction;
+  copyObject = new MyCopyNumber();
 }
 
 MySteppingAction::~MySteppingAction()
