@@ -26,13 +26,13 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
    
   if (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
+    // check if the volume where the step is in is also our scoring volume
+    G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
+    G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
+    G4LogicalVolume *logicScintillator = detectorConstruction->GetScoringVolume();
+    
     if ((volume == logicPixel || volume == logicPinhole) || (volume == logicScintillator))
     {
-      // check if the volume where the step is in is also our scoring volume
-      G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
-      G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
-      G4LogicalVolume *logicScintillator = detectorConstruction->GetScoringVolume();
-
       MyCopyNumber *copyObject = new MyCopyNumber();
       copyObject->SetMaxX(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetXHalfLength()*2.);
       copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength()*2.);
