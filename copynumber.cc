@@ -52,3 +52,10 @@ void MyCopyNumber::SetCopyNoY(G4double valueY)
   else
     G4cout << "y point outside volume" << G4endl;
 }
+
+void MyCopyNumber::Reset()
+{
+  fCopyNoX = 0;
+  fCopyNoY = 0;
+  fCopyNo = 0;
+}
