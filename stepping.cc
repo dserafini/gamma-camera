@@ -21,9 +21,6 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
   
-  G4TouchableHandle theTouchable = step->GetPreStepPoint()->GetTouchableHandle();
-  G4int copyNo = theTouchable->GetCopyNumber();
-  G4int motherCopyNo = theTouchable->GetCopyNumber(1);
 
   // check if the volume where the step is in is also our scoring volume
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
@@ -38,6 +35,9 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
      (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()) && 
      (fEventAction->GetCross() < 1))
   {
+  G4TouchableHandle theTouchable = step->GetPreStepPoint()->GetTouchableHandle();
+  G4int copyNo = theTouchable->GetCopyNumber();
+  G4int motherCopyNo = theTouchable->GetCopyNumber(1);
     if(fEventAction->GetCopyNumber() == -1)
       fEventAction->SetCopyNumber(copyno);
     else
