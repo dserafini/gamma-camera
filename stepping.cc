@@ -57,7 +57,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
           if(enterCopyNo != exitCopyNo)
             fEventAction->SetCross(1);
           else
-            fEvenAction->SetCross(2);
+            fEventAction->SetCross(2);
       }
     }
   }
