@@ -33,7 +33,7 @@ public:
 	G4LogicalVolume *GetDetectorVolume() const { return logicDetector; }
 	G4LogicalVolume *GetCollimatorVolume() const { return logicCollimatorMatrix; }
 	G4VPhysicalVolume *GetCollimatorPhysVolume() const { return physCollimator; }
-	G4int *GetHolesSideNumber() { return holes_number; }
+	G4int GetHolesSideNumber() { return holes_number; }
 
 	virtual G4VPhysicalVolume *Construct();
 	// virtual because it is defined in G4USerDetectorConstruction
