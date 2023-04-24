@@ -19,7 +19,6 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // we take the energy of the whole volume
   // or we take the energy of a single scoring volume
   
-  auto touch = step->GetPreStepPoint()->GetTouchable();
   // G4cout << "physvol:\t" << touch->GetVolume()->GetName() << G4endl;
   // G4cout << "copy: " << touch->GetCopyNumber() << G4endl;
   // G4cout << "copy0: " << touch->GetCopyNumber(0) << G4endl;
