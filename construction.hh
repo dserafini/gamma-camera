@@ -33,6 +33,7 @@ public:
 	G4LogicalVolume *GetDetectorVolume() const { return logicDetector; }
 	G4LogicalVolume *GetCollimatorVolume() const { return logicCollimatorMatrix; }
 	G4LogicalVolume *GetPinholeVolume() const {return logicCollimatorPinhole; }
+	G4LogicalVolume *GetPixelVolume() const {return logicCollimatorPixel; }
 	G4VPhysicalVolume *GetCollimatorPhysVolume() const { return physCollimator; }
 	G4int GetHolesSideNumber() const { return holes_number; }
 
