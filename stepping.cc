@@ -35,6 +35,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   G4LogicalVolume *logicCollimatorMatrix = detectorConstruction->GetCollimatorVolume();
   G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
   G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
+  G4LogicalVolume *logicScintillator = detectorConstruction->GetScoringVolume();
   
   copyObject->SetMaxX(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetXHalfLength()*2.);
   copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength()*2.);
@@ -53,7 +54,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     ",\ty: " << copyObject->GetCopyNoY() << G4endl;
   }*/
   
-  if ((volume == logicPixel || volume == logicPinhole) && 
+  if ((volume == logicPixel || volume == logicPinhole || volume == logicScintillator) && 
      (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()))
   {
     if(pos.getZ() == 0.*mm)
