@@ -16,6 +16,7 @@ public:
   G4int GetCopyNo(G4double, G4double);
   G4int GetCopyNoX() { return fCopyNoX; };
   G4int GetCopyNoY() { return fCopyNoY; };
+  void Reset();
 
 private:
   void SetCopyNoX(G4double valueX);
