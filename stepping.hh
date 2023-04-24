@@ -11,6 +11,7 @@
 
 #include "construction.hh"
 #include "event.hh"
+#include "copynumber.hh"
 
 class MySteppingAction : public G4UserSteppingAction
 {
@@ -22,6 +23,7 @@ public:
 
 private:
   MyEventAction *fEventAction;
+  MyCopyNumber *copyObject;
 };
 
 #endif
