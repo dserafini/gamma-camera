@@ -17,31 +17,13 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // we take the energy of the whole volume
   // or we take the energy of a single scoring volume
   
-  // G4cout << "physvol:\t" << touch->GetVolume()->GetName() << G4endl;
-  // G4cout << "copy: " << touch->GetCopyNumber() << G4endl;
-  // G4cout << "copy0: " << touch->GetCopyNumber(0) << G4endl;
-  // G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
-  // G4cout << "logicvol:\t" << volume->GetName() << G4endl;
   
   G4ThreeVector pos = step->GetPreStepPoint()->GetPosition();
   // G4cout << "vec: " << pos << G4endl;
+  
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
-  
-
-  
- /* if(step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
-  {
-    G4cout << "collimator is mother? " << volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume()) << G4endl;
-  G4cout << "holesnumber: " << detectorConstruction->GetHolesSideNumber() <<
-    ",\tx: " << step->GetPreStepPoint()->GetPosition().getX() <<
-    ",\ty: " << step->GetPreStepPoint()->GetPosition().getY() << G4endl;
-    G4cout << "copy number: " << copyno << 
-    ",\tx: " << copyObject->GetCopyNoX() << 
-    ",\ty: " << copyObject->GetCopyNoY() << 
-    ",\txy: " << copyObject->GetCopyNo(pos.getX(), pos.getY()) << G4endl;
-  }*/
-  
+   
   if (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
     // check if the volume where the step is in is also our scoring volume
