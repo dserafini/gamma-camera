@@ -27,7 +27,7 @@ void MyCopyNumber::UpdateCopyNo()
 
 G4int MyCopyNumber::GetCopyNo(G4double valueX, G4double valueY)
 {
-  this->SetCopyNoX(G4double valueX);
+  SetCopyNoX(G4double valueX);
   MyCopyNumber::SetCopyNoY(G4double valueY);
   MyCopyNumber::UpdateCopyNo();
   return fCopyNo;
