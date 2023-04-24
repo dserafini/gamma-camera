@@ -60,6 +60,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     if ((volume == logicPixel || volume == logicPinhole) && 
        (pos.getZ() == 0.*mm))
     {
+      G4cout << "enter" << G4endl;
       enterCopyNo = copyno;
       fEventAction->SetCopyNumber(copyno);
     }
