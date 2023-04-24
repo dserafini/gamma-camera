@@ -30,7 +30,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
 
   // check if the volume where the step is in is also our scoring volume
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
-  G4LogicalVolume *logicCollimatorMatrix = detectorConstruction->GetCollimatorVolume()->GetLogicalVolume();
+  G4LogicalVolume *logicCollimatorMatrix = detectorConstruction->GetCollimatorVolume();
   G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
   G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
   
