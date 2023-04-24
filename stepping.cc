@@ -14,33 +14,12 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // we take the energy of the whole volume
   // or we take the energy of a single scoring volume
   
-  if (!step)
-    G4cout << "no step!!" << G4endl;
-  
-  if (!step->GetPreStepPoint())
-    G4cout << "no PreStepPoint!!" << G4endl;
-  
-  G4cout << "declare touch" << G4endl;
   auto touch = step->GetPreStepPoint()->GetTouchable();
-  G4cout << "touch declared" << G4endl;
-  if (!touch)
-    G4cout << "no touch!!" << G4endl;
-
-  G4cout << "touch: " << touch << G4endl;
-  G4cout << "copy: " << touch->GetCopyNumber() << G4endl;
-  G4cout << "copy0: " << touch->GetCopyNumber(0) << G4endl;
-  G4cout << "copy1: " << touch->GetCopyNumber(-1) << G4endl;
-  G4cout << "copy2: " << touch->GetCopyNumber(-2) << G4endl;
+  // G4cout << "copy: " << touch->GetCopyNumber() << G4endl;
+  // G4cout << "copy0: " << touch->GetCopyNumber(0) << G4endl;
   G4int copyno = touch->GetCopyNumber(-2) * 1000 - touch->GetCopyNumber(-1); // così ho al limite 1000 pixel per lato penso
-  G4cout << "a" << G4endl;
   G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
-  G4cout << "b" << G4endl;
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
-  G4cout << "c" << G4endl;
-  auto pv = step->GetPreStepPoint()->GetPhysicalVolume();
-  G4cout << "pv: " << pv << G4endl;
-  G4cout << "copy0: " << pv->GetCopyNo(0) << G4endl;
-  G4cout << "copy1: " << pv->GetCopyNo(-1) << G4endl;
 
   // check if the volume where the step is in is also our scoring volume
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
