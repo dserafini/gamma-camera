@@ -30,17 +30,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // G4cout << "vec: " << pos << G4endl;
   
 
-  // check if the volume where the step is in is also our scoring volume
-  const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
-  G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
-  G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
-  G4LogicalVolume *logicScintillator = detectorConstruction->GetScoringVolume();
-  
-  copyObject->SetMaxX(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetXHalfLength()*2.);
-  copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength()*2.);
-  copyObject->SetMaxNoX(detectorConstruction->GetHolesSideNumber());
-  copyObject->SetMaxNoY(detectorConstruction->GetHolesSideNumber());
-  G4int copyno = copyObject->GetCopyNo(step->GetPreStepPoint()->GetPosition().getX(), step->GetPreStepPoint()->GetPosition().getY());
+
   
  /* if(step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
@@ -56,6 +46,18 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   
   if (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
+    // check if the volume where the step is in is also our scoring volume
+    const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
+    G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
+    G4LogicalVolume *logicPixel = detectorConstruction->GetPixelVolume();
+    G4LogicalVolume *logicScintillator = detectorConstruction->GetScoringVolume();
+    
+    copyObject->SetMaxX(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetXHalfLength()*2.);
+    copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength()*2.);
+    copyObject->SetMaxNoX(detectorConstruction->GetHolesSideNumber());
+    copyObject->SetMaxNoY(detectorConstruction->GetHolesSideNumber());
+    G4int copyno = copyObject->GetCopyNo(step->GetPreStepPoint()->GetPosition().getX(), step->GetPreStepPoint()->GetPosition().getY());
+    
     // G4cout << "a gamma" << G4endl;
     if ((volume == logicPixel || volume == logicPinhole) && 
        (pos.getZ() == 0.*mm))
