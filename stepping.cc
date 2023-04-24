@@ -30,6 +30,10 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
   
   copyObject->SetMaxX(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetXHalfLength());
+  copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength());
+  copyObject->SetMaxNoX((detectorConstruction->GetHolesSideNumber());
+  copyObject->SetMaxNoY((detectorConstruction->GetHolesSideNumber());
+  copyno = copyObject->GetCopyNo(step->GetPreStepPoint()->GetPosition.getX(), step->GetPreStepPoint()->GetPosition.getY());
   
   if(step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
