@@ -76,6 +76,9 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
         if(enterCopyNo != exitCopyNo)
           fEventAction->SetCross(1);
     }
+    if (copyno == -1)
+    G4cout << "vec: " << pos << G4endl;
+      
   }
 
   G4LogicalVolume *fScoringVolume = detectorConstruction->GetScoringVolume();
