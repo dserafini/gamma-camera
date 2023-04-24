@@ -18,12 +18,13 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // or we take the energy of a single scoring volume
   
   auto touch = step->GetPreStepPoint()->GetTouchable();
-  G4cout << "physvol: " << touch->GetVolume()->GetName() << G4endl;
+  G4cout << "physvol:\t" << touch->GetVolume()->GetName() << G4endl;
   // G4cout << "copy: " << touch->GetCopyNumber() << G4endl;
   // G4cout << "copy0: " << touch->GetCopyNumber(0) << G4endl;
   G4int copyno = touch->GetCopyNumber(-2) * 1000 - touch->GetCopyNumber(-1); // così ho al limite 1000 pixel per lato penso
   // G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
+  G4cout << "logicvol:\t" << volume->GetName()->GetName() << G4endl;
   
   G4ThreeVector pos = step->GetPreStepPoint()->GetPosition();
   
