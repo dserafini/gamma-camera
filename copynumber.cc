@@ -22,7 +22,7 @@ G4int MyCopyNumber::GetCopyNoForSquareSide(G4double value, G4double maxValue, G4
 
 void MyCopyNumber::UpdateCopyNo()
 {
-  fCopyNo = fCopyNoY * fMaxY + fCopyNoX;
+  fCopyNo = fCopyNoY * fMaxNoY + fCopyNoX;
 }
 
 G4int MyCopyNumber::GetCopyNo(G4double valueX, G4double valueY)
