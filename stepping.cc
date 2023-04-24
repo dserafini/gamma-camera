@@ -31,8 +31,8 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   
   copyObject->SetMaxX(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetXHalfLength());
   copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength());
-  copyObject->SetMaxNoX((detectorConstruction->GetHolesSideNumber());
-  copyObject->SetMaxNoY((detectorConstruction->GetHolesSideNumber());
+  copyObject->SetMaxNoX(detectorConstruction->GetHolesSideNumber());
+  copyObject->SetMaxNoY(detectorConstruction->GetHolesSideNumber());
   copyno = copyObject->GetCopyNo(step->GetPreStepPoint()->GetPosition.getX(), step->GetPreStepPoint()->GetPosition.getY());
   
   if(step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
