@@ -39,8 +39,8 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   G4cout << "c" << G4endl;
   auto pv = step->GetPreStepPoint()->GetPhysicalVolume();
   G4cout << "pv: " << pv << G4endl;
-  G4cout << "copy0: " << pv->GetCopyNumber(0) << G4endl;
-  G4cout << "copy1: " << pv->GetCopyNumber(-1) << G4endl;
+  G4cout << "copy0: " << pv->GetCopyNo(0) << G4endl;
+  G4cout << "copy1: " << pv->GetCopyNo(-1) << G4endl;
 
   // check if the volume where the step is in is also our scoring volume
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
