@@ -4,6 +4,8 @@ MySteppingAction::MySteppingAction(MyEventAction* eventAction)
 {
   fEventAction = eventAction;
   copyObject = new MyCopyNumber();
+  enterCopyNo = 0;
+  exitCopyNo = 0;
 }
 
 MySteppingAction::~MySteppingAction()
@@ -21,7 +23,6 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   G4cout << "physvol:\t" << touch->GetVolume()->GetName() << G4endl;
   // G4cout << "copy: " << touch->GetCopyNumber() << G4endl;
   // G4cout << "copy0: " << touch->GetCopyNumber(0) << G4endl;
-  G4int copyno = touch->GetCopyNumber(-2) * 1000 - touch->GetCopyNumber(-1); // così ho al limite 1000 pixel per lato penso
   // G4VPhysicalVolume *physvolume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
   G4cout << "logicvol:\t" << volume->GetName() << G4endl;
@@ -41,7 +42,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   copyObject->SetMaxY(((G4Box*)detectorConstruction->GetCollimatorVolume()->GetSolid())->GetYHalfLength()*2.);
   copyObject->SetMaxNoX(detectorConstruction->GetHolesSideNumber());
   copyObject->SetMaxNoY(detectorConstruction->GetHolesSideNumber());
-  copyno = copyObject->GetCopyNo(step->GetPreStepPoint()->GetPosition().getX(), step->GetPreStepPoint()->GetPosition().getY());
+  G4int copyno = copyObject->GetCopyNo(step->GetPreStepPoint()->GetPosition().getX(), step->GetPreStepPoint()->GetPosition().getY());
   
 /*  if(step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
   {
@@ -59,16 +60,18 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   {
     if(pos.getZ() == 0.*mm)
     {
+      enterCopyNo = copyno;
       fEventAction->SetCopyNumber(copyno);
-      G4cout << "start: " << copyno;
     }
     else
     {
       if (pos.getZ() == 30.*mm)
       {
-        if(fEventAction->GetCopyNumber() != copyno)
+        exitCopyNo = copyno;
+        G4cout << "start: " << enterCopyNo;
+        G4cout << ",\t stop: " << exitCopyNo;
+        if(enterCopyNo != exitCopyNo)
           fEventAction->SetCross(1);
-        G4cout << ",\t stop: " << fEventAction->GetCopyNumber();
       }
     }
     G4cout << G4endl;
