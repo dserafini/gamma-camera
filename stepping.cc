@@ -53,7 +53,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     G4cout << "copy number: " << copyno << 
     ",\tx: " << copyObject->GetCopyNoX() << 
     ",\ty: " << copyObject->GetCopyNoY() << 
-    ",\txy: " << copyObject->GetCopyNo() << G4endl;
+    ",\txy: " << copyObject->GetCopyNo(pos.getX(), pos.getY()) << G4endl;
   }
   
   if ((volume == logicPixel || volume == logicPinhole || volume == logicScintillator) && 
