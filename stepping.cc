@@ -24,7 +24,8 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   
   const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
    
-  if (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
+  if (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition() &&
+     ((volume == logicPixel || volume == logicPinhole) || (volume == logicScintillator)))
   {
     // check if the volume where the step is in is also our scoring volume
     G4LogicalVolume *logicPinhole = detectorConstruction->GetPinholeVolume();
