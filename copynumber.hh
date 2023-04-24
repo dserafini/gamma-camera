@@ -18,8 +18,8 @@ public:
   G4int GetCopyNoY() { return fCopyNoY; };
 
 private:
-  void SetCopyNoX(G4double valueX) { fCopyNoX = GetCopyNoForSquareSide(valueX, fMaxX, fMaxNoX); };
-  void SetCopyNoY(G4double valueY) { fCopyNoY = GetCopyNoForSquareSide(valueY, fMaxY, fMaxNoY); };
+  void SetCopyNoX(G4double valueX);
+  void SetCopyNoY(G4double valueY);
   G4int GetCopyNoForSquareSide(G4double, G4double, G4int);
   void UpdateCopyNo();
   G4int fMaxNoX;
