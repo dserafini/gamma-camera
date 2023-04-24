@@ -9,6 +9,8 @@ public:
 
   void SetMaxX(G4double valueX) { fMaxX = valueX; };
   void SetMaxY(G4double valueY) { fMaxY = valueY; };
+  void SetMaxNoX(G4int valueX) { fMaxNoX = valueX; };
+  void SetMaxNoY(G4int valueY) { fMaxNoY = valueY; };
   void SetCopyNoX(G4double);
   void SetCopyNoY(G4double);
   void UpdateCopyNo();
