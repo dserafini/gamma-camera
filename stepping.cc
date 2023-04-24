@@ -41,7 +41,9 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   G4cout << "holesnumber: " << detectorConstruction->GetHolesSideNumber() <<
     ",\tx: " << step->GetPreStepPoint()->GetPosition().getX() <<
     ",\ty: " << step->GetPreStepPoint()->GetPosition().getY() << G4endl;
-    G4cout << "copy number: " << copyno << G4endl;
+    G4cout << "copy number: " << copyno << 
+    ",\tx: " << copyObject->GetCopyNoX() << 
+    ",\ty: " << copyObject->GetCopyNoY() << G4endl;
   }
   
   if((volume->IsDaughter(detectorConstruction->GetCollimatorPhysVolume())) && 
