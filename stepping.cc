@@ -35,9 +35,6 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
      (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition()) && 
      (fEventAction->GetCross() < 1))
   {
-  G4TouchableHandle theTouchable = step->GetPreStepPoint()->GetTouchableHandle();
-  G4int copyNo = theTouchable->GetCopyNumber();
-  G4int motherCopyNo = theTouchable->GetCopyNumber(1);
     if(fEventAction->GetCopyNumber() == -1)
       fEventAction->SetCopyNumber(copyno);
     else
