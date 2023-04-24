@@ -1,6 +1,8 @@
 #ifndef COPYNUMBER_HH
 #define COPYNUMBER_HH
 
+#include "globals.hh"
+
 class MyCopyNumber
 {
 public:
