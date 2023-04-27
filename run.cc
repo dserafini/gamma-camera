@@ -14,15 +14,16 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "fY"); // [mm]
   man->CreateNtupleDColumn(0, "fZ"); // [mm]
   // and optical photon positions
-  man->CreateNtupleIColumn(0, "fCross"); // [1]
   // man->CreateNtupleDColumn(0, "pX"); // [mm]
   // man->CreateNtupleDColumn(0, "pY"); // [mm]
   // man->CreateNtupleDColumn(0, "pZ"); // [mm]
   man->CreateNtupleDColumn(0, "EntryEnergy"); // [keV]
   man->CreateNtupleDColumn(0, "ExitEnergy"); // [keV]
+  man->CreateNtupleIColumn(0, "fCross"); // [1]
   man->CreateNtupleIColumn(0, "EntryCopyNo"); // [1]
   man->CreateNtupleIColumn(0, "ExitCopyNo"); // [1]
   man->FinishNtuple(0);
+  G4cout << "Ntuple fatta" << G4endl;
 }
 
 MyRunAction::~MyRunAction()
