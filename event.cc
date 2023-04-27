@@ -8,6 +8,8 @@ MyEventAction::MyEventAction(MyRunAction*)
   fPostPosition = G4ThreeVector(0.,0.,0.);
   fCross = 0;
   fCopyNumber = -1;
+  fEntryCopyNumber = -1;
+  fExitCopyNumber = -1;
   
   // optical photons
   pNum = 0;
@@ -22,6 +24,8 @@ void MyEventAction::BeginOfEventAction(const G4Event*)
 {
   // whenever a new event starts the energy accumulated in the previous event should be set to 0
   fEdep = 0.;
+  fEntryEnergy = 0.;
+  fExitEnergy = 0.;
   fPrePosition = G4ThreeVector(0.,0.,0.);
   fPostPosition = G4ThreeVector(0.,0.,0.);
   fCross = -2;
@@ -29,6 +33,8 @@ void MyEventAction::BeginOfEventAction(const G4Event*)
   pPosition = G4ThreeVector(0.,0.,0.);
   pSigma = G4ThreeVector(0.,0.,0.);
   fCopyNumber = -1;
+  fEntryCopyNumber = -1;
+  fExitCopyNumber = -1;
 }
 
 void MyEventAction::EndOfEventAction(const G4Event*)
@@ -65,6 +71,10 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   // man->FillNtupleDColumn(0, 5, fPostPosition.getX());
   // man->FillNtupleDColumn(0, 6, fPostPosition.getY());
   // man->FillNtupleDColumn(0, 7, fPostPosition.getZ());
+  man->FillNtupleDColumn(0, 5, fEntryEnergy / keV);
+  man->FillNtupleDColumn(0, 6, fExitEnergy / keV);
+  man->FillNtupleIColumn(0, 7, fEntryCopyNumber);
+  man->FillNtupleIColumn(0, 8, fExitCopyNumber);
 
   man->AddNtupleRow(0);
 }
