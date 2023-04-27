@@ -84,7 +84,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     
     return;
   }
-  
+  /*
   if((volume == detectorConstruction->GetDetectorVolume()) && (step->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition()))
   {
     G4int num = 1;
@@ -94,5 +94,5 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     // G4cout << "step position " << position << " vector" << G4endl;
     
     return;
-  }
+  }*/
 }
