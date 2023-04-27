@@ -252,8 +252,8 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	if(collimatorExist)
 		ConstructCollimator();
 	
-	ConstructScintillator();
-	ConstructDetector();
+	// ConstructScintillator();
+	// ConstructDetector();
 	// SetVisualizationFeatures();
 
 	return physWorld;
