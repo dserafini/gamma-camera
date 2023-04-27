@@ -34,6 +34,8 @@ public:
 private:
   // for gammas
   G4double fEdep;
+  G4double fEntryEnergy;
+  G4double fExitEnergy;
   G4ThreeVector fPrePosition;
   G4ThreeVector fPostPosition;
   G4int fCross;
