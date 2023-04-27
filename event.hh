@@ -26,6 +26,10 @@ public:
   G4int GetCross() { return fCross; }
   void SetCross(G4int cross) { fCross = cross; }
   void SetCopyNumber(G4int copy) { fCopyNumber = copy; }
+  void SetEntryCopyNumber(G4int copy) { fEntryCopyNumber = copy; }
+  void SetExitCopyNumber(G4int copy) { fExitCopyNumber = copy; }
+  void SetEntryEnergy(G4double energy) { fEntryEnergy = energy; }
+  void SetExitEnergy(G4double energy) { fExitEnergy = energy; }
   G4int GetCopyNumber() { return fCopyNumber; }
   // accumulate number of optical photons
   void AddNum(G4int num) { pNum += num; }
