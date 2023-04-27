@@ -206,7 +206,7 @@ void MyDetectorConstruction::ConstructCollimator()
 void MyDetectorConstruction::ConstructScintillator()
 {
 	solidScintillator = new G4Box("solidScintillator", slab_side/2., slab_side/2., slab_depth/2.);
-	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
+	logicScintillator = new G4LogicalVolume(solidScintillator, materialAir, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
 		G4ThreeVector(0.,0.,hole_length + slab_depth/2.),
@@ -252,7 +252,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	if(collimatorExist)
 		ConstructCollimator();
 	
-	// ConstructScintillator();
+	ConstructScintillator();
 	// ConstructDetector();
 	// SetVisualizationFeatures();
 
