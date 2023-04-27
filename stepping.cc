@@ -57,12 +57,17 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
       if ((volume == logicScintillator) &&
          (pos.getZ() == 30.*mm))
       {
-          exitCopyNo = copyno;
-          // G4cout << "start: " << enterCopyNo << ",\t stop: " << exitCopyNo << G4endl;
-          if(enterCopyNo != exitCopyNo)
-            fEventAction->SetCross(1);
-          else
-            fEventAction->SetCross(2);
+        exitCopyNo = copyno;
+        // G4cout << "start: " << enterCopyNo << ",\t stop: " << exitCopyNo << G4endl;
+        if(enterCopyNo != exitCopyNo)
+          fEventAction->SetCross(1);
+        else
+          fEventAction->SetCross(2);
+
+        // save exit energy
+        G4AnalysisManager *man = G4AnalysisManager::Instance();
+        G4double exitEnergy = step->GetTrack()->GetKineticEnergy();
+        man->FillNtupleDColumn(0, 5, exitEnergy / keV);
       }
     }
   }
