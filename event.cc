@@ -71,10 +71,10 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   // man->FillNtupleDColumn(0, 5, fPostPosition.getX());
   // man->FillNtupleDColumn(0, 6, fPostPosition.getY());
   // man->FillNtupleDColumn(0, 7, fPostPosition.getZ());
-  man->FillNtupleDColumn(0, 5, fEntryEnergy);
-  man->FillNtupleDColumn(0, 6, fExitEnergy);
-  man->FillNtupleIColumn(0, 7, fEntryCopyNumber);
-  man->FillNtupleIColumn(0, 8, fExitCopyNumber);
+  man->FillNtupleIColumn(0, 5, fEntryCopyNumber);
+  man->FillNtupleIColumn(0, 6, fExitCopyNumber);
+  man->FillNtupleDColumn(0, 7, fEntryEnergy);
+  man->FillNtupleDColumn(0, 8, fExitEnergy);
 
   man->AddNtupleRow(0);
 }
