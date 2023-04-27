@@ -58,7 +58,6 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   man->FillNtupleDColumn(0, 3, fPrePosition.getZ());
   
   // optical photons
-  man->FillNtupleIColumn(0, 4, fCross);
   
   // G4cout << "pPosition: " << pPosition << " vector" << G4endl;
   // G4cout << "pNumber: " << pNum << G4endl;
@@ -71,8 +70,9 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   // man->FillNtupleDColumn(0, 5, fPostPosition.getX());
   // man->FillNtupleDColumn(0, 6, fPostPosition.getY());
   // man->FillNtupleDColumn(0, 7, fPostPosition.getZ());
-  man->FillNtupleIColumn(0, 5, fEntryCopyNumber);
-  man->FillNtupleIColumn(0, 6, fExitCopyNumber);
+  man->FillNtupleIColumn(0, 4, fEntryCopyNumber);
+  man->FillNtupleIColumn(0, 5, fExitCopyNumber);
+  man->FillNtupleIColumn(0, 6, fCross);
   man->FillNtupleDColumn(0, 7, fEntryEnergy);
   man->FillNtupleDColumn(0, 8, fExitEnergy);
 
