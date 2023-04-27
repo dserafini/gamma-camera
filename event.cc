@@ -62,9 +62,9 @@ void MyEventAction::EndOfEventAction(const G4Event*)
     pSigma = pSigma/pNum;
   }
   
-  man->FillNtupleDColumn(0, 5, fPostPosition.getX());
-  man->FillNtupleDColumn(0, 6, fPostPosition.getY());
-  man->FillNtupleDColumn(0, 7, fPostPosition.getZ());
+  // man->FillNtupleDColumn(0, 5, fPostPosition.getX());
+  // man->FillNtupleDColumn(0, 6, fPostPosition.getY());
+  // man->FillNtupleDColumn(0, 7, fPostPosition.getZ());
 
   man->AddNtupleRow(0);
 }
