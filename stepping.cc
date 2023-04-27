@@ -47,6 +47,11 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
         // G4cout << "enter" << G4endl;
         enterCopyNo = copyno;
         fEventAction->SetCopyNumber(copyno);
+        
+        // save entry energy
+        G4AnalysisManager *man = G4AnalysisManager::Instance();
+        G4double entryEnergy = step->GetTrack()->GetKineticEnergy();
+        man->FillNtupleDColumn(0, 5, entryEnergy / keV);
       }
 
       if ((volume == logicScintillator) &&
