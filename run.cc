@@ -21,7 +21,7 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "EntryEnergy"); // [keV]
   man->CreateNtupleDColumn(0, "ExitEnergy"); // [keV]
   man->CreateNtupleIColumn(0, "EntryCopyNo"); // [1]
-  man->CreateNtupleIColumn(0, "EntryCopyNo"); // [1]
+  man->CreateNtupleIColumn(0, "ExitCopyNo"); // [1]
   man->FinishNtuple(0);
 }
 
