@@ -184,7 +184,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "defining the collimator case" << G4endl;
 	solidCollimatorMatrix = new G4Box("solidCollimatorMatrix", case_side/2., case_side/2., hole_length/2.);
 	logicCollimatorMatrix = new G4LogicalVolume(solidCollimatorMatrix, materialTungsten, "logicCollimatorMatrix");
-	new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth/2.), logicCollimatorMatrix, "physCollimatorMatrix", logicWorld, false, 0, true);
+	new G4PVPlacement(0, G4ThreeVector(0,0,+hole_length/2.), logicCollimatorMatrix, "physCollimatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the collimator array element" << G4endl;
@@ -239,7 +239,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	G4cout << "defining the scintillator case" << G4endl;
 	G4Box* solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", slab_side/2., slab_side/2., slab_depth/2.);
 	G4LogicalVolume *logicScintillatorMatrix = new G4LogicalVolume(solidScintillatorMatrix, materialPlastic, "logicScintillatorMatrix");
-	new G4PVPlacement(0, G4ThreeVector(0,0,+hole_length/2.), logicScintillatorMatrix, "physScintillatorMatrix", logicWorld, false, 0, true);
+	new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth/2.), logicScintillatorMatrix, "physScintillatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the scintillator array element" << G4endl;
