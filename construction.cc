@@ -243,25 +243,25 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	
 	// array
 	G4cout << "defining the scintillator array element" << G4endl;
-	solidScintillatorArray = new G4Box("solidScintillatorArray", case_side/2., scinti_pixel_size/2., scinti_holes_number/2.);
-	logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialTungsten, "logicCollimatorArray");
-	new G4PVReplica("physCollimatorArray", logicCollimatorArray, logicScintillatorMatrix, kYAxis, holes_number, pixel_size, 0);
+	G4Box* solidScintillatorArray = new G4Box("solidScintillatorArray", case_side/2., scinti_pixel_size/2., scinti_holes_number/2.);
+	G4LogicalVolume *logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialTungsten, "logicScintillatorArray");
+	new G4PVReplica("physScintillatorArray", logicCollimatorArray, logicScintillatorMatrix, kYAxis, holes_number, pixel_size, 0);
 	
 	// pixel
 	G4cout << "defining the scintillator pixel element" << G4endl;
-	solidScintillatorPixel = new G4Box("solidScintillatorPixel", pixel_size/2., pixel_size/2., hole_length/2.);
-	logicScintillatorPixel = new G4LogicalVolume(solidScintillatorPixel, materialTungsten, "logicScintillatorPixel");
+	G4Box* solidScintillatorPixel = new G4Box("solidScintillatorPixel", pixel_size/2., pixel_size/2., hole_length/2.);
+	G4LogicalVolume *logicScintillatorPixel = new G4LogicalVolume(solidScintillatorPixel, materialTungsten, "logicScintillatorPixel");
 	new G4PVReplica("physScintillatorPixel", logicScintillatorPixel, logicScintillatorArray, kXAxis, holes_number, pixel_size, 0);
 	
 	// pinhole
-	solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", hole_thickness/2., hole_thickness/2., hole_length/2.);
-	logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialAir, "logicScintillatorPinhole");
+	G4Box* solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", hole_thickness/2., hole_thickness/2., hole_length/2.);
+	G4LogicalVolume *logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialAir, "logicScintillatorPinhole");
 	new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
 	
-	solidScintillator = new G4Box("solidScintillator", slab_side/2., slab_side/2., slab_depth/2.);
-	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
+	G4Box* solidScintillator = new G4Box("solidScintillator", slab_side/2., slab_side/2., slab_depth/2.);
+	G4LogicalVolume *logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
 <
-	physScintillator = new G4PVPlacement(0,  // no rotation
+	G4VPhysicalVolume* physScintillator = new G4PVPlacement(0,  // no rotation
 		G4ThreeVector(0.,0.,hole_length + slab_depth/2.),
 		logicScintillator,             // its logical volume
 		"physScintillator",           // its name
