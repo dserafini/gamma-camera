@@ -245,13 +245,13 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	G4cout << "defining the scintillator array element" << G4endl;
 	G4Box* solidScintillatorArray = new G4Box("solidScintillatorArray", case_side/2., scinti_pixel_size/2., scinti_holes_number/2.);
 	G4LogicalVolume *logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialPlastic, "logicScintillatorArray");
-	new G4PVReplica("physScintillatorArray", logicCollimatorArray, logicScintillatorMatrix, kYAxis, holes_number, pixel_size, 0);
+	new G4PVReplica("physScintillatorArray", logicCollimatorArray, logicScintillatorMatrix, kYAxis, scinti_holes_number, pixel_size, 0);
 	
 	// pixel
 	G4cout << "defining the scintillator pixel element" << G4endl;
-	G4Box* solidScintillatorPixel = new G4Box("solidScintillatorPixel", pixel_size/2., pixel_size/2., hole_length/2.);
+	G4Box* solidScintillatorPixel = new G4Box("solidScintillatorPixel", scinti_pixel_size/2., scinti_pixel_size/2., hole_length/2.);
 	G4LogicalVolume *logicScintillatorPixel = new G4LogicalVolume(solidScintillatorPixel, materialPlastic, "logicScintillatorPixel");
-	new G4PVReplica("physScintillatorPixel", logicScintillatorPixel, logicScintillatorArray, kXAxis, holes_number, pixel_size, 0);
+	new G4PVReplica("physScintillatorPixel", logicScintillatorPixel, logicScintillatorArray, kXAxis, scinti_holes_number, scinti_pixel_size, 0);
 	
 	// pinhole
 	G4Box* solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", hole_thickness/2., hole_thickness/2., hole_length/2.);
