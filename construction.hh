@@ -46,12 +46,14 @@ private:
 	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator, *physDetector;
 
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
+	G4Material *materialPlastic;
 	G4Element *elLa, *elBr;
 
 	void DefineMaterials();
 	void DefineMaterialsProperties();
 
 	void ConstructScintillator();
+	void ConstructPixelScintillator();
 	void ConstructCollimator();
 	void ConstructDetector();
 	void SetVisualizationFeatures();
