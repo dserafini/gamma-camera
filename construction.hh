@@ -43,6 +43,7 @@ private:
 	G4Box *solidWorld, *solidScintillator, *solidDetector;
 	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
 	G4LogicalVolume *logicWorld, *logicScintillator, *logicDetector;
+	G4LogicalVolume *logicScintillatorPixel;
 	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
 	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator, *physDetector;
 	G4VPhysicalVolume *physScintillatorPinhole, *physScintillatorPixel;
