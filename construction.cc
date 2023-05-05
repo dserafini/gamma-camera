@@ -135,15 +135,6 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	G4MaterialPropertiesTable* mptAir = new G4MaterialPropertiesTable();
 	mptAir->AddProperty("RINDEX", PhotonEnergy, refractiveIndexAir, nEntries);
 	materialAir->SetMaterialPropertiesTable(mptAir);
-	
-	// scintillator pixel surfaces
-	std::vector<G4double> ephoton = {PhotonEnergy[0], PhotonEnergy[1]}; // [200, 1000] nm
-	std::vector<G4double> reflectivity = { 0.1, 0.1 };
-	std::vector<G4double> transmittance = { 0, 0 };
-	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
-	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
-	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
-	myST2->DumpTable();
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
@@ -260,12 +251,12 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	G4cout << "defining the scintillator pixel element" << G4endl;
 	G4Box* solidScintillatorPixel = new G4Box("solidScintillatorPixel", scinti_pixel_size/2., scinti_pixel_size/2., hole_length/2.);
 	G4LogicalVolume *logicScintillatorPixel = new G4LogicalVolume(solidScintillatorPixel, materialPlastic, "logicScintillatorPixel");
-	new G4PVReplica("physScintillatorPixel", logicScintillatorPixel, logicScintillatorArray, kXAxis, scinti_holes_number, scinti_pixel_size, 0);
+	physScintillatorPixel = new G4PVReplica("physScintillatorPixel", logicScintillatorPixel, logicScintillatorArray, kXAxis, scinti_holes_number, scinti_pixel_size, 0);
 	
 	// pinhole
 	G4Box* solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", hole_thickness/2., hole_thickness/2., hole_length/2.);
 	G4LogicalVolume *logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialGAGG, "logicScintillatorPinhole");
-	new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
+	physScintillatorPinhole = new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
 
 	fScoringVolume = logicScintillatorPinhole;
 }
@@ -305,9 +296,30 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	// ConstructScintillator();
 	ConstructPixelScintillator();
 	ConstructDetector();
+	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
 
 	return physWorld;
+}
+
+
+void MyDetectorConstruction::DefineOpticalSurfaceProperties()
+{
+	// scintillator pixel surfaces
+	G4cout << "Set Optical surfaces" << G4endl;
+	std::vector<G4double> ephoton = {1.0*eV, 7.0*eV};
+	std::vector<G4double> reflectivity = { 0.1, 0.1 };
+	std::vector<G4double> transmittance = { 0, 0 };
+	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
+	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
+	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
+	myST2->DumpTable();
+	G4OpticalSurface* opGaggPlasticSurface;
+	G4LogicalBorderSurface* waterSurface;
+	G4OpticalSurface* opticalSurface;
+	opticalSurface[i] = dynamic_cast<G4OpticalSurface*>(
+		waterSurface[i]->GetSurface(physScintillatorPinhole, physScintillatorPixel)
+		->GetSurfaceProperty());
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
