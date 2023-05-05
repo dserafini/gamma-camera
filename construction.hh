@@ -44,7 +44,7 @@ private:
 	G4LogicalVolume *logicWorld, *logicScintillator, *logicDetector;
 	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
 	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator, *physDetector;
-	G4VPhysicalVolume *physScintillatorPinhole;
+	G4VPhysicalVolume *physScintillatorPinhole, physScintillatorPixel;
 
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
 	G4Material *materialPlastic;
