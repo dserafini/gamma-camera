@@ -328,6 +328,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 		waterSurface->GetSurface(physScintillatorPinhole, physScintillatorPixel)
 		->GetSurfaceProperty());
 	opticalSurface->DumpInfo();
+	G4LogicalSkinSurface *skin = new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
