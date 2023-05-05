@@ -135,6 +135,14 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	G4MaterialPropertiesTable* mptAir = new G4MaterialPropertiesTable();
 	mptAir->AddProperty("RINDEX", PhotonEnergy, refractiveIndexAir, nEntries);
 	materialAir->SetMaterialPropertiesTable(mptAir);
+	
+	// scintillator pixel surfaces
+	G4double reflectivity[nEntries] = { 0.1, 0.1 };
+	G4double transmittance[nEntries] = { 0.1, 0.1 };
+	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
+	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
+	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
+	myST2->DumpTable();
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
