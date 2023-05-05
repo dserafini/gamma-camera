@@ -314,12 +314,14 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
 	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
 	myST2->DumpTable();
-	G4OpticalSurface* opGaggPlasticSurface;
-	G4LogicalBorderSurface* waterSurface;
+	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
+	G4LogicalBorderSurface* waterSurface = new G4LogicalBorderSurface(
+		"WaterSurface", physScintillatorPinhole, physScintillatorPixel, opGaggPlasticSurface);
 	G4OpticalSurface* opticalSurface;
-	opticalSurface[i] = dynamic_cast<G4OpticalSurface*>(
-		waterSurface[i]->GetSurface(physScintillatorPinhole, physScintillatorPixel)
+	opticalSurface = dynamic_cast<G4OpticalSurface*>(
+		waterSurface->GetSurface(physScintillatorPinhole, physScintillatorPixel)
 		->GetSurfaceProperty());
+	opticalSurface->DumpInfo();
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
