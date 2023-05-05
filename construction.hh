@@ -51,6 +51,7 @@ private:
 
 	void DefineMaterials();
 	void DefineMaterialsProperties();
+	void DefineOpticalSurfaceProperties();
 
 	void ConstructScintillator();
 	void ConstructPixelScintillator();
