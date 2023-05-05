@@ -308,8 +308,8 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	// scintillator pixel surfaces
 	G4cout << "Set Optical surfaces" << G4endl;
 	std::vector<G4double> ephoton = {1.0*eV, 7.0*eV};
-	std::vector<G4double> reflectivity = { 0.1, 0.1 };
-	std::vector<G4double> transmittance = { 0, 0 };
+	std::vector<G4double> reflectivity = { 0., 0. };
+	std::vector<G4double> transmittance = { 1., 1. };
 	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
 	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
 	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
