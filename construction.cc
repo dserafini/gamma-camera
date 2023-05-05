@@ -140,7 +140,7 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	G4double refractiveIndexPlastic[nEntries] = {1.5,1.5};
 	G4MaterialPropertiesTable* mptPlastic = new G4MaterialPropertiesTable();
 	mptPlastic->AddProperty("RINDEX", PhotonEnergy, refractiveIndexPlastic, nEntries);
-	materialPlasic->SetMaterialPropertiesTable(mptPlastic);
+	materialPlastic->SetMaterialPropertiesTable(mptPlastic);
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
