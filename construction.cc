@@ -137,11 +137,12 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	materialAir->SetMaterialPropertiesTable(mptAir);
 	
 	// scintillator pixel surfaces
-	G4double reflectivity[nEntries] = { 0.1, 0.1 };
-	G4double transmittance[nEntries] = { 0.1, 0.1 };
+	std::vector<G4double> ephoton = {PhotonEnergy[0], PhotonEnergy[1]}; // [200, 1000] nm
+	std::vector<G4double> reflectivity = { 0.1, 0.1 };
+	std::vector<G4double> transmittance = { 0, 0 };
 	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
-	myST2->AddProperty("REFLECTIVITY", PhotonEnergy, reflectivity);
-	myST2->AddProperty("TRANSMITTANCE", PhotonEnergy, transmittance);
+	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
+	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
 	myST2->DumpTable();
 }
 
