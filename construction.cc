@@ -140,8 +140,8 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	G4double reflectivity[nEntries] = { 0.1, 0.1 };
 	G4double transmittance[nEntries] = { 0.1, 0.1 };
 	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
-	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
-	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
+	myST2->AddProperty("REFLECTIVITY", PhotonEnergy, reflectivity);
+	myST2->AddProperty("TRANSMITTANCE", PhotonEnergy, transmittance);
 	myST2->DumpTable();
 }
 
