@@ -15,6 +15,7 @@
 #include "G4PVReplica.hh"
 #include "G4OpticalSurface.hh"
 #include "G4LogicalSkinSurface.hh"
+#include "G4LogicalBorderSurface.hh"
 #include "G4VisAttributes.hh"
 // per cambiare geometria on the way
 #include "G4GenericMessenger.hh"
