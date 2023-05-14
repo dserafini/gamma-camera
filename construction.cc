@@ -312,10 +312,12 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 {
 	// scintillator pixel surfaces
-	G4cout << "Set Optical surfaces" << G4endl;
+	G4cout << "MyDetectorConstruction::DefineOpticalSurfaceProperties" << G4endl;
+	
+	// define he material properties table for the surface
 	std::vector<G4double> ephoton = {1.0*eV, 7.0*eV};
 	std::vector<G4double> reflectivity = { 0., 0. };
-	std::vector<G4double> transmittance = { 0., 0. };
+	std::vector<G4double> transmittance = { 1., 1. };
 	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
 	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
 	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
@@ -326,10 +328,12 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	
 	// block optical photons escaping toward the detector
+	/*
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
 	opGaggDetectorSurface->SetMaterialPropertiesTable(myST2);
-	/*G4LogicalBorderSurface* logicBorderGaggDetectorSurface =*/ new G4LogicalBorderSurface(
-		"logicBorderGaggDetectorSurface", physScintillatorPixel, physDetector, opGaggDetectorSurface);
+	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+				   physScintillatorPixel, physDetector, opGaggDetectorSurface);
+	*/
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
