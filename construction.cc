@@ -319,7 +319,12 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
 	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
 	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
-	myST2->DumpTable();
+	
+	// build reflective skin surface around the sicntillator pixel hole
+	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opticalSurface);
+	opticalSurface->SetMaterialPropertiesTable(myST2);
+	
+	/*
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
 	G4LogicalBorderSurface* waterSurface = new G4LogicalBorderSurface(
 		"WaterSurface", physScintillatorPinhole, physScintillatorPixel, opGaggPlasticSurface);
@@ -328,8 +333,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 		waterSurface->GetSurface(physScintillatorPinhole, physScintillatorPixel)
 		->GetSurfaceProperty());
 	opticalSurface->DumpInfo();
-	/*G4LogicalSkinSurface *skin =*/ new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
-	opGaggPlasticSurface->SetMaterialPropertiesTable(myST2);
+	*/ 
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
