@@ -329,7 +329,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 		->GetSurfaceProperty());
 	opticalSurface->DumpInfo();
 	/*G4LogicalSkinSurface *skin =*/ new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
-	opticalSurface->SetMaterialPropertiesTable(myST2);
+	opGaggPlasticSurface->SetMaterialPropertiesTable(myST2);
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
