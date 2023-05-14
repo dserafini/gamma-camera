@@ -317,7 +317,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	// define he material properties table for the surface
 	std::vector<G4double> ephoton = {1.0*eV, 7.0*eV};
 	std::vector<G4double> reflectivity = { 0., 0. };
-	std::vector<G4double> transmittance = { 1., 1. };
+	std::vector<G4double> transmittance = { 0., 0. };
 	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
 	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
 	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
