@@ -321,7 +321,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
 	
 	// build reflective skin surface around the sicntillator pixel hole
-	G4OpticalSurface* opticalSurface;
+	G4OpticalSurface* opticalSurface = new G4OpticalSurface("opticalSurface");
 	opticalSurface->SetMaterialPropertiesTable(myST2);
 	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opticalSurface);
 	
