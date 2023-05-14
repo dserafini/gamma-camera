@@ -321,20 +321,15 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
 	
 	// build reflective skin surface around the sicntillator pixel hole
-	G4OpticalSurface* opticalSurface = new G4OpticalSurface("opticalSurface");
-	opticalSurface->SetMaterialPropertiesTable(myST2);
-	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opticalSurface);
-	
-	/*
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
-	G4LogicalBorderSurface* waterSurface = new G4LogicalBorderSurface(
-		"WaterSurface", physScintillatorPinhole, physScintillatorPixel, opGaggPlasticSurface);
+	opGaggPlasticSurface->SetMaterialPropertiesTable(myST2);
+	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	
-	opticalSurface = dynamic_cast<G4OpticalSurface*>(
-		waterSurface->GetSurface(physScintillatorPinhole, physScintillatorPixel)
-		->GetSurfaceProperty());
-	opticalSurface->DumpInfo();
-	*/ 
+	// block optical photons escaping toward the detector
+	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
+	opGaggDetectorSurface->SetMaterialPropertiesTable(myST2);
+	G4LogicalBorderSurface* logicBorderGaggDetectorSurface = new G4LogicalBorderSurface(
+		"logicBorderGaggDetectorSurface", physScintillatorPinhole, physDetector, opGaggDetectorSurface);
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
