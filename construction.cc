@@ -329,7 +329,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	opGaggPlasticSurface->SetFinish(polished);
 	opGaggPlasticSurface->SetMaterialPropertiesTable(myST1);
 	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
-	
+	/*
 	// define he material properties table for the border surface
 	std::vector<G4double> reflectivity2 = { 0., 0. };
 	std::vector<G4double> transmittance2 = { 0., 0. };
@@ -342,6 +342,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	opGaggDetectorSurface->SetMaterialPropertiesTable(myST2);
 	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
 				   physScintillatorPinhole, physDetector, opGaggDetectorSurface);
+				   */
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
