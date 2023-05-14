@@ -140,7 +140,7 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	G4double refractiveIndexPlastic[nEntries] = {1.5,1.5};
 	G4MaterialPropertiesTable* mptPlastic = new G4MaterialPropertiesTable();
 	mptPlastic->AddProperty("RINDEX", PhotonEnergy, refractiveIndexPlastic, nEntries);
-	//materialPlastic->SetMaterialPropertiesTable(mptPlastic);
+	materialPlastic->SetMaterialPropertiesTable(mptPlastic);
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
@@ -329,6 +329,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 		->GetSurfaceProperty());
 	opticalSurface->DumpInfo();
 	/*G4LogicalSkinSurface *skin =*/ new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
+	opticalSurface->SetMaterialPropertiesTable(myST2);
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
