@@ -245,7 +245,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	G4cout << "defining the scintillator case" << G4endl;
 	G4Box* solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", case_side/2., case_side/2., hole_length/2.);
 	G4LogicalVolume *logicScintillatorMatrix = new G4LogicalVolume(solidScintillatorMatrix, materialPlastic, "logicScintillatorMatrix");
-	new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth/2.), logicScintillatorMatrix, "physScintillatorMatrix", logicWorld, false, 0, true);
+	physScintillator = new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth/2.), logicScintillatorMatrix, "physScintillatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the scintillator array element" << G4endl;
@@ -329,7 +329,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	opGaggPlasticSurface->SetFinish(polished);
 	opGaggPlasticSurface->SetMaterialPropertiesTable(myST1);
 	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
-	/*
+	
 	// define he material properties table for the border surface
 	std::vector<G4double> reflectivity2 = { 0., 0. };
 	std::vector<G4double> transmittance2 = { 0., 0. };
@@ -341,8 +341,8 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
 	opGaggDetectorSurface->SetMaterialPropertiesTable(myST2);
 	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-				   physScintillatorPinhole, physDetector, opGaggDetectorSurface);
-				   */
+				   physScintillator, physDetector, opGaggDetectorSurface);
+				   
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
