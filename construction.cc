@@ -314,29 +314,34 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	// scintillator pixel surfaces
 	G4cout << "MyDetectorConstruction::DefineOpticalSurfaceProperties" << G4endl;
 	
-	// define he material properties table for the surface
+	// define he material properties table for the skin surface
 	std::vector<G4double> ephoton = {1.0*eV, 7.0*eV};
 	std::vector<G4double> reflectivity = { 1., 1. };
 	std::vector<G4double> transmittance = { 0., 0. };
-	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
-	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity);
-	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance);
+	G4MaterialPropertiesTable* myST1 = new G4MaterialPropertiesTable();
+	myST1->AddProperty("REFLECTIVITY", ephoton, reflectivity);
+	myST1->AddProperty("TRANSMITTANCE", ephoton, transmittance);
 	
 	// build reflective skin surface around the sicntillator pixel hole
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
 	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetModel(unified);
 	opGaggPlasticSurface->SetFinish(polished);
-	opGaggPlasticSurface->SetMaterialPropertiesTable(myST2);
+	opGaggPlasticSurface->SetMaterialPropertiesTable(myST1);
 	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	
+	// define he material properties table for the border surface
+	std::vector<G4double> reflectivity2 = { 0., 0. };
+	std::vector<G4double> transmittance2 = { 0., 0. };
+	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
+	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity2);
+	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance2);
+	
 	// block optical photons escaping toward the detector
-	/*
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
 	opGaggDetectorSurface->SetMaterialPropertiesTable(myST2);
 	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-				   physScintillatorPixel, physDetector, opGaggDetectorSurface);
-	*/
+				   physScintillatorPinhole, physDetector, opGaggDetectorSurface);
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
