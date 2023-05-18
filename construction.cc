@@ -233,7 +233,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	
 	// Derived parameters
 	G4double scinti_pixel_size = case_side;
-	G4double scinti_hole_length = hole_length;
+	G4double scinti_hole_length = slab_depth;
 	G4double scinti_holes_number = (G4int) case_side / scinti_pixel_size;
 	
 	// derived parameters
@@ -276,7 +276,7 @@ void MyDetectorConstruction::ConstructDetector()
 	logicDetector = new G4LogicalVolume(solidDetector, materialGAGG, "logicDetector");
 
 	physDetector = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,hole_length + scinti_hole_length + detector_depth/2.),
+		G4ThreeVector(0.,0.,hole_length + slab_depth + detector_depth/2.),
 		logicDetector,             // its logical volume
 		"physDetector",           // its name
 		logicWorld,                  // its mother volume
