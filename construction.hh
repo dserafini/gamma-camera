@@ -15,6 +15,7 @@
 #include "G4PVReplica.hh"
 #include "G4OpticalSurface.hh"
 #include "G4LogicalSkinSurface.hh"
+#include "G4LogicalBorderSurface.hh"
 #include "G4VisAttributes.hh"
 // per cambiare geometria on the way
 #include "G4GenericMessenger.hh"
@@ -43,16 +44,21 @@ private:
 	G4Box *solidWorld, *solidScintillator, *solidDetector;
 	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
 	G4LogicalVolume *logicWorld, *logicScintillator, *logicDetector;
+	G4LogicalVolume *logicScintillatorPixel, *logicScintillatorPinhole;
 	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
 	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator, *physDetector;
+	G4VPhysicalVolume *physScintillatorPinhole, *physScintillatorPixel, *physScintillatorMatrix;
 
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
+	G4Material *materialPlastic;
 	G4Element *elLa, *elBr;
 
 	void DefineMaterials();
 	void DefineMaterialsProperties();
+	void DefineOpticalSurfaceProperties();
 
 	void ConstructScintillator();
+	void ConstructPixelScintillator();
 	void ConstructCollimator();
 	void ConstructDetector();
 	void SetVisualizationFeatures();
