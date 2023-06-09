@@ -17,6 +17,8 @@ MyEventAction::~MyEventAction()
 
 void MyEventAction::BeginOfEventAction(const G4Event*)
 {
+  // G4cout << "MyEventAction::BeginOfEventAction" << G4endl;
+  
   // whenever a new event starts the energy accumulated in the previous event should be set to 0
   fEdep = 0.;
   fPosition = G4ThreeVector(0.,0.,0.);
@@ -27,6 +29,7 @@ void MyEventAction::BeginOfEventAction(const G4Event*)
 
 void MyEventAction::EndOfEventAction(const G4Event*)
 {
+  // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
   // G4cout << "Energy deposition: " << fEdep << " keV" << G4endl;
 
   G4AnalysisManager *man = G4AnalysisManager::Instance();
@@ -43,7 +46,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   man->FillNtupleDColumn(0, 3, fPosition.getZ());
   
   // optical photons
-  man->FillNtupleIColumn(0, 4, pNum);
+  // man->FillNtupleIColumn(0, 4, pNum);
   
   // G4cout << "pPosition: " << pPosition << " vector" << G4endl;
   // G4cout << "pNumber: " << pNum << G4endl;
@@ -53,10 +56,10 @@ void MyEventAction::EndOfEventAction(const G4Event*)
     pSigma = pSigma/pNum;
   }
   
-  man->FillNtupleDColumn(0, 5, pPosition.getX());
-  man->FillNtupleDColumn(0, 6, pSigma.getX());
-  man->FillNtupleDColumn(0, 7, pPosition.getY());
-  man->FillNtupleDColumn(0, 8, pSigma.getY());
+  // man->FillNtupleDColumn(0, 5, pPosition.getX());
+  // man->FillNtupleDColumn(0, 6, pSigma.getX());
+  // man->FillNtupleDColumn(0, 7, pPosition.getY());
+  // man->FillNtupleDColumn(0, 8, pSigma.getY());
 
   man->AddNtupleRow(0);
 }
