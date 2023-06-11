@@ -8,6 +8,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   fHitsCollection = nullptr;
   collectionName.insert(hitsCollectionName);
   fMeanPos = G4ThreeVector();
+  fSigmaPos = G4ThreeVector();
   fSigma = 0.;
   nofHits = 0;
 }
@@ -28,6 +29,7 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
   
   // reset for each event
   fMeanPos = G4ThreeVector();
+  fSigmaPos = G4ThreeVector();
   fSigma = 0.;
   nofHits = 0;
 }
@@ -89,10 +91,13 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     // calculate standard deviation of position
     for ( G4int i=0; i<nofHits; i++ )
     {
-      G4double addend = fMeanPos.getX() - ((*fHitsCollection)[i]->GetPos()).getX();
-      addend = addend*addend;
-      fSigma += addend;
+      G4ThreeVector addend = fMeanPos - (*fHitsCollection)[i]->GetPos();
+      fSigmaPos.setX( fSigmaPos.getX() + addend.getX()*addend.getX() );
+      fSigmaPos.setY( fSigmaPos.getY() + addend.getY()*addend.getY() );
+      fSigma += (fMeanPos - (*fHitsCollection)[i]->GetPos()).mag2();
     }
+    fSigmaPos.setX(sqrt(fSigma.getX() / (nofHits - 1)));
+    fSigmaPos.setY(sqrt(fSigma.getY() / (nofHits - 1)));
     fSigma = sqrt(fSigma / (nofHits - 1));
   }
   
@@ -103,9 +108,9 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   G4AnalysisManager *man = G4AnalysisManager::Instance();
   man->FillNtupleIColumn(0, 4, nofHits);
   man->FillNtupleDColumn(0, 5, fMeanPos.getX());
-  man->FillNtupleDColumn(0, 6, fSigma);
+  man->FillNtupleDColumn(0, 6, fSigmaPos.getX());
   man->FillNtupleDColumn(0, 7, fMeanPos.getY());
-  man->FillNtupleDColumn(0, 8, fSigma);
+  man->FillNtupleDColumn(0, 8, fSigmaPos.getY());
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
