@@ -96,8 +96,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
       fSigmaPos.setY( fSigmaPos.getY() + addend.getY()*addend.getY() );
       fSigmaMod += (fMeanPos - (*fHitsCollection)[i]->GetPos()).mag2();
     }
-    fSigmaPos.setX(sqrt(fSigma.getX() / (nofHits - 1)));
-    fSigmaPos.setY(sqrt(fSigma.getY() / (nofHits - 1)));
+    fSigmaPos.setX(sqrt(fSigmaPos.getX() / (nofHits - 1)));
+    fSigmaPos.setY(sqrt(fSigmaPos.getY() / (nofHits - 1)));
     fSigmaMod = sqrt(fSigmaMod / (nofHits - 1));
   }
   
