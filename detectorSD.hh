@@ -27,9 +27,6 @@ private:
 	G4ThreeVector fMeanPos;
 	G4double fSigma;
 	G4int nofHits;
-
-	// quantum efficiency
-	G4PhysicsOrderedFreeVector *quEff;
 };
 
 #endif
