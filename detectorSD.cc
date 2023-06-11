@@ -109,7 +109,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   man->FillNtupleIColumn(0, 4, nofHits);
   man->FillNtupleDColumn(0, 5, fMeanPos.getX());
   man->FillNtupleDColumn(0, 6, fSigmaPos.getX());
-  man->FillNtupleDColumn(0, 7, fMeanPos.getY());
+  man->FillNtupleDColumn(0, 7, fMeanMod);
   man->FillNtupleDColumn(0, 8, fSigmaPos.getY());
 }
 
