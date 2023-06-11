@@ -88,7 +88,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 
     // calculate standard deviation of position
     for ( G4int i=0; i<nofHits; i++ )
-      fSigma += (fMeanPos.getX() - ((*fHitsCollection)[i]->GetPos()).getX())^2;
+      fSigma += (fMeanPos.getX() - ((*fHitsCollection)[i]->GetPos()).getX())**2;
     fSigma = sqrt(fSigma / (nofHits - 1));
   }
   
