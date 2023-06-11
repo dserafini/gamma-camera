@@ -25,7 +25,8 @@ private:
 	
 	detectorHitsCollection* fHitsCollection;
 	G4ThreeVector fMeanPos;
-	G4double fSigma;
+	G4ThreeVector fSigmaPos;
+	G4double fSigmaMod;
 	G4int nofHits;
 };
 
