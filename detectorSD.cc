@@ -9,7 +9,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   collectionName.insert(hitsCollectionName);
   fMeanPos = G4ThreeVector();
   fSigmaPos = G4ThreeVector();
-  fSigma = 0.;
+  fSigmaMod = 0.;
   nofHits = 0;
 }
 
@@ -30,7 +30,7 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
   // reset for each event
   fMeanPos = G4ThreeVector();
   fSigmaPos = G4ThreeVector();
-  fSigma = 0.;
+  fSigmaMod = 0.;
   nofHits = 0;
 }
 
@@ -94,11 +94,11 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
       G4ThreeVector addend = fMeanPos - (*fHitsCollection)[i]->GetPos();
       fSigmaPos.setX( fSigmaPos.getX() + addend.getX()*addend.getX() );
       fSigmaPos.setY( fSigmaPos.getY() + addend.getY()*addend.getY() );
-      fSigma += (fMeanPos - (*fHitsCollection)[i]->GetPos()).mag2();
+      fSigmaMod += (fMeanPos - (*fHitsCollection)[i]->GetPos()).mag2();
     }
     fSigmaPos.setX(sqrt(fSigma.getX() / (nofHits - 1)));
     fSigmaPos.setY(sqrt(fSigma.getY() / (nofHits - 1)));
-    fSigma = sqrt(fSigma / (nofHits - 1));
+    fSigmaMod = sqrt(fSigmaMod / (nofHits - 1));
   }
   
   // G4cout << "mean: " << fMeanPos << ",\t sigma: " << fSigma 
