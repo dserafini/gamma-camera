@@ -315,8 +315,11 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 {
 	// scintillator pixel surfaces
 	G4cout << "MyDetectorConstruction::DefineOpticalSurfaceProperties" << G4endl;
+	// reflectivity 0 and transmission 0 means total absorption
+	// reflectivity 0 and transmission 1 means total transmission
+	// reflectivity 1 and transmission 0 (or whatever) means Fresnel
 	
-	// define he material properties table for the skin surface
+	// define the material properties table for the skin surface
 	std::vector<G4double> ephoton = {1.0*eV, 7.0*eV};
 	std::vector<G4double> reflectivity = { 1., 1. };
 	std::vector<G4double> transmittance = { 0., 0. };
@@ -324,7 +327,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	myST1->AddProperty("REFLECTIVITY", ephoton, reflectivity);
 	myST1->AddProperty("TRANSMITTANCE", ephoton, transmittance);
 	
-	// build reflective skin surface around the sicntillator pixel hole
+	// build reflective skin surface around the scintillator pixel hole
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
 	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetModel(unified);
