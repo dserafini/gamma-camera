@@ -251,7 +251,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	
 	// array
 	G4cout << "defining the scintillator array element" << G4endl;
-	G4Box* solidScintillatorArray = new G4Box("solidScintillatorArray", scinti_pixel_size/2., scinti_pixel_size/2., scinti_hole_length/2.);
+	G4Box* solidScintillatorArray = new G4Box("solidScintillatorArray", case_side/2., scinti_pixel_size/2., scinti_hole_length/2.);
 	G4LogicalVolume *logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialPlastic, "logicScintillatorArray");
 	new G4PVReplica("physScintillatorArray", logicScintillatorArray, logicScintillatorMatrix, kYAxis, scinti_holes_number, scinti_pixel_size, 0);
 	
