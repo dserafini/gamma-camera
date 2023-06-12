@@ -233,7 +233,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	G4cout << "MyDetectorConstruction::ConstructPixelScintillator" << G4endl;
 	
 	// Derived parameters
-	G4double scinti_pixel_size = case_side;
+	G4double scinti_pixel_size = pixel_size;
 	G4double scinti_hole_length = slab_depth;
 	G4double scinti_holes_number = (G4int) case_side / scinti_pixel_size;
 	
