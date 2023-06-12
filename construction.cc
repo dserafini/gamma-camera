@@ -319,32 +319,32 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	// reflectivity 0 and transmission 1 means total transmission
 	// reflectivity 1 and transmission 0 (or whatever) means Fresnel
 	
-	// define the material properties table for the skin surface
+	// define the material properties table for a fully reflective surface
 	std::vector<G4double> ephoton = {1.0*eV, 7.0*eV};
-	std::vector<G4double> reflectivity = { 1., 1. };
-	std::vector<G4double> transmittance = { 0., 0. };
-	G4MaterialPropertiesTable* myST1 = new G4MaterialPropertiesTable();
-	myST1->AddProperty("REFLECTIVITY", ephoton, reflectivity);
-	myST1->AddProperty("TRANSMITTANCE", ephoton, transmittance);
+	std::vector<G4double> reflectivity = { 0., 0. };
+	std::vector<G4double> transmittance = { 1., 1. };
+	G4MaterialPropertiesTable* MPTreflecting = new G4MaterialPropertiesTable();
+	MPTreflecting->AddProperty("REFLECTIVITY", ephoton, reflectivity);
+	MPTreflecting->AddProperty("TRANSMITTANCE", ephoton, transmittance);
+	
+	// define he material properties table for a fully absorbing surface
+	std::vector<G4double> reflectivity2 = { 0., 0. };
+	std::vector<G4double> transmittance2 = { 0., 0. };
+	G4MaterialPropertiesTable* MPTabsorbing = new G4MaterialPropertiesTable();
+	MPTabsorbing->AddProperty("REFLECTIVITY", ephoton, reflectivity2);
+	MPTabsorbing->AddProperty("TRANSMITTANCE", ephoton, transmittance2);
 	
 	// build reflective skin surface around the scintillator pixel hole
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
 	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetModel(unified);
 	opGaggPlasticSurface->SetFinish(polished);
-	opGaggPlasticSurface->SetMaterialPropertiesTable(myST1);
+	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTreflecting);
 	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
-	
-	// define he material properties table for the border surface
-	std::vector<G4double> reflectivity2 = { 0., 0. };
-	std::vector<G4double> transmittance2 = { 0., 0. };
-	G4MaterialPropertiesTable* myST2 = new G4MaterialPropertiesTable();
-	myST2->AddProperty("REFLECTIVITY", ephoton, reflectivity2);
-	myST2->AddProperty("TRANSMITTANCE", ephoton, transmittance2);
 	
 	// block optical photons escaping toward the detector
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
-	opGaggDetectorSurface->SetMaterialPropertiesTable(myST2);
+	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTabsorbing);
 	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
 				   physScintillator, physDetector, opGaggDetectorSurface);
 				   
