@@ -32,6 +32,8 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerCollimator = new G4GenericMessenger(this, "/scintillator/", "Scintillator Construction");
 	fMessengerCollimator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the collimator");
 	fMessengerCollimator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
+	fMessengerCollimator->DeclarePropertyWithUnit("scinti_hole_thickness", "mm", scinti_hole_thickness, "Thickness of the scintillator holes");
+	fMessengerCollimator->DeclarePropertyWithUnit("scinti_septa_thickness", "mm", scinti_septa_thickness, "Thickness of the scintillator septa");
 	
 	// scintillator parameters
 	slab_side  = case_side;
@@ -233,9 +235,22 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	G4cout << "MyDetectorConstruction::ConstructPixelScintillator" << G4endl;
 	
 	// Derived parameters
-	G4double scinti_pixel_size = pixel_size;
+	G4double scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
 	G4double scinti_hole_length = slab_depth;
 	G4double scinti_holes_number = (G4int) case_side / scinti_pixel_size;
+	
+	// check proper parameters
+	if (scinti_holes_number < 1)
+	{
+		G4cout << "Error: pixel larger than case!" << G4endl;
+		G4cout << "return to default values" << G4endl;
+		scinti_septa_thickness = 1.*mm;
+		scinti_hole_thickness = 2.*mm;
+		scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
+		scinti_holes_number = (G4int) case_side / scinti_pixel_size;
+	}
+	if ((scinti_holes_number % 2) < 1)
+		scinti_holes_number = scinti_holes_number - 1;
 	
 	// derived parameters
 	case_side = (G4double) scinti_pixel_size * scinti_holes_number;
@@ -262,7 +277,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	physScintillatorPixel = new G4PVReplica("physScintillatorPixel", logicScintillatorPixel, logicScintillatorArray, kXAxis, scinti_holes_number, scinti_pixel_size, 0);
 	
 	// pinhole
-	G4Box* solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", hole_thickness/2., hole_thickness/2., scinti_hole_length/2.);
+	G4Box* solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", scinti_hole_thickness/2., scinti_hole_thickness/2., scinti_hole_length/2.);
 	logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialGAGG, "logicScintillatorPinhole");
 	physScintillatorPinhole = new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
 
@@ -336,9 +351,9 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	
 	// build reflective skin surface around the scintillator pixel hole
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
-	//opGaggPlasticSurface->SetType(dielectric_metal);
-	//opGaggPlasticSurface->SetModel(unified);
-	//opGaggPlasticSurface->SetFinish(polished);
+	opGaggPlasticSurface->SetType(dielectric_metal);
+	opGaggPlasticSurface->SetModel(unified);
+	opGaggPlasticSurface->SetFinish(polished);
 	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTtransmitting);
 	//new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	
