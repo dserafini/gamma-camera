@@ -38,6 +38,8 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// scintillator parameters
 	slab_side  = case_side;
 	slab_depth = hole_length/3.;
+	scinti_hole_thickness = hole_thickness;
+	scinti_septa_thickness = septa_thickness;
 
 	// define materials just once
 	DefineMaterials();
