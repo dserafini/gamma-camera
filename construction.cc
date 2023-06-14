@@ -350,6 +350,13 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	MPTabsorbing->AddProperty("REFLECTIVITY", ephoton, reflectivity2);
 	MPTabsorbing->AddProperty("TRANSMITTANCE", ephoton, transmittance2);
 	
+	// define he material properties table for a fully Fresnel surface
+	std::vector<G4double> reflectivity3 = { 1., 1. };
+	std::vector<G4double> transmittance3 = { 0., 0. };
+	G4MaterialPropertiesTable* MPTfresnel = new G4MaterialPropertiesTable();
+	MPTfresnel->AddProperty("REFLECTIVITY", ephoton, reflectivity3);
+	MPTfresnel->AddProperty("TRANSMITTANCE", ephoton, transmittance3);
+	
 	// build reflective skin surface around the scintillator pixel hole
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
 	opGaggPlasticSurface->SetModel(unified);
