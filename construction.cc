@@ -369,7 +369,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	// G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
 	// opGaggDetectorSurface->SetMaterialPropertiesTable(MPTabsorbing);
 	// new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-				   physScintillator, physDetector, opGaggDetectorSurface);
+	// 			   physScintillator, physDetector, opGaggDetectorSurface);
 				   
 }
 
