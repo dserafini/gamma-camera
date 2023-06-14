@@ -80,3 +80,6 @@
 
 # Set file name
 /analysis/setFileName output.root
+
+# reduce scintillation yield to allow visualization
+/process/optical/scintillation/setYieldFactor .001
