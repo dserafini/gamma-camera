@@ -128,7 +128,6 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	mptGAGG->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
 
 	mptGAGG->AddConstProperty("SCINTILLATIONYIELD", 42000/MeV);
-	// mptGAGG->AddConstProperty("SCINTILLATIONYIELD", 42/MeV);
 	mptGAGG->AddConstProperty("RESOLUTIONSCALE", 1.0);
 	mptGAGG->AddConstProperty("FASTTIMECONSTANT",90.0*ns);
 	mptGAGG->AddConstProperty("YIELDRATIO",1.0);
