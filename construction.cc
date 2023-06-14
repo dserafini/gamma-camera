@@ -362,7 +362,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	opGaggPlasticSurface->SetModel(unified);
 	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetFinish(polished);
-	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTtransmitting);
+	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTabsorbing);
 	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	
 	// block optical photons escaping toward the detector
