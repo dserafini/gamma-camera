@@ -358,12 +358,12 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	MPTfresnel->AddProperty("TRANSMITTANCE", ephoton, transmittance3);
 	
 	// build reflective skin surface around the scintillator pixel hole
-	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
-	opGaggPlasticSurface->SetModel(unified);
-	opGaggPlasticSurface->SetType(dielectric_metal);
-	opGaggPlasticSurface->SetFinish(polished);
-	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
-	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
+	// G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
+	// opGaggPlasticSurface->SetModel(unified);
+	// opGaggPlasticSurface->SetType(dielectric_metal);
+	// opGaggPlasticSurface->SetFinish(polished);
+	// opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
+	// new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	
 	// block optical photons escaping toward the detector
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
