@@ -8,10 +8,11 @@
 /collimator/case_side 10. cm
 
 ################################################################################
-# change scintillator collimator
+# change geometry scintillator
 ################################################################################
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
+/scintillator/scinti_hole_thickness 10. mm
 
 /run/reinitializeGeometry
 
