@@ -12,7 +12,7 @@
 ################################################################################
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
-/scintillator/scinti_hole_thickness 10. mm
+/scintillator/scinti_hole_thickness 20. mm
 
 /run/reinitializeGeometry
 
