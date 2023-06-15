@@ -115,7 +115,7 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 
 	// gagg
 	G4double refractiveIndexGAGG[nEntries] = {1.9,1.9};
-	G4double absorptionLengthGAGG[nEntries] = {50.*cm,50.*cm};
+	G4double absorptionLengthGAGG[nEntries] = {645.*mm,645.*mm};
 
 	G4MaterialPropertiesTable* mptGAGG = new G4MaterialPropertiesTable();
 
@@ -142,8 +142,10 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	
 	// plastic
 	G4double refractiveIndexPlastic[nEntries] = {1.5,1.5};
+	G4double absorptionLengthPlastic[nEntries] = {.1*mm,.1*mm}; // per polietilene
 	G4MaterialPropertiesTable* mptPlastic = new G4MaterialPropertiesTable();
 	mptPlastic->AddProperty("RINDEX", PhotonEnergy, refractiveIndexPlastic, nEntries);
+	mptGAGG->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthPlastic, nEntries);
 	materialPlastic->SetMaterialPropertiesTable(mptPlastic);
 }
 
