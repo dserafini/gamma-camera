@@ -19,7 +19,6 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "pMeanY"); // [mm]
   man->CreateNtupleDColumn(0, "pMeanZ"); // [mm]
   man->CreateNtupleDColumn(0, "pSigmaX"); // [mm]
-  man->CreateNtupleDColumn(0, "pSigmaY"); // [mm]
   man->CreateNtupleDColumn(0, "pSigmaR"); // [mm]
   man->FinishNtuple(0);
 }
