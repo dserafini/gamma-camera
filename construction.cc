@@ -60,6 +60,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 MyDetectorConstruction::~MyDetectorConstruction()
 {
 	delete fMessengerCollimator;
+	delete sensDet;
 }
 
 // to define material only once
@@ -391,7 +392,7 @@ void MyDetectorConstruction::ConstructSDandField()
 
 	if(logicDetector != NULL)
 	{
-		MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector","SensitiveDetectorHitsCollection");
+		sensDet = new MySensitiveDetector("SensitiveDetector","SensitiveDetectorHitsCollection");
 		G4SDManager::GetSDMpointer()->AddNewDetector(sensDet);
 		logicDetector->SetSensitiveDetector(sensDet);
 	}
