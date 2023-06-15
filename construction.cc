@@ -128,7 +128,6 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	mptGAGG->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
 
 	mptGAGG->AddConstProperty("SCINTILLATIONYIELD", 42000/MeV);
-	// mptGAGG->AddConstProperty("SCINTILLATIONYIELD", 42/MeV);
 	mptGAGG->AddConstProperty("RESOLUTIONSCALE", 1.0);
 	mptGAGG->AddConstProperty("FASTTIMECONSTANT",90.0*ns);
 	mptGAGG->AddConstProperty("YIELDRATIO",1.0);
@@ -351,19 +350,28 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	MPTabsorbing->AddProperty("REFLECTIVITY", ephoton, reflectivity2);
 	MPTabsorbing->AddProperty("TRANSMITTANCE", ephoton, transmittance2);
 	
+	// define he material properties table for a fully Fresnel surface
+	std::vector<G4double> reflectivity3 = { 1., 1. };
+	std::vector<G4double> transmittance3 = { 0., 0. };
+	G4MaterialPropertiesTable* MPTfresnel = new G4MaterialPropertiesTable();
+	MPTfresnel->AddProperty("REFLECTIVITY", ephoton, reflectivity3);
+	MPTfresnel->AddProperty("TRANSMITTANCE", ephoton, transmittance3);
+	
 	// build reflective skin surface around the scintillator pixel hole
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
-	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetModel(unified);
+	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetFinish(polished);
-	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTtransmitting);
-	//new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
+	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
+	// new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
+	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+				   physScintillatorPinhole, physScintillatorPixel, opGaggPlasticSurface);
 	
 	// block optical photons escaping toward the detector
-	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
-	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTabsorbing);
-	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-				   physScintillator, physDetector, opGaggDetectorSurface);
+	// G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
+	// opGaggDetectorSurface->SetMaterialPropertiesTable(MPTabsorbing);
+	// new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+	// 			   physScintillator, physDetector, opGaggDetectorSurface);
 				   
 }
 
