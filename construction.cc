@@ -361,9 +361,9 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	// build reflective skin surface around the scintillator pixel hole
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
 	opGaggPlasticSurface->SetModel(unified);
-	opGaggPlasticSurface->SetType(dielectric_dielectric);
+	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetFinish(polished);
-	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
+	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTabsorbing);
 	// new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
 				   physScintillatorPinhole, physScintillatorPixel, opGaggPlasticSurface);
