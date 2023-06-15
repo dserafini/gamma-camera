@@ -364,14 +364,12 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	opGaggPlasticSurface->SetFinish(polished);
 	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
 	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
-	// new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-	//			   physScintillatorPinhole, physScintillatorPixel, opGaggPlasticSurface);
 	
 	// block optical photons escaping toward the detector
-	// G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
-	// opGaggDetectorSurface->SetMaterialPropertiesTable(MPTabsorbing);
-	// new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-	// 			   physScintillator, physDetector, opGaggDetectorSurface);
+	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
+	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTabsorbing);
+	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+				   physScintillator, physDetector, opGaggDetectorSurface);
 				   
 }
 
