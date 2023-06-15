@@ -60,7 +60,6 @@ MyDetectorConstruction::MyDetectorConstruction()
 MyDetectorConstruction::~MyDetectorConstruction()
 {
 	delete fMessengerCollimator;
-	delete sensDet;
 }
 
 // to define material only once
@@ -389,6 +388,9 @@ void MyDetectorConstruction::SetVisualizationFeatures()
 void MyDetectorConstruction::ConstructSDandField()
 {
 	G4cout << "MyDetectorConstruction::ConstructSDandField" << G4endl;
+	
+	if (sensDet)
+		delete sensDet;
 
 	if(logicDetector != NULL)
 	{
