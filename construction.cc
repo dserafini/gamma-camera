@@ -363,7 +363,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	opGaggPlasticSurface->SetModel(unified);
 	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetFinish(polished);
-	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
+	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTabsorbing);
 	// new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
 				   physScintillatorPinhole, physScintillatorPixel, opGaggPlasticSurface);
