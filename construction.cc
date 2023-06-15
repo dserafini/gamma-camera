@@ -276,7 +276,6 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	G4Box* solidScintillatorPixel = new G4Box("solidScintillatorPixel", scinti_pixel_size/2., scinti_pixel_size/2., scinti_hole_length/2.);
 	logicScintillatorPixel = new G4LogicalVolume(solidScintillatorPixel, materialPlastic, "logicScintillatorPixel");
 	physScintillatorPixel = new G4PVReplica("physScintillatorPixel", logicScintillatorPixel, logicScintillatorArray, kXAxis, scinti_holes_number, scinti_pixel_size, 0);
-	// physScintillatorPixel = new G4PVPlacement(0, G4ThreeVector(0.,0.,0.), logicScintillatorPixel, "physScintillatorPixel", logicScintillatorMatrix, false, 0, true);
 	
 	// pinhole
 	G4Box* solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", scinti_hole_thickness/2., scinti_hole_thickness/2., scinti_hole_length/2.);
@@ -363,9 +362,9 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	opGaggPlasticSurface->SetModel(unified);
 	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetFinish(polished);
-	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTabsorbing);
-	// new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
-	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
+	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
+	// new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
 				   physScintillatorPinhole, physScintillatorPixel, opGaggPlasticSurface);
 	
 	// block optical photons escaping toward the detector
