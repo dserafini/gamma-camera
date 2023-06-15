@@ -362,7 +362,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
 	opGaggPlasticSurface->SetModel(unified);
 	opGaggPlasticSurface->SetType(dielectric_metal);
-	opGaggPlasticSurface->SetFinish(polished);
+	opGaggPlasticSurface->SetFinish(ground);
 	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTabsorbing);
 	// new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
