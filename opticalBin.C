@@ -22,18 +22,18 @@ void opticalBin(TString fileName, Double_t scinti_hole_thickness = 8., Double_t 
 	    case_side = (Double_t) scinti_pixel_size * scinti_holes_number;
       Double_t half_case_side = case_side/2.;
       
-      TH2F* h2 = new TH2F("h2","h2",scinti_holes_number,-half_case_side,half_case_side,scinti_holes_number,-half_case_side,half_case_side);
-      t1->Draw("fX:fY>>h2","fEdep>0", "colz");
-      if (!h2) cout << "No histogram extracted!" << endl;
-      else
-      {
-        cout << "scinti_pixel_size: " << h2->ProfileX()->GetBinWidth(1) << " mm" << endl;
-        h2->GetXaxis()->SetTitle("x [mm]");
-        h2->GetYaxis()->SetTitle("y [mm]");
-        h2->SetTitle(fileName);
-        h2->Draw("colz");
-        c1->SaveAs("c1"+fileName+"OpticalPos.png");
-      }
+	TH2F* h2 = new TH2F("h2","h2",scinti_holes_number,-half_case_side,half_case_side,scinti_holes_number,-half_case_side,half_case_side);
+	h2->GetXaxis()->SetTitle("x [mm]");
+	h2->GetYaxis()->SetTitle("y [mm]");
+	h2->SetTitle(fileName + " gamma fY:fX");
+	cout << "scinti_pixel_size: " << h2->ProfileX()->GetBinWidth(1) << " mm" << endl;
+	t1->Draw("fY:fX>>h2","fEdep>0", "colz");
+	c1->SaveAs("c1"+fileName+"GammaPos.png");
+	    
+	TH2F* h2b = (TH2F*)h2->Clone("h2b");
+	h2b->SetTitle(fileName + " gamma pMeanY:pMeanX");
+	t1->Draw("pMeanY:pMeanX>>h2","fEdep>0", "colz");
+	c1->SaveAs("c1"+fileName+"OpticalPos.png");
     }
   }
 }
