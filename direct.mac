@@ -30,8 +30,8 @@
 
 /gps/particle gamma
 /gps/energy 342 keV
-/gps/position 0 0 -100. mm
-# /gps/direction 0 0 1
+# /gps/position 0 0 -100. mm
+/gps/direction 0 0 1
 /gps/ang/type iso
 /analysis/setFileName discard.root
 /run/beamOn 1
