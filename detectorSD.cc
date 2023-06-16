@@ -44,7 +44,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
     return false;
   
   // energy deposit
-  G4double edep = aStep->GetTotalEnergyDeposit();
+  G4double edep = aStep->GetTotalEnergyDeposit(); // [keV]
 
   // if (edep==0.) return false;
 
