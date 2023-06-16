@@ -16,7 +16,7 @@ void opticalBin(TString fileName, Double_t scinti_hole_thickness = 8., Double_t 
       
       // calculate number of bins
       Double_t scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
-      scinti_holes_number = (G4int) case_side / scinti_pixel_size;
+      scinti_holes_number = (Int_t) case_side / scinti_pixel_size;
       if ((scinti_holes_number % 2) < 1)
         scinti_holes_number = scinti_holes_number - 1;
       
@@ -29,9 +29,7 @@ void opticalBin(TString fileName, Double_t scinti_hole_thickness = 8., Double_t 
         h2->GetXaxis()->SetTitle("x [mm]");
         h2->GetYaxis()->SetTitle("y [mm]");
         h2->SetTitle(fileName);
-        if (logz)
-          c1->SetLogz();
-        h2->Draw(drawOption);
+        h2->Draw("colz");
         c1->SaveAs("c1"+fileName+"OpticalPos.png");
       }
     }
