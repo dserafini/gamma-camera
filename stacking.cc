@@ -15,6 +15,10 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
       {  // particle is electron
             return fKill;
       }
+      if(aTrack->GetDefinition() == G4AntiNeutrinoE::Definition())
+      {  // particle is anti_nu_e
+            return fKill;
+      }
     }
   
   return fUrgent;
