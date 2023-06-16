@@ -35,7 +35,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
   // gammas
-  man->FillNtupleDColumn(0, 1, fEdep);
+  man->FillNtupleDColumn(0, 1, fEdep/keV); // [keV]
   
   // G4cout << "fPosition: " << fPosition << " vector" << G4endl;
   if (fEdep>0)
