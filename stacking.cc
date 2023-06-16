@@ -20,6 +20,12 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
       if(aTrack->GetDefinition() == G4AntiNeutrinoE::Definition())
             return fKill;
     
+      // particle is gamma
+      if(aTrack->GetDefinition() == G4Gamma::Definition())
+      {
+        G4AnalysisManager *man = G4AnalysisManager::Instance();
+        man->FillNtupleDColumn(0, 0, aTrack->GetKineticEnergy());
+      }
     }
   return fUrgent;
 }
