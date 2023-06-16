@@ -22,7 +22,10 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
       // particle is anti_nu_e
       if(aTrack->GetDefinition() == G4AntiNeutrinoE::Definition())
             return fKill;
-    
+    }
+  
+  if(aTrack->GetParentID() == 2) // excited Cd-111 daughter
+    {
       // particle is gamma
       if(aTrack->GetDefinition() == G4Gamma::Definition())
       {
@@ -30,5 +33,6 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
         man->FillNtupleDColumn(0, 0, aTrack->GetKineticEnergy()/keV); // [keV]
       }
     }
+    
   return fUrgent;
 }
