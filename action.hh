@@ -7,6 +7,7 @@
 #include "run.hh"
 #include "event.hh"
 #include "stepping.hh"
+#include "stacking.hh"
 
 class MyActionInitialization : public G4VUserActionInitialization
 {
