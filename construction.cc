@@ -115,7 +115,7 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 
 	// gagg
 	G4double refractiveIndexGAGG[nEntries] = {1.9,1.9};
-	G4double absorptionLengthGAGG[nEntries] = {50.*cm,50.*cm};
+	G4double absorptionLengthGAGG[nEntries] = {645.*mm,645.*mm};
 
 	G4MaterialPropertiesTable* mptGAGG = new G4MaterialPropertiesTable();
 
@@ -142,8 +142,10 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	
 	// plastic
 	G4double refractiveIndexPlastic[nEntries] = {1.5,1.5};
+	G4double absorptionLengthPlastic[nEntries] = {.1*mm,.1*mm}; // per polietilene
 	G4MaterialPropertiesTable* mptPlastic = new G4MaterialPropertiesTable();
 	mptPlastic->AddProperty("RINDEX", PhotonEnergy, refractiveIndexPlastic, nEntries);
+	mptPlastic->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthPlastic, nEntries);
 	materialPlastic->SetMaterialPropertiesTable(mptPlastic);
 }
 
@@ -290,7 +292,7 @@ void MyDetectorConstruction::ConstructDetector()
 	G4cout << "MyDetectorConstruction::ConstructDetector" << G4endl;
 	
 	solidDetector = new G4Box("solidDetector", detector_side/2., detector_side/2., detector_depth/2.);
-	logicDetector = new G4LogicalVolume(solidDetector, materialGAGG, "logicDetector");
+	logicDetector = new G4LogicalVolume(solidDetector, materialPlastic, "logicDetector");
 
 	physDetector = new G4PVPlacement(0,  // no rotation
 		G4ThreeVector(0.,0.,hole_length + slab_depth + detector_depth/2.),
@@ -320,7 +322,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	// ConstructScintillator();
 	ConstructPixelScintillator();
 	ConstructDetector();
-	// DefineOpticalSurfaceProperties();
+	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
 
 	return physWorld;
@@ -363,15 +365,13 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetFinish(polished);
 	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
-	// new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
-	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-				   physScintillatorPinhole, physScintillatorPixel, opGaggPlasticSurface);
+	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	
 	// block optical photons escaping toward the detector
-	// G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
-	// opGaggDetectorSurface->SetMaterialPropertiesTable(MPTabsorbing);
-	// new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-	// 			   physScintillator, physDetector, opGaggDetectorSurface);
+	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
+	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTtransmitting);
+	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+				   physScintillatorPinhole, physDetector, opGaggDetectorSurface);
 				   
 }
 

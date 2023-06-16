@@ -43,10 +43,6 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
     return false;
   
-  // process hits only at z = 61 mm
-  if (aStep->GetPostStepPoint()->GetPosition().getZ() != 61*mm)
-    return false;
-  
   // energy deposit
   G4double edep = aStep->GetTotalEnergyDeposit();
 
@@ -63,6 +59,9 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
   // newHit->Print();
   // newHit->Draw();
+  
+  // kill every detected photon
+  aStep->GetTrack()->SetTrackStatus(fStopAndKill);
 
   return true;
 }
@@ -111,7 +110,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   man->FillNtupleDColumn(0, 6, fMeanPos.getY());
   man->FillNtupleDColumn(0, 7, fMeanPos.getZ());
   man->FillNtupleDColumn(0, 8, fSigmaPos.getX());
-  man->FillNtupleDColumn(0, 9, fSigmaPos.getY());
+  man->FillNtupleDColumn(0, 9, fSigmaMod);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

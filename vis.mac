@@ -3,8 +3,8 @@
 ################################################################################
 /collimator/exist 1
 /collimator/hole_length 30. mm
-/collimator/septa_thickness 10. mm
-/collimator/hole_thickness 10. mm
+/collimator/hole_thickness 15. mm
+/collimator/septa_thickness 5. mm
 /collimator/case_side 10. cm
 
 ################################################################################
@@ -12,7 +12,8 @@
 ################################################################################
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
-/scintillator/scinti_hole_thickness 20. mm
+/scintillator/scinti_hole_thickness 18. mm
+/scintillator/scinti_septa_thickness 2. mm
 
 /run/reinitializeGeometry
 
@@ -83,3 +84,7 @@
 
 # reduce scintillation yield to allow visualization
 /process/optical/scintillation/setYieldFactor .001
+
+# color first gamma
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set gamma blue
