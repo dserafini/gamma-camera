@@ -292,7 +292,7 @@ void MyDetectorConstruction::ConstructDetector()
 	G4cout << "MyDetectorConstruction::ConstructDetector" << G4endl;
 	
 	solidDetector = new G4Box("solidDetector", detector_side/2., detector_side/2., detector_depth/2.);
-	logicDetector = new G4LogicalVolume(solidDetector, materialGAGG, "logicDetector");
+	logicDetector = new G4LogicalVolume(solidDetector, materialPlastic, "logicDetector");
 
 	physDetector = new G4PVPlacement(0,  // no rotation
 		G4ThreeVector(0.,0.,hole_length + slab_depth + detector_depth/2.),
