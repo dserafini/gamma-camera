@@ -34,7 +34,7 @@ void opticalBin(TString fileName, Double_t scinti_hole_thickness = 8., Double_t 
 	c2->cd(1);
 	TH2F* h2b = (TH2F*)h2->Clone("h2b");
 	h2b->SetTitle(fileName + " gamma pMeanY:pMeanX");
-	t1->Draw("pMeanY:pMeanX>>h2","fEdep>0", "colz");
+	t1->Draw("pMeanY:pMeanX>>h2b","fEdep>0", "colz");
 	c2->SaveAs("c2"+fileName+"OpticalPos.png");
     }
   }
