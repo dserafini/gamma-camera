@@ -30,8 +30,8 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
       // particle is gamma
       if(aTrack->GetDefinition() == G4Gamma::Definition())
       {
-        G4cout << "gamma e figlia di Cd-111" << G4endl;
-        G4cout << "energy: " << aTrack->GetKineticEnergy()/keV << " keV" << G4endl;
+        // G4cout << "gamma e figlia di Cd-111" << G4endl;
+        // G4cout << "energy: " << aTrack->GetKineticEnergy()/keV << " keV" << G4endl;
         G4AnalysisManager *man = G4AnalysisManager::Instance();
         man->FillNtupleDColumn(0, 0, aTrack->GetKineticEnergy()/keV); // [keV]
       }
