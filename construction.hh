@@ -89,7 +89,6 @@ private:
 	
 	// detector
 	G4double detector_depth, detector_side;
-	MySensitiveDetector *sensDet;
 };
 
 #endif
