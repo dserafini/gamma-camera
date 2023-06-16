@@ -7,6 +7,7 @@
 #include "G4Track.hh"
 #include "G4Electron.hh"
 #include "G4AntiNeutrinoE.hh"
+#include "G4Gamma.hh"
 
 class MyStackingAction : public G4UserStackingAction
 {
