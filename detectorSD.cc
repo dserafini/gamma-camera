@@ -37,7 +37,7 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
-  G4cout << "MySensitiveDetector::ProcessHits" << G4endl;
+  // G4cout << "MySensitiveDetector::ProcessHits" << G4endl;
   
   // process hits only for optical photons
   if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
