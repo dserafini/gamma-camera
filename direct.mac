@@ -29,7 +29,8 @@
 ################################################################################
 
 /gps/particle gamma
-/gps/energy 342 keV
+# /gps/energy 342 keV
+/gps/energy 245 keV
 /gps/position 0 0 -100. mm
 # /gps/direction 0 0 1
 /gps/ang/type iso
@@ -48,9 +49,11 @@
 /analysis/setFileName direct4.root
 /scintillator/scinti_hole_thickness 4. mm
 /run/reinitializeGeometry
-/run/beamOn 10000000
+# /run/beamOn 10000000
+/run/beamOn 1850746
 
 /analysis/setFileName direct10.root
 /scintillator/scinti_hole_thickness 10. mm
 /run/reinitializeGeometry
-/run/beamOn 10000000
+# /run/beamOn 10000000
+/run/beamOn 1850746
