@@ -19,8 +19,10 @@ void opticalBin(TString fileName, Double_t scinti_hole_thickness = 8., Double_t 
       scinti_holes_number = (Int_t) case_side / scinti_pixel_size;
       if ((scinti_holes_number % 2) < 1)
         scinti_holes_number = scinti_holes_number - 1;
+	    case_side = (Double_t) scinti_pixel_size * scinti_holes_number;
+      Double_t half_case_side = case_side/2.;
       
-      TH2F* h2 = new TH2F("h2","h2",scinti_holes_number,-50,50,scinti_holes_number,-50,50);
+      TH2F* h2 = new TH2F("h2","h2",scinti_holes_number,-half_case_side,half_case_side,scinti_holes_number,-half_case_side,half_case_side);
       t1->Draw("fX:fY>>h2","fEdep>0", "colz");
       if (!h2) cout << "No histogram extracted!" << endl;
       else
