@@ -391,9 +391,12 @@ void MyDetectorConstruction::ConstructSDandField()
 {
 	G4cout << "MyDetectorConstruction::ConstructSDandField" << G4endl;
 
+	if(sensDet)
+		delete sensDet;
+	
 	if(logicDetector != NULL)
 	{
-		MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector","SensitiveDetectorHitsCollection");
+		sensDet = new MySensitiveDetector("SensitiveDetector","SensitiveDetectorHitsCollection");
 		G4SDManager::GetSDMpointer()->AddNewDetector(sensDet);
 		logicDetector->SetSensitiveDetector(sensDet);
 	}
