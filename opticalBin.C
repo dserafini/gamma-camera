@@ -11,7 +11,7 @@ void opticalBin(TString fileName, Double_t scinti_hole_thickness = 8., Double_t 
     if (!t1) cout << "No tree found!" << endl;
     else
     {
-      TCanvas * c1 = new TCanvas("c1","c1",1000,200,800,800);
+      TCanvas * c1 = new TCanvas("c1","c1",10,10,800,800);
       c1->cd(1);
       
       // calculate number of bins
@@ -30,7 +30,7 @@ void opticalBin(TString fileName, Double_t scinti_hole_thickness = 8., Double_t 
 	t1->Draw("fY:fX>>h2","fEdep>0", "colz");
 	c1->SaveAs("c1"+fileName+"GammaPos.png");
 	    
-      	TCanvas * c2 = new TCanvas("c2","c2",1000,200,800,800);
+      	TCanvas * c2 = new TCanvas("c2","c2",10,10,800,800);
 	c2->cd(1);
 	TH2F* h2b = new TH2F("h2b","h2b",scinti_holes_number,-half_case_side,half_case_side,scinti_holes_number,-half_case_side,half_case_side);
 	h2b->SetTitle(fileName + " optical pMeanY:pMeanX");
