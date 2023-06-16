@@ -44,17 +44,17 @@
 ################################################################################
 
 /analysis/setFileName direct4.root
-/run/printProgress 100
-/run/beamOn 1000
+/run/printProgress 10
+/run/beamOn 100
 
 /analysis/setFileName direct6.root
 /scintillator/scinti_hole_thickness 6. mm
-/run/beamOn 1000
+/run/beamOn 100
 
 /analysis/setFileName direct8.root
 /scintillator/scinti_hole_thickness 8. mm
-/run/beamOn 1000
+/run/beamOn 100
 
 /analysis/setFileName direct10.root
 /scintillator/scinti_hole_thickness 10. mm
-/run/beamOn 1000
+/run/beamOn 100
