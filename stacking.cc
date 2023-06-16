@@ -7,12 +7,15 @@ MyStackingAction::~MyStackingAction() {}
 G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
   const G4Track* aTrack)
 {
-  if(aTrack->GetDefinition() == G4Electron::Definition())
-  {  // particle is electron
-    if(aTrack->GetParentID() == 0)
-    {  // beta is Ag-111 daughter
-      return fKill;
+  G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
+  
+  if(aTrack->GetParentID() == 1) // Ag-111 daughter
+    {
+      if(aTrack->GetDefinition() == G4Electron::Definition())
+      {  // particle is electron
+            return fKill;
+      }
     }
-  }
+  
   return fUrgent;
 }
