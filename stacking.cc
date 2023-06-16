@@ -1,6 +1,9 @@
 #include "stacking.hh"
 
-MyStackingAction::MyStackingAction() {}
+MyStackingAction::MyStackingAction()
+{
+  G4cout << "ClassifyNewTrack is set on aTrack->GetParentID() == 1" << G4endl;
+}
 
 MyStackingAction::~MyStackingAction() {}
 
