@@ -145,7 +145,7 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	G4double absorptionLengthPlastic[nEntries] = {.1*mm,.1*mm}; // per polietilene
 	G4MaterialPropertiesTable* mptPlastic = new G4MaterialPropertiesTable();
 	mptPlastic->AddProperty("RINDEX", PhotonEnergy, refractiveIndexPlastic, nEntries);
-	mptPlastic->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthPlastic, nEntries);
+	// mptPlastic->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthPlastic, nEntries);
 	materialPlastic->SetMaterialPropertiesTable(mptPlastic);
 }
 
