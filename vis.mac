@@ -84,3 +84,7 @@
 
 # reduce scintillation yield to allow visualization
 /process/optical/scintillation/setYieldFactor .001
+
+# color first gamma
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set gamma blue
