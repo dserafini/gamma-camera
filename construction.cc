@@ -369,7 +369,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	
 	// block optical photons escaping toward the detector
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
-	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTabsorbing);
+	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTfresnel);
 	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
 				   physScintillatorPinhole, physDetector, opGaggDetectorSurface);
 				   
