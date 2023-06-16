@@ -1,4 +1,4 @@
-void collimatorBin(TString fileName, Double_t coll_hole_thickness = 8., Double_t coll_septa_thickness = 2., Double_t case_side = 100., Int_t coll_holes_number = 10)
+void collBin(TString fileName, Double_t coll_hole_thickness = 8., Double_t coll_septa_thickness = 2., Double_t case_side = 100., Int_t coll_holes_number = 10)
 {
   TFile* file = new TFile(fileName);
   if (!file) cout << "No file found!" << endl;
@@ -28,14 +28,14 @@ void collimatorBin(TString fileName, Double_t coll_hole_thickness = 8., Double_t
 	h2->SetTitle(fileName + " gamma fY:fX");
 	cout << "coll_pixel_size: " << h2->ProfileX()->GetBinWidth(1) << " mm" << endl;
 	t1->Draw("fY:fX>>h2","fEdep>0", "colz");
-	c1->SaveAs("c1"+fileName+"GammaPos.png");
+	c1->SaveAs("c1collBin"+fileName+"GammaPos.png");
 	    
       	TCanvas * c2 = new TCanvas("c2","c2",10,10,800,800);
 	c2->cd(1);
 	TH2F* h2b = new TH2F("h2b","h2b",coll_holes_number,-half_case_side,half_case_side,coll_holes_number,-half_case_side,half_case_side);
 	h2b->SetTitle(fileName + " optical pMeanY:pMeanX");
 	t1->Draw("pMeanY:pMeanX>>h2b","fEdep>0", "colz");
-	c2->SaveAs("c2"+fileName+"OpticalPos.png");
+	c2->SaveAs("c2collBin"+fileName+"OpticalPos.png");
     }
   }
 }
