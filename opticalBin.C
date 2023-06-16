@@ -25,7 +25,7 @@ void opticalBin(TString fileName, Double_t scinti_hole_thickness = 8., Double_t 
       if (!h2) cout << "No histogram extracted!" << endl;
       else
       {
-        cout << "scinti_pixel_size: " << h2->GetBinWidth(1) << " mm" << endl;
+        cout << "scinti_pixel_size: " << h2->ProfileX()->GetBinWidth(1) << " mm" << endl;
         h2->GetXaxis()->SetTitle("x [mm]");
         h2->GetYaxis()->SetTitle("y [mm]");
         h2->SetTitle(fileName);
