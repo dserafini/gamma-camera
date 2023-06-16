@@ -43,10 +43,6 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
     return false;
   
-  // process hits only at z = 61 mm
-  if (aStep->GetPostStepPoint()->GetPosition().getZ() != 61*mm)
-    return false;
-  
   // energy deposit
   G4double edep = aStep->GetTotalEnergyDeposit();
 
