@@ -30,9 +30,9 @@ void opticalBin(TString fileName, Double_t scinti_hole_thickness = 8., Double_t 
 	t1->Draw("fY:fX>>h2","fEdep>0", "colz");
 	c1->SaveAs("c1"+fileName+"GammaPos.png");
 	    
-	TCanvas * c2 = (TCanvas*)c1->Clone("c2");
+      	TCanvas * c2 = new TCanvas("c2","c2",1000,200,800,800);
 	c2->cd(1);
-	TH2F* h2b = (TH2F*)h2->Clone("h2b");
+	TH2F* h2b = new TH2F("h2b","h2b",scinti_holes_number,-half_case_side,half_case_side,scinti_holes_number,-half_case_side,half_case_side);
 	h2b->SetTitle(fileName + " gamma pMeanY:pMeanX");
 	t1->Draw("pMeanY:pMeanX>>h2b","fEdep>0", "colz");
 	c2->SaveAs("c2"+fileName+"OpticalPos.png");
