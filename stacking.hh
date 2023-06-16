@@ -2,6 +2,7 @@
 #define STACKINGACTION_HH 1
 
 #include "globals.hh"
+#include "g4root.hh"
 #include "G4UserStackingAction.hh"
 #include "G4Track.hh"
 #include "G4Electron.hh"
