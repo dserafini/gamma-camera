@@ -320,7 +320,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	// ConstructScintillator();
 	ConstructPixelScintillator();
 	ConstructDetector();
-	// DefineOpticalSurfaceProperties();
+	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
 
 	return physWorld;
