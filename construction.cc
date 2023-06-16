@@ -54,7 +54,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	
 	// detector parameters
 	detector_side = slab_side;
-	detector_depth = 1*mm;
+	detector_depth = 1*um;
 }
 
 MyDetectorConstruction::~MyDetectorConstruction()
