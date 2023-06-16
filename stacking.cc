@@ -26,7 +26,7 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
   
   if(aTrack->GetParentID() == 2) // excited Cd-111 daughter
     {
-      G4cout << "figlia di Cd-111" << G4endl;
+      // G4cout << "figlia di Cd-111" << G4endl;
       // particle is gamma
       if(aTrack->GetDefinition() == G4Gamma::Definition())
       {
