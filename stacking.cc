@@ -11,15 +11,17 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
   
   if(aTrack->GetParentID() == 1) // Ag-111 daughter
     {
+    
       if(aTrack->GetDefinition() == G4Electron::Definition())
       {  // particle is electron
             return fKill;
       }
+    
       if(aTrack->GetDefinition() == G4AntiNeutrinoE::Definition())
       {  // particle is anti_nu_e
             return fKill;
       }
+    
     }
-  
   return fUrgent;
 }
