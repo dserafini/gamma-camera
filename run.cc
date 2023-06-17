@@ -1,6 +1,6 @@
 #include "run.hh"
 
-MyRunAction::MyRunAction()
+MyRunAction::MyRunAction(MyGenerator *aGenerator, MyStackingAction *aStackingAction)
 {
   // u can create a single output file here for all the runs
 
@@ -24,8 +24,8 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "pSigmaR"); // [mm]
   man->FinishNtuple(0);
 
-  fStackingAction = nullptr;
-  fGenerator = nullptr;
+  fGenerator = aGenerator;
+  fStackingAction = aStackingAction;
 }
 
 MyRunAction::~MyRunAction()
