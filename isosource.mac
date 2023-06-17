@@ -47,27 +47,22 @@
 
 
 
-# change collimator parameters
-/collimator/septa_thickness .8 mm
-/collimator/hole_thickness 1.2 mm
-
-
-/analysis/setFileName direct4collP4.root
+/analysis/setFileName direct4.root
 /scintillator/scinti_hole_thickness 4. mm
 /run/reinitializeGeometry
 /run/beamOn 100000000
 
-/analysis/setFileName direct6collP6.root
+/analysis/setFileName direct6.root
 /scintillator/scinti_hole_thickness 6. mm
 /run/reinitializeGeometry
 /run/beamOn 100000000
 
-/analysis/setFileName direct8collP8.root
+/analysis/setFileName direct8.root
 /scintillator/scinti_hole_thickness 8. mm
 /run/reinitializeGeometry
 /run/beamOn 100000000
 
-/analysis/setFileName direct10collP10.root
+/analysis/setFileName direct10.root
 /scintillator/scinti_hole_thickness 10. mm
 /run/reinitializeGeometry
 /run/beamOn 100000000
