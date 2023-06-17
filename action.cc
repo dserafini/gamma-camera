@@ -8,7 +8,7 @@ MyActionInitialization::~MyActionInitialization()
 
 void MyActionInitialization::BuildForMaster() const
 {
-	MyRunAction *runAction = new MyRunAction(generator, stackingAction);
+	MyRunAction *runAction = new MyRunAction(nullptr, nullptr);
 	SetUserAction(runAction);
 }
 
