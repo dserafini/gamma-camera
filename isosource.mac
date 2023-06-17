@@ -45,7 +45,20 @@
 
 /run/printProgress 100000000
 
-/analysis/setFileName direct10.root
+/analysis/setFileName directColl1p5mmScinti10mm.root
 /scintillator/scinti_hole_thickness 10. mm
+/collimator/hole_thickness 1.5. mm
+/run/reinitializeGeometry
+/run/beamOn 1000000000
+
+/analysis/setFileName directColl3mmScinti10mm.root
+/scintillator/scinti_hole_thickness 10. mm
+/collimator/hole_thickness 3. mm
+/run/reinitializeGeometry
+/run/beamOn 1000000000
+
+/analysis/setFileName directColl4mmScinti10mm.root
+/scintillator/scinti_hole_thickness 10. mm
+/collimator/hole_thickness 4. mm
 /run/reinitializeGeometry
 /run/beamOn 1000000000
