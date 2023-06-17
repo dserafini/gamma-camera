@@ -17,6 +17,7 @@ public:
 	~MyPrimaryGenerator();
 
 	virtual void GeneratePrimaries(G4Event*);
+	G4GeneralParticleSource* GetGeneralParticleSource() { return fParticleGPS; };
 
 private:
 	G4GeneralParticleSource* fParticleGPS;
