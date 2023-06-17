@@ -43,26 +43,26 @@
 # run
 ################################################################################
 
-/run/printProgress 10000000
+/run/printProgress 1000000
 
 
 
 /analysis/setFileName direct4.root
 /scintillator/scinti_hole_thickness 4. mm
 /run/reinitializeGeometry
-/run/beamOn 100000000
+/run/beamOn 10000000
 
 /analysis/setFileName direct6.root
 /scintillator/scinti_hole_thickness 6. mm
 /run/reinitializeGeometry
-/run/beamOn 100000000
+/run/beamOn 10000000
 
 /analysis/setFileName direct8.root
 /scintillator/scinti_hole_thickness 8. mm
 /run/reinitializeGeometry
-/run/beamOn 100000000
+/run/beamOn 10000000
 
 /analysis/setFileName direct10.root
 /scintillator/scinti_hole_thickness 10. mm
 /run/reinitializeGeometry
-/run/beamOn 100000000
+/run/beamOn 10000000
