@@ -13,7 +13,7 @@
 class MyStackingAction : public G4UserStackingAction
 {
  public:
-  MyStackingAction(MyPrimaryGenerator*);
+  MyStackingAction();
   ~MyStackingAction();
 
   G4ClassificationOfNewTrack ClassifyNewTrack(const G4Track* aTrack) override;
