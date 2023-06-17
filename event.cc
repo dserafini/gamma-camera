@@ -35,31 +35,21 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
   // gammas
-  man->FillNtupleDColumn(0, 0, fEdep);
+  man->FillNtupleDColumn(0, 1, fEdep/keV); // [keV]
   
   // G4cout << "fPosition: " << fPosition << " vector" << G4endl;
   if (fEdep>0)
     fPosition = fPosition/fEdep; // normalize on the total energy
   
-  man->FillNtupleDColumn(0, 1, fPosition.getX());
-  man->FillNtupleDColumn(0, 2, fPosition.getY());
-  man->FillNtupleDColumn(0, 3, fPosition.getZ());
+  man->FillNtupleDColumn(0, 2, fPosition.getX());
+  man->FillNtupleDColumn(0, 3, fPosition.getY());
+  man->FillNtupleDColumn(0, 4, fPosition.getZ());
   
-  // optical photons
-  // man->FillNtupleIColumn(0, 4, pNum);
-  
-  // G4cout << "pPosition: " << pPosition << " vector" << G4endl;
-  // G4cout << "pNumber: " << pNum << G4endl;
   if (pNum>0)
   {
     pPosition = pPosition/pNum; // normalize on the number of optical photons
     pSigma = pSigma/pNum;
   }
-  
-  // man->FillNtupleDColumn(0, 5, pPosition.getX());
-  // man->FillNtupleDColumn(0, 6, pSigma.getX());
-  // man->FillNtupleDColumn(0, 7, pPosition.getY());
-  // man->FillNtupleDColumn(0, 8, pSigma.getY());
 
   man->AddNtupleRow(0);
 }

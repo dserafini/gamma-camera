@@ -44,7 +44,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
     return false;
   
   // energy deposit
-  G4double edep = aStep->GetTotalEnergyDeposit();
+  G4double edep = aStep->GetTotalEnergyDeposit(); // [keV]
 
   // if (edep==0.) return false;
 
@@ -105,13 +105,13 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   
   // fill the Ntuple
   G4AnalysisManager *man = G4AnalysisManager::Instance();
-  man->FillNtupleIColumn(0, 4, nofHits);
-  man->FillNtupleDColumn(0, 5, fMeanPos.getX());
-  man->FillNtupleDColumn(0, 6, fMeanPos.getY());
-  man->FillNtupleDColumn(0, 7, fMeanPos.getZ());
-  man->FillNtupleDColumn(0, 8, fSigmaPos.getX());
-  man->FillNtupleDColumn(0, 9, fSigmaPos.getY());
-  man->FillNtupleDColumn(0, 10, fSigmaMod);
+  man->FillNtupleIColumn(0, 5, nofHits);
+  man->FillNtupleDColumn(0, 6, fMeanPos.getX());
+  man->FillNtupleDColumn(0, 7, fMeanPos.getY());
+  man->FillNtupleDColumn(0, 8, fMeanPos.getZ());
+  man->FillNtupleDColumn(0, 9, fSigmaPos.getX());
+  man->FillNtupleDColumn(0, 10, fSigmaPos.getY());
+  man->FillNtupleDColumn(0, 11, fSigmaMod);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

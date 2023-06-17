@@ -9,6 +9,7 @@ MyRunAction::MyRunAction()
 
   // want to save energy deposition
   man->CreateNtuple("Scoring", "Scoring");
+  man->CreateNtupleDColumn(0, "fEini"); // [eV]
   man->CreateNtupleDColumn(0, "fEdep"); // [eV]
   man->CreateNtupleDColumn(0, "fX"); // [mm]
   man->CreateNtupleDColumn(0, "fY"); // [mm]

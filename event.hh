@@ -7,6 +7,7 @@
 #include "g4root.hh" // v10.7
 // #include "g4root_defs.hh" // v11.1
 // #include "G4AnalysisManager.hh" // v11.1
+#include "G4SystemOfUnits.hh"
 
 #include "run.hh"
 
