@@ -3,6 +3,16 @@
 MyStackingAction::MyStackingAction()
 {
   G4cout << "ClassifyNewTrack is set on aTrack->GetParentID() == 1" << G4endl;
+
+  const MyPrimaryGenerator* generatorAction
+  = static_cast<const MyPrimaryGenerator*>(
+      G4MTRunManager::GetRunManager()->GetUserPrimaryGeneratorAction());
+  
+  if (generatorAction)
+  {
+      const G4GeneralParticleSource* gps = generatorAction->GetGeneralParticleSource();
+      fPrimaryDefinition = gps->GetParticleDefinition();
+  }
 }
 
 MyStackingAction::~MyStackingAction() {}
