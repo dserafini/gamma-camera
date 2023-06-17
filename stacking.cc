@@ -6,7 +6,7 @@ MyStackingAction::MyStackingAction(MyPrimaryGenerator* aGenerator)
 
   primaryParticleDefinition = aGenerator->GetGPS()->GetParticleDefinition();
 
-  G4cout << "primary is: " << primaryParticleDefinition << ", called " << primaryParticleDefinition->GetParticleName() << G4endl;
+  G4cout << "primary is: " << primaryParticleDefinition->GetParticleName() << G4endl;
 }
 
 MyStackingAction::~MyStackingAction() {}
