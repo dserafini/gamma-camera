@@ -9,6 +9,8 @@
 // #include "g4root_defs.hh" // v11.0
 // #include "G4AnalysisManager.hh" // v11.0
 #include "G4Run.hh"
+#include "generator.hh"
+#include "stacking.hh"
 
 
 class MyRunAction : public G4UserRunAction
