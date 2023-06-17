@@ -3,10 +3,6 @@
 MyStackingAction::MyStackingAction(MyPrimaryGenerator* aGenerator)
 {
   G4cout << "ClassifyNewTrack is set on aTrack->GetParentID() == 1" << G4endl;
-
-  primaryParticleDefinition = aGenerator->GetPrimaryGPS()->GetParticleDefinition();
-
-  G4cout << "primary is: " << primaryParticleDefinition->GetParticleName() << G4endl;
 }
 
 MyStackingAction::~MyStackingAction() {}
