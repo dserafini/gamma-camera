@@ -23,7 +23,7 @@ public:
   virtual void EndOfRunAction(const G4Run*);
 
 private:
-	MyGenerator *fGenerator;
+	MyPrimaryGenerator *fGenerator;
 	MyStackingAction *fStackingAction;
 };
 
