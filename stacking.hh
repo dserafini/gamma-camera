@@ -5,6 +5,7 @@
 #include "g4root.hh"
 #include "G4UserStackingAction.hh"
 #include "generator.hh"
+#include "G4MTRunManager.hh"
 #include "G4Track.hh"
 #include "G4Electron.hh"
 #include "G4AntiNeutrinoE.hh"
