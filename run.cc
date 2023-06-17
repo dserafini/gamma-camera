@@ -23,6 +23,9 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "pSigmaY"); // [mm]
   man->CreateNtupleDColumn(0, "pSigmaR"); // [mm]
   man->FinishNtuple(0);
+
+  fStackingAction = nullptr;
+  fGenerator = nullptr;
 }
 
 MyRunAction::~MyRunAction()
@@ -43,6 +46,10 @@ void MyRunAction::BeginOfRunAction(const G4Run* run)
   //man->OpenFile("output" + strRunID.str() + ".root");
   // I prefer to give the file name from macro
   man->OpenFile();
+
+  // set primary definition of generator modified by macro into stacking
+  fStackingAction->SetPrimaryDefinition(fGenerator->GetPrimaryDefinition());
+  G4cout << "primary is " << fGenerator->GetPrimaryDefinition()->GetParticleName() << G4endl;
 }
 
 void MyRunAction::EndOfRunAction(const G4Run*)
