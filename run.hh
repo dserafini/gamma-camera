@@ -16,7 +16,7 @@
 class MyRunAction : public G4UserRunAction
 {
 public:
-	MyRunAction();
+	MyRunAction(MyGenerator*, MyStackingAction*);
 	~MyRunAction();
 
   virtual void BeginOfRunAction(const G4Run*);
