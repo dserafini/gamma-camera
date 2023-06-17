@@ -4,7 +4,6 @@
 #include "globals.hh"
 #include "g4root.hh"
 #include "G4UserStackingAction.hh"
-#include "generator.hh"
 #include "G4Track.hh"
 #include "G4Electron.hh"
 #include "G4AntiNeutrinoE.hh"
@@ -20,7 +19,7 @@ class MyStackingAction : public G4UserStackingAction
   G4ClassificationOfNewTrack ClassifyNewTrack(const G4Track* aTrack) override;
   // void NewStage() override;
   // void PrepareNewEvent() override;
-  void SetPrimaryGPS(G4ParticleDefinition* aParticleDefinition) { primaryParticleDefinition = aParticleDefinition; };
+  void SetPrimaryDefinition(G4ParticleDefinition* aParticleDefinition) { primaryParticleDefinition = aParticleDefinition; };
 
  private:
   G4ParticleDefinition *primaryParticleDefinition;
