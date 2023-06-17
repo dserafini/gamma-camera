@@ -20,6 +20,7 @@ class MyStackingAction : public G4UserStackingAction
   G4ClassificationOfNewTrack ClassifyNewTrack(const G4Track* aTrack) override;
   // void NewStage() override;
   // void PrepareNewEvent() override;
+  void SetPrimaryGPS(G4ParticleDefinition* aParticleDefinition) { primaryParticleDefinition = aParticleDefinition; };
 
  private:
   G4ParticleDefinition *primaryParticleDefinition;
