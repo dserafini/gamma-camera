@@ -1,6 +1,6 @@
 #include "run.hh"
 
-MyRunAction::MyRunAction(MyGenerator *aGenerator, MyStackingAction *aStackingAction)
+MyRunAction::MyRunAction(MyPrimaryGenerator *aGenerator, MyStackingAction *aStackingAction)
 {
   // u can create a single output file here for all the runs
 
