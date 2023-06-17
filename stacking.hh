@@ -14,12 +14,15 @@
 class MyStackingAction : public G4UserStackingAction
 {
  public:
-  MyStackingAction(MyPrimaryGenerator* aGenerator);
+  MyStackingAction(MyPrimaryGenerator*);
   ~MyStackingAction();
 
   G4ClassificationOfNewTrack ClassifyNewTrack(const G4Track* aTrack) override;
   // void NewStage() override;
   // void PrepareNewEvent() override;
+
+ private:
+  G4ParticleDefinition *primaryParticleDefinition;
 };
 
 #endif
