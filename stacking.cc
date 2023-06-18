@@ -21,7 +21,7 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 	{
 		G4cout << "Kinetic energy: " << aTrack->GetKineticEnergy() / keV << " keV" << G4endl;
 		
-		G4VProcess *aProcess = aTrack->GetCreatorProcess();
+		const G4VProcess *aProcess = aTrack->GetCreatorProcess();
 		G4String aProcessName = "none";
 		if (!aProcess)
 			aProcessName = aProcess->GetProcessName();
