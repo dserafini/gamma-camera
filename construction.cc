@@ -357,9 +357,15 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		ConstructCollimator();
 
 	if(materialChoice) // 1 LYSO
+	{
 		materialScintillator = materialLYSO;
+		G4cout << "scintillator in LYSO" << G4endl;
+	}
 	else // 0 GAGG
+	{
 		materialScintillator = materialGAGG;
+		G4cout << "scintillator in GAGG" << G4endl;
+	}
 
 	if (scintiPixelNoSlab)
 		ConstructPixelScintillator();
