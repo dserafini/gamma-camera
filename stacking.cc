@@ -23,7 +23,7 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 		
 		const G4VProcess *aProcess = aTrack->GetCreatorProcess();
 		G4String aProcessName = "none";
-		if (!aProcess)
+		if (aProcess)
 			aProcessName = aProcess->GetProcessName();
 		
 		G4AnalysisManager *man = G4AnalysisManager::Instance();
