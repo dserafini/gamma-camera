@@ -8,7 +8,9 @@
 #include "G4Electron.hh"
 #include "G4AntiNeutrinoE.hh"
 #include "G4Gamma.hh"
+#include "G4OpticalPhoton.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4VProcess.hh"
 
 class MyStackingAction : public G4UserStackingAction
 {

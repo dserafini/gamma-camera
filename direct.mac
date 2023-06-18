@@ -51,9 +51,3 @@
 /run/reinitializeGeometry
 # /run/beamOn 10000000
 /run/beamOn 1850746
-
-/analysis/setFileName direct10.root
-/scintillator/scinti_hole_thickness 10. mm
-/run/reinitializeGeometry
-# /run/beamOn 10000000
-/run/beamOn 1850746
