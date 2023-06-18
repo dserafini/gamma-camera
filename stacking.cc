@@ -20,6 +20,8 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
   const G4Track* aTrack)
 {
   G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
+G4cout << "Particle: " << aTrack->GetParticleDefinition()->GetParticleName() << G4endl;
+G4cout << "Kinetic energy: " << aTrack->GetKineticEnergy() / keV << " keV" << G4endl;
 if (aTrack->GetCreatorProcess())
 	G4cout << "Creator process " << aTrack->GetCreatorProcess()->GetProcessName() << G4endl;
 else
