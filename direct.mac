@@ -55,7 +55,7 @@
 /run/beamOn 1000
 
 /analysis/setFileName directPixel10mm.root
-/scintillator/scinti_hole_thickness 4. mm
+/scintillator/scinti_hole_thickness 10. mm
 /scintillator/pixel 1
 /run/reinitializeGeometry
 /run/beamOn 1000
