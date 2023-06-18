@@ -19,7 +19,8 @@ MyStackingAction::~MyStackingAction()
 G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
   const G4Track* aTrack)
 {
-  // G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
+  G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
+G4cout << "Process " << aTrack->GetCreatorProcess()->GetProcessName() << G4endl;
 
 G4AnalysisManager *man = G4AnalysisManager::Instance();
 
