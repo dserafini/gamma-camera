@@ -319,8 +319,8 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	if(collimatorExist)
 		ConstructCollimator();
 	
-	// ConstructScintillator();
-	ConstructPixelScintillator();
+	ConstructScintillator();
+	// ConstructPixelScintillator();
 	ConstructDetector();
 	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
