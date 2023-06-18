@@ -43,7 +43,5 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 			man->FillNtupleDColumn(0, 0, aTrack->GetKineticEnergy()/keV); // [keV]
 		}
 	}
-}
-
-return fUrgent;
+	return fUrgent;
 }
