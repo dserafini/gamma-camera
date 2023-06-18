@@ -21,7 +21,8 @@ class MyStackingAction : public G4UserStackingAction
   // void NewStage() override;
   // void PrepareNewEvent() override;
  private:
-  G4GenericMessenger *fMessengerStack;
+  G4GenericMessenger *fMessengerPrimary;
+  G4int fIonIsPrimary;
 };
 
 #endif
