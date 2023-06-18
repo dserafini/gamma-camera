@@ -8,8 +8,8 @@
 #include "G4Electron.hh"
 #include "G4AntiNeutrinoE.hh"
 #include "G4Gamma.hh"
+#include "G4OpticalPhoton.hh"
 #include "G4SystemOfUnits.hh"
-#include "G4GenericMessenger.hh"
 #include "G4VProcess.hh"
 
 class MyStackingAction : public G4UserStackingAction
@@ -21,9 +21,6 @@ class MyStackingAction : public G4UserStackingAction
   G4ClassificationOfNewTrack ClassifyNewTrack(const G4Track* aTrack) override;
   // void NewStage() override;
   // void PrepareNewEvent() override;
- private:
-  G4GenericMessenger *fMessengerPrimary;
-  G4int fIonIsPrimary;
 };
 
 #endif
