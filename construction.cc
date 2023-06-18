@@ -159,9 +159,6 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	mptLYSO->AddProperty("RINDEX", PhotonEnergy, refractiveIndexLYSO, nEntries);
 	mptLYSO->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthLYSO, nEntries);
 
-	G4double ScintEnergy[nEntries] = {3.25*eV, 3.44*eV};
-	G4double ScintFast[nEntries] = {1.0,1.0};
-
 	mptLYSO->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
 
 	mptLYSO->AddConstProperty("SCINTILLATIONYIELD", 29000/MeV);
