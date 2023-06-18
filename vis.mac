@@ -33,7 +33,6 @@
 /gps/position 0 0. -1. mm
 /gps/direction 0 0 1
 # /gps/ang/type iso
-/primary/ion 1
 
 ################################################################################
 # other visualization settings
