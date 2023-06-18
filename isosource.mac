@@ -3,8 +3,8 @@
 ################################################################################
 /collimator/exist 1
 /collimator/hole_length 30. mm
-/collimator/hole_thickness 15. mm
-/collimator/septa_thickness 5. mm
+/collimator/hole_thickness 2. mm
+/collimator/septa_thickness 1. mm
 /collimator/case_side 10. cm
 
 ################################################################################
@@ -12,8 +12,8 @@
 ################################################################################
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
-/scintillator/scinti_hole_thickness 18. mm
-/scintillator/scinti_septa_thickness 2. mm
+/scintillator/scinti_hole_thickness 9.9 mm
+/scintillator/scinti_septa_thickness .1 mm
 
 /run/reinitializeGeometry
 
@@ -37,5 +37,5 @@
 # Set file name
 /analysis/setFileName isosource.root
 
-/run/printProgress 100000
-/run/beamOn 1000000
+/run/printProgress 1000000
+/run/beamOn 10000000
