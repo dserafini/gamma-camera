@@ -42,26 +42,26 @@
 # run
 ################################################################################
 
-/run/printProgress 100000
+/run/printProgress 1000000
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
 /analysis/setFileName directScinti4mmColl1p5mm.root
 /collimator/hole_thickness 1.5 mm
 /run/reinitializeGeometry
-/run/beamOn 1000000
+/run/beamOn 10000000
 
 /analysis/setFileName directScinti4mmColl2mm.root
 /collimator/hole_thickness 2. mm
 /run/reinitializeGeometry
-/run/beamOn 1000000
+/run/beamOn 10000000
 
 /analysis/setFileName directScinti4mmColl1p2mm.root
 /collimator/hole_thickness 1.2 mm
 /run/reinitializeGeometry
-/run/beamOn 1000000
+/run/beamOn 10000000
 
 /analysis/setFileName directScinti4mmColl1mm.root
 /collimator/hole_thickness 1 mm
 /run/reinitializeGeometry
-/run/beamOn 1000000
+/run/beamOn 10000000
