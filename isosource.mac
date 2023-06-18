@@ -14,7 +14,7 @@
 ################################################################################
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
-/scintillator/scinti_hole_thickness 9.9 mm
+/scintillator/scinti_hole_thickness 5 mm
 /scintillator/scinti_septa_thickness .1 mm
 
 /run/reinitializeGeometry
@@ -38,6 +38,16 @@
 
 # Set file name
 /analysis/setFileName isosource.root
-
 /run/printProgress 1000000
+
+/analysis/setFileName isosourceScinti5mmColl2mmDistance1mm.root
+/gps/position 0 0. -1. mm
+/run/beamOn 10000000
+
+/analysis/setFileName isosourceScinti5mmColl2mmDistance5mm.root
+/gps/position 0 0. -5. mm
+/run/beamOn 10000000
+
+/analysis/setFileName isosourceScinti5mmColl2mmDistance10mm.root
+/gps/position 0 0. -10. mm
 /run/beamOn 10000000
