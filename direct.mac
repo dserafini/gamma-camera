@@ -7,7 +7,7 @@
 /scintillator/pixel 1
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
-/scintillator/scinti_hole_thickness 4. mm
+/scintillator/scinti_hole_thickness 10. mm
 /scintillator/scinti_septa_thickness 1. mm
 
 ################################################################################
@@ -44,17 +44,11 @@
 # run
 ################################################################################
 
-/run/printProgress 100
+/run/printProgress 1000000
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
-#/analysis/setFileName directSlab.root
-#/scintillator/pixel 0
-#/run/reinitializeGeometry
-#/run/beamOn 1000
-
-/analysis/setFileName directPixel99mm.root
-/scintillator/scinti_hole_thickness 99. mm
-/scintillator/pixel 1
+/analysis/setFileName directPixel10mmDepth30mm.root
+/scintillator/slab_depth 30. mm
 /run/reinitializeGeometry
-/run/beamOn 1000
+/run/beamOn 10000000
