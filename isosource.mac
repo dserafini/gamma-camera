@@ -37,8 +37,5 @@
 # Set file name
 /analysis/setFileName isosource.root
 
-# reduce scintillation yield to allow visualization
-/process/optical/scintillation/setYieldFactor .001
-
-/run/printProgress 100
-/run/beamOn 1000
+/run/printProgress 100000
+/run/beamOn 1000000
