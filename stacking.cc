@@ -20,7 +20,10 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
   const G4Track* aTrack)
 {
   G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
-G4cout << "Process " << aTrack->GetCreatorProcess()->GetProcessName() << G4endl;
+if (aTrack->GetCreatorProcess())
+	G4cout << "Creator process " << aTrack->GetCreatorProcess()->GetProcessName() << G4endl;
+else
+	G4cout << "No creator process" << G4endl;
 
 G4AnalysisManager *man = G4AnalysisManager::Instance();
 
