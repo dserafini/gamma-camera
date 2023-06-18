@@ -85,8 +85,7 @@ private:
 	
 	// scintillator
 	G4double slab_depth, slab_side, scinti_pixel_size, scinti_septa_thickness, scinti_hole_thickness, scinti_hole_length;
-	G4int scinti_holes_number;
-	G4int scintiPixelNoSlab;
+	G4int scinti_holes_number, scintiPixelNoSlab, materialChoice;
 	
 	// detector
 	G4double detector_depth, detector_side;
