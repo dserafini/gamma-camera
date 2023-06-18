@@ -50,7 +50,7 @@ private:
 	G4VPhysicalVolume *physScintillatorPinhole, *physScintillatorPixel, *physScintillatorMatrix;
 
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
-	G4Material *materialPlastic, *materialLYSO;
+	G4Material *materialPlastic, *materialLYSO, *materialScintillator;
 	G4Element *elLa, *elBr;
 
 	void DefineMaterials();
