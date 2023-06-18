@@ -108,15 +108,15 @@ void MyDetectorConstruction::DefineMaterials()
 	// LYSO
 	// https://www.epic-crystal.com/oxide-scintillators/lyso-ce-scintillator.html
 	G4cout << "Define Material LYSO" << G4endl;
-	materialLYSO = new G4Material("materialLYSO", 7.25*g/cm3, 4);
+	materialLYSO = new G4Material("materialLYSO", 7.25*g/cm3, 40);
 	G4cout << "Add Element Lu" << G4endl;
-	materialLYSO->AddElement(nist->FindOrBuildElement("Lu"), 1.9);
+	materialLYSO->AddElement(nist->FindOrBuildElement("Lu"), 19);
 	G4cout << "Add Element Y" << G4endl;
-	materialLYSO->AddElement(nist->FindOrBuildElement("Y"), .1);
+	materialLYSO->AddElement(nist->FindOrBuildElement("Y"), 1);
 	G4cout << "Add Element Si" << G4endl;
-	materialLYSO->AddElement(nist->FindOrBuildElement("Si"), 1);
+	materialLYSO->AddElement(nist->FindOrBuildElement("Si"), 10);
 	G4cout << "Add Element O" << G4endl;
-	materialLYSO->AddElement(nist->FindOrBuildElement("O"), 5);
+	materialLYSO->AddElement(nist->FindOrBuildElement("O"), 50);
 	G4cout << "No Cerium is inserted but in reality there is some as dopant" << G4endl;
 }
 
