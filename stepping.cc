@@ -31,6 +31,8 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
 
     G4ThreeVector position = step->GetPreStepPoint()->GetPosition();
     fEventAction->AddPosition(position, edep);
+    if (edep>0)
+      step->GetTrack()->SetTrackStatus(fStopAndKill);
     
     return;
   }
