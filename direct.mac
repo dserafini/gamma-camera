@@ -44,11 +44,26 @@
 # run
 ################################################################################
 
-/run/printProgress 100000
+/run/printProgress 1000000
 # /run/beamOn 10000000
 # /run/beamOn 1850746
+
+/analysis/setFileName directPixel10mmDepth10mm.root
+/scintillator/slab_depth 10. mm
+/run/reinitializeGeometry
+/run/beamOn 10000000
 
 /analysis/setFileName directPixel10mmDepth30mm.root
 /scintillator/slab_depth 30. mm
 /run/reinitializeGeometry
-/run/beamOn 1000000
+/run/beamOn 10000000
+
+/analysis/setFileName directPixel10mmDepth50mm.root
+/scintillator/slab_depth 50. mm
+/run/reinitializeGeometry
+/run/beamOn 10000000
+
+/analysis/setFileName directPixel10mmDepth70mm.root
+/scintillator/slab_depth 70. mm
+/run/reinitializeGeometry
+/run/beamOn 10000000
