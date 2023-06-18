@@ -42,6 +42,11 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 		{
 			// G4cout << "energy: " << aTrack->GetKineticEnergy()/keV << " keV" << G4endl;
 			man->FillNtupleDColumn(0, 0, aTrack->GetKineticEnergy()/keV); // [keV]
+			if ( aTrack->GetKineticEnergy() != 245*keV)
+			{
+				G4cout << "Kinetic energy: " << aTrack->GetKineticEnergy() / keV << " keV" << ", ";
+				G4cout << "from: " << aProcessName << G4endl;
+			}
 		}
 	}
 	return fUrgent;
