@@ -10,6 +10,7 @@
 #include "G4Gamma.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4GenericMessenger.hh"
+#include "G4VProcess.hh"
 
 class MyStackingAction : public G4UserStackingAction
 {
