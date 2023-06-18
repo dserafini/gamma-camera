@@ -15,7 +15,7 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 	if (aTrack->GetParticleDefinition() == G4OpticalPhoton::Definition())
 	{
 		G4cout << G4endl;
-		return;
+		return fUrgent;
 	}
 	else
 	{
