@@ -46,24 +46,14 @@
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
-/gps/energy 342 keV
-/analysis/setFileName direct342keVpixel10mmDepth30mm.root
-/scintillator/slab_depth 30. mm
-/run/reinitializeGeometry
-/run/beamOn 1000000
-
-/analysis/setFileName direct342keVpixel10mmDepth60mm.root
+/gps/energy 140 keV
+/analysis/setFileName direct140keVpixel10mmDepth60mm.root
 /scintillator/slab_depth 60. mm
 /run/reinitializeGeometry
 /run/beamOn 1000000
 
-/gps/energy 245 keV
-/analysis/setFileName direct245keVpixel10mmDepth30mm.root
-/scintillator/slab_depth 30. mm
-/run/reinitializeGeometry
-/run/beamOn 1000000
-
-/analysis/setFileName direct245keVpixel10mmDepth60mm.root
+/gps/energy 511 keV
+/analysis/setFileName direct511keVpixel10mmDepth60mm.root
 /scintillator/slab_depth 60. mm
 /run/reinitializeGeometry
 /run/beamOn 1000000
