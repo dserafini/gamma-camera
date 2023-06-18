@@ -36,8 +36,6 @@
 /analysis/setFileName discard.root
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
-# spengo gli ottici
-# /process/inactivate Scintillation
 
 ################################################################################
 # run
@@ -45,20 +43,49 @@
 
 /run/printProgress 100000000
 
-/analysis/setFileName directColl1p5mmScinti10mm.root
-/scintillator/scinti_hole_thickness 10. mm
-/collimator/hole_thickness 1.5. mm
+/analysis/setFileName directColl2mmScinti2mm.root
+/scintillator/scinti_hole_thickness 2. mm
+/collimator/hole_thickness 2. mm
 /run/reinitializeGeometry
 /run/beamOn 1000000000
 
-/analysis/setFileName directColl3mmScinti10mm.root
-/scintillator/scinti_hole_thickness 10. mm
-/collimator/hole_thickness 3. mm
+/analysis/setFileName directColl5mmScinti5mm.root
+/scintillator/scinti_hole_thickness 5. mm
+/collimator/hole_thickness 5. mm
 /run/reinitializeGeometry
 /run/beamOn 1000000000
 
-/analysis/setFileName directColl4mmScinti10mm.root
+/analysis/setFileName directColl10mmScinti10mm.root
 /scintillator/scinti_hole_thickness 10. mm
-/collimator/hole_thickness 4. mm
+/collimator/hole_thickness 10. mm
+/run/reinitializeGeometry
+/run/beamOn 1000000000
+
+/analysis/setFileName directColl15mmScinti15mm.root
+/scintillator/scinti_hole_thickness 15. mm
+/collimator/hole_thickness 15. mm
+/run/reinitializeGeometry
+/run/beamOn 1000000000
+
+/collimator/hole_thickness 2. mm
+/scintillator/scinti_hole_thickness 10. mm
+# varying depth
+/scintillator/slab_depth 2. cm
+/analysis/setFileName directColl2mmScinti10mmDepth20mm.root
+/run/reinitializeGeometry
+/run/beamOn 1000000000
+
+/scintillator/slab_depth 3. cm
+/analysis/setFileName directColl2mmScinti10mmDepth30mm.root
+/run/reinitializeGeometry
+/run/beamOn 1000000000
+
+/scintillator/slab_depth 4. cm
+/analysis/setFileName directColl2mmScinti10mmDepth40mm.root
+/run/reinitializeGeometry
+/run/beamOn 1000000000
+
+/scintillator/slab_depth 5. cm
+/analysis/setFileName directColl2mmScinti10mmDepth50mm.root
 /run/reinitializeGeometry
 /run/beamOn 1000000000
