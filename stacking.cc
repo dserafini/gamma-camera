@@ -46,6 +46,7 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 			{
 				G4cout << "Kinetic energy: " << aTrack->GetKineticEnergy() / keV << " keV" << ", ";
 				G4cout << "parent: " << aTrack->GetParentID() << ", ";
+				G4cout << "vertex: " << aTrack->GetVertexPosition() << ", ";
 				G4cout << "from: " << aProcessName << G4endl;
 			}
 		}
