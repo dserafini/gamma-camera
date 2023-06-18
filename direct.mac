@@ -1,12 +1,14 @@
-
+/run/numberOfThreads 10
 
 ################################################################################
 # define scintillator
 ################################################################################
 
+/scintillator/pixel 1
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
 /scintillator/scinti_hole_thickness 4. mm
+/scintillator/scinti_septa_thickness 1. mm
 
 ################################################################################
 # define collimator
@@ -20,8 +22,6 @@
 
 /run/reinitializeGeometry
 
-/run/numberOfThreads 10
-
 /run/initialize
 
 ################################################################################
@@ -29,11 +29,11 @@
 ################################################################################
 
 /gps/particle gamma
-# /gps/energy 342 keV
-/gps/energy 245 keV
+/gps/energy 342 keV
+# /gps/energy 245 keV
 /gps/position 0 0 -100. mm
-# /gps/direction 0 0 1
-/gps/ang/type iso
+/gps/direction 0 0 1
+# /gps/ang/type iso
 /analysis/setFileName discard.root
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
@@ -44,10 +44,17 @@
 # run
 ################################################################################
 
-/run/printProgress 1000000
-
-/analysis/setFileName direct4.root
-/scintillator/scinti_hole_thickness 4. mm
-/run/reinitializeGeometry
+/run/printProgress 100
 # /run/beamOn 10000000
-/run/beamOn 1850746
+# /run/beamOn 1850746
+
+#/analysis/setFileName directSlab.root
+#/scintillator/pixel 0
+#/run/reinitializeGeometry
+#/run/beamOn 1000
+
+/analysis/setFileName directPixel99mm.root
+/scintillator/scinti_hole_thickness 99. mm
+/scintillator/pixel 1
+/run/reinitializeGeometry
+/run/beamOn 1000
