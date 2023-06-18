@@ -8,7 +8,7 @@
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
 /scintillator/scinti_hole_thickness 4. mm
-scinti_septa_thickness 1. mm
+/scintillator/scinti_septa_thickness 1. mm
 
 ################################################################################
 # define collimator
