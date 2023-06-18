@@ -20,7 +20,7 @@
 
 /run/reinitializeGeometry
 
-/run/numberOfThreads 10
+/run/numberOfThreads 1
 
 /run/initialize
 
@@ -32,7 +32,6 @@
 /gps/ion 47 111 0 0.
 /gps/energy 0. eV
 /gps/position 0 0 -100. mm
-/gps/ang/type iso
 /analysis/setFileName discard.root
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
@@ -41,10 +40,7 @@
 # run
 ################################################################################
 
-/run/printProgress 1000000
+/run/printProgress 100000
 
 /analysis/setFileName isosource.root
-/scintillator/scinti_hole_thickness 2. mm
-/collimator/hole_thickness 2. mm
-/run/reinitializeGeometry
-/run/beamOn 10000000
+/run/beamOn 1000000
