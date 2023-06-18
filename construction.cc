@@ -35,6 +35,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerScintillator->DeclareProperty("pixel", scintiPixelNoSlab, "0 slab, 1 matrix");
 	fMessengerScintillator->DeclarePropertyWithUnit("scinti_hole_thickness", "mm", scinti_hole_thickness, "Thickness of the scintillator holes");
 	fMessengerScintillator->DeclarePropertyWithUnit("scinti_septa_thickness", "mm", scinti_septa_thickness, "Thickness of the scintillator septa");
+	fMessengerScintillator->DeclareProperty("material", materialChoice, "0 gagg, 1 lyso");
 	
 	// scintillator parameters
 	slab_side  = case_side;
@@ -42,6 +43,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	scintiPixelNoSlab = 1;
 	scinti_hole_thickness = hole_thickness;
 	scinti_septa_thickness = septa_thickness;
+	materialChoice = 0;
 
 	// define materials just once
 	DefineMaterials();
@@ -103,9 +105,19 @@ void MyDetectorConstruction::DefineMaterials()
 	materialGAGG->AddElement(nist->FindOrBuildElement("O"), 12);
 	G4cout << "Added Element O" << G4endl;
 	
-	//G4Material *materialWater = new G4Material("water", 1.0*g/cm3, 3);
-	//materialWater->AddElement(nist->FindOrBuildElement("G4_H"), 2);
-	//materialWater->AddElement(nist->FindOrBuildElement("G4_O"), 1);
+	// LYSO
+	// https://www.epic-crystal.com/oxide-scintillators/lyso-ce-scintillator.html
+	G4cout << "Define Material LYSO" << G4endl;
+	materialLYSO = new G4Material("materialLYSO", 7.25*g/cm3, 4);
+	G4cout << "Add Element Lu" << G4endl;
+	materialLYSO->AddElement(nist->FindOrBuildElement("Lu"), 1.9);
+	G4cout << "Add Element Y" << G4endl;
+	materialLYSO->AddElement(nist->FindOrBuildElement("Y"), .1);
+	G4cout << "Add Element Si" << G4endl;
+	materialLYSO->AddElement(nist->FindOrBuildElement("Si"), 1);
+	G4cout << "Add Element O" << G4endl;
+	materialLYSO->AddElement(nist->FindOrBuildElement("O"), 5);
+	G4cout << "No Cerium is inserted but in reality there is some as dopant" << G4endl;
 }
 
 
@@ -136,6 +148,28 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	mptGAGG->AddConstProperty("YIELDRATIO",1.0);
 
 	materialGAGG->SetMaterialPropertiesTable(mptGAGG);
+
+	// lyso
+	// https://doi.org/10.1016/j.nima.2006.04.079
+	G4double refractiveIndexLYSO[nEntries] = {1.82,1.82};
+	G4double absorptionLengthLYSO[nEntries] = {42.*cm,42.*cm};
+
+	G4MaterialPropertiesTable* mptLYSO = new G4MaterialPropertiesTable();
+
+	mptLYSO->AddProperty("RINDEX", PhotonEnergy, refractiveIndexLYSO, nEntries);
+	mptLYSO->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthLYSO, nEntries);
+
+	G4double ScintEnergy[nEntries] = {3.25*eV, 3.44*eV};
+	G4double ScintFast[nEntries] = {1.0,1.0};
+
+	mptLYSO->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
+
+	mptLYSO->AddConstProperty("SCINTILLATIONYIELD", 29000/MeV);
+	mptLYSO->AddConstProperty("RESOLUTIONSCALE", 1.0);
+	mptLYSO->AddConstProperty("FASTTIMECONSTANT",90.0*ns);
+	mptLYSO->AddConstProperty("YIELDRATIO",1.0);
+
+	materialLYSO->SetMaterialPropertiesTable(mptLYSO);
 	
 	// air
 	G4double refractiveIndexAir[nEntries] = {1.000,1.000};
@@ -222,7 +256,7 @@ void MyDetectorConstruction::ConstructCollimator()
 void MyDetectorConstruction::ConstructScintillator()
 {
 	solidScintillator = new G4Box("solidScintillator", slab_side/2., slab_side/2., slab_depth/2.);
-	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
+	logicScintillator = new G4LogicalVolume(solidScintillator, materialScintillator, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
 		G4ThreeVector(0.,0.,hole_length + slab_depth/2.),
@@ -284,7 +318,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	
 	// pinhole
 	G4Box* solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", scinti_hole_thickness/2., scinti_hole_thickness/2., scinti_hole_length/2.);
-	logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialGAGG, "logicScintillatorPinhole");
+	logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialScintillator, "logicScintillatorPinhole");
 	physScintillatorPinhole = new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
 
 	fScoringVolume = logicScintillatorPinhole;
@@ -321,6 +355,11 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	G4cout << "Do I construct the collimator? " << collimatorExist << G4endl;
 	if(collimatorExist)
 		ConstructCollimator();
+
+	if(materialChoice) // 1 LYSO
+		materialScintillator = materialLYSO;
+	else // 0 GAGG
+		materialScintillator = materialGAGG;
 
 	if (scintiPixelNoSlab)
 		ConstructPixelScintillator();
