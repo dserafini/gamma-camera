@@ -38,7 +38,7 @@
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
 # spengo gli ottici
-# /process/inactivate Scintillation
+/process/inactivate Scintillation
 
 ################################################################################
 # run
