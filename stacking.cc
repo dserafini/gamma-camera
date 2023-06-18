@@ -19,17 +19,18 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 	}
 	else
 	{
-		G4cout << "Kinetic energy: " << aTrack->GetKineticEnergy() / keV << " keV" << G4endl;
+		G4cout << "Kinetic energy: " << aTrack->GetKineticEnergy() / keV << " keV" << ", ";
 		
 		const G4VProcess *aProcess = aTrack->GetCreatorProcess();
 		G4String aProcessName = "none";
 		if (aProcess)
 			aProcessName = aProcess->GetProcessName();
+		G4cout << "from: " << aProcessName << G4endl;
 		
 		G4AnalysisManager *man = G4AnalysisManager::Instance();
 		
 		// particle is beta-
-		if(aTrack->GetDefinition() == G4Electron::Definition() && aProcessName == "G4RadioactiveDecayBase")
+		if(aTrack->GetDefinition() == G4Electron::Definition() && aProcessName == "RadioactiveDecayBase")
 			return fKill;
 		
 		// particle is anti_nu_e
@@ -37,7 +38,7 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 			return fKill;
 		
 		// particle is gamma, primary or from de-excitation
-		if(aTrack->GetDefinition() == G4Gamma::Definition() && (aProcessName == "G4RadioactiveDecayBase" || aProcessName == "none"))
+		if(aTrack->GetDefinition() == G4Gamma::Definition() && (aProcessName == "RadioactiveDecayBase" || aProcessName == "none"))
 		{
 			// G4cout << "energy: " << aTrack->GetKineticEnergy()/keV << " keV" << G4endl;
 			man->FillNtupleDColumn(0, 0, aTrack->GetKineticEnergy()/keV); // [keV]
