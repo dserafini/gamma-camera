@@ -45,6 +45,7 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 			if ( aTrack->GetKineticEnergy() != 245*keV)
 			{
 				G4cout << "Kinetic energy: " << aTrack->GetKineticEnergy() / keV << " keV" << ", ";
+				G4cout << "parent: " << aTrack->GetParentID() << ", ";
 				G4cout << "from: " << aProcessName << G4endl;
 			}
 		}
