@@ -25,6 +25,10 @@ void MyEventAction::BeginOfEventAction(const G4Event*)
   pNum = 0;
   pPosition = G4ThreeVector(0.,0.,0.);
   pSigma = G4ThreeVector(0.,0.,0.);
+
+  // default is no initial energy
+  G4AnalysisManager *man = G4AnalysisManager::Instance();
+  man->FillNtupleDColumn(0, 0, 0.*eV); // [eV]
 }
 
 void MyEventAction::EndOfEventAction(const G4Event*)
