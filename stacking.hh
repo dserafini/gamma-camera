@@ -9,6 +9,7 @@
 #include "G4AntiNeutrinoE.hh"
 #include "G4Gamma.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4GenericMessenger.hh"
 
 class MyStackingAction : public G4UserStackingAction
 {
