@@ -29,15 +29,17 @@ MyDetectorConstruction::MyDetectorConstruction()
 	case_side = 10.*cm; // fixed but not necessarily precise
 	
 	// scintillator commands
-	fMessengerCollimator = new G4GenericMessenger(this, "/scintillator/", "Scintillator Construction");
-	fMessengerCollimator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the collimator");
-	fMessengerCollimator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
-	fMessengerCollimator->DeclarePropertyWithUnit("scinti_hole_thickness", "mm", scinti_hole_thickness, "Thickness of the scintillator holes");
-	fMessengerCollimator->DeclarePropertyWithUnit("scinti_septa_thickness", "mm", scinti_septa_thickness, "Thickness of the scintillator septa");
+	fMessengerScintillator = new G4GenericMessenger(this, "/scintillator/", "Scintillator Construction");
+	fMessengerScintillator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the collimator");
+	fMessengerScintillator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
+	fMessengerScintillator->DeclareProperty("pixel", scintiPixelNoSlab, "0 slab, 1 matrix");
+	fMessengerScintillator->DeclarePropertyWithUnit("scinti_hole_thickness", "mm", scinti_hole_thickness, "Thickness of the scintillator holes");
+	fMessengerScintillator->DeclarePropertyWithUnit("scinti_septa_thickness", "mm", scinti_septa_thickness, "Thickness of the scintillator septa");
 	
 	// scintillator parameters
 	slab_side  = case_side;
 	slab_depth = hole_length/3.;
+	scintiPixelNoSlab = 1;
 	scinti_hole_thickness = hole_thickness;
 	scinti_septa_thickness = septa_thickness;
 
@@ -60,6 +62,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 MyDetectorConstruction::~MyDetectorConstruction()
 {
 	delete fMessengerCollimator;
+	delete fMessengerScintillator;
 }
 
 // to define material only once
@@ -318,9 +321,12 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	G4cout << "Do I construct the collimator? " << collimatorExist << G4endl;
 	if(collimatorExist)
 		ConstructCollimator();
+
+	if (scintiPixelNoSlab)
+		ConstructPixelScintillator();
+	else
+		ConstructScintillator();
 	
-	ConstructScintillator();
-	// ConstructPixelScintillator();
 	ConstructDetector();
 	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
@@ -358,21 +364,37 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	G4MaterialPropertiesTable* MPTfresnel = new G4MaterialPropertiesTable();
 	MPTfresnel->AddProperty("REFLECTIVITY", ephoton, reflectivity3);
 	MPTfresnel->AddProperty("TRANSMITTANCE", ephoton, transmittance3);
-	
-	// build reflective skin surface around the scintillator pixel hole
+
+	// build reflective skin surface
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
 	opGaggPlasticSurface->SetModel(unified);
 	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetFinish(polished);
 	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
-	new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
 	
-	// block optical photons escaping toward the detector
+	// build fully transmitting surface
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
 	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTtransmitting);
-	new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-				   physScintillatorPinhole, physDetector, opGaggDetectorSurface);
-				   
+
+	
+	if (scintiPixelNoSlab)
+	{
+		// build reflective skin surface around the scintillator pixel hole
+		new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
+			
+		// block optical photons escaping toward the detector
+		new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+					   physScintillatorPinhole, physDetector, opGaggDetectorSurface);
+	}
+	else
+	{
+		// build reflective skin surface around the scintillator pixel hole
+		new G4LogicalSkinSurface("skin",logicScintillator, opGaggPlasticSurface);
+			
+		// block optical photons escaping toward the detector
+		new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+					   physScintillator, physDetector, opGaggDetectorSurface);
+	}
 }
 
 void MyDetectorConstruction::SetVisualizationFeatures()
