@@ -3,9 +3,16 @@
 MyStackingAction::MyStackingAction()
 {
   G4cout << "ClassifyNewTrack is set on aTrack->GetParentID() == 1" << G4endl;
+  
+	fMessengerPrimary = new G4GenericMessenger(this, "/primary/", "Primary selection for stacking action");
+  
+	fMessengerPrimary->DeclareProperty("ion", fIonIsPrimary, "0 gamma, 1 ion");
 }
 
-MyStackingAction::~MyStackingAction() {}
+MyStackingAction::~MyStackingAction()
+{
+  delete fMessengerPrimary;
+}
 
 G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
   const G4Track* aTrack)
