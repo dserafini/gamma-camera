@@ -32,29 +32,36 @@
 /gps/energy 342 keV
 # /gps/energy 245 keV
 /gps/position 0 0 -100. mm
-/gps/direction 0 0 1
-# /gps/ang/type iso
+# /gps/direction 0 0 1
+/gps/ang/type iso
 /analysis/setFileName discard.root
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
-# spengo gli ottici
-# /process/inactivate Scintillation
 
 ################################################################################
 # run
 ################################################################################
 
-/run/printProgress 100
+/run/printProgress 100000
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
-#/analysis/setFileName directSlab.root
-#/scintillator/pixel 0
-#/run/reinitializeGeometry
-#/run/beamOn 1000
-
-/analysis/setFileName directPixel99mm.root
-/scintillator/scinti_hole_thickness 99. mm
-/scintillator/pixel 1
+/analysis/setFileName directScinti4mmColl1p5mm.root
+/collimator/hole_thickness 1.5 mm
 /run/reinitializeGeometry
-/run/beamOn 1000
+/run/beamOn 1000000
+
+/analysis/setFileName directScinti4mmColl2mm.root
+/collimator/hole_thickness 2. mm
+/run/reinitializeGeometry
+/run/beamOn 1000000
+
+/analysis/setFileName directScinti4mmColl1p2mm.root
+/collimator/hole_thickness 1.2 mm
+/run/reinitializeGeometry
+/run/beamOn 1000000
+
+/analysis/setFileName directScinti4mmColl1mm.root
+/collimator/hole_thickness 1 mm
+/run/reinitializeGeometry
+/run/beamOn 1000000
