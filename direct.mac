@@ -7,8 +7,8 @@
 /scintillator/pixel 1
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
-/scintillator/scinti_hole_thickness 4. mm
-/scintillator/scinti_septa_thickness 1. mm
+/scintillator/scinti_hole_thickness 3. mm
+/scintillator/scinti_septa_thickness .1 mm
 
 ################################################################################
 # define collimator
@@ -17,8 +17,8 @@
 /collimator/exist 1
 /collimator/case_side 10. cm
 /collimator/hole_length 30. mm
-/collimator/septa_thickness 1. mm
-/collimator/hole_thickness 2. mm
+/collimator/septa_thickness 1.5 mm
+/collimator/hole_thickness 3. mm
 
 /run/reinitializeGeometry
 
@@ -46,22 +46,5 @@
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
-/analysis/setFileName directScinti4mmColl1p5mm.root
-/collimator/hole_thickness 1.5 mm
-/run/reinitializeGeometry
-/run/beamOn 10000000
-
-/analysis/setFileName directScinti4mmColl2mm.root
-/collimator/hole_thickness 2. mm
-/run/reinitializeGeometry
-/run/beamOn 10000000
-
-/analysis/setFileName directScinti4mmColl1p2mm.root
-/collimator/hole_thickness 1.2 mm
-/run/reinitializeGeometry
-/run/beamOn 10000000
-
-/analysis/setFileName directScinti4mmColl1mm.root
-/collimator/hole_thickness 1 mm
-/run/reinitializeGeometry
+/analysis/setFileName directScinti3mmColl1p5mm.root
 /run/beamOn 10000000
