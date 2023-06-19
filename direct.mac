@@ -46,22 +46,7 @@
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
-/analysis/setFileName directScinti6mmColl1p5mm.root
-/scintillator/scinti_hole_thickness 6. mm
-/run/reinitializeGeometry
-/run/beamOn 10000000
-
-/analysis/setFileName directScinti10mmColl1p5mm.root
-/scintillator/scinti_hole_thickness 10. mm
-/run/reinitializeGeometry
-/run/beamOn 10000000
-
-/analysis/setFileName directScinti20mmColl1p5mm.root
-/scintillator/scinti_hole_thickness 20. mm
-/run/reinitializeGeometry
-/run/beamOn 10000000
-
-/analysis/setFileName directScinti48mmColl1p5mm.root
-/scintillator/scinti_hole_thickness 48. mm
+/scintillator/pixel 1
+/analysis/setFileName directSlabColl1p5mm.root
 /run/reinitializeGeometry
 /run/beamOn 10000000
