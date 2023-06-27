@@ -20,10 +20,7 @@ G4bool scintillatorHit::operator==(const scintillatorHit& right) const
 
 void scintillatorHit::Print()
 {
-  G4cout
-     << "SD trackID:\t" << fTrackID
-     << ",\tPostPosition: " << fPos
-     << G4endl;
+  return;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
