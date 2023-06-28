@@ -26,6 +26,18 @@ class scintillatorHit : public G4VHit
     // methods from base class
     void Print() override;
     void Draw() override;
+
+    // Set methods
+    void SetEdep     (G4double de)      { fEdep = de; };
+    void SetPos      (G4ThreeVector xyz){ fPos = xyz; };
+
+    // Get methods
+    G4double GetEdep() const     { return fEdep; };
+    G4ThreeVector GetPos() const { return fPos; };
+
+  private:
+    G4double      fEdep;
+    G4ThreeVector fPos;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
