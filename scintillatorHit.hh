@@ -8,6 +8,7 @@
 /// It defines data members to store the trackID, chamberNb, energy deposit,
 /// and position of charged particles in a selected volume:
 /// - fTrackID, fChamberNB, fEdep, fPos
+#include "G4ThreeVector.hh"
 
 class scintillatorHit : public G4VHit
 {
