@@ -9,6 +9,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4PhysicsOrderedFreeVector.hh"
 #include "G4OpticalPhoton.hh"
+#include "event.hh"
 
 #include "detectorHit.hh"
 
@@ -28,6 +29,7 @@ private:
 	G4ThreeVector fSigmaPos;
 	G4double fSigmaMod;
 	G4int nofHits;
+	MyEventAction *fEventAction;
 };
 
 #endif
