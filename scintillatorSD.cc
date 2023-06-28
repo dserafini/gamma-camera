@@ -7,6 +7,7 @@ MySensitiveScintillator::MySensitiveScintillator(G4String name, const G4String& 
     
   fHitsCollection = nullptr;
   collectionName.insert(hitsCollectionName);
+  fEventAction = G4RunManager::GetUserEventAction();
 }
 
 MySensitiveScintillator::~MySensitiveScintillator()
@@ -28,6 +29,19 @@ void MySensitiveScintillator::Initialize(G4HCofThisEvent* hce)
 G4bool MySensitiveScintillator::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
   G4cout << "MySensitiveScintillator::ProcessHits" << G4endl;
+
+  if(aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
+  {
+    G4double edep = aStep->GetTotalEnergyDeposit() / keV;
+    fEventAction->AddEdep(edep);
+    G4cout << "adding " << edep << " keV" << G4endl;
+
+    G4ThreeVector position = aStep->GetPreStepPoint()->GetPosition();
+    fEventAction->AddPosition(position, edep);
+    
+    return true;
+  }
+  
   return true;
 }
 
