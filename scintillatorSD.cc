@@ -36,18 +36,19 @@ void MySensitiveScintillator::Initialize(G4HCofThisEvent* hce)
 G4bool MySensitiveScintillator::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
   G4cout << "MySensitiveScintillator::ProcessHits" << G4endl;
+  
+  // energy deposit
+  G4double edep = aStep->GetTotalEnergyDeposit(); // [keV]
 
-  if(aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
-  {
-    G4double edep = aStep->GetTotalEnergyDeposit() / keV;
-    fEventAction->AddEdep(edep);
-    G4cout << "adding " << edep << " keV" << G4endl;
+  if (edep==0.) return false;
 
-    G4ThreeVector position = aStep->GetPreStepPoint()->GetPosition();
-    fEventAction->AddPosition(position, edep);
-    
-    return true;
-  }
+  auto newHit = new detectorHit();
+
+  newHit->SetEdep(edep);
+  newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
+
+  if (fHitsCollection)
+    fHitsCollection->insert( newHit );
   
   return true;
 }
@@ -57,20 +58,28 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 void MySensitiveScintillator::EndOfEvent(G4HCofThisEvent*)
 {
   // G4cout << "MySensitiveScintillator::EndOfEvent" << G4endl;
-  G4cout << "Energy deposition: " << fEdep << " keV" << G4endl;
 
+  nofHits = fHitsCollection->entries();
+  
+  // calculate mean position and energy deposit
+  for ( G4int i=0; i<nofHits; i++ )
+  {
+    fEdep += (*fHitsCollection)[i]->GetEdep();
+    fPosition += (*fHitsCollection)[i]->GetPos()*(*fHitsCollection)[i]->GetEdep();
+  }
+
+  if (fEdep>0)
+    fPosition /= fEdep; // normalize on the total energy
+  
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
-  // gammas
-  man->FillNtupleDColumn(0, 1, fEdep/keV); // [keV]
-  
+  G4cout << "Energy deposition: " << fEdep << " keV" << G4endl;
   G4cout << "fPosition: " << fPosition << " vector" << G4endl;
-  if (fEdep>0)
-    fPosition = fPosition/fEdep; // normalize on the total energy
   
-  man->FillNtupleDColumn(0, 2, fPosition.getX());
-  man->FillNtupleDColumn(0, 3, fPosition.getY());
-  man->FillNtupleDColumn(0, 4, fPosition.getZ());
+  man->FillNtupleDColumn(0, 1, fEdep/keV); // [keV]
+  man->FillNtupleDColumn(0, 2, fPosition.getX()/mm); // [mm]
+  man->FillNtupleDColumn(0, 3, fPosition.getY()/mm);
+  man->FillNtupleDColumn(0, 4, fPosition.getZ()/mm);
   man->AddNtupleRow(0);
 }
 
