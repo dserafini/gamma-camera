@@ -7,7 +7,6 @@
 #include "G4RunManager.hh"
 #include "G4SDManager.hh"
 #include "G4SystemOfUnits.hh"
-#include "event.hh"
 
 #include "scintillatorHit.hh"
 
@@ -24,6 +23,8 @@ private:
 	
 	scintillatorHitsCollection* fHitsCollection;
 	const MyEventAction *fEventAction;
+	G4double fEdep;
+	G4ThreeVector fPosition;
 };
 
 #endif
