@@ -23,7 +23,7 @@ private:
 	void EndOfEvent(G4HCofThisEvent* hitCollection) override;
 	
 	scintillatorHitsCollection* fHitsCollection;
-	MyEventAction *fEventAction;
+	const MyEventAction *fEventAction;
 };
 
 #endif
