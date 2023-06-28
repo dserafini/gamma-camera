@@ -42,7 +42,7 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
   if (edep==0.) return false;
 
-  auto newHit = new detectorHit();
+  auto newHit = new scintillatorHit();
 
   newHit->SetEdep(edep);
   newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
