@@ -22,7 +22,6 @@ private:
 	void EndOfEvent(G4HCofThisEvent* hitCollection) override;
 	
 	scintillatorHitsCollection* fHitsCollection;
-	const MyEventAction *fEventAction;
 	G4double fEdep;
 	G4ThreeVector fPosition;
 };
