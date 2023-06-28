@@ -27,7 +27,7 @@ void MySensitiveScintillator::Initialize(G4HCofThisEvent* hce)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 G4bool MySensitiveScintillator::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
-  // G4cout << "MySensitiveScintillator::ProcessHits" << G4endl;
+  G4cout << "MySensitiveScintillator::ProcessHits" << G4endl;
   return true;
 }
 
