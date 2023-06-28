@@ -24,6 +24,7 @@ private:
 	scintillatorHitsCollection* fHitsCollection;
 	G4double fEdep;
 	G4ThreeVector fPosition;
+	G4int nofHits;
 };
 
 #endif
