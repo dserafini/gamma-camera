@@ -36,8 +36,8 @@ class scintillatorHit : public G4VHit
     G4ThreeVector GetPos() const { return fPos; };
 
   private:
-    G4double      fEdep;
-    G4ThreeVector fPos;
+    G4double      fEdep = 0.;
+    G4ThreeVector fPos = G4ThreeVector();
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
