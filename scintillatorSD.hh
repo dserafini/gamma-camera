@@ -7,6 +7,7 @@
 #include "G4RunManager.hh"
 #include "G4SDManager.hh"
 #include "G4SystemOfUnits.hh"
+#include "event.hh"
 
 #include "scintillatorHit.hh"
 
@@ -22,6 +23,7 @@ private:
 	void EndOfEvent(G4HCofThisEvent* hitCollection) override;
 	
 	scintillatorHitsCollection* fHitsCollection;
+	MyEventAction *fEventAction;
 };
 
 #endif
