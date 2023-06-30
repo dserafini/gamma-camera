@@ -1,5 +1,5 @@
 #ifndef SCINTILLATORSD_HH
-#define SCINTILLATORSD_HH
+#define SCINTILLATORSD_HH 1
 
 #include "G4VSensitiveDetector.hh"
 #include "g4root.hh" // ok with geant version 10.7
