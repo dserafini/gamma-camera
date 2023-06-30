@@ -14,7 +14,7 @@ MySensitiveScintillator::~MySensitiveScintillator()
 
 void MySensitiveScintillator::Initialize(G4HCofThisEvent* hce)
 {
-  // G4cout << "MySensitiveScintillator::Initialize" << G4endl;
+  G4cout << "MySensitiveScintillator::Initialize" << G4endl;
   
   // Create hits collection
   fHitsCollection = new scintillatorHitsCollection(SensitiveDetectorName, collectionName[0]);
@@ -57,7 +57,7 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 void MySensitiveScintillator::EndOfEvent(G4HCofThisEvent*)
 {
-  // G4cout << "MySensitiveScintillator::EndOfEvent" << G4endl;
+  G4cout << "MySensitiveScintillator::EndOfEvent" << G4endl;
 
   nofHits = fHitsCollection->entries();
   
