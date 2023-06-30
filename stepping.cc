@@ -13,7 +13,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // G4cout << "MySteppingAction::UserSteppingAction" << G4endl;
   // we take the energy of the whole volume
   // or we take the energy of a single scoring volume
-  
+  /*
   G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
 
   // check if the volume where the step is in is also our scoring volume
@@ -33,7 +33,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     fEventAction->AddPosition(position, edep);
     
     return;
-  }
+  }*/
   
   if((volume == detectorConstruction->GetDetectorVolume()) && (step->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition()))
   {
