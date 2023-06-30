@@ -40,7 +40,7 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   // energy deposit
   G4double edep = aStep->GetTotalEnergyDeposit(); // [keV]
 
-  if (edep==0.) return false;
+  // if (edep==0.) return false;
 
   auto newHit = new scintillatorHit();
 
