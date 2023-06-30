@@ -33,7 +33,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     fEventAction->AddPosition(position, edep);
     
     return;
-  }*/
+  }
   
   if((volume == detectorConstruction->GetDetectorVolume()) && (step->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition()))
   {
@@ -48,5 +48,5 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
       step->GetTrack()->SetTrackStatus(fStopAndKill);
     
     return;
-  }
+  }*/
 }
