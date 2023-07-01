@@ -424,6 +424,6 @@ void MyDetectorConstruction::ConstructSDandField()
 	{
 		MySensitiveScintillator *sensScinti = new MySensitiveScintillator("SensitiveScintillator");
 		G4SDManager::GetSDMpointer()->AddNewDetector(sensScinti);
-		logicCollimatorPinhole->SetSensitiveDetector(sensScinti);
+		logicScintillator->SetSensitiveDetector(sensScinti);
 	}
 }
