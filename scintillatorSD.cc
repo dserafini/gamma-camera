@@ -9,7 +9,7 @@ MySensitiveScintillator::MySensitiveScintillator(G4String name) : G4VSensitiveDe
 MySensitiveScintillator::~MySensitiveScintillator()
 {}
 
-MySensitiveScintillator::Initialize()
+void MySensitiveScintillator::Initialize()
 {
   G4cout << "MySensitiveScintillator::Initialize" << G4endl;
   fEdep = 0.;
