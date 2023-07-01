@@ -10,7 +10,7 @@ MySteppingAction::~MySteppingAction()
 
 void MySteppingAction::UserSteppingAction(const G4Step *step)
 {
-  // G4cout << "MySteppingAction::UserSteppingAction" << G4endl;
+  G4cout << "MySteppingAction::UserSteppingAction" << G4endl;
   // we take the energy of the whole volume
   // or we take the energy of a single scoring volume
   /*
