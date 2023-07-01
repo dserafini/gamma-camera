@@ -7,6 +7,7 @@
 #include "G4RunManager.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4OpticalPhoton.hh"
+#include "G4ThreeVector.hh"
 
 
 class MySensitiveScintillator : public G4VSensitiveDetector
@@ -20,6 +21,7 @@ private:
 	void Initialize(G4HCofThisEvent*) override;
 	void EndOfEvent(G4HCofThisEvent*) override;
 	G4double fEdep;
+	G4ThreeVector fPosition;
 
 };
 
