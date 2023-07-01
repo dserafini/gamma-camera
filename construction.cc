@@ -325,6 +325,8 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	if (scintiPixelNoSlab)
 	{
 		ConstructPixelScintillator();
+
+		// set the sensitive scintillator with the same logical volume (logicScintillator)
 		logicScintillator = logicScintillatorPinhole;
 	}
 	else
@@ -423,7 +425,7 @@ void MyDetectorConstruction::ConstructSDandField()
 		logicDetector->SetSensitiveDetector(sensDet);
 	}
 
-	if(logicCollimatorPinhole != NULL)
+	if(logicScintillator != NULL)
 	{
 		MySensitiveScintillator *sensScinti = new MySensitiveScintillator("SensitiveScintillator");
 		G4SDManager::GetSDMpointer()->AddNewDetector(sensScinti);
