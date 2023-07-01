@@ -18,7 +18,7 @@ void MySensitiveScintillator::Initialize(G4HCofThisEvent*)
 
 G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *)
 {
-  G4cout << "MySensitiveScintillator::ProcessHits" << G4endl;
+  // G4cout << "MySensitiveScintillator::ProcessHits" << G4endl;
 
   fEdep += aStep->GetTotalEnergyDeposit();
   
