@@ -16,6 +16,7 @@ public:
 
 private:
 	virtual G4bool ProcessHits(G4Step*, G4TouchableHistory*);
+	void Initialize(G4HCofThisEvent*) override;
 	G4double fEdep;
 
 };
