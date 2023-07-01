@@ -19,7 +19,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // check if the volume where the step is in is also our scoring volume
   //const MyDetectorConstruction *detectorConstruction = static_cast<const MyDetectorConstruction*> (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
 
-  G4LogicalVolume *fScoringVolume = detectorConstruction->GetScoringVolume();
+  //G4LogicalVolume *fScoringVolume = detectorConstruction->GetScoringVolume();
   G4cout << "volume: " << volume->GetName() << G4endl;
   // G4cout << "fScoringVolume: " << fScoringVolume->GetName() << G4endl;
 
