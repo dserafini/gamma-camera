@@ -6,6 +6,7 @@
 #include "g4root_defs.hh" // ok with geant version 11.1
 #include "G4RunManager.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4OpticalPhoton.hh"
 
 
 class MySensitiveScintillator : public G4VSensitiveDetector
