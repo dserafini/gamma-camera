@@ -10,7 +10,7 @@
 ################################################################################
 # change geometry scintillator
 ################################################################################
-/scintillator/pixel 1
+/scintillator/pixel 0
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
 /scintillator/scinti_hole_thickness 18. mm
@@ -24,12 +24,12 @@
 ################################################################################
 # change source
 ################################################################################
-# /gps/particle gamma
-# /gps/energy 342 keV
+/gps/particle gamma
+/gps/energy 342 keV
 # /gps/particle opticalphoton
-/gps/particle ion
-/gps/ion 47 111 0 0.
-/gps/energy 0. eV
+# /gps/particle ion
+# /gps/ion 47 111 0 0.
+# /gps/energy 0. eV
 # position must be < 0 
 /gps/position 0 0. -1. mm
 /gps/direction 0 0 1
