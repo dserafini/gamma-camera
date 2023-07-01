@@ -20,6 +20,9 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
 {
   // G4cout << "MySensitiveScintillator::ProcessHits" << G4endl;
 
+  if (aStep->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition())
+    return false;
+
   fEdep += aStep->GetTotalEnergyDeposit();
   
   return true;
