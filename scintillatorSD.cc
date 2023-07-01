@@ -25,9 +25,10 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
   if (aStep->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition())
     return false;
 
-  fEdep += aStep->GetTotalEnergyDeposit();
+  G4double edep = aStep->GetTotalEnergyDeposit();
+  fEdep += edep;
   
-  fPosition = aStep->GetPreStepPoint()->GetPosition();
+  fPosition = aStep->GetPreStepPoint()->GetPosition() * edep;
   
   return true;
 }
@@ -35,6 +36,11 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
 void MySensitiveScintillator::EndOfEvent(G4HCofThisEvent*)
 {
   G4cout << "MySensitiveScintillator::EndOfEvent" << G4endl;
+
+  // normalize fPosition on total energy deposit
+  if (fEdep>0)
+    fPosition /= fEdep;
+  
   G4cout << "Energy deposited: " << fEdep/keV << " keV" << G4endl;
   G4cout << "Position: " << fPosition << " keV" << G4endl;
   return;
