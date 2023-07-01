@@ -8,6 +8,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4OpticalPhoton.hh"
 #include "G4ThreeVector.hh"
+#include "G4SDManager.hh"
 
 
 class MySensitiveScintillator : public G4VSensitiveDetector
