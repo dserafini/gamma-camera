@@ -9,7 +9,7 @@ MyPhysicsList::MyPhysicsList()
   RegisterPhysics(new G4EmStandardPhysics_option3());
   //
   G4OpticalPhysics * opticalPhysics = new G4OpticalPhysics();
-  //RegisterPhysics(opticalPhysics);
+  RegisterPhysics(opticalPhysics);
 }
 
 MyPhysicsList::~MyPhysicsList()
