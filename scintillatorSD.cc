@@ -24,3 +24,10 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
   
   return true;
 }
+
+void MySensitiveScintillator::EndOfEvent(G4HCofThisEvent*)
+{
+  G4cout << "MySensitiveScintillator::EndOfEvent" << G4endl;
+  G4cout << "Energy deposited: " << fEdep/keV << " keV" << G4endl;
+  return;
+}
