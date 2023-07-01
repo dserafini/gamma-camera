@@ -27,8 +27,9 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
 
   G4double edep = aStep->GetTotalEnergyDeposit();
   fEdep += edep;
-  
-  fPosition = aStep->GetPreStepPoint()->GetPosition() * edep;
+
+  G4ThreeVector delta = aStep->GetPreStepPoint()->GetPosition() * edep;
+  fPosition += delta;
   
   return true;
 }
