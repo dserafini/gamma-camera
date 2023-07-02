@@ -233,7 +233,7 @@ void MyDetectorConstruction::ConstructScintillator()
 		0,                       // copy number
 		1); // checking overlaps
 
-	fScoringVolume = logicScintillator;
+	fScoringScintillator = logicScintillator;
 }
 
 void MyDetectorConstruction::ConstructPixelScintillator()
@@ -289,7 +289,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialGAGG, "logicScintillatorPinhole");
 	physScintillatorPinhole = new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
 
-	fScoringVolume = logicScintillatorPinhole;
+	fScoringScintillator = logicScintillatorPinhole;
 }
 
 void MyDetectorConstruction::ConstructDetector()
@@ -325,12 +325,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		ConstructCollimator();
 
 	if (scintiPixelNoSlab)
-	{
 		ConstructPixelScintillator();
-
-		// set the sensitive scintillator with the same logical volume (logicScintillator)
-		logicScintillator = logicScintillatorPinhole;
-	}
 	else
 		ConstructScintillator();
 	
@@ -427,10 +422,10 @@ void MyDetectorConstruction::ConstructSDandField()
 		logicDetector->SetSensitiveDetector(sensDet);
 	}
 
-	if(logicScintillator != NULL)
+	if(fScoringScintillator != NULL)
 	{
 		MySensitiveScintillator *sensScinti = new MySensitiveScintillator("SensitiveScintillator");
 		G4SDManager::GetSDMpointer()->AddNewDetector(sensScinti);
-		logicScintillator->SetSensitiveDetector(sensScinti);
+		fScoringScintillator->SetSensitiveDetector(sensScinti);
 	}
 }
