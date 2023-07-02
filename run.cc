@@ -23,6 +23,13 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "pSigmaY"); // [mm]
   man->CreateNtupleDColumn(0, "pSigmaR"); // [mm]
   man->FinishNtuple(0);
+
+  // save SiPM pixel information not event by event
+  man->CreateNtuple("Sipm", "Sipm");
+  man->CreateNtupleIColumn(0, "eventID"); // [1]
+  man->CreateNtupleIColumn(0, "pNumber"); // [1]
+  man->CreateNtupleDColumn(0, "pX"); // [mm]
+  man->CreateNtupleDColumn(0, "pY"); // [mm]
 }
 
 MyRunAction::~MyRunAction()
