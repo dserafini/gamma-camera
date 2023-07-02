@@ -40,15 +40,37 @@ public:
 private:
 	virtual void ConstructSDandField();
 
-	// declare some things here to modify geometry on the run
-	G4Box *solidWorld, *solidScintillator, *solidDetector;
-	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
-	G4LogicalVolume *logicWorld, *logicScintillator, *logicDetector;
+	// world
+	G4Box *solidWorld;
+	G4LogicalVolume *logicWorld;
+	G4VPhysicalVolume *physWorld;
+
+	// scintillator slab
+	G4Box *solidScintillator;
+	G4LogicalVolume *logicScintillator;
+	G4VPhysicalVolume *physScintillator;
+
+	// scintillator pixel
+	G4Box *solidScintillator;
 	G4LogicalVolume *logicScintillatorPixel, *logicScintillatorPinhole;
-	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
-	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator, *physDetector;
 	G4VPhysicalVolume *physScintillatorPinhole, *physScintillatorPixel, *physScintillatorMatrix;
 
+	//detector slab
+	G4Box *solidDetector;
+	G4LogicalVolume *logicDetector;
+	G4VPhysicalVolume *physDetector;
+
+	// detector pixel
+	G4Box *solidDetector;
+	G4LogicalVolume *logicDetectorPixel;
+	G4VPhysicalVolume *physDetectorPixel, *physDetectorMatrix;
+
+	// collimator pixel
+	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
+	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
+	G4VPhysicalVolume *physCollimator, *physCollimatorMatrix;
+
+	// materials
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
 	G4Material *materialPlastic;
 	G4Element *elLa, *elBr;
@@ -92,7 +114,7 @@ private:
 	
 	// detector
 	G4double det_pixel_size, detector_depth, detector_side;
-	G4int det_holes_number;
+	G4int det_pixels_number;
 	G4int detPixelNoSlab;
 };
 
