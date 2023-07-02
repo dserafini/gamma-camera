@@ -268,28 +268,47 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	
 	// case
 	G4cout << "defining the scintillator case" << G4endl;
-	G4Box* solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", case_side/2., case_side/2., scinti_hole_length/2.);
-	G4LogicalVolume *logicScintillatorMatrix = new G4LogicalVolume(solidScintillatorMatrix, materialPlastic, "logicScintillatorMatrix");
+	solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", case_side/2., case_side/2., scinti_hole_length/2.);
+	logicScintillatorMatrix = new G4LogicalVolume(solidScintillatorMatrix, materialPlastic, "logicScintillatorMatrix");
 	physScintillator = new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth/2.), logicScintillatorMatrix, "physScintillatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the scintillator array element" << G4endl;
-	G4Box* solidScintillatorArray = new G4Box("solidScintillatorArray", case_side/2., scinti_pixel_size/2., scinti_hole_length/2.);
-	G4LogicalVolume *logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialPlastic, "logicScintillatorArray");
+	solidScintillatorArray = new G4Box("solidScintillatorArray", case_side/2., scinti_pixel_size/2., scinti_hole_length/2.);
+	logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialPlastic, "logicScintillatorArray");
 	new G4PVReplica("physScintillatorArray", logicScintillatorArray, logicScintillatorMatrix, kYAxis, scinti_holes_number, scinti_pixel_size, 0);
 	
 	// pixel
 	G4cout << "defining the scintillator pixel element" << G4endl;
-	G4Box* solidScintillatorPixel = new G4Box("solidScintillatorPixel", scinti_pixel_size/2., scinti_pixel_size/2., scinti_hole_length/2.);
+	solidScintillatorPixel = new G4Box("solidScintillatorPixel", scinti_pixel_size/2., scinti_pixel_size/2., scinti_hole_length/2.);
 	logicScintillatorPixel = new G4LogicalVolume(solidScintillatorPixel, materialPlastic, "logicScintillatorPixel");
 	physScintillatorPixel = new G4PVReplica("physScintillatorPixel", logicScintillatorPixel, logicScintillatorArray, kXAxis, scinti_holes_number, scinti_pixel_size, 0);
 	
 	// pinhole
-	G4Box* solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", scinti_hole_thickness/2., scinti_hole_thickness/2., scinti_hole_length/2.);
+	solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", scinti_hole_thickness/2., scinti_hole_thickness/2., scinti_hole_length/2.);
 	logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialGAGG, "logicScintillatorPinhole");
 	physScintillatorPinhole = new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
 
 	fScoringScintillator = logicScintillatorPinhole;
+}
+
+void MyDetectorConstruction::ConstructDetector()
+{
+	G4cout << "MyDetectorConstruction::ConstructDetector" << G4endl;
+	
+	solidDetector = new G4Box("solidDetector", detector_side/2., detector_side/2., detector_depth/2.);
+	logicDetector = new G4LogicalVolume(solidDetector, materialPlastic, "logicDetector");
+
+	physDetector = new G4PVPlacement(0,  // no rotation
+		G4ThreeVector(0.,0.,hole_length + slab_depth + detector_depth/2.),
+		logicDetector,             // its logical volume
+		"physDetector",           // its name
+		logicWorld,                  // its mother volume
+		false,                   // no boolean operations
+		0,                       // copy number
+		1); // checking overlaps
+
+	fScoringDetector = logicDetector;
 }
 
 void MyDetectorConstruction::ConstructPixelDetector()
@@ -318,42 +337,23 @@ void MyDetectorConstruction::ConstructPixelDetector()
 	
 	// case
 	G4cout << "defining the detector case" << G4endl;
-	G4Box* solidDetectorMatrix = new G4Box("solidDetectorMatrix", detector_side/2., detector_side/2., detector_depth/2.);
-	G4LogicalVolume *logicDetectorMatrix = new G4LogicalVolume(solidDetectorMatrix, materialPlastic, "logicDetectorMatrix");
+	solidDetectorMatrix = new G4Box("solidDetectorMatrix", detector_side/2., detector_side/2., detector_depth/2.);
+	logicDetectorMatrix = new G4LogicalVolume(solidDetectorMatrix, materialPlastic, "logicDetectorMatrix");
 	physDetector = new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth + detector_depth/2.), logicDetectorMatrix, "physDetectorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the detector array element" << G4endl;
-	G4Box* solidDetectorArray = new G4Box("solidDetectorArray", detector_side/2., det_pixel_size/2., detector_depth/2.);
-	G4LogicalVolume *logicDetectorArray = new G4LogicalVolume(solidDetectorArray, materialPlastic, "logicDetectorArray");
+	solidDetectorArray = new G4Box("solidDetectorArray", detector_side/2., det_pixel_size/2., detector_depth/2.);
+	logicDetectorArray = new G4LogicalVolume(solidDetectorArray, materialPlastic, "logicDetectorArray");
 	new G4PVReplica("physDetectorArray", logicDetectorArray, logicDetectorMatrix, kYAxis, det_holes_number, det_pixel_size, 0);
 	
 	// pixel
 	G4cout << "defining the detector pixel element" << G4endl;
-	G4Box* solidDetectorPixel = new G4Box("solidDetectorPixel", det_pixel_size/2., det_pixel_size/2., detector_depth/2.);
+	solidDetectorPixel = new G4Box("solidDetectorPixel", det_pixel_size/2., det_pixel_size/2., detector_depth/2.);
 	logicDetectorPixel = new G4LogicalVolume(solidDetectorPixel, materialPlastic, "logicDetectorPixel");
 	physDetectorPixel = new G4PVReplica("physDetectorPixel", logicDetectorPixel, logicDetectorArray, kXAxis, det_holes_number, det_pixel_size, 0);
 	
 	fScoringDetector = logicDetectorPixel;
-}
-
-void MyDetectorConstruction::ConstructDetector()
-{
-	G4cout << "MyDetectorConstruction::ConstructDetector" << G4endl;
-	
-	solidDetector = new G4Box("solidDetector", detector_side/2., detector_side/2., detector_depth/2.);
-	logicDetector = new G4LogicalVolume(solidDetector, materialPlastic, "logicDetector");
-
-	physDetector = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,hole_length + slab_depth + detector_depth/2.),
-		logicDetector,             // its logical volume
-		"physDetector",           // its name
-		logicWorld,                  // its mother volume
-		false,                   // no boolean operations
-		0,                       // copy number
-		1); // checking overlaps
-
-	fScoringDetector = logicDetector;
 }
 
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
