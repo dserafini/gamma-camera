@@ -122,6 +122,13 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   man->FillNtupleDColumn(0, 9, fSigmaPos.getX());
   man->FillNtupleDColumn(0, 10, fSigmaPos.getY());
   man->FillNtupleDColumn(0, 11, fSigmaMod);
+
+  // save pixel tree
+  vector <G4ThreeVector> pixelPos;
+  vector <G4int> pixelCount;
+  for ( G4int i=0; i<nofHits; i++ )
+  {
+  }
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
