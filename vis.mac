@@ -19,7 +19,7 @@
 # change geometry detector
 ################################################################################
 /detector/pixel 1
-/scintillator/det_pixel_size 20. mm
+/detector/det_pixel_size 20. mm
 
 /run/reinitializeGeometry
 
