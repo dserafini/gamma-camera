@@ -14,7 +14,7 @@
 ################################################################################
 
 /collimator/exist 1
-/collimator/case_side 37. mm
+/collimator/case_side 100. mm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
