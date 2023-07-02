@@ -124,8 +124,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   man->FillNtupleDColumn(0, 11, fSigmaMod);
 
   // save pixel tree
-  vector <G4ThreeVector> pixelPos;
-  vector <G4int> pixelCount;
+  std::vector <G4ThreeVector> pixelPos;
+  std::vector <G4int> pixelCount;
   for ( G4int i=0; i<nofHits; i++ )
   {
   }
