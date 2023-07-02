@@ -14,7 +14,7 @@ void MyEventAction::BeginOfEventAction(const G4Event*)
 
 void MyEventAction::EndOfEventAction(const G4Event*)
 {
-  // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
+  G4cout << "MyEventAction::EndOfEventAction" << G4endl;
 
   G4AnalysisManager *man = G4AnalysisManager::Instance();
   man->AddNtupleRow(0);
