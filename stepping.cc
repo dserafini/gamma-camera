@@ -50,6 +50,10 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     return;
   }*/
 
-  if (step->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition() && step->GetTrack()->GetTrackLength() > 2*cm)
-    step->GetTrack()->SetTrackStatus(fStopAndKill);
+  G4Track *track = step->GetTrack();
+  if (track)
+  {
+    if (track->GetParticleDefinition() == G4OpticalPhoton::Definition() && track->GetTrackLength() > 2*cm)
+      track->SetTrackStatus(fStopAndKill);
+  }
 }
