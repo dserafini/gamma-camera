@@ -383,8 +383,11 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	else
 		ConstructScintillator();
 	
-	// ConstructDetector();
-	ConstructPixelDetector();
+	if (detPixelNoSlab)
+		ConstructPixelDetector();
+	else
+		ConstructDetector();
+
 	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
 
