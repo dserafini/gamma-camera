@@ -67,7 +67,7 @@ private:
 	G4GenericMessenger *fMessengerCollimator;
 	G4GenericMessenger *fMessengerScintillator;
 
-	G4LogicalVolume *fScoringVolume;
+	G4LogicalVolume *fScoringScintillator;
 
 	// declare variables used for the messenger
 	G4int nCols, nRows;
