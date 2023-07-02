@@ -345,7 +345,7 @@ void MyDetectorConstruction::ConstructPixelDetector()
 	G4cout << "defining the detector array element" << G4endl;
 	solidDetectorArray = new G4Box("solidDetectorArray", detector_side/2., det_pixel_size/2., detector_depth/2.);
 	logicDetectorArray = new G4LogicalVolume(solidDetectorArray, materialPlastic, "logicDetectorArray");
-	new G4PVReplica("physDetectorArray", logicDetectorArray, logicDetectorMatrix, kYAxis, det_holes_number, det_pixel_size, 0);
+	new G4PVReplica("physDetectorArray", logicDetectorArray, logicDetectorMatrix, kYAxis, det_pixels_number, det_pixel_size, 0);
 	
 	// pixel
 	G4cout << "defining the detector pixel element" << G4endl;
