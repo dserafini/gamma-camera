@@ -42,6 +42,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	scinti_pixel_size = hole_thickness + septa_thickness;
 	scinti_septa_thickness = 10*um;
 	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
+	fScoringScintillator = 0;
 
 	// define materials just once
 	DefineMaterials();
@@ -57,6 +58,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// detector parameters
 	detector_side = slab_side;
 	detector_depth = 1*mm;
+	fScoringDetector = 0;
 }
 
 MyDetectorConstruction::~MyDetectorConstruction()
@@ -290,6 +292,51 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	fScoringScintillator = logicScintillatorPinhole;
 }
 
+void MyDetectorConstruction::ConstructPixelDetector()
+{
+	G4cout << "MyDetectorConstruction::ConstructPixelDetector" << G4endl;
+	
+	// Derived parameters
+	det_pixels_number = (G4int) detector_side / det_pixel_size;
+	
+	// check proper parameters
+	if (scinti_holes_number < 1)
+	{
+		G4cout << "Error: pixel larger than case!" << G4endl;
+		G4cout << "return to default values" << G4endl;;
+		det_pixel_size = 3*mm;
+		det_pixels_number = (G4int) detector_side / det_pixel_size;
+	}
+	if ((det_pixels_number % 2) < 1)
+		det_pixels_number = det_pixels_number - 1;
+	
+	// derived parameters
+	detector_side = (G4double) det_pixel_size * det_pixels_number;
+	G4cout << "det_pixel_size: " << det_pixel_size / mm << " mm" << G4endl;
+	G4cout << "det_pixels_number: " << det_pixels_number << " " << G4endl;
+	G4cout << "detector_side: " << detector_side / mm << " mm" << G4endl;
+	
+	// case
+	G4cout << "defining the detector case" << G4endl;
+	G4Box* solidDetectorMatrix = new G4Box("solidDetectorMatrix", detector_side/2., detector_side/2., detector_depth/2.);
+	G4LogicalVolume *logicDetectorMatrix = new G4LogicalVolume(solidDetectorMatrix, materialPlastic, "logicDetectorMatrix");
+	physDetector = new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth + detector_depth/2.), logicDetectorMatrix, "physDetectorMatrix", logicWorld, false, 0, true);
+	
+	// array
+	G4cout << "defining the detector array element" << G4endl;
+	G4Box* solidDetectorArray = new G4Box("solidDetectorArray", detector_side/2., det_pixel_size/2., detector_depth/2.);
+	G4LogicalVolume *logicDetectorArray = new G4LogicalVolume(solidDetectorArray, materialPlastic, "logicDetectorArray");
+	new G4PVReplica("physDetectorArray", logicDetectorArray, logicDetectorMatrix, kYAxis, det_holes_number, det_pixel_size, 0);
+	
+	// pixel
+	G4cout << "defining the detector pixel element" << G4endl;
+	G4Box* solidDetectorPixel = new G4Box("solidDetectorPixel", det_pixel_size/2., det_pixel_size/2., detector_depth/2.);
+	logicDetectorPixel = new G4LogicalVolume(solidDetectorPixel, materialPlastic, "logicDetectorPixel");
+	physDetectorPixel = new G4PVReplica("physDetectorPixel", logicDetectorPixel, logicDetectorArray, kXAxis, det_holes_number, det_pixel_size, 0);
+	
+	fScoringDetector = logicDetectorPixel;
+}
+
 void MyDetectorConstruction::ConstructDetector()
 {
 	G4cout << "MyDetectorConstruction::ConstructDetector" << G4endl;
@@ -305,6 +352,8 @@ void MyDetectorConstruction::ConstructDetector()
 		false,                   // no boolean operations
 		0,                       // copy number
 		1); // checking overlaps
+
+	fScoringDetector = logicDetector;
 }
 
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
@@ -327,7 +376,8 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	else
 		ConstructScintillator();
 	
-	ConstructDetector();
+	// ConstructDetector();
+	ConstructPixelDetector();
 	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
 
@@ -413,11 +463,11 @@ void MyDetectorConstruction::ConstructSDandField()
 {
 	G4cout << "MyDetectorConstruction::ConstructSDandField" << G4endl;
 
-	if(logicDetector != NULL)
+	if(fScoringDetector != NULL)
 	{
 		MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector","SensitiveDetectorHitsCollection");
 		G4SDManager::GetSDMpointer()->AddNewDetector(sensDet);
-		logicDetector->SetSensitiveDetector(sensDet);
+		fScoringDetector->SetSensitiveDetector(sensDet);
 	}
 
 	if(fScoringScintillator != NULL)
