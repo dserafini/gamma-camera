@@ -59,6 +59,16 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
   // newHit->Print();
   // newHit->Draw();
+
+  // get volume position
+  // G4VPhysicalVolume *vol = aStep->GetTrack()->GetVolume();
+  // if (vol)
+  // {
+    // G4cout << "name " << vol->GetName();
+    // G4cout << "\t, copyno " << vol->GetCopyNo();
+    // G4cout << "\t, copyno " << vol->GetObjectTranslation();
+    // G4cout << G4endl;
+  // }
   
   // kill every detected photon
   aStep->GetTrack()->SetTrackStatus(fStopAndKill);
