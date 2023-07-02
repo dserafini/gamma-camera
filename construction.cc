@@ -319,7 +319,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		ConstructPixelScintillator();
 
 		// set the sensitive scintillator with the same logical volume (logicScintillator)
-		logicScintillator = logicScintillatorPinhole;
+		logicScintillator = logicScintillatorPixel;
 	}
 	else
 		ConstructScintillator();
