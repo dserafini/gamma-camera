@@ -44,6 +44,18 @@ MyDetectorConstruction::MyDetectorConstruction()
 	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
 	fScoringScintillator = 0;
 
+	// detector commands
+	fMessengerDetector = new G4GenericMessenger(this, "/detector/", "Detector Construction");
+	fMessengerDetector->DeclarePropertyWithUnit("det_pixel_size", "mm", det_pixel_size, "Size of the detector pixels");
+	fMessengerDetector->DeclareProperty("pixel", detPixelNoSlab, "0 slab, 1 matrix");
+
+	// detector parameters
+	det_pixel_size = 3*mm;
+	detPixelNoSlab = 1;
+	detector_side = slab_side;
+	detector_depth = 1*mm;
+	fScoringDetector = 0;
+
 	// define materials just once
 	DefineMaterials();
 	DefineMaterialsProperties();
@@ -54,11 +66,6 @@ MyDetectorConstruction::MyDetectorConstruction()
 	zWorld = 5*m;
 
 	isCherenkov = false;
-	
-	// detector parameters
-	detector_side = slab_side;
-	detector_depth = 1*mm;
-	fScoringDetector = 0;
 }
 
 MyDetectorConstruction::~MyDetectorConstruction()
