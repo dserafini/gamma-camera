@@ -42,7 +42,7 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
 
 void MySensitiveScintillator::EndOfEvent(G4HCofThisEvent*)
 {
-  // G4cout << "MySensitiveScintillator::EndOfEvent" << G4endl;
+  G4cout << "MySensitiveScintillator::EndOfEvent" << G4endl;
 
   // normalize fPosition on total energy deposit
   if (fEdep>0)
