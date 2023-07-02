@@ -13,7 +13,7 @@
 /scintillator/pixel 1
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
-/scintillator/scinti_hole_thickness 20. mm
+/scintillator/scinti_pixel_size 20. mm
 
 /run/reinitializeGeometry
 
