@@ -53,6 +53,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
   newHit->SetEdep(edep);
   newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
+  newHit->SetPixelPos (aStep->GetPreStepPoint()->GetPhysicalVolume()->GetObjectTranslation());
 
   if (fHitsCollection)
     fHitsCollection->insert( newHit );
@@ -128,8 +129,15 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   std::vector <G4int> pixelCount;
   for ( G4int i=0; i<nofHits; i++ )
   {
+    auto it = std::find(pixelPos.begin(),pixelPos.end(),(*fHitsCollection)[i]->GetPixelPos());
+    if(it == pixelPos.end())
+    {
+      pixelPos.push_back((*fHitsCollection)[i]->GetPixelPos());
+      pixelCount.push_back(1);
+    }
+    else
+      pixelCount.at(std::distance(pixelPos.begin(),it)) += 1;
   }
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
