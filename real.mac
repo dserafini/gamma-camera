@@ -19,6 +19,12 @@
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
 
+################################################################################
+# change geometry detector
+################################################################################
+/detector/pixel 1
+/detector/det_pixel_size 3. mm
+
 /run/reinitializeGeometry
 
 /run/initialize
