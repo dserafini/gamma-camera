@@ -61,13 +61,15 @@ private:
 	void ConstructPixelScintillator();
 	void ConstructCollimator();
 	void ConstructDetector();
+	void ConstructPixelDetector();
 	void SetVisualizationFeatures();
 
 	// we do not need to access the messenger from outside
 	G4GenericMessenger *fMessengerCollimator;
 	G4GenericMessenger *fMessengerScintillator;
+	G4GenericMessenger *fMessengerDetector;
 
-	G4LogicalVolume *fScoringScintillator;
+	G4LogicalVolume *fScoringScintillator, *fScoringDetector;
 
 	// declare variables used for the messenger
 	G4int nCols, nRows;
@@ -89,7 +91,9 @@ private:
 	G4int scintiPixelNoSlab;
 	
 	// detector
-	G4double detector_depth, detector_side;
+	G4double det_pixel_size, detector_depth, detector_side;
+	G4int det_holes_number;
+	G4int detPixelNoSlab;
 };
 
 #endif
