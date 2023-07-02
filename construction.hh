@@ -44,10 +44,10 @@ private:
 	G4Box *solidWorld, *solidScintillator, *solidDetector;
 	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
 	G4LogicalVolume *logicWorld, *logicScintillator, *logicDetector;
-	G4LogicalVolume *logicScintillatorPixel, *logicScintillatorPinhole;
+	G4LogicalVolume *logicScintillatorPixel;
 	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
 	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator, *physDetector;
-	G4VPhysicalVolume *physScintillatorPinhole, *physScintillatorPixel, *physScintillatorMatrix;
+	G4VPhysicalVolume *physScintillatorPixel, *physScintillatorMatrix;
 
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
 	G4Material *materialPlastic;
@@ -84,7 +84,7 @@ private:
 	G4int holes_number, collimatorExist;
 	
 	// scintillator
-	G4double slab_depth, slab_side, scinti_pixel_size, scinti_septa_thickness, scinti_hole_thickness, scinti_hole_length;
+	G4double slab_depth, slab_side, scinti_pixel_size, scinti_hole_thickness, scinti_hole_length;
 	G4int scinti_holes_number;
 	G4int scintiPixelNoSlab;
 	
