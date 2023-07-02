@@ -387,6 +387,9 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	{
 		// build reflective skin surface around the scintillator pixel hole
 		new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggDetectorSurface2);
+		
+		// build reflective skin surface around the scintillator pixel hole
+		new G4LogicalSkinSurface("skin",logicScintillatorPixel, opGaggPlasticSurface);
 			
 		// block optical photons escaping toward the detector
 		new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
