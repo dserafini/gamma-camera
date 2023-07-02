@@ -37,6 +37,7 @@ class detectorHit : public G4VHit
     // Get methods
     G4int GetTrackID() const     { return fTrackID; };
     G4double GetEdep() const     { return fEdep; };
+    G4ThreeVector GetPos() const { return fPos; };
     G4ThreeVector GetPixelPos() const { return fPixelPos; };
 
   private:
