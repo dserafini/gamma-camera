@@ -49,4 +49,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
     
     return;
   }*/
+
+  if (step->GetTrack()->GetTrackLength() > 1*m)
+    step->GetTrack()->SetTrackStatus(fStopAndKill);
 }
