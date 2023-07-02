@@ -6,18 +6,18 @@
 
 /scintillator/pixel 1
 /scintillator/slab_side 10. cm
-/scintillator/slab_depth 3. cm
-/scintillator/scinti_pixel_size 3. mm
+/scintillator/slab_depth 26. mm
+/scintillator/scinti_pixel_size 1. mm
 
 ################################################################################
 # define collimator
 ################################################################################
 
 /collimator/exist 1
-/collimator/case_side 10. cm
+/collimator/case_side 100. mm
 /collimator/hole_length 30. mm
-/collimator/septa_thickness 1.5 mm
-/collimator/hole_thickness 3. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
 
 /run/reinitializeGeometry
 

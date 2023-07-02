@@ -33,15 +33,15 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerScintillator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the collimator");
 	fMessengerScintillator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
 	fMessengerScintillator->DeclareProperty("pixel", scintiPixelNoSlab, "0 slab, 1 matrix");
-	fMessengerScintillator->DeclarePropertyWithUnit("scinti_hole_thickness", "mm", scinti_hole_thickness, "Thickness of the scintillator holes");
-	fMessengerScintillator->DeclarePropertyWithUnit("scinti_septa_thickness", "mm", scinti_septa_thickness, "Thickness of the scintillator septa");
+	fMessengerScintillator->DeclarePropertyWithUnit("scinti_pixel_size", "mm", scinti_pixel_size, "Size of the scintillator pixels");
 	
 	// scintillator parameters
 	slab_side  = case_side;
 	slab_depth = hole_length/3.;
 	scintiPixelNoSlab = 1;
-	scinti_hole_thickness = hole_thickness;
-	scinti_septa_thickness = septa_thickness;
+	scinti_pixel_size = hole_thickness + septa_thickness;
+	scinti_septa_thickness = 10*um;
+	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
 
 	// define materials just once
 	DefineMaterials();
@@ -233,7 +233,7 @@ void MyDetectorConstruction::ConstructScintillator()
 		0,                       // copy number
 		1); // checking overlaps
 
-	fScoringVolume = logicScintillator;
+	fScoringScintillator = logicScintillator;
 }
 
 void MyDetectorConstruction::ConstructPixelScintillator()
@@ -241,7 +241,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	G4cout << "MyDetectorConstruction::ConstructPixelScintillator" << G4endl;
 	
 	// Derived parameters
-	scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
+	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
 	scinti_hole_length = slab_depth;
 	scinti_holes_number = (G4int) case_side / scinti_pixel_size;
 	
@@ -250,8 +250,8 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	{
 		G4cout << "Error: pixel larger than case!" << G4endl;
 		G4cout << "return to default values" << G4endl;
-		scinti_septa_thickness = 1.*mm;
-		scinti_hole_thickness = 2.*mm;
+		scinti_septa_thickness = 10.*um;
+		scinti_hole_thickness = 2.*mm - scinti_septa_thickness;
 		scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
 		scinti_holes_number = (G4int) case_side / scinti_pixel_size;
 	}
@@ -287,7 +287,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialGAGG, "logicScintillatorPinhole");
 	physScintillatorPinhole = new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
 
-	fScoringVolume = logicScintillatorPinhole;
+	fScoringScintillator = logicScintillatorPinhole;
 }
 
 void MyDetectorConstruction::ConstructDetector()
@@ -323,12 +323,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		ConstructCollimator();
 
 	if (scintiPixelNoSlab)
-	{
 		ConstructPixelScintillator();
-
-		// set the sensitive scintillator with the same logical volume (logicScintillator)
-		logicScintillator = logicScintillatorPinhole;
-	}
 	else
 		ConstructScintillator();
 	
@@ -425,10 +420,10 @@ void MyDetectorConstruction::ConstructSDandField()
 		logicDetector->SetSensitiveDetector(sensDet);
 	}
 
-	if(logicScintillator != NULL)
+	if(fScoringScintillator != NULL)
 	{
 		MySensitiveScintillator *sensScinti = new MySensitiveScintillator("SensitiveScintillator");
 		G4SDManager::GetSDMpointer()->AddNewDetector(sensScinti);
-		logicScintillator->SetSensitiveDetector(sensScinti);
+		fScoringScintillator->SetSensitiveDetector(sensScinti);
 	}
 }
