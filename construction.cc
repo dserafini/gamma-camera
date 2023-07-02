@@ -53,7 +53,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	det_pixel_size = 3*mm;
 	detPixelNoSlab = 1;
 	detector_side = slab_side;
-	detector_depth = 1*mm;
+	detector_depth = 10*um;
 	fScoringDetector = 0;
 
 	// define materials just once
