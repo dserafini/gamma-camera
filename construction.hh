@@ -31,7 +31,7 @@ public:
 	~MyDetectorConstruction();
 
 	// create a scoring volume to store only the energy deposited in the radiator
-	G4LogicalVolume *GetScoringVolume() const { return fScoringVolume; }
+	G4LogicalVolume *GetScoringScintillator() const { return fScoringScintillator; }
 	G4LogicalVolume *GetDetectorVolume() const { return logicDetector; }
 
 	virtual G4VPhysicalVolume *Construct();
