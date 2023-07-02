@@ -15,6 +15,12 @@
 /scintillator/slab_depth 3. cm
 /scintillator/scinti_pixel_size 20. mm
 
+################################################################################
+# change geometry detector
+################################################################################
+/detector/pixel 1
+/scintillator/det_pixel_size 20. mm
+
 /run/reinitializeGeometry
 
 # initalize if not done in the main
