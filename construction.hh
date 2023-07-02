@@ -51,8 +51,8 @@ private:
 	G4VPhysicalVolume *physScintillator;
 
 	// scintillator pixel
-	G4Box *solidScintillator;
-	G4LogicalVolume *logicScintillatorPixel, *logicScintillatorPinhole;
+	G4Box *solidScintillatorPinhole, *solidScintillatorPixel, *solidScintillatorArray, *solidScintillatorMatrix;
+	G4LogicalVolume *logicScintillatorMatrix, *logicScintillatorArray, *logicScintillatorPixel, *logicScintillatorPinhole;
 	G4VPhysicalVolume *physScintillatorPinhole, *physScintillatorPixel, *physScintillatorMatrix;
 
 	//detector slab
@@ -61,8 +61,8 @@ private:
 	G4VPhysicalVolume *physDetector;
 
 	// detector pixel
-	G4Box *solidDetector;
-	G4LogicalVolume *logicDetectorPixel;
+	G4Box *solidDetectorPixel, *solidDetectorArray, *solidDetectorMatrix;
+	G4LogicalVolume *logicDetectorPixel, *logicDetectorArray, *logicDetectorMatrix;
 	G4VPhysicalVolume *physDetectorPixel, *physDetectorMatrix;
 
 	// collimator pixel
