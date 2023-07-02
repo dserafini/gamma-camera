@@ -264,13 +264,13 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	// case
 	G4cout << "defining the scintillator case" << G4endl;
 	G4Box* solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", case_side/2., case_side/2., scinti_hole_length/2.);
-	G4LogicalVolume *logicScintillatorMatrix = new G4LogicalVolume(solidScintillatorMatrix, materialPlastic, "logicScintillatorMatrix");
+	G4LogicalVolume *logicScintillatorMatrix = new G4LogicalVolume(solidScintillatorMatrix, materialGAGG, "logicScintillatorMatrix");
 	physScintillator = new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth/2.), logicScintillatorMatrix, "physScintillatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the scintillator array element" << G4endl;
 	G4Box* solidScintillatorArray = new G4Box("solidScintillatorArray", case_side/2., scinti_pixel_size/2., scinti_hole_length/2.);
-	G4LogicalVolume *logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialPlastic, "logicScintillatorArray");
+	G4LogicalVolume *logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialGAGG, "logicScintillatorArray");
 	new G4PVReplica("physScintillatorArray", logicScintillatorArray, logicScintillatorMatrix, kYAxis, scinti_holes_number, scinti_pixel_size, 0);
 	
 	// pixel
@@ -367,7 +367,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	opGaggPlasticSurface->SetModel(unified);
 	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetFinish(polished);
-	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
+	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTabsorbing);
 	
 	// build fully transmitting surface
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
