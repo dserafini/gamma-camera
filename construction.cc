@@ -377,12 +377,16 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	// build fully transmitting surface
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
 	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTtransmitting);
+	
+	// build fully transmitting surface 2
+	G4OpticalSurface* opGaggDetectorSurface2 = new G4OpticalSurface("opGaggDetectorSurface2");
+	opGaggDetectorSurface2->SetMaterialPropertiesTable(MPTtransmitting);
 
 	
 	if (scintiPixelNoSlab)
 	{
 		// build reflective skin surface around the scintillator pixel hole
-		new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
+		new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggDetectorSurface2);
 			
 		// block optical photons escaping toward the detector
 		new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
