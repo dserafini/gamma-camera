@@ -86,7 +86,7 @@
 /analysis/setFileName output.root
 
 # reduce scintillation yield to allow visualization
-/process/optical/scintillation/setYieldFactor .001
+# /process/optical/scintillation/setYieldFactor .001
 
 # color first gamma
 /vis/modeling/trajectories/create/drawByParticleID
