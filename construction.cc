@@ -40,8 +40,8 @@ MyDetectorConstruction::MyDetectorConstruction()
 	slab_side  = case_side;
 	slab_depth = hole_length/3.;
 	scintiPixelNoSlab = 1;
-	scinti_hole_thickness = hole_thickness;
-	scinti_septa_thickness = septa_thickness;
+	scinti_septa_thickness = 10*um;
+	scinti_hole_thickness = hole_thickness + septa_thickness - scinti_septa_thickness;
 
 	// define materials just once
 	DefineMaterials();
@@ -241,6 +241,8 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	G4cout << "MyDetectorConstruction::ConstructPixelScintillator" << G4endl;
 	
 	// Derived parameters
+	if (scinti_septa_thickness != 10*um)
+		G4cout << "Warning: scinti septa thickness is " << scinti_septa_thickness / mm << " mm" << G4endl;
 	scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
 	scinti_hole_length = slab_depth;
 	scinti_holes_number = (G4int) case_side / scinti_pixel_size;
@@ -250,8 +252,8 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	{
 		G4cout << "Error: pixel larger than case!" << G4endl;
 		G4cout << "return to default values" << G4endl;
-		scinti_septa_thickness = 1.*mm;
-		scinti_hole_thickness = 2.*mm;
+		scinti_septa_thickness = 10.*um;
+		scinti_hole_thickness = 2.*mm - scinti_septa_thickness;
 		scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
 		scinti_holes_number = (G4int) case_side / scinti_pixel_size;
 	}
