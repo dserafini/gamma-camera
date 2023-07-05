@@ -150,7 +150,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   }
 
   // print to check
-  for ( G4int i=0; i<pixelPos.size(); i++)
+  for ( G4long i=0; i<pixelPos.size(); i++)
     G4cout << pixelPos.at(i) << "\t" << pixelCount.at(i) << G4endl;
 
   if (nofHits>0)
