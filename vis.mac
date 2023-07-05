@@ -100,4 +100,4 @@
 
 # test with optical photons
 /gps/particle opticalphoton
-/gps/position 0. 0. 55. mm
+/gps/position 0. 30. 55. mm
