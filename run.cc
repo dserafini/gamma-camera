@@ -9,12 +9,18 @@ MyRunAction::MyRunAction()
 
   // want to save energy deposition
   man->CreateNtuple("Scoring", "Scoring");
+
+  // initial
   man->CreateNtupleDColumn(0, "fEini"); // [eV]
+
+  // scintillator
   man->CreateNtupleDColumn(0, "fEdep"); // [eV]
   man->CreateNtupleDColumn(0, "fX"); // [mm]
   man->CreateNtupleDColumn(0, "fY"); // [mm]
   man->CreateNtupleDColumn(0, "fZ"); // [mm]
-  // and optical photon positions
+  
+  // SiPM detector
+  // optical photons
   man->CreateNtupleIColumn(0, "pNumber"); // [1]
   man->CreateNtupleDColumn(0, "pMeanX"); // [mm]
   man->CreateNtupleDColumn(0, "pMeanY"); // [mm]
@@ -22,15 +28,14 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "pSigmaX"); // [mm]
   man->CreateNtupleDColumn(0, "pSigmaY"); // [mm]
   man->CreateNtupleDColumn(0, "pSigmaR"); // [mm]
-  man->FinishNtuple(0);
+  // pixels of SiPM
+  man->CreateNtupleDColumn(0, "xMeanX"); // [mm]
+  man->CreateNtupleDColumn(0, "xMeanY"); // [mm]
+  man->CreateNtupleDColumn(0, "xMostX"); // [mm]
+  man->CreateNtupleDColumn(0, "xMostY"); // [mm]
 
-  // save SiPM pixel information not event by event
-  man->CreateNtuple("Sipm", "Sipm");
-  man->CreateNtupleDColumn(1, "pMeanX"); // [mm]
-  man->CreateNtupleDColumn(1, "pMeanY"); // [mm]
-  man->CreateNtupleDColumn(1, "pMostX"); // [mm]
-  man->CreateNtupleDColumn(1, "pMostY"); // [mm]
-  man->FinishNtuple(1);
+  // finish tuple
+  man->FinishNtuple(0);
 }
 
 MyRunAction::~MyRunAction()
