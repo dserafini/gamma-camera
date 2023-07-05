@@ -149,6 +149,10 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
       pixelCount.at(std::distance(pixelPos.begin(),it)) += 1;
   }
 
+  // print to check
+  for ( G4int i=0; i<pixelPos.std::size(); i++)
+    G4cout << pixelPos.at(i) << "\t" << pixelCount.at(i) << G4endl;
+
   if (nofHits>0)
   {
     // find maximum pixel
