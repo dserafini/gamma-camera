@@ -125,6 +125,16 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   man->FillNtupleDColumn(0, 11, fSigmaMod);
 
   // save pixel tree
+  G4ThreeVector meanPixelPos = G4ThreeVector();
+  for ( G4int i=0; i<nofHits; i++ )
+    meanPixelPos += (*fHitsCollection)[i]->GetPixelPos();
+  if (nofHits>0)
+    meanPixelPos /= nofHits;
+  
+  man->FillNtupleDColumn(1, 0, meanPixelPos.getX());
+  man->FillNtupleDColumn(1, 1, meanPixelPos.getY());
+
+  // save pixel tree
   std::vector <G4ThreeVector> pixelPos;
   std::vector <G4int> pixelCount;
   for ( G4int i=0; i<nofHits; i++ )
@@ -138,6 +148,12 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     else
       pixelCount.at(std::distance(pixelPos.begin(),it)) += 1;
   }
+
+  // find maximum pixel
+  G4ThreeVector mostPixelPos = pixelPos.at(std::distance(pixelCount.begin(),std::max_element(pixelCount.begin(),pixelCount.end())));
+  
+  man->FillNtupleDColumn(1, 2, mostPixelPos.getX());
+  man->FillNtupleDColumn(1, 3, mostPixelPos.getY());
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
