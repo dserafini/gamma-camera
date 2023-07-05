@@ -154,6 +154,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     // find maximum pixel
     G4ThreeVector mostPixelPos = pixelPos.at(std::distance(pixelCount.begin(),std::max_element(pixelCount.begin(),pixelCount.end())));
     G4cout << "found most pixel pos: " << mostPixelPos << G4endl;
+    G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
     man->FillNtupleDColumn(0, 14, mostPixelPos.getX());
     man->FillNtupleDColumn(0, 15, mostPixelPos.getY());
   }
