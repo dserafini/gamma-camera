@@ -51,7 +51,5 @@
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
-/scintillator/pixel 0
-/analysis/setFileName directSlabColl1p5mm.root
-/run/reinitializeGeometry
+/analysis/setFileName realTestPixelDetector.root
 /run/beamOn 10000000
