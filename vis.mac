@@ -37,8 +37,8 @@
 # /gps/energy 0. eV
 # position must be < 0 
 /gps/position 0 0. -1. mm
-/gps/direction 0 0 1
-# /gps/ang/type iso
+# /gps/direction 0 0 1
+/gps/ang/type iso
 
 ################################################################################
 # other visualization settings
@@ -99,5 +99,5 @@
 /vis/modeling/trajectories/drawByParticleID-0/set gamma blue
 
 # test with optical photons
-/gps/particle opticalphoton
-/gps/position 0. 30. 55. mm
+# /gps/particle opticalphoton
+# /gps/position 0. 30. 55. mm
