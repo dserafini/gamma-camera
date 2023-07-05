@@ -54,7 +54,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   newHit->SetEdep(edep);
   newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
   newHit->SetPixelPos (aStep->GetPreStepPoint()->GetPhysicalVolume()->GetObjectTranslation());
-  G4cout << "volpos: " << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetObjectTranslation()) << G4endl;
+  G4cout << "volpos: " << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetObjectTranslation() << G4endl;
 
   if (fHitsCollection)
     fHitsCollection->insert( newHit );
