@@ -18,5 +18,4 @@ void MyEventAction::EndOfEventAction(const G4Event*)
 
   G4AnalysisManager *man = G4AnalysisManager::Instance();
   man->AddNtupleRow(0);
-  man->AddNtupleRow(1);
 }
