@@ -6,6 +6,8 @@
 /collimator/hole_thickness 15. mm
 /collimator/septa_thickness 5. mm
 /collimator/case_side 10. cm
+/collimator/positionX 10. mm
+/collimator/positionY 20. mm
 
 ################################################################################
 # change geometry scintillator
