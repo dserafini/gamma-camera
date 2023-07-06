@@ -28,7 +28,6 @@ MyDetectorConstruction::MyDetectorConstruction()
 	case_side = 10.*cm; // fixed but not necessarily precise
 	collimator_posX = 0.*mm;
 	collimator_posY = 0.*mm;
-	collimator_position = G4ThreeVector(collimator_posX, collimator_posY, +hole_length/2.);
 	
 	// scintillator commands
 	fMessengerScintillator = new G4GenericMessenger(this, "/scintillator/", "Scintillator Construction");
@@ -207,9 +206,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "case_side: " << case_side << " mm" << G4endl;
 
 	// position
-	collimator_position.setX(collimator_posX);
-	collimator_position.setY(collimator_posY);
-	collimator_position.setZ( +hole_length/2.);
+	G4ThreeVector collimator_position = G4ThreeVector(collimator_posX, collimator_posY, +hole_length/2.);
 	
 	// case
 	G4cout << "defining the collimator case" << G4endl;
