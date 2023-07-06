@@ -47,7 +47,7 @@
 # run
 ################################################################################
 
-/run/printProgress 10000
+/run/printProgress 1000000
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
@@ -60,12 +60,12 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter5mmPrimo.root
 /gps/pos/centre 5. -2.89 -2.6. mm
-/run/beamOn 100000
+/run/beamOn 10000000
 # secondo
 /analysis/setFileName realThreeCylindersDiameter5mmSecondo.root
 /gps/pos/centre -5. -2.89 -2.6. mm
-/run/beamOn 100000
+/run/beamOn 10000000
 # terzo
 /analysis/setFileName realThreeCylindersDiameter5mmTerzo.root
 /gps/pos/centre 0. 5.77 -2.6. mm
-/run/beamOn 100000
+/run/beamOn 10000000
