@@ -51,5 +51,24 @@
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
-/analysis/setFileName realTestPixelDetector.root
+/analysis/setFileName realThreeCylindersDiameter5mm.root
+/run/beamOn 10000000
+
+# generate cylinder
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/radius 2.5 mm
+/gps/pos/halfz 2.5 mm
+
+# primo
+/analysis/setFileName realThreeCylindersDiameter5mmPrimo.root
+/gps/position 5. -2.89 -2.6. mm
+/run/beamOn 10000000
+# secondo
+/analysis/setFileName realThreeCylindersDiameter5mmSecondo.root
+/gps/position -5. -2.89 -2.6. mm
+/run/beamOn 10000000
+# terzo
+/analysis/setFileName realThreeCylindersDiameter5mmTerzo.root
+/gps/position 0. 5.77 -2.6. mm
 /run/beamOn 10000000
