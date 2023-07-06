@@ -53,6 +53,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
   newHit->SetEdep(edep);
   newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
+  newHit->SetPixelPos (aStep->GetPreStepPoint()->GetTouchable()->GetTranslation());
+  // G4cout << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() << ": " << aStep->GetPreStepPoint()->GetTouchable()->GetTranslation() << G4endl;
 
   if (fHitsCollection)
     fHitsCollection->insert( newHit );
@@ -108,21 +110,56 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     fSigmaPos.setX(sqrt(fSigmaPos.getX() / (nofHits - 1)));
     fSigmaPos.setY(sqrt(fSigmaPos.getY() / (nofHits - 1)));
     fSigmaMod = sqrt(fSigmaMod / (nofHits - 1));
+  
+    // G4cout << "mean: " << fMeanPos << ",\t sigma: " << fSigma 
+    // << ",\t nofHits: " << nofHits << G4endl;
+    
+    // fill the Ntuple
+    G4AnalysisManager *man = G4AnalysisManager::Instance();
+    man->FillNtupleIColumn(0, 5, nofHits);
+    man->FillNtupleDColumn(0, 6, fMeanPos.getX());
+    man->FillNtupleDColumn(0, 7, fMeanPos.getY());
+    man->FillNtupleDColumn(0, 8, fMeanPos.getZ());
+    man->FillNtupleDColumn(0, 9, fSigmaPos.getX());
+    man->FillNtupleDColumn(0, 10, fSigmaPos.getY());
+    man->FillNtupleDColumn(0, 11, fSigmaMod);
+  
+    // save pixel tree
+    G4ThreeVector meanPixelPos = G4ThreeVector();
+    for ( G4int i=0; i<nofHits; i++ )
+      meanPixelPos += (*fHitsCollection)[i]->GetPixelPos();
+    if (nofHits>0)
+      meanPixelPos /= nofHits;
+    
+    man->FillNtupleDColumn(0, 12, meanPixelPos.getX());
+    man->FillNtupleDColumn(0, 13, meanPixelPos.getY());
+  
+    // save pixel tree
+    std::vector <G4ThreeVector> pixelPos = {};
+    std::vector <G4int> pixelCount = {};
+    for ( G4int i=0; i<nofHits; i++ )
+    {
+      auto it = std::find(pixelPos.begin(),pixelPos.end(),(*fHitsCollection)[i]->GetPixelPos());
+      if(it == pixelPos.end())
+      {
+        pixelPos.push_back((*fHitsCollection)[i]->GetPixelPos());
+        pixelCount.push_back(1);
+      }
+      else
+        pixelCount.at(std::distance(pixelPos.begin(),it)) += 1;
+    }
+  
+    // print to check
+    // for ( G4int i=0; i<((G4int)pixelPos.size()); i++)
+    //   G4cout << pixelPos.at(i) << "\t" << pixelCount.at(i) << G4endl;
+  
+    // find maximum pixel
+    G4ThreeVector mostPixelPos = pixelPos.at(std::distance(pixelCount.begin(),std::max_element(pixelCount.begin(),pixelCount.end())));
+    // G4cout << "found most pixel pos: " << mostPixelPos << G4endl;
+    // G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
+    man->FillNtupleDColumn(0, 14, mostPixelPos.getX());
+    man->FillNtupleDColumn(0, 15, mostPixelPos.getY());
   }
-  
-  // G4cout << "mean: " << fMeanPos << ",\t sigma: " << fSigma 
-  // << ",\t nofHits: " << nofHits << G4endl;
-  
-  // fill the Ntuple
-  G4AnalysisManager *man = G4AnalysisManager::Instance();
-  man->FillNtupleIColumn(0, 5, nofHits);
-  man->FillNtupleDColumn(0, 6, fMeanPos.getX());
-  man->FillNtupleDColumn(0, 7, fMeanPos.getY());
-  man->FillNtupleDColumn(0, 8, fMeanPos.getZ());
-  man->FillNtupleDColumn(0, 9, fSigmaPos.getX());
-  man->FillNtupleDColumn(0, 10, fSigmaPos.getY());
-  man->FillNtupleDColumn(0, 11, fSigmaMod);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-

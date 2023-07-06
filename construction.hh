@@ -40,15 +40,37 @@ public:
 private:
 	virtual void ConstructSDandField();
 
-	// declare some things here to modify geometry on the run
-	G4Box *solidWorld, *solidScintillator, *solidDetector;
-	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
-	G4LogicalVolume *logicWorld, *logicScintillator, *logicDetector;
-	G4LogicalVolume *logicScintillatorPixel, *logicScintillatorPinhole;
-	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
-	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator, *physDetector;
+	// world
+	G4Box *solidWorld;
+	G4LogicalVolume *logicWorld;
+	G4VPhysicalVolume *physWorld;
+
+	// scintillator slab
+	G4Box *solidScintillator;
+	G4LogicalVolume *logicScintillator;
+	G4VPhysicalVolume *physScintillator;
+
+	// scintillator pixel
+	G4Box *solidScintillatorPinhole, *solidScintillatorPixel, *solidScintillatorArray, *solidScintillatorMatrix;
+	G4LogicalVolume *logicScintillatorMatrix, *logicScintillatorArray, *logicScintillatorPixel, *logicScintillatorPinhole;
 	G4VPhysicalVolume *physScintillatorPinhole, *physScintillatorPixel, *physScintillatorMatrix;
 
+	//detector slab
+	G4Box *solidDetector;
+	G4LogicalVolume *logicDetector;
+	G4VPhysicalVolume *physDetector;
+
+	// detector pixel
+	G4Box *solidDetectorPixel, *solidDetectorArray, *solidDetectorMatrix;
+	G4LogicalVolume *logicDetectorPixel, *logicDetectorArray, *logicDetectorMatrix;
+	G4VPhysicalVolume *physDetectorPixel, *physDetectorMatrix;
+
+	// collimator pixel
+	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
+	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
+	G4VPhysicalVolume *physCollimator, *physCollimatorMatrix;
+
+	// materials
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
 	G4Material *materialPlastic;
 	G4Element *elLa, *elBr;
@@ -61,13 +83,15 @@ private:
 	void ConstructPixelScintillator();
 	void ConstructCollimator();
 	void ConstructDetector();
+	void ConstructPixelDetector();
 	void SetVisualizationFeatures();
 
 	// we do not need to access the messenger from outside
 	G4GenericMessenger *fMessengerCollimator;
 	G4GenericMessenger *fMessengerScintillator;
+	G4GenericMessenger *fMessengerDetector;
 
-	G4LogicalVolume *fScoringScintillator;
+	G4LogicalVolume *fScoringScintillator, *fScoringDetector;
 
 	// declare variables used for the messenger
 	G4int nCols, nRows;
@@ -89,7 +113,9 @@ private:
 	G4int scintiPixelNoSlab;
 	
 	// detector
-	G4double detector_depth, detector_side;
+	G4double det_pixel_size, detector_depth, detector_side;
+	G4int det_pixels_number;
+	G4int detPixelNoSlab;
 };
 
 #endif

@@ -1,7 +1,7 @@
 ################################################################################
 # change geometry collimator
 ################################################################################
-/collimator/exist 1
+/collimator/exist 0
 /collimator/hole_length 30. mm
 /collimator/hole_thickness 15. mm
 /collimator/septa_thickness 5. mm
@@ -14,6 +14,12 @@
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
 /scintillator/scinti_pixel_size 20. mm
+
+################################################################################
+# change geometry detector
+################################################################################
+/detector/pixel 1
+/detector/det_pixel_size 20. mm
 
 /run/reinitializeGeometry
 
@@ -91,3 +97,7 @@
 # color first gamma
 /vis/modeling/trajectories/create/drawByParticleID
 /vis/modeling/trajectories/drawByParticleID-0/set gamma blue
+
+# test with optical photons
+# /gps/particle opticalphoton
+# /gps/position 0. 30. 55. mm
