@@ -18,6 +18,8 @@
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
+/collimator/positionX 1.5. mm
+/collimator/positionY 0. mm
 
 ################################################################################
 # change geometry detector
@@ -58,14 +60,14 @@
 /gps/pos/halfz 2.5 mm
 
 # primo
-/analysis/setFileName realThreeCylindersDiameter5mmPrimo.root
+/analysis/setFileName realThreeCylindersDiameter5mmP2Primo.root
 /gps/pos/centre 5. -2.89 -2.6. mm
 /run/beamOn 10000000
 # secondo
-/analysis/setFileName realThreeCylindersDiameter5mmSecondo.root
+/analysis/setFileName realThreeCylindersDiameter5mmP2Secondo.root
 /gps/pos/centre -5. -2.89 -2.6. mm
 /run/beamOn 10000000
 # terzo
-/analysis/setFileName realThreeCylindersDiameter5mmTerzo.root
+/analysis/setFileName realThreeCylindersDiameter5mmP2Terzo.root
 /gps/pos/centre 0. 5.77 -2.6. mm
 /run/beamOn 10000000
