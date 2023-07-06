@@ -18,7 +18,7 @@
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
-/collimator/positionX 0. mm
+/collimator/positionX 1.5 mm
 /collimator/positionY 1.5 mm
 
 ################################################################################
