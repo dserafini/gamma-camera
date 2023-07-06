@@ -62,13 +62,13 @@
 
 # primo
 /analysis/setFileName realThreeCylindersDiameter5mmPrimo.root
-/gps/position 5. -2.89 -2.6. mm
+/gps/pos/centre 5. -2.89 -2.6. mm
 /run/beamOn 10000000
 # secondo
 /analysis/setFileName realThreeCylindersDiameter5mmSecondo.root
-/gps/position -5. -2.89 -2.6. mm
+/gps/pos/centre -5. -2.89 -2.6. mm
 /run/beamOn 10000000
 # terzo
 /analysis/setFileName realThreeCylindersDiameter5mmTerzo.root
-/gps/position 0. 5.77 -2.6. mm
+/gps/pos/centre 0. 5.77 -2.6. mm
 /run/beamOn 10000000
