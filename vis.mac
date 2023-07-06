@@ -1,7 +1,7 @@
 ################################################################################
 # change geometry collimator
 ################################################################################
-/collimator/exist 0
+/collimator/exist 1
 /collimator/hole_length 30. mm
 /collimator/hole_thickness 15. mm
 /collimator/septa_thickness 5. mm
