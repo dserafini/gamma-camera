@@ -12,6 +12,7 @@
 ################################################################################
 # change geometry scintillator
 ################################################################################
+/scintillator/exist 0
 /scintillator/pixel 1
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
@@ -101,5 +102,5 @@
 /vis/modeling/trajectories/drawByParticleID-0/set gamma blue
 
 # test with optical photons
-# /gps/particle opticalphoton
-# /gps/position 0. 30. 55. mm
+/gps/particle opticalphoton
+/gps/position 0. 30. 55. mm
