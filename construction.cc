@@ -10,16 +10,15 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerCollimator->DeclareProperty("exist", collimatorExist, "0 no, 1 yes");
 
 	// define our command
-	fMessengerCollimator->DeclarePropertyWithUnit("hole_length", "mm", hole_length, "Length of the collimator holes");
 	// first argument is the name of the command
 	// second argument is a variable
 	// third argument is help text
-
+	fMessengerCollimator->DeclarePropertyWithUnit("hole_length", "mm", hole_length, "Length of the collimator holes");
 	fMessengerCollimator->DeclarePropertyWithUnit("hole_thickness", "mm", hole_thickness, "Thickness of the collimator holes");
-
 	fMessengerCollimator->DeclarePropertyWithUnit("septa_thickness", "mm", septa_thickness, "Thickness of the collimator septa");
-
 	fMessengerCollimator->DeclarePropertyWithUnit("case_side", "mm", case_side, "Side of the collimator case");
+	fMessengerCollimator->DeclarePropertyWithUnit("positionX", "mm", collimator_posX, "X position of the collimator");
+	fMessengerCollimator->DeclarePropertyWithUnit("positionY", "mm", collimator_posY, "X position of the collimator");
 
 	// Collimator parameters
 	collimatorExist = 1; // by default the collimator is built
@@ -27,6 +26,8 @@ MyDetectorConstruction::MyDetectorConstruction()
 	septa_thickness = 1.*mm; // 2*mm;
 	hole_thickness = 2.*mm; // 3*mm;
 	case_side = 10.*cm; // fixed but not necessarily precise
+	collimator_posX = 0.*mm;
+	collimator_posY = 0.*mm;
 	
 	// scintillator commands
 	fMessengerScintillator = new G4GenericMessenger(this, "/scintillator/", "Scintillator Construction");
@@ -203,12 +204,15 @@ void MyDetectorConstruction::ConstructCollimator()
 	G4cout << "pixel_size: " << pixel_size << " mm" << G4endl;
 	G4cout << "holes_number: " << holes_number << " " << G4endl;
 	G4cout << "case_side: " << case_side << " mm" << G4endl;
+
+	// position
+	G4ThreeVector collimator_position = G4ThreeVector(collimator_posX, collimator_posY, +hole_length/2.);
 	
 	// case
 	G4cout << "defining the collimator case" << G4endl;
 	solidCollimatorMatrix = new G4Box("solidCollimatorMatrix", case_side/2., case_side/2., hole_length/2.);
 	logicCollimatorMatrix = new G4LogicalVolume(solidCollimatorMatrix, materialTungsten, "logicCollimatorMatrix");
-	new G4PVPlacement(0, G4ThreeVector(0,0,+hole_length/2.), logicCollimatorMatrix, "physCollimatorMatrix", logicWorld, false, 0, true);
+	new G4PVPlacement(0, collimator_position, logicCollimatorMatrix, "physCollimatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the collimator array element" << G4endl;
