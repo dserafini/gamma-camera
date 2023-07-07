@@ -1,7 +1,7 @@
 ################################################################################
 # change geometry collimator
 ################################################################################
-/collimator/exist 1
+/collimator/exist 0
 /collimator/hole_length 30. mm
 /collimator/hole_thickness 15. mm
 /collimator/septa_thickness 5. mm
@@ -21,7 +21,7 @@
 ################################################################################
 # change geometry detector
 ################################################################################
-/detector/pixel 1
+/detector/pixel 0
 /detector/det_pixel_size 20. mm
 
 /run/reinitializeGeometry
