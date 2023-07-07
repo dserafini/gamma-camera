@@ -18,8 +18,8 @@
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
-/collimator/positionX 1.5 mm
-/collimator/positionY 1.5 mm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
 
 ################################################################################
 # change geometry detector
@@ -60,31 +60,31 @@
 /gps/pos/halfz 1. mm
 
 # primo
-/analysis/setFileName realThreeCylindersDiameter2mmP4Primo.root
+/analysis/setFileName realThreeCylindersDiameter2mmP1Primo.root
 /gps/pos/centre 5. -2.89 -2.6. mm
 /run/beamOn 10000000
 # secondo
-/analysis/setFileName realThreeCylindersDiameter2mmP4Secondo.root
+/analysis/setFileName realThreeCylindersDiameter2mmP1Secondo.root
 /gps/pos/centre -5. -2.89 -2.6. mm
 /run/beamOn 10000000
 # terzo
-/analysis/setFileName realThreeCylindersDiameter2mmP4Terzo.root
+/analysis/setFileName realThreeCylindersDiameter2mmP1Terzo.root
 /gps/pos/centre 0. 5.77 -2.6. mm
 /run/beamOn 10000000
 
 
-/collimator/positionX 1.5 mm
-/collimator/positionY 0. mm
+/collimator/positionY 1.5 mm
+/collimator/positionX 0. mm
 /run/reinitializeGeometry
 # primo
-/analysis/setFileName realThreeCylindersDiameter2mmP3Primo.root
+/analysis/setFileName realThreeCylindersDiameter2mmP2Primo.root
 /gps/pos/centre 5. -2.89 -2.6. mm
 /run/beamOn 10000000
 # secondo
-/analysis/setFileName realThreeCylindersDiameter2mmP3Secondo.root
+/analysis/setFileName realThreeCylindersDiameter2mmP2Secondo.root
 /gps/pos/centre -5. -2.89 -2.6. mm
 /run/beamOn 10000000
 # terzo
-/analysis/setFileName realThreeCylindersDiameter2mmP3Terzo.root
+/analysis/setFileName realThreeCylindersDiameter2mmP2Terzo.root
 /gps/pos/centre 0. 5.77 -2.6. mm
 /run/beamOn 10000000
