@@ -21,7 +21,7 @@
 ################################################################################
 # change geometry detector
 ################################################################################
-/detector/pixel 0
+/detector/pixel 1
 /detector/det_pixel_size 20. mm
 
 /run/reinitializeGeometry
