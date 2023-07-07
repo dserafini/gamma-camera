@@ -56,18 +56,35 @@
 # generate cylinder
 /gps/pos/type Volume
 /gps/pos/shape Cylinder
-/gps/pos/radius 2.5 mm
-/gps/pos/halfz 2.5 mm
+/gps/pos/radius 1. mm
+/gps/pos/halfz 1. mm
 
 # primo
-/analysis/setFileName realThreeCylindersDiameter5mmP4Primo.root
+/analysis/setFileName realThreeCylindersDiameter2mmP4Primo.root
 /gps/pos/centre 5. -2.89 -2.6. mm
 /run/beamOn 10000000
 # secondo
-/analysis/setFileName realThreeCylindersDiameter5mmP4Secondo.root
+/analysis/setFileName realThreeCylindersDiameter2mmP4Secondo.root
 /gps/pos/centre -5. -2.89 -2.6. mm
 /run/beamOn 10000000
 # terzo
-/analysis/setFileName realThreeCylindersDiameter5mmP4Terzo.root
+/analysis/setFileName realThreeCylindersDiameter2mmP4Terzo.root
+/gps/pos/centre 0. 5.77 -2.6. mm
+/run/beamOn 10000000
+
+
+/collimator/positionX 1.5 mm
+/collimator/positionY 0. mm
+/run/reinitializeGeometry
+# primo
+/analysis/setFileName realThreeCylindersDiameter2mmP3Primo.root
+/gps/pos/centre 5. -2.89 -2.6. mm
+/run/beamOn 10000000
+# secondo
+/analysis/setFileName realThreeCylindersDiameter2mmP3Secondo.root
+/gps/pos/centre -5. -2.89 -2.6. mm
+/run/beamOn 10000000
+# terzo
+/analysis/setFileName realThreeCylindersDiameter2mmP3Terzo.root
 /gps/pos/centre 0. 5.77 -2.6. mm
 /run/beamOn 10000000
