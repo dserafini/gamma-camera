@@ -35,6 +35,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerScintillator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
 	fMessengerScintillator->DeclareProperty("pixel", scintiPixelNoSlab, "0 slab, 1 matrix");
 	fMessengerScintillator->DeclarePropertyWithUnit("scinti_pixel_size", "mm", scinti_pixel_size, "Size of the scintillator pixels");
+	fMessengerScintillator->DeclareProperty("exist", scintillatorExist, "0 no, 1 yes");
 	
 	// scintillator parameters
 	slab_side  = case_side;
@@ -382,10 +383,13 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	if(collimatorExist)
 		ConstructCollimator();
 
-	if (scintiPixelNoSlab)
-		ConstructPixelScintillator();
-	else
-		ConstructScintillator();
+	if(scintillatorExist)
+	{
+		if (scintiPixelNoSlab)
+			ConstructPixelScintillator();
+		else
+			ConstructScintillator();
+	}
 	
 	if (detPixelNoSlab)
 		ConstructPixelDetector();
