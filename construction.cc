@@ -35,6 +35,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerScintillator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
 	fMessengerScintillator->DeclareProperty("pixel", scintiPixelNoSlab, "0 slab, 1 matrix");
 	fMessengerScintillator->DeclarePropertyWithUnit("scinti_pixel_size", "mm", scinti_pixel_size, "Size of the scintillator pixels");
+	fMessengerScintillator->DeclareProperty("exist", scintillatorExist, "0 no, 1 yes");
 	
 	// scintillator parameters
 	slab_side  = case_side;
@@ -330,7 +331,7 @@ void MyDetectorConstruction::ConstructPixelDetector()
 	det_pixels_number = (G4int) detector_side / det_pixel_size;
 	
 	// check proper parameters
-	if (scinti_holes_number < 1)
+	if (det_pixels_number < 1)
 	{
 		G4cout << "Error: pixel larger than case!" << G4endl;
 		G4cout << "return to default values" << G4endl;;
@@ -382,10 +383,13 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	if(collimatorExist)
 		ConstructCollimator();
 
-	if (scintiPixelNoSlab)
-		ConstructPixelScintillator();
-	else
-		ConstructScintillator();
+	if(scintillatorExist)
+	{
+		if (scintiPixelNoSlab)
+			ConstructPixelScintillator();
+		else
+			ConstructScintillator();
+	}
 	
 	if (detPixelNoSlab)
 		ConstructPixelDetector();

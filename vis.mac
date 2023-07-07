@@ -6,12 +6,13 @@
 /collimator/hole_thickness 15. mm
 /collimator/septa_thickness 5. mm
 /collimator/case_side 10. cm
-/collimator/positionX 10. mm
-/collimator/positionY 20. mm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
 
 ################################################################################
 # change geometry scintillator
 ################################################################################
+/scintillator/exist 1
 /scintillator/pixel 1
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
@@ -39,8 +40,8 @@
 # /gps/energy 0. eV
 # position must be < 0 
 /gps/position 0 0. -1. mm
-/gps/direction 0 0 1
-# /gps/ang/type iso
+# /gps/direction 0 0 1
+/gps/ang/type iso
 
 ################################################################################
 # other visualization settings
@@ -101,5 +102,7 @@
 /vis/modeling/trajectories/drawByParticleID-0/set gamma blue
 
 # test with optical photons
-# /gps/particle opticalphoton
-# /gps/position 0. 30. 55. mm
+/gps/particle opticalphoton
+/gps/polarization 1 1 1
+/gps/number 10
+/gps/position 0. 0. 0. mm
