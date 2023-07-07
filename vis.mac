@@ -104,5 +104,5 @@
 # test with optical photons
 /gps/particle opticalphoton
 /gps/polarization 1 1 1
-/gps/number 2
+/gps/number 10
 /gps/position 0. 0. 0. mm
