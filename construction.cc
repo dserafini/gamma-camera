@@ -331,7 +331,7 @@ void MyDetectorConstruction::ConstructPixelDetector()
 	det_pixels_number = (G4int) detector_side / det_pixel_size;
 	
 	// check proper parameters
-	if (scinti_holes_number < 1)
+	if (det_pixels_number < 1)
 	{
 		G4cout << "Error: pixel larger than case!" << G4endl;
 		G4cout << "return to default values" << G4endl;;
