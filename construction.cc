@@ -38,6 +38,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerScintillator->DeclareProperty("exist", scintillatorExist, "0 no, 1 yes");
 	
 	// scintillator parameters
+	scintillatorExist = 1; // by default the scintillator is built
 	slab_side  = case_side;
 	slab_depth = hole_length/3.;
 	scintiPixelNoSlab = 1;
