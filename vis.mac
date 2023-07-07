@@ -40,8 +40,8 @@
 # /gps/energy 0. eV
 # position must be < 0 
 /gps/position 0 0. -1. mm
-/gps/direction 0 0 1
-# /gps/ang/type iso
+# /gps/direction 0 0 1
+/gps/ang/type iso
 
 ################################################################################
 # other visualization settings
@@ -103,4 +103,6 @@
 
 # test with optical photons
 /gps/particle opticalphoton
-/gps/position 0. 32. 50. mm
+/gps/polarization 1 1 1
+/gps/number 2
+/gps/position 0. 0. 0. mm
