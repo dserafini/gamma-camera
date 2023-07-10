@@ -66,38 +66,45 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   // process hits only for optical photons
   if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
     return false;
+
+  // filter on optical photon wavelength
+  G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
+  G4ThreeVector momPhoton = preStepPoint->GetMomentum();
+  G4double wlen = (1.239841939*eV/momPhoton.mag())*1e3;
+  if (G4UniformRand() < quEff->Value(wlen))
+  {
+    // energy deposit
+    G4double edep = aStep->GetTotalEnergyDeposit(); // [keV]
   
-  // energy deposit
-  G4double edep = aStep->GetTotalEnergyDeposit(); // [keV]
-
-  // if (edep==0.) return false;
-
-  auto newHit = new detectorHit();
-
-  newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
-  newHit->SetEdep(edep);
-  newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
-  newHit->SetPixelPos (aStep->GetPreStepPoint()->GetTouchable()->GetTranslation());
-  // G4cout << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() << ": " << aStep->GetPreStepPoint()->GetTouchable()->GetTranslation() << G4endl;
-
-  if (fHitsCollection)
-    fHitsCollection->insert( newHit );
-
-  // newHit->Print();
-  // newHit->Draw();
-
-  // get volume position
-  // G4VPhysicalVolume *vol = aStep->GetTrack()->GetVolume();
-  // if (vol)
-  // {
-    // G4cout << "name " << vol->GetName();
-    // G4cout << "\t, copyno " << vol->GetCopyNo();
-    // G4cout << "\t, copyno " << vol->GetObjectTranslation();
-    // G4cout << G4endl;
-  // }
+    // if (edep==0.) return false;
   
-  // kill every detected photon
-  aStep->GetTrack()->SetTrackStatus(fStopAndKill);
+    auto newHit = new detectorHit();
+  
+    newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
+    newHit->SetEdep(edep);
+    newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
+    newHit->SetPixelPos (aStep->GetPreStepPoint()->GetTouchable()->GetTranslation());
+    // G4cout << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() << ": " << aStep->GetPreStepPoint()->GetTouchable()->GetTranslation() << G4endl;
+  
+    if (fHitsCollection)
+      fHitsCollection->insert( newHit );
+  
+    // newHit->Print();
+    // newHit->Draw();
+  
+    // get volume position
+    // G4VPhysicalVolume *vol = aStep->GetTrack()->GetVolume();
+    // if (vol)
+    // {
+      // G4cout << "name " << vol->GetName();
+      // G4cout << "\t, copyno " << vol->GetCopyNo();
+      // G4cout << "\t, copyno " << vol->GetObjectTranslation();
+      // G4cout << G4endl;
+    // }
+    
+    // kill every detected photon
+    aStep->GetTrack()->SetTrackStatus(fStopAndKill);
+  }
 
   return true;
 }
