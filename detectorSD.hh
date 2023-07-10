@@ -28,6 +28,9 @@ private:
 	G4ThreeVector fSigmaPos;
 	G4double fSigmaMod;
 	G4int nofHits;
+
+	// quantum efficiency
+	G4PhysicsOrderedFreeVector *quEff;
 };
 
 #endif
