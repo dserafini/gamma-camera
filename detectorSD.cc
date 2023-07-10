@@ -18,7 +18,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   std::ifstream datafile;
   datafile.open("eff.dat");
   // put the read data files into the quEff vector
-  while(1)
+  while(datafile.good())
   {
     G4double wlen, queff;
 
