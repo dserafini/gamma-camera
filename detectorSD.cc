@@ -11,6 +11,30 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   fSigmaPos = G4ThreeVector();
   fSigmaMod = 0.;
   nofHits = 0;
+
+  // quantum efficiency
+  quEff = new G4PhysicsOrderedFreeVector();
+  // read the data files
+  std::ifstream datafile;
+  datafile.open("eff.dat");
+  // put the read data files into the quEff vector
+  while(1)
+  {
+    G4double wlen, queff;
+
+    datafile >> wlen >> queff;
+
+    if(datafile.eof())
+      break;
+
+    // make sure everything work fine by printing
+    G4cout << wlen << " " << queff << G4endl;
+
+    quEff->InsertValues(wlen, queff/100.);
+  }
+  // close data file
+  datafile.close();
+  quEff->SetSpline(false);
 }
 
 MySensitiveDetector::~MySensitiveDetector()
