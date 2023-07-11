@@ -13,7 +13,7 @@
 # change geometry scintillator
 ################################################################################
 /scintillator/exist 0
-/scintillator/pixel 1
+/scintillator/pixel slab
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
 /scintillator/scinti_pixel_size 20. mm
