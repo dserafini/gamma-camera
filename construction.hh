@@ -72,7 +72,7 @@ private:
 
 	// materials
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
-	G4Material *materialPlastic;
+	G4Material *materialPlastic, *materialLYSO, *materialScintillator;
 	G4Element *elLa, *elBr;
 
 	void DefineMaterials();
@@ -110,7 +110,7 @@ private:
 	
 	// scintillator
 	G4double slab_depth, slab_side, scinti_pixel_size, scinti_septa_thickness, scinti_hole_thickness, scinti_hole_length;
-	G4int scinti_holes_number, scintillatorExist;
+	G4int scinti_holes_number, scintillatorExist, materialChoice;
 	G4String scintiPixelNoSlab;
 	
 	// detector
