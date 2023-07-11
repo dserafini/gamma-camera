@@ -42,4 +42,4 @@
 # run
 ################################################################################
 /analysis/setFileName outQuantumEff{energyop}.root
-/run/beamOn 100000
+/run/beamOn 10
