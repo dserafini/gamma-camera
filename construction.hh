@@ -20,8 +20,8 @@
 // per cambiare geometria on the way
 #include "G4GenericMessenger.hh"
 #include "G4SDManager.hh"
-
 #include "detectorSD.hh"
+#include "scintillatorSD.hh"
 
 class MyDetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -31,7 +31,7 @@ public:
 	~MyDetectorConstruction();
 
 	// create a scoring volume to store only the energy deposited in the radiator
-	G4LogicalVolume *GetScoringVolume() const { return fScoringVolume; }
+	G4LogicalVolume *GetScoringScintillator() const { return fScoringScintillator; }
 	G4LogicalVolume *GetDetectorVolume() const { return logicDetector; }
 
 	virtual G4VPhysicalVolume *Construct();
@@ -40,15 +40,37 @@ public:
 private:
 	virtual void ConstructSDandField();
 
-	// declare some things here to modify geometry on the run
-	G4Box *solidWorld, *solidScintillator, *solidDetector;
-	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
-	G4LogicalVolume *logicWorld, *logicScintillator, *logicDetector;
-	G4LogicalVolume *logicScintillatorPixel, *logicScintillatorPinhole;
-	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
-	G4VPhysicalVolume *physWorld, *physCollimator, *physCollimatorMatrix, *physScintillator, *physDetector;
+	// world
+	G4Box *solidWorld;
+	G4LogicalVolume *logicWorld;
+	G4VPhysicalVolume *physWorld;
+
+	// scintillator slab
+	G4Box *solidScintillator;
+	G4LogicalVolume *logicScintillator;
+	G4VPhysicalVolume *physScintillator;
+
+	// scintillator pixel
+	G4Box *solidScintillatorPinhole, *solidScintillatorPixel, *solidScintillatorArray, *solidScintillatorMatrix;
+	G4LogicalVolume *logicScintillatorMatrix, *logicScintillatorArray, *logicScintillatorPixel, *logicScintillatorPinhole;
 	G4VPhysicalVolume *physScintillatorPinhole, *physScintillatorPixel, *physScintillatorMatrix;
 
+	//detector slab
+	G4Box *solidDetector;
+	G4LogicalVolume *logicDetector;
+	G4VPhysicalVolume *physDetector;
+
+	// detector pixel
+	G4Box *solidDetectorPixel, *solidDetectorArray, *solidDetectorMatrix;
+	G4LogicalVolume *logicDetectorPixel, *logicDetectorArray, *logicDetectorMatrix;
+	G4VPhysicalVolume *physDetectorPixel, *physDetectorMatrix;
+
+	// collimator pixel
+	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
+	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
+	G4VPhysicalVolume *physCollimator, *physCollimatorMatrix;
+
+	// materials
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
 	G4Material *materialPlastic, *materialLYSO, *materialScintillator;
 	G4Element *elLa, *elBr;
@@ -61,13 +83,15 @@ private:
 	void ConstructPixelScintillator();
 	void ConstructCollimator();
 	void ConstructDetector();
+	void ConstructPixelDetector();
 	void SetVisualizationFeatures();
 
 	// we do not need to access the messenger from outside
 	G4GenericMessenger *fMessengerCollimator;
 	G4GenericMessenger *fMessengerScintillator;
+	G4GenericMessenger *fMessengerDetector;
 
-	G4LogicalVolume *fScoringVolume;
+	G4LogicalVolume *fScoringScintillator, *fScoringDetector;
 
 	// declare variables used for the messenger
 	G4int nCols, nRows;
@@ -82,13 +106,17 @@ private:
 	// collimator
 	G4double collimator_thickness, case_side, case_wall_thickness, hole_thickness, pixel_size, hole_length, septa_thickness;
 	G4int holes_number, collimatorExist;
+	G4double collimator_posX, collimator_posY;
 	
 	// scintillator
 	G4double slab_depth, slab_side, scinti_pixel_size, scinti_septa_thickness, scinti_hole_thickness, scinti_hole_length;
-	G4int scinti_holes_number, scintiPixelNoSlab, materialChoice;
+	G4int scinti_holes_number, scintillatorExist, materialChoice;
+	G4String scintiPixelNoSlab;
 	
 	// detector
-	G4double detector_depth, detector_side;
+	G4double det_pixel_size, detector_depth, detector_side;
+	G4int det_pixels_number;
+	G4String detPixelNoSlab;
 };
 
 #endif

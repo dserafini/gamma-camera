@@ -6,16 +6,24 @@
 /collimator/hole_thickness 15. mm
 /collimator/septa_thickness 5. mm
 /collimator/case_side 10. cm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
 
 ################################################################################
 # change geometry scintillator
 ################################################################################
-/scintillator/pixel 1
+/scintillator/exist 1
 /scintillator/material 1
+/scintillator/pixel matrix
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
-/scintillator/scinti_hole_thickness 18. mm
-/scintillator/scinti_septa_thickness 2. mm
+/scintillator/scinti_pixel_size 20. mm
+
+################################################################################
+# change geometry detector
+################################################################################
+/detector/pixel matrix
+/detector/det_pixel_size 20. mm
 
 /run/reinitializeGeometry
 
@@ -25,16 +33,16 @@
 ################################################################################
 # change source
 ################################################################################
-# /gps/particle gamma
-# /gps/energy 342 keV
+/gps/particle gamma
+/gps/energy 342 keV
 # /gps/particle opticalphoton
-/gps/particle ion
-/gps/ion 47 111 0 0.
-/gps/energy 0. eV
+# /gps/particle ion
+# /gps/ion 47 111 0 0.
+# /gps/energy 0. eV
 # position must be < 0 
 /gps/position 0 0. -1. mm
-/gps/direction 0 0 1
-# /gps/ang/type iso
+# /gps/direction 0 0 1
+/gps/ang/type iso
 
 ################################################################################
 # other visualization settings
@@ -93,3 +101,12 @@
 # color first gamma
 /vis/modeling/trajectories/create/drawByParticleID
 /vis/modeling/trajectories/drawByParticleID-0/set gamma blue
+
+# test with optical photons
+/gps/particle opticalphoton
+/gps/polarization 1 1 1
+/gps/direction 0 0 1
+/gps/number 10
+/gps/position 0. 0. 0. mm
+/gps/ene/type Mono
+/gps/energy 4 eV

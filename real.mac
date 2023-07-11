@@ -1,0 +1,127 @@
+/run/numberOfThreads 10
+
+################################################################################
+# define scintillator
+################################################################################
+
+/scintillator/pixel 1
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 26. mm
+/scintillator/scinti_pixel_size 1. mm
+
+################################################################################
+# define collimator
+################################################################################
+
+/collimator/exist 1
+/collimator/case_side 100. mm
+/collimator/hole_length 30. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
+
+################################################################################
+# change geometry detector
+################################################################################
+/detector/pixel 1
+/detector/det_pixel_size 3. mm
+
+/run/reinitializeGeometry
+
+/run/initialize
+
+################################################################################
+# define primary
+################################################################################
+
+/gps/particle gamma
+/gps/energy 342 keV
+# /gps/energy 245 keV
+/gps/position 0 0 -1. mm
+# /gps/direction 0 0 1
+/gps/ang/type iso
+/analysis/setFileName discard.root
+/run/beamOn 1
+# devo lanciare il primo evento che ha l'energia sbagliata
+
+################################################################################
+# run
+################################################################################
+
+/run/printProgress 1000000
+# /run/beamOn 10000000
+# /run/beamOn 1850746
+
+# generate cylinder
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/radius 2.5 mm
+/gps/pos/halfz 2.5 mm
+
+/collimator/positionX 1.5 mm
+/collimator/positionY 1.5 mm
+/run/reinitializeGeometry
+# primo
+/analysis/setFileName realThreeCylindersDiameter5mmP4Primo.root
+/gps/pos/centre 5. -2.89 -2.6. mm
+/run/beamOn 1500000
+# secondo
+/analysis/setFileName realThreeCylindersDiameter5mmP4Secondo.root
+/gps/pos/centre -5. -2.89 -2.6. mm
+/run/beamOn 1500000
+# terzo
+/analysis/setFileName realThreeCylindersDiameter5mmP4Terzo.root
+/gps/pos/centre 0. 5.77 -2.6. mm
+/run/beamOn 1500000
+
+
+/collimator/positionX 1.5 mm
+/collimator/positionY 0. mm
+/run/reinitializeGeometry
+# primo
+/analysis/setFileName realThreeCylindersDiameter5mmP3Primo.root
+/gps/pos/centre 5. -2.89 -2.6. mm
+/run/beamOn 1500000
+# secondo
+/analysis/setFileName realThreeCylindersDiameter5mmP3Secondo.root
+/gps/pos/centre -5. -2.89 -2.6. mm
+/run/beamOn 1500000
+# terzo
+/analysis/setFileName realThreeCylindersDiameter5mmP3Terzo.root
+/gps/pos/centre 0. 5.77 -2.6. mm
+/run/beamOn 1500000
+
+
+/collimator/positionY 1.5 mm
+/collimator/positionX 0. mm
+/run/reinitializeGeometry
+# primo
+/analysis/setFileName realThreeCylindersDiameter5mmP2Primo.root
+/gps/pos/centre 5. -2.89 -2.6. mm
+/run/beamOn 1500000
+# secondo
+/analysis/setFileName realThreeCylindersDiameter5mmP2Secondo.root
+/gps/pos/centre -5. -2.89 -2.6. mm
+/run/beamOn 1500000
+# terzo
+/analysis/setFileName realThreeCylindersDiameter5mmP2Terzo.root
+/gps/pos/centre 0. 5.77 -2.6. mm
+/run/beamOn 1500000
+
+
+/collimator/positionY 0. mm
+/collimator/positionX 0. mm
+/run/reinitializeGeometry
+# primo
+/analysis/setFileName realThreeCylindersDiameter5mmP1Primo.root
+/gps/pos/centre 5. -2.89 -2.6. mm
+/run/beamOn 1500000
+# secondo
+/analysis/setFileName realThreeCylindersDiameter5mmP1Secondo.root
+/gps/pos/centre -5. -2.89 -2.6. mm
+/run/beamOn 1500000
+# terzo
+/analysis/setFileName realThreeCylindersDiameter5mmP1Terzo.root
+/gps/pos/centre 0. 5.77 -2.6. mm
+/run/beamOn 1500000

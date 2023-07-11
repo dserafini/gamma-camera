@@ -13,6 +13,6 @@ MyPrimaryGenerator::~MyPrimaryGenerator()
 
 void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 {
-  // G4cout << "energy: " << fParticleGPS->GetParticleEnergy() << " MeV" << G4endl;
+	// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() / eV << " eV" << G4endl;
 	fParticleGPS->GeneratePrimaryVertex(anEvent);
 }
