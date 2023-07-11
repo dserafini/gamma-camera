@@ -104,5 +104,8 @@
 # test with optical photons
 /gps/particle opticalphoton
 /gps/polarization 1 1 1
+/gps/direction 0 0 1
 /gps/number 10
 /gps/position 0. 0. 0. mm
+/gps/ene/type Mono
+/gps/energy 4 eV
