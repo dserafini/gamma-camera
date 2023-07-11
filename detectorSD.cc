@@ -35,6 +35,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   // close data file
   datafile.close();
   quEff->SetSpline(false);
+  quEff->DumpValues();
 }
 
 MySensitiveDetector::~MySensitiveDetector()
