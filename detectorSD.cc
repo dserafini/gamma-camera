@@ -70,9 +70,9 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
   // filter on optical photon wavelength
   G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
-  G4ThreeVector momPhoton = aStep->GetTrack()->GetKineticEnergy();
-  G4double wlen = (1.239841939*eV/momPhoton.mag())*1e3;
-  G4cout << "mom: " << momPhoton.mag() << ", wlen (nm): " << wlen /nm<< ", quEff: " << quEff->Value(wlen/nm) << G4endl;
+  G4double enePhoton = aStep->GetTrack()->GetKineticEnergy();
+  G4double wlen = (1.239841939*eV/enePhoton)*1e3;
+  G4cout << "mom: " << enePhoton << ", wlen (nm): " << wlen /nm<< ", quEff: " << quEff->Value(wlen/nm) << G4endl;
   if (G4UniformRand() < quEff->Value(wlen))
   {
     // energy deposit
