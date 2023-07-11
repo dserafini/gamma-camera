@@ -1,0 +1,47 @@
+################################################################################
+# change geometry collimator
+################################################################################
+/collimator/exist 0
+/collimator/hole_length 30. mm
+/collimator/hole_thickness 15. mm
+/collimator/septa_thickness 5. mm
+/collimator/case_side 10. cm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
+
+################################################################################
+# change geometry scintillator
+################################################################################
+/scintillator/exist 0
+/scintillator/pixel 1
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 3. cm
+/scintillator/scinti_pixel_size 20. mm
+
+################################################################################
+# change geometry detector
+################################################################################
+/detector/pixel 1
+/detector/det_pixel_size 20. mm
+
+/run/reinitializeGeometry
+
+# initalize if not done in the main
+/run/initialize
+
+################################################################################
+# change source
+################################################################################
+/gps/particle opticalphoton
+/gps/polarization 1 1 1
+/gps/position 0 0. -1. mm
+/gps/direction 0 0 1
+/gps/energy {energyop} eV
+
+################################################################################
+# run
+################################################################################
+/analysis/setFileName discard.root
+/run/beamOn 1
+/analysis/setFileName outQuantumEff{energyop}.root
+/run/beamOn 100000
