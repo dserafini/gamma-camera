@@ -61,7 +61,7 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
-  // G4cout << "MySensitiveDetector::ProcessHits" << G4endl;
+  G4cout << "MySensitiveDetector::ProcessHits" << G4endl;
   
   // process hits only for optical photons
   if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
@@ -71,6 +71,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
   G4ThreeVector momPhoton = preStepPoint->GetMomentum();
   G4double wlen = (1.239841939*eV/momPhoton.mag())*1e3;
+  G4cout << "quEff: " << quEff->Value(wlen) << G4endl;
   if (G4UniformRand() < quEff->Value(wlen))
   {
     // energy deposit
