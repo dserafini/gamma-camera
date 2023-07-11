@@ -41,7 +41,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	scintillatorExist = 1; // by default the scintillator is built
 	slab_side  = case_side;
 	slab_depth = hole_length/3.;
-	scintiPixelNoSlab = 1;
+	scintiPixelNoSlab = "matrix";
 	scinti_pixel_size = hole_thickness + septa_thickness;
 	scinti_septa_thickness = 10*um;
 	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
@@ -386,13 +386,13 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 
 	if(scintillatorExist)
 	{
-		if (scintiPixelNoSlab)
+		if (scintiPixelNoSlab == "matrix")
 			ConstructPixelScintillator();
 		else
 			ConstructScintillator();
 	}
 	
-	if (detPixelNoSlab)
+	if (detPixelNoSlab == "matrix")
 		ConstructPixelDetector();
 	else
 		ConstructDetector();
@@ -446,7 +446,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTtransmitting);
 
 	
-	if (scintiPixelNoSlab)
+	if (scintiPixelNoSlab == "matrix")
 	{
 		// build reflective skin surface around the scintillator pixel hole
 		new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
