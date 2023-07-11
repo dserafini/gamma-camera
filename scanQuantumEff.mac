@@ -44,4 +44,4 @@
 /analysis/setFileName discard.root
 /run/beamOn 1
 /analysis/setFileName outQuantumEff{energyop}.root
-/run/beamOn 10
+/run/beamOn 100000
