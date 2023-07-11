@@ -72,7 +72,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
   G4double enePhoton = aStep->GetTrack()->GetKineticEnergy();
   G4double wlen = (1.239841939*eV/enePhoton)*1e3;
-  G4cout << "mom: " << enePhoton << ", wlen (nm): " << wlen /nm<< ", quEff: " << quEff->Value(wlen/nm) << G4endl;
+  G4cout << "mom (eV): " << enePhoton/eV << ", wlen (nm): " << wlen /nm<< ", quEff: " << quEff->Value(wlen/nm) << G4endl;
   if (G4UniformRand() < quEff->Value(wlen))
   {
     // energy deposit
