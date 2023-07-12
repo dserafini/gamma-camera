@@ -4,7 +4,8 @@
 # define scintillator
 ################################################################################
 
-/scintillator/pixel 1
+/scintillator/pixel matrix
+# matrix or otherwise slab
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 26. mm
 /scintillator/scinti_pixel_size 1. mm
@@ -24,7 +25,7 @@
 ################################################################################
 # change geometry detector
 ################################################################################
-/detector/pixel 1
+/detector/pixel matrix
 /detector/det_pixel_size 3. mm
 
 /run/reinitializeGeometry
