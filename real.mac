@@ -55,7 +55,7 @@
 
 # define cylinder dimension
 /control/alias cylRad 1.5
-/control/multiply cylDiam cylRad 2
+/control/multiply cylDiam {cylRad} 2
 
 # generate cylinder
 /gps/pos/type Volume
