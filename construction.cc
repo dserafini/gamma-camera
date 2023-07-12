@@ -7,7 +7,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// the slashes in the folder argument are mandatory
 	// third argument is help text
 	
-	fMessengerCollimator->DeclareProperty("exist", collimatorExist, "0 no, 1 yes");
+	fMessengerCollimator->DeclareProperty("exist", collimatorExist, "true or false");
 
 	// define our command
 	// first argument is the name of the command
@@ -21,7 +21,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerCollimator->DeclarePropertyWithUnit("positionY", "mm", collimator_posY, "X position of the collimator");
 
 	// Collimator parameters
-	collimatorExist = 1; // by default the collimator is built
+	collimatorExist = true; // by default the collimator is built
 	hole_length = 30.*mm;
 	septa_thickness = 1.*mm; // 2*mm;
 	hole_thickness = 2.*mm; // 3*mm;
@@ -33,12 +33,12 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerScintillator = new G4GenericMessenger(this, "/scintillator/", "Scintillator Construction");
 	fMessengerScintillator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the collimator");
 	fMessengerScintillator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
-	fMessengerScintillator->DeclareProperty("pixel", scintiPixelNoSlab, "0 slab, 1 matrix");
+	fMessengerScintillator->DeclareProperty("pixel", scintiPixelNoSlab, "matrix or otherwise slab");
 	fMessengerScintillator->DeclarePropertyWithUnit("scinti_pixel_size", "mm", scinti_pixel_size, "Size of the scintillator pixels");
-	fMessengerScintillator->DeclareProperty("exist", scintillatorExist, "0 no, 1 yes");
+	fMessengerScintillator->DeclareProperty("exist", scintillatorExist, "true or false");
 	
 	// scintillator parameters
-	scintillatorExist = 1; // by default the scintillator is built
+	scintillatorExist = true; // by default the scintillator is built
 	slab_side  = case_side;
 	slab_depth = hole_length/3.;
 	scintiPixelNoSlab = "matrix";
@@ -50,11 +50,11 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// detector commands
 	fMessengerDetector = new G4GenericMessenger(this, "/detector/", "Detector Construction");
 	fMessengerDetector->DeclarePropertyWithUnit("det_pixel_size", "mm", det_pixel_size, "Size of the detector pixels");
-	fMessengerDetector->DeclareProperty("pixel", detPixelNoSlab, "0 slab, 1 matrix");
+	fMessengerDetector->DeclareProperty("pixel", detPixelNoSlab, "matrix or otherwise");
 
 	// detector parameters
 	det_pixel_size = 3*mm;
-	detPixelNoSlab = 1;
+	detPixelNoSlab = "matrix";
 	detector_side = slab_side;
 	detector_depth = 10*um;
 	fScoringDetector = 0;
