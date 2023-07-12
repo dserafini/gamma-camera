@@ -55,7 +55,7 @@
 # /run/beamOn 1850746
 
 # define cylinder dimension
-/control/alias cylDiam 5
+/control/alias cylDiam 3
 /control/multiply cylRad {cylDiam} .5
 
 # generate cylinder
