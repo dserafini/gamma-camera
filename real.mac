@@ -64,8 +64,8 @@
 /gps/pos/halfz 2.5 mm
 
 # define cylinders position
-/control/multiply cylPosY cylDiam 1.1547
-/control/multiply cylPosHY cylPosY .5
+/control/multiply cylPosY {cylDiam} 1.1547
+/control/multiply cylPosHY {cylPosY} .5
 /control/alias cylPosX cylDiam
 
 /collimator/positionX 1.5 mm
