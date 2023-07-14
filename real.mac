@@ -51,14 +51,18 @@
 # run
 ################################################################################
 
-/run/printProgress 1000000
-/control/alias nEventsTotal 18000000
+/run/printProgress 100000
+/control/alias nEventsTotal 1800000
 # 4 posizioni diverse
 # 3 cilindri per posizione generati
-/control/alias nPartial 12
-/control/remainder v1 {nEventsTotal} {nPartial}
+/control/alias nParts 12
+/control/remainder v1 {nEventsTotal} {nParts}
 /control/subtract v2 {nEventsTotal} {v1}
-/control/divide nEventsPartial {v2} {nPartial}
+/control/divide nEventsPartial {v2} {nParts}
+/control/echo "nEventsPartial: "
+/control/echo {nEventsPartial}
+# nEventsPartial if greater or equal than 1M then is cast as float
+# beamOn needs an integer, thus a smaller nEventsPartial
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
