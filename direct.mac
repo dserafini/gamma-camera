@@ -4,7 +4,7 @@
 # define scintillator
 ################################################################################
 
-/scintillator/pixel 1
+/scintillator/pixel matrix
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
 /scintillator/scinti_pixel_size 3. mm
@@ -13,7 +13,7 @@
 # define collimator
 ################################################################################
 
-/collimator/exist 1
+/collimator/exist true
 /collimator/case_side 10. cm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1.5 mm
@@ -22,7 +22,7 @@
 ################################################################################
 # change geometry detector
 ################################################################################
-/detector/pixel 1
+/detector/pixel matrix
 /detector/det_pixel_size 20. mm
 
 /run/reinitializeGeometry

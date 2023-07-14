@@ -11,7 +11,7 @@
 # define collimator
 ################################################################################
 
-/collimator/exist 0
+/collimator/exist false
 
 /run/reinitializeGeometry
 
