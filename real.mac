@@ -90,15 +90,15 @@
 /run/reinitializeGeometry
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP4Primo.root
-/gps/pos/centre {cylPosX} -{cylPosHY} -{cylHalfZ} mm
+/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP4Secondo.root
-/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylHalfZ} mm
+/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP4Terzo.root
-/gps/pos/centre 0. {cylPosY} -{cylHalfZ} mm
+/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 
 
@@ -107,15 +107,15 @@
 /run/reinitializeGeometry
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP3Primo.root
-/gps/pos/centre {cylPosX} -{cylPosHY} -{cylHalfZ} mm
+/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP3Secondo.root
-/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylHalfZ} mm
+/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP3Terzo.root
-/gps/pos/centre 0. {cylPosY} -{cylHalfZ} mm
+/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 
 
@@ -124,15 +124,15 @@
 /run/reinitializeGeometry
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP2Primo.root
-/gps/pos/centre {cylPosX} -{cylPosHY} -{cylHalfZ} mm
+/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP2Secondo.root
-/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylHalfZ} mm
+/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP2Terzo.root
-/gps/pos/centre 0. {cylPosY} -{cylHalfZ} mm
+/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 
 
@@ -141,13 +141,13 @@
 /run/reinitializeGeometry
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
-/gps/pos/centre {cylPosX} -{cylPosHY} -{cylHalfZ} mm
+/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
-/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylHalfZ} mm
+/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
-/gps/pos/centre 0. {cylPosY} -{cylHalfZ} mm
+/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
 /run/beamOn {nEventsPartial}
