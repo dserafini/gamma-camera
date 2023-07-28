@@ -1,0 +1,14 @@
+# 342 keV branch
+/gps/energy 342 keV
+/run/beamOn {nEventsUno}
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP3Primo342keV.root
+
+/control/divide v1 1.24 6.7
+/control/remainder v2 {nEventsUno} {v1}
+/control/subtract v3 {nEventsUno} {v2}
+/control/divide nEventsDue {v3} {v1}
+
+# 245 keV branch
+/gps/energy 245 keV
+/run/beamOn {nEventsDue}
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP3Primo245keV.root
