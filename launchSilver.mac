@@ -1,3 +1,6 @@
+# available alias
+/control/listAlias
+
 # 342 keV branch
 /gps/energy 342 keV
 /control/multiply nEventsUno {decayedNucleik} 67
