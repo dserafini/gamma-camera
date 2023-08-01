@@ -49,17 +49,17 @@
 # run
 ################################################################################
 
-/run/printProgress 100000
-/control/alias activitykBq 45
-/control/echo "activity in kBq: "
-/control/echo {activitykBq}
-# activitykBq if greater or equal than 1M then is cast as float
-# beamOn needs an integer, thus a smaller activitykBq
-# /run/beamOn 10000000
-# /run/beamOn 1850746
-/control/alias acquisitionTimes 300
-/control/multiply decayedNucleik {activitykBq} {acquisitionTimes}
-/control/multiply decayedNuclei {decayedNucleik} 10
+/control/alias decayedNucleiPerCylinder 1000000
+/control/alias acquisitionTimeS 300
+/control/divide numberProgress {decayedNucleiPerCylinder} 10
+/run/printProgress {numberProgress}
+/control/divide activityPerCylinderBq {decayedNucleiPerCylinder} {acquisitionTimeS}
+/control/multiply activityThreeCylindersBq {activityPerCylinderBq} 3
+/control/echo "activityPerCylinderBq in Bq: "
+/control/echo {activityPerCylinderBq}
+/control/echo "activityThreeCylindersBq in Bq: "
+/control/echo {activityThreeCylindersBq}
+# integer from any operation if greater or equal than 1M then is cast as float
 
 ################################################################################
 # cylinder dimension and distance
@@ -92,12 +92,12 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
 /gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNuclei}
+/run/beamOn {decayedNucleiPerCylinder}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
 /gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNuclei}
+/run/beamOn {decayedNucleiPerCylinder}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
 /gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-/run/beamOn {decayedNuclei}
+/run/beamOn {decayedNucleiPerCylinder}
