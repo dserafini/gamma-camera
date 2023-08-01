@@ -93,15 +93,15 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
 /gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
 /gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
 /gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 
 /control/alias distanceZ 5
 /control/add cylPosZ {distanceZ} {cylHalfZ}
@@ -111,15 +111,15 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
 /gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
 /gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
 /gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 
 /control/alias distanceZ 10
 /control/add cylPosZ {distanceZ} {cylHalfZ}
@@ -129,15 +129,15 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
 /gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
 /gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
 /gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 
 /control/alias distanceZ 50
 /control/add cylPosZ {distanceZ} {cylHalfZ}
@@ -147,15 +147,15 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
 /gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
 /gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
 /gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 
 /control/alias distanceZ 100
 /control/add cylPosZ {distanceZ} {cylHalfZ}
@@ -165,15 +165,15 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
 /gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
 /gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
 /gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 
 /control/alias cylDiam 3
 /control/multiply cylRad {cylDiam} .5
@@ -190,15 +190,15 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
 /gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
 /gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
 /gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 
 /control/alias cylDiam 2
 /control/multiply cylRad {cylDiam} .5
@@ -215,12 +215,12 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
 /gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
 /gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
 /gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-#/run/beamOn {decayedNucleiPerCylinder}
+/run/beamOn {decayedNucleiPerCylinder}
