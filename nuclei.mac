@@ -59,7 +59,7 @@
 # /run/beamOn 1850746
 /control/alias acquisitionTimes 300
 /control/multiply decayedNucleik {activitykBq} {acquisitionTimes}
-/control/multiply decayedNuclei {decayedNucleik} 1000
+/control/multiply decayedNuclei {decayedNucleik} 10
 
 ################################################################################
 # cylinder dimension and distance
