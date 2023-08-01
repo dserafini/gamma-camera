@@ -52,7 +52,7 @@
 ################################################################################
 
 /run/printProgress 100000
-/control/alias activitykBq 450
+/control/alias activitykBq 45
 /control/echo "activity in kBq: "
 /control/echo {activitykBq}
 # activitykBq if greater or equal than 1M then is cast as float
@@ -83,6 +83,9 @@
 /control/multiply cylPosHY {cylPosY} .5
 /control/alias cylPosX {cylDiam}
 /control/add cylPosZ {distanceZ} {cylHalfZ}
+
+# check aliases
+/control/listAlias
 
 /collimator/positionY 0. mm
 /collimator/positionX 0. mm
