@@ -93,12 +93,63 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
 /gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
+#/run/beamOn {decayedNucleiPerCylinder}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
 /gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
+#/run/beamOn {decayedNucleiPerCylinder}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
+/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
+#/run/beamOn {decayedNucleiPerCylinder}
+
+
+## prova
+/gps/particle gamma
+/gps/energy 342 keV
+/gps/position 0 0 -1. mm
+# /gps/direction 0 0 1
+/gps/ang/type iso
+/analysis/setFileName discard.root
+/run/beamOn 1
+# devo lanciare il primo evento che ha l'energia sbagliata
+/control/alias decayedNucleiPerCylinder 2127000
+/collimator/positionY 0. mm
+/collimator/positionX 0. mm
+/run/reinitializeGeometry
+# primo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo342keV.root
+/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
+/run/beamOn {decayedNucleiPerCylinder}
+# secondo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo342keV.root
+/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
+/run/beamOn {decayedNucleiPerCylinder}
+# terzo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo342keV.root
+/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
+/run/beamOn {decayedNucleiPerCylinder}
+/gps/particle gamma
+/gps/energy 245 keV
+/gps/position 0 0 -1. mm
+# /gps/direction 0 0 1
+/gps/ang/type iso
+/analysis/setFileName discard.root
+/run/beamOn 1
+# devo lanciare il primo evento che ha l'energia sbagliata
+/control/alias decayedNucleiPerCylinder 299600
+/collimator/positionY 0. mm
+/collimator/positionX 0. mm
+/run/reinitializeGeometry
+# primo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo245keV.root
+/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
+/run/beamOn {decayedNucleiPerCylinder}
+# secondo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo245keV.root
+/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
+/run/beamOn {decayedNucleiPerCylinder}
+# terzo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo245keV.root
 /gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
 /run/beamOn {decayedNucleiPerCylinder}
