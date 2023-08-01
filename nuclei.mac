@@ -52,6 +52,7 @@
 /control/alias decayedNucleiPerCylinder 30000000
 /control/alias acquisitionTimeS 300
 /control/divide numberProgress {decayedNucleiPerCylinder} 10
+/control/doif {numberProgress} >= 1000000 /control/alias numberProgress 1000000
 /run/printProgress {numberProgress}
 /control/divide activityPerCylinderBq {decayedNucleiPerCylinder} {acquisitionTimeS}
 /control/multiply activityThreeCylindersBq {activityPerCylinderBq} 3
