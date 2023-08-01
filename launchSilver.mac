@@ -1,5 +1,6 @@
 # 342 keV branch
 /gps/energy 342 keV
+/control/multiply nEventsUno {decayedNucleik} 670
 /run/beamOn {nEventsUno}
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP3Primo342keV.root
 
@@ -10,5 +11,6 @@
 
 # 245 keV branch
 /gps/energy 245 keV
+/control/multiply nEventsDue {decayedNucleik} 124
 /run/beamOn {nEventsDue}
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP3Primo245keV.root
