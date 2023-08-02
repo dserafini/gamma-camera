@@ -69,7 +69,7 @@
 # define cylinder dimension
 /control/alias cylDiam 5
 /control/alias cylHalfZ 2.5
-/control/alias distanceZ 0
+/control/alias distanceZ 10
 
 # generate cylinder
 /control/multiply cylRad {cylDiam} .5
@@ -87,128 +87,6 @@
 # check aliases
 /control/listAlias
 
-/collimator/positionY 0. mm
-/collimator/positionX 0. mm
-/run/reinitializeGeometry
-# primo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
-/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# secondo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
-/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# terzo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
-/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-
-/control/alias distanceZ 5
-/control/add cylPosZ {distanceZ} {cylHalfZ}
-/collimator/positionY 0. mm
-/collimator/positionX 0. mm
-/run/reinitializeGeometry
-# primo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
-/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# secondo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
-/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# terzo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
-/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-
-/control/alias distanceZ 10
-/control/add cylPosZ {distanceZ} {cylHalfZ}
-/collimator/positionY 0. mm
-/collimator/positionX 0. mm
-/run/reinitializeGeometry
-# primo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
-/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# secondo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
-/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# terzo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
-/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-
-/control/alias distanceZ 50
-/control/add cylPosZ {distanceZ} {cylHalfZ}
-/collimator/positionY 0. mm
-/collimator/positionX 0. mm
-/run/reinitializeGeometry
-# primo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
-/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# secondo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
-/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# terzo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
-/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-
-/control/alias distanceZ 100
-/control/add cylPosZ {distanceZ} {cylHalfZ}
-/collimator/positionY 0. mm
-/collimator/positionX 0. mm
-/run/reinitializeGeometry
-# primo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
-/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# secondo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
-/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# terzo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
-/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-
-/control/alias cylDiam 3
-/control/multiply cylRad {cylDiam} .5
-/gps/pos/radius {cylRad} mm
-/control/multiply cylPosY {cylDiam} 1.1547
-/control/multiply cylPosHY {cylPosY} .5
-/control/alias cylPosX {cylDiam}
-/control/add cylPosZ {distanceZ} {cylHalfZ}
-/control/alias distanceZ 0
-/control/add cylPosZ {distanceZ} {cylHalfZ}
-/collimator/positionY 0. mm
-/collimator/positionX 0. mm
-/run/reinitializeGeometry
-# primo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
-/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# secondo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
-/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-# terzo
-/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
-/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-/run/beamOn {decayedNucleiPerCylinder}
-
-/control/alias cylDiam 2
-/control/multiply cylRad {cylDiam} .5
-/gps/pos/radius {cylRad} mm
-/control/multiply cylPosY {cylDiam} 1.1547
-/control/multiply cylPosHY {cylPosY} .5
-/control/alias cylPosX {cylDiam}
-/control/add cylPosZ {distanceZ} {cylHalfZ}
-/control/alias distanceZ 0
-/control/add cylPosZ {distanceZ} {cylHalfZ}
 /collimator/positionY 0. mm
 /collimator/positionX 0. mm
 /run/reinitializeGeometry
