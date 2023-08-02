@@ -1,0 +1,104 @@
+
+/run/numberOfThreads 10
+
+################################################################################
+# define scintillator
+################################################################################
+
+/scintillator/pixel matrix
+# matrix or otherwise slab
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 26. mm
+/scintillator/scinti_pixel_size 1. mm
+
+################################################################################
+# define collimator
+################################################################################
+
+/collimator/exist 1
+/collimator/case_side 100. mm
+/collimator/hole_length 30. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
+
+################################################################################
+# change geometry detector
+################################################################################
+/detector/pixel matrix
+/detector/det_pixel_size 3. mm
+
+/run/reinitializeGeometry
+
+/run/initialize
+
+################################################################################
+# define primary
+################################################################################
+
+/gps/particle gamma
+/gps/energy 342 keV
+# /gps/energy 245 keV
+/gps/position 0 0 -1. mm
+# /gps/direction 0 0 1
+/gps/ang/type iso
+/analysis/setFileName discard.root
+/run/beamOn 1
+# devo lanciare il primo evento che ha l'energia sbagliata
+
+################################################################################
+# run
+################################################################################
+
+/run/printProgress 100000
+/control/alias activitykBq 45
+/control/echo "activity in kBq: "
+/control/echo {activitykBq}
+# activitykBq if greater or equal than 1M then is cast as float
+# beamOn needs an integer, thus a smaller activitykBq
+# /run/beamOn 10000000
+# /run/beamOn 1850746
+/control/alias acquisitionTimes 300
+/control/multiply decayedNucleik {activitykBq} {acquisitionTimes}
+
+################################################################################
+# cylinder dimension and distance
+################################################################################
+
+# define cylinder dimension
+/control/alias cylDiam 5
+/control/alias cylHalfZ 2.5
+/control/alias distanceZ 0
+
+# generate cylinder
+/control/multiply cylRad {cylDiam} .5
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/radius {cylRad} mm
+/gps/pos/halfz {cylHalfZ} mm
+
+# define cylinders position
+/control/multiply cylPosY {cylDiam} 1.1547
+/control/multiply cylPosHY {cylPosY} .5
+/control/alias cylPosX {cylDiam}
+/control/add cylPosZ {distanceZ} {cylHalfZ}
+
+# check aliases
+/control/listAlias
+
+/collimator/positionY 0. mm
+/collimator/positionX 0. mm
+/run/reinitializeGeometry
+# primo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
+/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
+/control/foreach launchSilver.mac decayedNucleik {decayedNucleik}
+# secondo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
+/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
+/control/foreach launchSilver.mac decayedNucleik {decayedNucleik}
+# terzo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
+/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
+/control/foreach launchSilver.mac decayedNucleik {decayedNucleik}

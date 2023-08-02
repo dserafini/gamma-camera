@@ -1,0 +1,104 @@
+
+/run/numberOfThreads 10
+
+################################################################################
+# define scintillator
+################################################################################
+
+/scintillator/pixel matrix
+# matrix or otherwise slab
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 26. mm
+/scintillator/scinti_pixel_size 1. mm
+
+################################################################################
+# define collimator
+################################################################################
+
+/collimator/exist 1
+/collimator/case_side 100. mm
+/collimator/hole_length 30. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
+
+################################################################################
+# change geometry detector
+################################################################################
+/detector/pixel matrix
+/detector/det_pixel_size 3. mm
+
+/run/reinitializeGeometry
+
+/run/initialize
+
+################################################################################
+# define primary
+################################################################################
+
+/gps/particle ion
+/gps/ion 47 111 0 0.
+/gps/energy 0. eV
+/gps/direction 0 0 1
+/analysis/setFileName discard.root
+/run/beamOn 1
+# devo lanciare il primo evento che ha l'energia sbagliata
+
+################################################################################
+# run
+################################################################################
+
+/control/alias decayedNucleiPerCylinder 30000000
+/control/alias acquisitionTimeS 300
+/control/divide numberProgress {decayedNucleiPerCylinder} 10
+/control/doif {numberProgress} >= 1000000 /control/alias numberProgress 1000000
+/run/printProgress {numberProgress}
+/control/divide activityPerCylinderBq {decayedNucleiPerCylinder} {acquisitionTimeS}
+/control/multiply activityThreeCylindersBq {activityPerCylinderBq} 3
+/control/echo "activityPerCylinderBq in Bq: "
+/control/echo {activityPerCylinderBq}
+/control/echo "activityThreeCylindersBq in Bq: "
+/control/echo {activityThreeCylindersBq}
+# integer from any operation if greater or equal than 1M then is cast as float
+
+################################################################################
+# cylinder dimension and distance
+################################################################################
+
+# define cylinder dimension
+/control/alias cylDiam 5
+/control/alias cylHalfZ 2.5
+/control/alias distanceZ 10
+
+# generate cylinder
+/control/multiply cylRad {cylDiam} .5
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/radius {cylRad} mm
+/gps/pos/halfz {cylHalfZ} mm
+
+# define cylinders position
+/control/multiply cylPosY {cylDiam} 1.1547
+/control/multiply cylPosHY {cylPosY} .5
+/control/alias cylPosX {cylDiam}
+/control/add cylPosZ {distanceZ} {cylHalfZ}
+
+# check aliases
+/control/listAlias
+
+/collimator/positionY 0. mm
+/collimator/positionX 0. mm
+/run/reinitializeGeometry
+# primo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
+/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
+/run/beamOn {decayedNucleiPerCylinder}
+# secondo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
+/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
+/run/beamOn {decayedNucleiPerCylinder}
+# terzo
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
+/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
+/run/beamOn {decayedNucleiPerCylinder}

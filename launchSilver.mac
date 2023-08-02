@@ -1,0 +1,19 @@
+# available alias
+/control/listAlias
+
+# 342 keV branch
+/gps/energy 342 keV
+/control/multiply nEventsUno {decayedNucleik} 67
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmPrimo342keV.root
+/run/beamOn 2
+
+/control/divide v1 1.24 6.7
+/control/remainder v2 {nEventsUno} {v1}
+/control/subtract v3 {nEventsUno} {v2}
+/control/divide nEventsDue {v3} {v1}
+
+# 245 keV branch
+/gps/energy 245 keV
+/control/multiply nEventsDue {decayedNucleik} 12
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmPrimo245keV.root
+/run/beamOn 3
