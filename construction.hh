@@ -116,9 +116,10 @@ private:
 	G4String scintiPixelNoSlab;
 	
 	// detector
-	G4double det_pixel_size, detector_depth, detector_side;
+	G4double det_pixel_size, detector_depth, detector_side, detector_scintillator_distance;
 	G4int det_pixels_number;
 	G4String detPixelNoSlab;
+	G4ThreeVector detector_centre_position;
 };
 
 #endif
