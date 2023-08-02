@@ -51,6 +51,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerDetector = new G4GenericMessenger(this, "/detector/", "Detector Construction");
 	fMessengerDetector->DeclarePropertyWithUnit("det_pixel_size", "mm", det_pixel_size, "Size of the detector pixels");
 	fMessengerDetector->DeclareProperty("pixel", detPixelNoSlab, "matrix or otherwise");
+	fMessengerDetector->DeclarePropertyWithUnit("det_scinti_distance", "mm", detector_scintillator_distance, "Optical coupling distance");
 
 	// detector parameters
 	det_pixel_size = 3*mm;
@@ -58,6 +59,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	detector_side = slab_side;
 	detector_depth = 10*um;
 	fScoringDetector = 0;
+	detector_scintillator_distance = 1*mm;
 
 	// define materials just once
 	DefineMaterials();
@@ -313,7 +315,7 @@ void MyDetectorConstruction::ConstructDetector()
 	logicDetector = new G4LogicalVolume(solidDetector, materialPlastic, "logicDetector");
 
 	physDetector = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,hole_length + slab_depth + detector_depth/2.),
+		detector_centre_position,
 		logicDetector,             // its logical volume
 		"physDetector",           // its name
 		logicWorld,                  // its mother volume
@@ -352,7 +354,7 @@ void MyDetectorConstruction::ConstructPixelDetector()
 	G4cout << "defining the detector case" << G4endl;
 	solidDetectorMatrix = new G4Box("solidDetectorMatrix", detector_side/2., detector_side/2., detector_depth/2.);
 	logicDetectorMatrix = new G4LogicalVolume(solidDetectorMatrix, materialPlastic, "logicDetectorMatrix");
-	physDetector = new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth + detector_depth/2.), logicDetectorMatrix, "physDetectorMatrix", logicWorld, false, 0, true);
+	physDetector = new G4PVPlacement(0, detector_centre_position, logicDetectorMatrix, "physDetectorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the detector array element" << G4endl;
@@ -391,7 +393,9 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		else
 			ConstructScintillator();
 	}
-	
+
+	detector_centre_position = G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance + detector_depth/2.);
+	G4cout << "Optical coupling distance: " << detector_scintillator_distance << G4endl;
 	if (detPixelNoSlab == "matrix")
 		ConstructPixelDetector();
 	else
