@@ -59,7 +59,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerDetector->DeclarePropertyWithUnit("det_pixel_size", "mm", det_pixel_size, "Size of the detector pixels");
 	fMessengerDetector->DeclareProperty("pixel", detPixelNoSlab, "matrix or otherwise");
 	fMessengerDetector->DeclarePropertyWithUnit("det_scinti_distance", "mm", detector_scintillator_distance, "Optical coupling distance");
-	fMessengerDetector->DeclarePropertyWithUnit("fill_factor", "1", det_fill_factor, "Ratio active over total pixel area");
+	fMessengerDetector->DeclarePropertyWithUnit("fill_factor", "perCent", det_fill_factor, "Ratio active over total pixel area");
 
 	// detector parameters
 	det_pixel_size = 3*mm;
