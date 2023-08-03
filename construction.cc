@@ -47,6 +47,13 @@ MyDetectorConstruction::MyDetectorConstruction()
 	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
 	fScoringScintillator = 0;
 
+	// coupler commands
+	fMessengerCoupler = new G4GenericMessenger(this, "/coupler/", "Optical coupling element");
+	fMessengerCoupler->DeclarePropertyWithUnit("thickness", "mm", detector_scintillator_distance, "Optical coupling distance");
+
+	// coupler parameters
+	detector_scintillator_distance = 1*mm;
+	
 	// detector commands
 	fMessengerDetector = new G4GenericMessenger(this, "/detector/", "Detector Construction");
 	fMessengerDetector->DeclarePropertyWithUnit("det_pixel_size", "mm", det_pixel_size, "Size of the detector pixels");
@@ -59,7 +66,6 @@ MyDetectorConstruction::MyDetectorConstruction()
 	detector_side = slab_side;
 	detector_depth = 10*um;
 	fScoringDetector = 0;
-	detector_scintillator_distance = 1*mm;
 
 	// define materials just once
 	DefineMaterials();
@@ -77,6 +83,8 @@ MyDetectorConstruction::~MyDetectorConstruction()
 {
 	delete fMessengerCollimator;
 	delete fMessengerScintillator;
+	delete fMessengerDetector;
+	delete fMessengerCoupler;
 }
 
 // to define material only once
@@ -307,6 +315,20 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	fScoringScintillator = logicScintillatorPinhole;
 }
 
+void MyDetectorConstruction::ConstructCoupler()
+{
+	solidCoupler = new G4Box("solidScintillator", slab_side/2., slab_side/2., detector_scintillator_distance/2.);
+	logicCoupler = new G4LogicalVolume(solidCoupler, materialAir, "logicCoupler");
+	physCoupler = new G4PVPlacement(0,  // no rotation
+		G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance/2.),
+		logicCoupler,             // its logical volume
+		"physCoupler",           // its name
+		logicWorld,                  // its mother volume
+		false,                   // no boolean operations
+		0,                       // copy number
+		1); // checking overlaps
+}
+
 void MyDetectorConstruction::ConstructDetector()
 {
 	G4cout << "MyDetectorConstruction::ConstructDetector" << G4endl;
@@ -394,6 +416,9 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 			ConstructScintillator();
 	}
 
+	if(scintillatorExist)
+		ConstructCoupler();
+
 	detector_centre_position = G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance + detector_depth/2.);
 	G4cout << "Optical coupling distance: " << detector_scintillator_distance << G4endl;
 	if (detPixelNoSlab == "matrix")
@@ -449,24 +474,27 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
 	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTtransmitting);
 
-	
-	if (scintiPixelNoSlab == "matrix")
+
+	if(scintillatorExist)
 	{
-		// build reflective skin surface around the scintillator pixel hole
-		new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
-			
-		// block optical photons escaping toward the detector
-		new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-					   physScintillatorPinhole, physDetector, opGaggDetectorSurface);
-	}
-	else
-	{
-		// build reflective skin surface around the scintillator pixel hole
-		new G4LogicalSkinSurface("skin",logicScintillator, opGaggPlasticSurface);
-			
-		// block optical photons escaping toward the detector
-		new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-					   physScintillator, physDetector, opGaggDetectorSurface);
+		if (scintiPixelNoSlab == "matrix")
+		{
+			// build reflective skin surface around the scintillator pixel hole
+			new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
+				
+			// block optical photons escaping toward the detector
+			new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+						   physScintillatorPinhole, physDetector, opGaggDetectorSurface);
+		}
+		else
+		{
+			// build reflective skin surface around the scintillator pixel hole
+			new G4LogicalSkinSurface("skin",logicScintillator, opGaggPlasticSurface);
+				
+			// block optical photons escaping toward the detector
+			new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+						   physScintillator, physDetector, opGaggDetectorSurface);
+		}
 	}
 }
 
