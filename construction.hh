@@ -66,9 +66,9 @@ private:
 	G4VPhysicalVolume *physDetector;
 
 	// detector pixel
-	G4Box *solidDetectorPixel, *solidDetectorArray, *solidDetectorMatrix;
-	G4LogicalVolume *logicDetectorPixel, *logicDetectorArray, *logicDetectorMatrix;
-	G4VPhysicalVolume *physDetectorPixel, *physDetectorMatrix;
+	G4Box *solidDetectorPixel, *solidDetectorFullPixel, *solidDetectorArray, *solidDetectorMatrix;
+	G4LogicalVolume *logicDetectorPixel, *logicDetectorFullPixel, *logicDetectorArray, *logicDetectorMatrix;
+	G4VPhysicalVolume *physDetectorPixel, *physDetectorFullPixel, *physDetectorMatrix;
 
 	// collimator pixel
 	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
@@ -76,7 +76,7 @@ private:
 	G4VPhysicalVolume *physCollimator, *physCollimatorMatrix;
 
 	// materials
-	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
+	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG, *materialSilicon;
 	G4Material *materialPlastic;
 	G4Element *elLa, *elBr;
 
@@ -84,10 +84,10 @@ private:
 	void DefineMaterialsProperties();
 	void DefineOpticalSurfaceProperties();
 
-	void ConstructScintillator();
+	void ConstructSlabScintillator();
 	void ConstructPixelScintillator();
 	void ConstructCollimator();
-	void ConstructDetector();
+	void ConstructSlabDetector();
 	void ConstructCoupler();
 	void ConstructPixelDetector();
 	void SetVisualizationFeatures();
@@ -124,7 +124,7 @@ private:
 	G4String scintiPixelNoSlab;
 	
 	// detector
-	G4double det_pixel_size, detector_depth, detector_side, detector_scintillator_distance;
+	G4double det_pixel_size, detector_depth, detector_side, detector_scintillator_distance, det_fill_factor;
 	G4int det_pixels_number;
 	G4String detPixelNoSlab;
 	G4ThreeVector detector_centre_position;
