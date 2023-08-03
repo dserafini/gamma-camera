@@ -76,7 +76,7 @@ private:
 	G4VPhysicalVolume *physCollimator, *physCollimatorMatrix;
 
 	// materials
-	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGGm, *materialSilicon;
+	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG, *materialSilicon;
 	G4Material *materialPlastic;
 	G4Element *elLa, *elBr;
 
