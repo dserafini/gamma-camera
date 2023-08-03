@@ -259,6 +259,7 @@ void MyDetectorConstruction::ConstructScintillator()
 		1); // checking overlaps
 
 	fScoringScintillator = logicScintillator;
+	physScoringScintillator = physScintillator;
 }
 
 void MyDetectorConstruction::ConstructPixelScintillator()
@@ -313,6 +314,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	physScintillatorPinhole = new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
 
 	fScoringScintillator = logicScintillatorPinhole;
+	physScoringScintillator = physScintillatorPinhole;
 }
 
 void MyDetectorConstruction::ConstructCoupler()
@@ -480,18 +482,9 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 		// build reflective skin surface around the scintillator pixel hole
 		new G4LogicalSkinSurface("skin",fScoringScintillator, opGaggPlasticSurface);
 		
-		if (scintiPixelNoSlab == "matrix")
-		{
-			// fully transmit optical photons escaping toward the detector
-			new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
-						   physScintillatorPinhole, physCoupler, opGaggDetectorSurface);
-		}
-		else
-		{
-			// fully transmit optical photons escaping toward the detector
-			new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
-						   physScintillator, physCoupler, opGaggDetectorSurface);
-		}
+		// fully transmit optical photons escaping toward the detector
+		new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
+					   physScoringScintillator, physCoupler, opGaggDetectorSurface);
 		
 		// fully transmit optical photons escaping toward the detector
 		new G4LogicalBorderSurface("logicBorderCouplerDetectorSurface", 
