@@ -1,9 +1,65 @@
+################################################################################
+# other visualization settings
+################################################################################
+
+# tell Geant4 to show the scene
+/vis/open OGL
+
+# decide the initial position of the detector
+/vis/viewer/set/viewpointVector -1 0 -2
+/vis/viewer/set/lightsVector -1 0 0
+
+# Specify style (surface, wireframe, auxiliary edges,...)
+/vis/viewer/set/style surface
+/vis/viewer/set/hiddenEdge true
+# /vis/viewer/set/style wireframe
+# /vis/viewer/set/auxiliaryEdge true
+# /vis/viewer/set/lineSegmentsPerCircle 100
+/vis/viewer/colourByDensity 1 g/cm3 0.0001 1.5 12
+/vis/geometry/set/visibility logicWorld 0 false
+
+# tell Geant4 to draw the volumes
+/vis/drawVolume
+
+# tell Geant4 to update every time it creates an event
+/vis/viewer/set/autoRefresh true
+
+# tell Geant4 to draw the trajectories of the particles
+/vis/scene/add/trajectories smooth
+
+# insert a scale that is 10 cm long in our program
+# /vis/scene/add/scale 10 cm
+
+# add a coordinate system
+# /vis/scene/add/axes
+
+# always shows which event is just generated, for debugging
+/vis/scene/add/eventID
+
+# tell Geant4 to draw all the events without deleting the previous ones
+/vis/scene/endOfEventAction accumulate
+
+# Frame
+/vis/set/colour red
+/vis/set/lineWidth 2
+/vis/scene/add/frame   # Simple frame around the view
+/vis/set/colour        # Revert to default colour (white)
+/vis/set/lineWidth     # Revert to default line width (1.)
+
+# reduce scintillation yield to allow visualization
+/process/optical/scintillation/setYieldFactor .001
+
+# color first gamma
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set gamma blue
+
 /run/numberOfThreads 10
 /collimator/exist 0
 /scintillator/exist 0
 /run/initialize
 
 /gps/particle opticalphoton
+/gps/polarization 1 1 1
 /gps/pos/type Plane
 /gps/pos/shape Square
 /gps/pos/centre 0 0 0 mm
