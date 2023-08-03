@@ -100,6 +100,7 @@ void MyDetectorConstruction::DefineMaterials()
 	materialPMT      = nist->FindOrBuildMaterial("G4_SILICON_DIOXIDE");
 	materialAluminum = nist->FindOrBuildMaterial("G4_Al");
 	materialPlastic = nist->FindOrBuildMaterial("G4_POLYETHYLENE");
+	materialSilicon = nist->FindOrBuildMaterial("G4_SILICON_DIOXIDE");
 
 	elLa = new G4Element("Lanthanum", "La", 57, 138.905*g/mole);
 	elBr = new G4Element("Bromine", "Br", 35, 79.904*g/mole);
@@ -174,6 +175,14 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	mptPlastic->AddProperty("RINDEX", PhotonEnergy, refractiveIndexPlastic, nEntries);
 	mptPlastic->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthPlastic, nEntries);
 	materialPlastic->SetMaterialPropertiesTable(mptPlastic);
+
+	// silicon
+	G4double refractiveIndexSilicon[nEntries] = {1.45,1.54};
+	G4double absorptionLengthSilicon[nEntries] = {1e-8*m,1*m}; // per silicon dioxide
+	G4MaterialPropertiesTable* mptSilicon = new G4MaterialPropertiesTable();
+	mptSilicon->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSilicon, nEntries);
+	mptSilicon->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthSilicon, nEntries);
+	materialSilicon->SetMaterialPropertiesTable(mptSilicon);
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
