@@ -24,7 +24,7 @@
 /detector/pixel matrix
 /detector/det_pixel_size 20. mm
 /detector/det_scinti_distance 10 mm
-/detector/fill_factor 1
+/detector/fill_factor .8
 
 /run/reinitializeGeometry
 
