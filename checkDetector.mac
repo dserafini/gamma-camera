@@ -1,4 +1,4 @@
-/run/numberOfThreads 1
+/run/numberOfThreads 11
 
 /collimator/exist 0
 /scintillator/exist 0
@@ -19,7 +19,7 @@
 /gps/direction 0 0 1
 
 /analysis/setFileName outCheckDetector.root
-/control/alias nEvents 100000
+/control/alias nEvents 1000000
 /control/divide nProgress {nEvents} 10
 /run/printProgress {nProgress}
 /run/beamOn {nEvents}
