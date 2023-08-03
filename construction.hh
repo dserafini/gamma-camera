@@ -88,6 +88,7 @@ private:
 	void ConstructPixelScintillator();
 	void ConstructCollimator();
 	void ConstructDetector();
+	void ConstructCoupler();
 	void ConstructPixelDetector();
 	void SetVisualizationFeatures();
 
