@@ -67,7 +67,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	detector_side = slab_side;
 	detector_depth = 10*um;
 	fScoringDetector = 0;
-	det_fill_factor = 80*perCent;
+	det_fill_factor = .8;
 
 	// define materials just once
 	DefineMaterials();
@@ -393,7 +393,7 @@ void MyDetectorConstruction::ConstructPixelDetector()
 	detector_side = (G4double) det_pixel_size * det_pixels_number;
 	G4double det_pixel_active_size = sqrt(det_fill_factor) * det_pixel_size;
 	G4cout << "det_pixel_size: " << det_pixel_size / mm << " mm" << G4endl;
-	G4cout << "det_fill_factor: " << det_fill_factor / perCent << " %" << G4endl;
+	G4cout << "det_fill_factor: " << det_fill_factor * 100. << " %" << G4endl;
 	G4cout << "det_pixel_active_size: " << det_pixel_active_size / mm << " mm" << G4endl;
 	G4cout << "det_pixels_number: " << det_pixels_number << " " << G4endl;
 	G4cout << "detector_side: " << detector_side / mm << " mm" << G4endl;
