@@ -3,7 +3,7 @@
 /collimator/exist 0
 /scintillator/exist 0
 /detector/pixel matrix
-/detector/det_pixel_size 20. mm
+/detector/det_pixel_size 3. mm
 /run/reinitializeGeometry
 /run/initialize
 
