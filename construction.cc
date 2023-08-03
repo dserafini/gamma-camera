@@ -419,7 +419,7 @@ void MyDetectorConstruction::ConstructPixelDetector()
 	// pixel
 	G4cout << "defining the detector pixel active element" << G4endl;
 	solidDetectorPixel = new G4Box("solidDetectorPixel", det_pixel_active_size/2., det_pixel_active_size/2., detector_depth/2.);
-	logicDetectorPixel = new G4LogicalVolume(solidDetectorPixel, materialSiliconDioxide, "logicDetectorPixel");
+	logicDetectorPixel = new G4LogicalVolume(solidDetectorPixel, materialSilicon, "logicDetectorPixel");
 	physDetectorPixel = new G4PVPlacement(0, G4ThreeVector(), logicDetectorPixel, "physDetectorActivePixel", logicDetectorFullPixel, false, 0, true);
 	
 	fScoringDetector = logicDetectorPixel;
