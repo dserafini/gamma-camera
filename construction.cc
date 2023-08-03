@@ -378,14 +378,14 @@ void MyDetectorConstruction::ConstructPixelDetector()
 	}
 	if ((det_pixels_number % 2) < 1)
 		det_pixels_number = det_pixels_number - 1;
-	if (det_fill_factor>=1)
+	if (det_fill_factor>1)
 	{
 		G4cout << "Error: fill factor larger than 1" << G4endl;
-		det_fill_factor = .99;
+		det_fill_factor = 1;
 	}
 	if (det_fill_factor<=0)
 	{
-		G4cout << "Error: fill factor smaller than 0" << G4endl;
+		G4cout << "Error: fill factor smaller than or equal to 0" << G4endl;
 		det_fill_factor = .1;
 	}
 	
@@ -409,18 +409,29 @@ void MyDetectorConstruction::ConstructPixelDetector()
 	solidDetectorArray = new G4Box("solidDetectorArray", detector_side/2., det_pixel_size/2., detector_depth/2.);
 	logicDetectorArray = new G4LogicalVolume(solidDetectorArray, materialPlastic, "logicDetectorArray");
 	new G4PVReplica("physDetectorArray", logicDetectorArray, logicDetectorMatrix, kYAxis, det_pixels_number, det_pixel_size, 0);
-	
-	// dead boundary of a pixel
-	G4cout << "defining the detector pixel element, both active and not-active" << G4endl;
-	solidDetectorFullPixel = new G4Box("solidDetectorFullPixel", det_pixel_size/2., det_pixel_size/2., detector_depth/2.);
-	logicDetectorFullPixel = new G4LogicalVolume(solidDetectorFullPixel, materialPlastic, "logicDetectorFullPixel");
-	physDetectorFullPixel = new G4PVReplica("physDetectorFullPixel", logicDetectorFullPixel, logicDetectorArray, kXAxis, det_pixels_number, det_pixel_size, 0);
-	
-	// pixel
-	G4cout << "defining the detector pixel active element" << G4endl;
-	solidDetectorPixel = new G4Box("solidDetectorPixel", det_pixel_active_size/2., det_pixel_active_size/2., detector_depth/2.);
-	logicDetectorPixel = new G4LogicalVolume(solidDetectorPixel, materialSilicon, "logicDetectorPixel");
-	physDetectorPixel = new G4PVPlacement(0, G4ThreeVector(), logicDetectorPixel, "physDetectorActivePixel", logicDetectorFullPixel, false, 0, true);
+
+	if (det_fill_factor < 1)
+	{
+		// dead boundary of a pixel
+		G4cout << "defining the detector pixel element, both active and not-active" << G4endl;
+		solidDetectorFullPixel = new G4Box("solidDetectorFullPixel", det_pixel_size/2., det_pixel_size/2., detector_depth/2.);
+		logicDetectorFullPixel = new G4LogicalVolume(solidDetectorFullPixel, materialPlastic, "logicDetectorFullPixel");
+		physDetectorFullPixel = new G4PVReplica("physDetectorFullPixel", logicDetectorFullPixel, logicDetectorArray, kXAxis, det_pixels_number, det_pixel_size, 0);
+		
+		// active pixel
+		G4cout << "defining the detector pixel active element" << G4endl;
+		solidDetectorPixel = new G4Box("solidDetectorPixel", det_pixel_active_size/2., det_pixel_active_size/2., detector_depth/2.);
+		logicDetectorPixel = new G4LogicalVolume(solidDetectorPixel, materialSilicon, "logicDetectorPixel");
+		physDetectorPixel = new G4PVPlacement(0, G4ThreeVector(), logicDetectorPixel, "physDetectorActivePixel", logicDetectorFullPixel, false, 0, true);
+	}
+	else
+	{
+		// pixel
+		G4cout << "defining the detector pixel element" << G4endl;
+		solidDetectorPixel = new G4Box("solidDetectorPixel", det_pixel_size/2., det_pixel_size/2., detector_depth/2.);
+		logicDetectorPixel = new G4LogicalVolume(solidDetectorPixel, materialSilicon, "logicDetectorPixel");
+		physDetectorPixel = new G4PVReplica("physDetectorPixel", logicDetectorPixel, logicDetectorArray, kXAxis, det_pixels_number, det_pixel_size, 0);
+	}
 	
 	fScoringDetector = logicDetectorPixel;
 }
