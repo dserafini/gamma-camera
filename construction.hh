@@ -84,10 +84,10 @@ private:
 	void DefineMaterialsProperties();
 	void DefineOpticalSurfaceProperties();
 
-	void ConstructScintillator();
+	void ConstructSlabScintillator();
 	void ConstructPixelScintillator();
 	void ConstructCollimator();
-	void ConstructDetector();
+	void ConstructSlabDetector();
 	void ConstructCoupler();
 	void ConstructPixelDetector();
 	void SetVisualizationFeatures();
