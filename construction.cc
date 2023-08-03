@@ -416,7 +416,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 			ConstructScintillator();
 	}
 
-	if(scintillatorExist)
+	if(scintillatorExist && detector_scintillator_distance>0)
 		ConstructCoupler();
 
 	detector_centre_position = G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance + detector_depth/2.);
