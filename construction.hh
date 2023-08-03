@@ -66,9 +66,9 @@ private:
 	G4VPhysicalVolume *physDetector;
 
 	// detector pixel
-	G4Box *solidDetectorPixel, *solidDetectorArray, *solidDetectorMatrix;
-	G4LogicalVolume *logicDetectorPixel, *logicDetectorArray, *logicDetectorMatrix;
-	G4VPhysicalVolume *physDetectorPixel, *physDetectorMatrix;
+	G4Box *solidDetectorPixel, *solidDetectorFullPixel, *solidDetectorArray, *solidDetectorMatrix;
+	G4LogicalVolume *logicDetectorPixel, *logicDetectorFullPixel, *logicDetectorArray, *logicDetectorMatrix;
+	G4VPhysicalVolume *physDetectorPixel, *physDetectorFullPixel, *physDetectorMatrix;
 
 	// collimator pixel
 	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
