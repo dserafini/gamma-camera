@@ -418,7 +418,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 			ConstructScintillator();
 	}
 
-	if(scintillatorExist && detector_scintillator_distance>0)
+	if(scintillatorExist && detector_scintillator_distance > 0)
 		ConstructCoupler();
 
 	detector_centre_position = G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance + detector_depth/2.);
@@ -481,14 +481,24 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	{
 		// build reflective skin surface around the scintillator pixel hole
 		new G4LogicalSkinSurface("skin",fScoringScintillator, opGaggPlasticSurface);
-		
-		// fully transmit optical photons escaping toward the detector
-		new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
-					   physScoringScintillator, physCoupler, opGaggDetectorSurface);
-		
-		// fully transmit optical photons escaping toward the detector
-		new G4LogicalBorderSurface("logicBorderCouplerDetectorSurface", 
-			  physCoupler, physDetector, opGaggDetectorSurface);
+
+		if (detector_scintillator_distance > 0)
+		{
+			// fully transmit optical photons escaping toward the detector
+			new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
+						   physScoringScintillator, physCoupler, opGaggDetectorSurface);
+			
+			// fully transmit optical photons escaping toward the detector
+			new G4LogicalBorderSurface("logicBorderCouplerDetectorSurface", 
+				  physCoupler, physDetector, opGaggDetectorSurface);
+		}
+		else
+		{
+			// fully transmit optical photons escaping toward the detector
+			new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
+						   physScoringScintillator, physDetector, opGaggDetectorSurface);
+			G4cout << "Optical coupling distance is zero!!!" << G4endl;
+		}
 	}
 }
 
