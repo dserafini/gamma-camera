@@ -15,4 +15,5 @@
 /run/reinitializeGeometry
 
 /run/initialize
+/analysis/setFileName outCheckDetector.root
 /run/beamOn 1000
