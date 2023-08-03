@@ -76,7 +76,7 @@ private:
 	G4VPhysicalVolume *physCollimator, *physCollimatorMatrix;
 
 	// materials
-	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG;
+	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGGm, *materialSilicon;
 	G4Material *materialPlastic;
 	G4Element *elLa, *elBr;
 
@@ -124,7 +124,7 @@ private:
 	G4String scintiPixelNoSlab;
 	
 	// detector
-	G4double det_pixel_size, detector_depth, detector_side, detector_scintillator_distance;
+	G4double det_pixel_size, detector_depth, detector_side, detector_scintillator_distance, det_fill_factor;
 	G4int det_pixels_number;
 	G4String detPixelNoSlab;
 	G4ThreeVector detector_centre_position;
