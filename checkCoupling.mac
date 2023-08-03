@@ -18,8 +18,8 @@
 /gps/pos/centre 0 0 0 mm
 /gps/direction 0 0 1
 
-/analysis/setFileName outCheckDetector.root
-/control/alias nEvents 100
+/analysis/setFileName outCheckCoupling.root
+/control/alias nEvents 1000
 /control/divide nProgress {nEvents} 10
 /run/printProgress {nProgress}
 /run/beamOn {nEvents}
