@@ -244,7 +244,7 @@ void MyDetectorConstruction::ConstructCollimator()
 	new G4PVPlacement(0, G4ThreeVector(), logicCollimatorPinhole, "physCollimatorPinhole", logicCollimatorPixel, false, 0, true);
 }
 
-void MyDetectorConstruction::ConstructScintillator()
+void MyDetectorConstruction::ConstructSlabScintillator()
 {
 	solidScintillator = new G4Box("solidScintillator", slab_side/2., slab_side/2., slab_depth/2.);
 	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
@@ -331,7 +331,7 @@ void MyDetectorConstruction::ConstructCoupler()
 		1); // checking overlaps
 }
 
-void MyDetectorConstruction::ConstructDetector()
+void MyDetectorConstruction::ConstructSlabDetector()
 {
 	G4cout << "MyDetectorConstruction::ConstructDetector" << G4endl;
 	
@@ -415,7 +415,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		if (scintiPixelNoSlab == "matrix")
 			ConstructPixelScintillator();
 		else
-			ConstructScintillator();
+			ConstructSlabScintillator();
 	}
 
 	if(scintillatorExist && detector_scintillator_distance > 0)
@@ -426,7 +426,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	if (detPixelNoSlab == "matrix")
 		ConstructPixelDetector();
 	else
-		ConstructDetector();
+		ConstructSlabDetector();
 
 	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
