@@ -55,7 +55,12 @@ private:
 	G4LogicalVolume *logicScintillatorMatrix, *logicScintillatorArray, *logicScintillatorPixel, *logicScintillatorPinhole;
 	G4VPhysicalVolume *physScintillatorPinhole, *physScintillatorPixel, *physScintillatorMatrix;
 
-	//detector slab
+	// optical photons coupling slab
+	G4Box *solidCoupler;
+	G4LogicalVolume *logicCoupler;
+	G4VPhysicalVolume *physCoupler;
+
+	// detector slab
 	G4Box *solidDetector;
 	G4LogicalVolume *logicDetector;
 	G4VPhysicalVolume *physDetector;
@@ -90,6 +95,7 @@ private:
 	G4GenericMessenger *fMessengerCollimator;
 	G4GenericMessenger *fMessengerScintillator;
 	G4GenericMessenger *fMessengerDetector;
+	G4GenericMessenger *fMessengerCoupler;
 
 	G4LogicalVolume *fScoringScintillator, *fScoringDetector;
 
