@@ -6,9 +6,9 @@
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
 /scintillator/scinti_pixel_size 20. mm
+/coupler/thickness 10 mm
 /detector/pixel matrix
 /detector/det_pixel_size 20. mm
-/detector/det_scinti_distance 10 mm
 /run/reinitializeGeometry
 /run/initialize
 
