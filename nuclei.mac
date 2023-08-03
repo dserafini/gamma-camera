@@ -33,6 +33,7 @@
 ################################################################################
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
+/detector/fill_factor .74
 
 /run/reinitializeGeometry
 
