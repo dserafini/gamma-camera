@@ -1,6 +1,8 @@
 /run/numberOfThreads 10
 /collimator/exist 0
 /scintillator/exist 0
+/run/initialize
+
 /gps/particle opticalphoton
 /gps/pos/type Plane
 /gps/pos/shape Square
@@ -14,6 +16,5 @@
 /detector/det_pixel_size 3. mm
 /run/reinitializeGeometry
 
-/run/initialize
 /analysis/setFileName outCheckDetector.root
 /run/beamOn 1000
