@@ -4,7 +4,7 @@
 /scintillator/exist 0
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
-/detector/fill_factor .3
+/detector/fill_factor .8
 /run/reinitializeGeometry
 /run/initialize
 
