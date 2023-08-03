@@ -24,6 +24,11 @@
 /collimator/positionY 0. mm
 
 ################################################################################
+# change geometry coupler
+################################################################################
+/coupler/thickness 1 mm
+
+################################################################################
 # change geometry detector
 ################################################################################
 /detector/pixel matrix
@@ -69,7 +74,7 @@
 # define cylinder dimension
 /control/alias cylDiam 5
 /control/alias cylHalfZ 2.5
-/control/alias distanceZ 10
+/control/alias distanceZ 0
 
 # generate cylinder
 /control/multiply cylRad {cylDiam} .5

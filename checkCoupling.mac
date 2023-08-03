@@ -1,0 +1,25 @@
+/run/numberOfThreads 11
+
+/collimator/exist 0
+/scintillator/exist true
+/scintillator/pixel matrix
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 3. cm
+/scintillator/scinti_pixel_size 20. mm
+/coupler/thickness 10 mm
+/detector/pixel matrix
+/detector/det_pixel_size 20. mm
+/run/reinitializeGeometry
+/run/initialize
+
+/gps/particle gamma
+/gps/energy 342 keV
+/gps/pos/type Point
+/gps/pos/centre 0 0 0 mm
+/gps/direction 0 0 1
+
+/analysis/setFileName outCheckCoupling.root
+/control/alias nEvents 1000
+/control/divide nProgress {nEvents} 10
+/run/printProgress {nProgress}
+/run/beamOn {nEvents}

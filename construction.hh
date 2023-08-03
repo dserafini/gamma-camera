@@ -55,7 +55,12 @@ private:
 	G4LogicalVolume *logicScintillatorMatrix, *logicScintillatorArray, *logicScintillatorPixel, *logicScintillatorPinhole;
 	G4VPhysicalVolume *physScintillatorPinhole, *physScintillatorPixel, *physScintillatorMatrix;
 
-	//detector slab
+	// optical photons coupling slab
+	G4Box *solidCoupler;
+	G4LogicalVolume *logicCoupler;
+	G4VPhysicalVolume *physCoupler;
+
+	// detector slab
 	G4Box *solidDetector;
 	G4LogicalVolume *logicDetector;
 	G4VPhysicalVolume *physDetector;
@@ -83,6 +88,7 @@ private:
 	void ConstructPixelScintillator();
 	void ConstructCollimator();
 	void ConstructDetector();
+	void ConstructCoupler();
 	void ConstructPixelDetector();
 	void SetVisualizationFeatures();
 
@@ -90,8 +96,10 @@ private:
 	G4GenericMessenger *fMessengerCollimator;
 	G4GenericMessenger *fMessengerScintillator;
 	G4GenericMessenger *fMessengerDetector;
+	G4GenericMessenger *fMessengerCoupler;
 
 	G4LogicalVolume *fScoringScintillator, *fScoringDetector;
+	G4VPhysicalVolume *physScoringScintillator;
 
 	// declare variables used for the messenger
 	G4int nCols, nRows;
@@ -116,9 +124,10 @@ private:
 	G4String scintiPixelNoSlab;
 	
 	// detector
-	G4double det_pixel_size, detector_depth, detector_side;
+	G4double det_pixel_size, detector_depth, detector_side, detector_scintillator_distance;
 	G4int det_pixels_number;
 	G4String detPixelNoSlab;
+	G4ThreeVector detector_centre_position;
 };
 
 #endif
