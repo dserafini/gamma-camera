@@ -8,6 +8,7 @@
 /scintillator/scinti_pixel_size 20. mm
 /detector/pixel matrix
 /detector/det_pixel_size 20. mm
+/detector/det_scinti_distance 10 mm
 /run/reinitializeGeometry
 /run/initialize
 
