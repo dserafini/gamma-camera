@@ -477,20 +477,17 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 
 	if(scintillatorExist)
 	{
+		// build reflective skin surface around the scintillator pixel hole
+		new G4LogicalSkinSurface("skin",fScoringScintillator, opGaggPlasticSurface);
+		
 		if (scintiPixelNoSlab == "matrix")
 		{
-			// build reflective skin surface around the scintillator pixel hole
-			new G4LogicalSkinSurface("skin",logicScintillatorPinhole, opGaggPlasticSurface);
-				
 			// fully transmit optical photons escaping toward the detector
 			new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
 						   physScintillatorPinhole, physCoupler, opGaggDetectorSurface);
 		}
 		else
 		{
-			// build reflective skin surface around the scintillator pixel hole
-			new G4LogicalSkinSurface("skin",logicScintillator, opGaggPlasticSurface);
-				
 			// fully transmit optical photons escaping toward the detector
 			new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
 						   physScintillator, physCoupler, opGaggDetectorSurface);
