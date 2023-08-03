@@ -99,6 +99,7 @@ private:
 	G4GenericMessenger *fMessengerCoupler;
 
 	G4LogicalVolume *fScoringScintillator, *fScoringDetector;
+	G4VPhysicalVolume *physScoringScintillator;
 
 	// declare variables used for the messenger
 	G4int nCols, nRows;
