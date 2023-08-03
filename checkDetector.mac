@@ -1,6 +1,10 @@
 /run/numberOfThreads 1
+
 /collimator/exist 0
 /scintillator/exist 0
+/detector/pixel matrix
+/detector/det_pixel_size 3. mm
+/run/reinitializeGeometry
 /run/initialize
 
 /gps/particle opticalphoton
@@ -12,10 +16,7 @@
 /gps/pos/halfy 5 cm
 /gps/ene/type Mono
 /gps/ene/mono 3 eV
-
-/detector/pixel matrix
-/detector/det_pixel_size 3. mm
-/run/reinitializeGeometry
+/gps/direction 0 0 1
 
 /analysis/setFileName outCheckDetector.root
 /control/alias nEvents 10000
