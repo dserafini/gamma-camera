@@ -111,3 +111,6 @@
 # /gps/position 0. 0. 0. mm
 # /gps/ene/type Mono
 # /gps/energy 4 eV
+
+# macro are in macro folder
+/control/macroPath macro
