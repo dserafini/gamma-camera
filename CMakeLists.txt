@@ -15,22 +15,30 @@ find_package(Geant4 REQUIRED ui_all vis_all)
 # so we include the files that are in the path ${Geant4_USE_FILE}
 include(${Geant4_USE_FILE})
 
+# Setup include directory for this project
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
 # in our project we will put different class in different files
 # we want to compile all the source files (*.cc) that we have in our folder
 # ${PROJECT_SOURCE_DIR} is where the CMakeLists.txt file is
-file(GLOB sources ${PROJECT_SOURCE_DIR}/*.cc)
+file(GLOB sources ${PROJECT_SOURCE_DIR}/source/*.cc)
 
 # same for the header files (*.hh)
-file(GLOB headers ${PROJECT_SOURCE_DIR}/*.hh)
+file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 
 # copy all the macro files in the build folder
 # but I have to cmake .. every change I make
 # but I do not have to make
 file(GLOB MACRO_GEANT_FILES
-  "*.mac"
+  "macro/*.mac"
 )
+file(COPY ${MACRO_GEANT_FILES} DESTINATION ${PROJECT_BINARY_DIR}/macro)
 
-file(COPY ${MACRO_GEANT_FILES} DESTINATION ${PROJECT_BINARY_DIR})
+# copy vis.mac into build folder
+file(GLOB VIS_FILE
+  "vis.mac"
+)
+file(COPY ${VIS_FILE} DESTINATION ${PROJECT_BINARY_DIR})
 
 # we create the executable with a certain name: sim
 # we have to write the main file where the source code is added: sim.cc
