@@ -17,6 +17,16 @@ include(${Geant4_USE_FILE})
 
 # Setup include directory for this project
 include_directories(${PROJECT_SOURCE_DIR}/include /home/isol/Applications/root-6.28.04-install/include/)
+include_directories(${PROJECT_SOURCE_DIR}/include /home/isol/Applications/root-6.28.04-install/include/)
+find_package(ROOT REQUIRED)
+include(${ROOT_USE_FILE})
+if (ROOT_FOUND)
+  message("ROOT found: ${ROOT_INCLUDE_DIRS}")
+else()
+   message (FATAL_ERROR "ROOT not found")
+endif()
+
+include_directories(${ROOT_INCLUDE_DIRS})
 
 # in our project we will put different class in different files
 # we want to compile all the source files (*.cc) that we have in our folder
