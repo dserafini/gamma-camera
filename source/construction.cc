@@ -207,15 +207,19 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
         std::vector<G4double> absorptionSoft = {0.2*cm, 0.2*cm, 0.04*cm, 0.04*cm, 0.03*cm}; // from Optical properties of biological tissues: a review
         std::vector<G4double> absorptionBone = {0.16*cm, 0.16*cm, 0.077*cm, 0.05*cm, 0.04*cm}; // https://hal.science/hal-02335596/document*/
 
-        // dati sono risistemati altrimenti se metto un'altra energia nel mezzo salta tutto...
-        // dati a 1.2eV = 1000 nm e 6.2eV = 200 nm sono inventati
-        std::vector<G4double> energies = {1.2*eV, 1.77*eV, 2.25*eV, 2.76*eV, 6.2*eV};
-        std::vector<G4double> absorptionSoft = {0.5*cm, 0.33*cm, 0.1*cm, 0.04*cm, 0.001*cm}; // from Experimental and analytical comparative study of optical coefficient of fresh and frozen rat tissues
-        std::vector<G4double> absorptionBone = {0.2*cm, 0.16*cm, 0.09*cm, 0.05*cm, 0.001*cm}; // from Optical properties of mice skull bone in the 455- to 705-nm range
+	G4double PhotonEnergy[nEntries] = {1.2*eV, 6.2*eV};
 
-        
-        G4double rIndex = 0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1;
-	mpt->AddProperty("RINDEX", (const std::vector<double>&)energies, const std::vector<G4double>(energies.size(), rIndex), const double (energies.size()));
+	// soft
+	G4double absorptionLengthSoft[nEntries] = {0.5*cm,0.001*cm};
+	G4double refractiveIndexSoft[nEntries] = {0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1,0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1};
+
+	// bone
+	G4double absorptionLengthBone[nEntries] = {0.2*cm,0.001*cm};
+	G4double refractiveIndexBone[nEntries] = {0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1,0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1};
+
+	// use soft refractive index in every case
+	mpt->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSoft, 2);
+	
         if(isSoft){
             mpt->AddProperty("ABSLENGTH", energies, absorptionSoft, true, true);
             //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm}), true, true);
