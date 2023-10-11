@@ -76,7 +76,10 @@ MyDetectorConstruction::MyDetectorConstruction()
 
 	// moby parameters
 	mouseXsize = 10*cm;
-	mVoxelX = 1;
+	// G4int nVoxelX = 550;
+	nVoxelX = 10; // per prova
+	nVoxelY = 200;
+	nVoxelZ = 200;
 
 	// define materials just once
 	DefineMaterials();
@@ -588,10 +591,6 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
     // Setting up voxel
     //HalfVoxelSize = 0.2*mm/2.;
     G4double HalfVoxelSize = 0.18*mm/2.;
-    // G4int nVoxelX = 550;
-    G4int nVoxelX = 10; // per prova
-    G4int nVoxelY = 200;
-    G4int nVoxelZ = 200;
 
     voxelizedPhantom->SetVoxelDimensions(HalfVoxelSize, HalfVoxelSize, HalfVoxelSize);
     voxelizedPhantom->SetNoVoxel(nVoxelX, nVoxelY, nVoxelZ);
