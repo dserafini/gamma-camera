@@ -11,6 +11,8 @@
 #include "G4GenericMessenger.hh"
 
 #include "TFile.h"
+#include "TH3F.h"
+#include "TROOT.h"
 
 class MyPrimaryGenerator : public G4VUserPrimaryGeneratorAction
 {
