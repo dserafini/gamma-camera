@@ -584,7 +584,7 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
     G4int nVoxelZ = 200;
 
     voxelizedPhantom->SetVoxelDimensions(HalfVoxelSize, HalfVoxelSize, HalfVoxelSize);
-    voxelizedPhantom->SetNoVoxels(nVoxelX, nVoxelY, nVoxelZ);
+    voxelizedPhantom->SetNoVoxel(nVoxelX, nVoxelY, nVoxelZ);
     voxelizedPhantom->SetMaterials(theMaterials);
 
     size_t* materialIDs = new size_t[nVoxelX*nVoxelY*nVoxelZ];
