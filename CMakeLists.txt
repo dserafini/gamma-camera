@@ -57,6 +57,7 @@ add_executable(sim sim.cc ${sources} ${headers})
 
 # link to Geant4 libraries otherwise it cannot find them
 target_link_libraries(sim ${Geant4_LIBRARIES})
+target_link_libraries(sim ${ROOT_LIBRARIES})
 
 # Adds a target with the given name that executes the given commands
 add_custom_target(Simulation DEPENDS sim)
