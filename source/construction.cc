@@ -72,7 +72,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// moby commands
 	fMessengerMoby = new G4GenericMessenger(this, "/moby/", "MOBY parameters");
 	fMessengerMoby->DeclarePropertyWithUnit("mouseXsize", "mm", mouseXsize, "Size of the mouse");
-	fMessengerMoby->DeclareProperty("voxelX", mVoxelX, "1 or more");
+	fMessengerMoby->DeclareProperty("voxelX", nVoxelX, "1 or more");
 
 	// moby parameters
 	mouseXsize = 10*cm;
