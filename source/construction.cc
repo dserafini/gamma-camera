@@ -68,6 +68,15 @@ MyDetectorConstruction::MyDetectorConstruction()
 	detector_depth = 10*um;
 	fScoringDetector = 0;
 	det_fill_factor = .8;
+	
+	// moby commands
+	fMessengerMoby = new G4GenericMessenger(this, "/moby/", "MOBY parameters");
+	fMessengerMoby->DeclarePropertyWithUnit("mouseXsize", "mm", mouseXsize, "Size of the mouse");
+	fMessengerMoby->DeclareProperty("voxelX", mVoxelX, "1 or more");
+
+	// moby parameters
+	mouseXsize = 10*cm;
+	mVoxelX = 1;
 
 	// define materials just once
 	DefineMaterials();
