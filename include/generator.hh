@@ -10,6 +10,8 @@
 #include "G4IonTable.hh"
 #include "G4GenericMessenger.hh"
 
+#include "/home/isol/Applications/root-6.28.04-install/include/TFile.h"
+
 class MyPrimaryGenerator : public G4VUserPrimaryGeneratorAction
 {
 public:
