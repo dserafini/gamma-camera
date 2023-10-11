@@ -201,7 +201,7 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 void MyDetectorConstruction::DefineMaterialsMOBY()
 {
     // Lambda function to set RINDEX and ABSLENGTH in a MPT and assign it to a material
-    auto SetMaterialProperties = [](G4MaterialPropertiesTable* mpt, G4Material* material, bool isSoft = true) {
+    auto SetMaterialProperties = [](G4MaterialPropertiesTable* mpt, G4Material* material)(bool isSoft = true) {
 
         /*std::vector<G4double> energies = {1.2*eV, 1.91*eV, 2.25*eV, 2.76*eV, 6.2*eV};
         std::vector<G4double> absorptionSoft = {0.2*cm, 0.2*cm, 0.04*cm, 0.04*cm, 0.03*cm}; // from Optical properties of biological tissues: a review
