@@ -24,6 +24,7 @@ public:
 	virtual void GeneratePrimaries(G4Event*);
 
 private:
+	G4ThreeVector GenerateParticlePositionMOBY();
 	G4GeneralParticleSource* fParticleGPS;
 	G4GenericMessenger *fMessenger;
 	TH3F* fHisto;
