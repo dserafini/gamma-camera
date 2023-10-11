@@ -160,6 +160,10 @@ private:
 	G4Material* fThyroidM;
 	G4Material* fSkinM;
 	std::vector<G4Material*> theMaterials;
+
+	// moby
+	G4int mVoxelX;
+	G4double mouseXsize;
 };
 
 #endif
