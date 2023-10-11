@@ -207,6 +207,7 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
         std::vector<G4double> absorptionSoft = {0.2*cm, 0.2*cm, 0.04*cm, 0.04*cm, 0.03*cm}; // from Optical properties of biological tissues: a review
         std::vector<G4double> absorptionBone = {0.16*cm, 0.16*cm, 0.077*cm, 0.05*cm, 0.04*cm}; // https://hal.science/hal-02335596/document*/
 
+	const G4int nEntries = 2;
 	G4double PhotonEnergy[nEntries] = {1.2*eV, 6.2*eV};
 
 	// soft
