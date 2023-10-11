@@ -24,6 +24,7 @@
 #include "G4SDManager.hh"
 #include "detectorSD.hh"
 #include "scintillatorSD.hh"
+#include "infoPhantom.hh"
 
 class MyDetectorConstruction : public G4VUserDetectorConstruction
 {
