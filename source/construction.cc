@@ -215,7 +215,7 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
 
         
         G4double rIndex = 0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1;
-	mpt->AddProperty("RINDEX", energies, std::vector<G4double>(energies.size(), rIndex), energies.size());
+	mpt->AddProperty("RINDEX", (const std::vector<double>&)energies, const std::vector<G4double>(energies.size(), rIndex), const double (energies.size()));
         if(isSoft){
             mpt->AddProperty("ABSLENGTH", energies, absorptionSoft, true, true);
             //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm}), true, true);
