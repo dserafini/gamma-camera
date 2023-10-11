@@ -638,9 +638,10 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
     voxelizedPhantom->SetMaterialIndices(materialIDs);
 
     G4double HalfPhantomDepth = nVoxelZ*HalfVoxelSize;
+    G4ThreeVector moby_position = G4ThreeVector(0, 0, HalfPhantomDepth + hole_length + mouseCollimatorDistance);
     G4Box* cont_solid = new G4Box("PhantomContainer", nVoxelX*HalfVoxelSize, nVoxelY*HalfVoxelSize, HalfPhantomDepth);
     G4LogicalVolume* cont_logic = new G4LogicalVolume( cont_solid, materialAir, "PhantomContainer", 0, 0, 0 );
-    G4VPhysicalVolume * cont_phys = new G4PVPlacement(0, G4ThreeVector(0, 0, HalfPhantomDepth + hole_length + mouseCollimatorDistance), cont_logic, "PhantomContainer", logicWorld, false, true);
+    G4VPhysicalVolume * cont_phys = new G4PVPlacement(0, moby_position, cont_logic, "PhantomContainer", logicWorld, false, true);
 
     voxelizedPhantom->BuildContainerSolid(cont_phys);
 
