@@ -222,12 +222,12 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
 	mpt->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSoft, 2);
 	
         if(isSoft){
-            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionSoft, true, true);
+            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthSoft, true, true);
             //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm}), true, true);
             //mpt->AddProperty("RAYLEIGH", std::vector<G4double>({1.2*eV, 2.25*eV, 6.2*eV}), std::vector<G4double>({0.14*mm, 0.69*mm, 2.2*mm}), true, true); // from Experimental and analytical comparative study of optical coefficient of fresh and frozen rat tissues
         }
         else{
-            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionBone, true, true);
+            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthBone, true, true);
             //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.05*cm, 0.05*cm, 0.05*cm, 0.05*cm, 0.05*cm}), true, true);
             //mpt->AddProperty("RAYLEIGH", std::vector<G4double>({1.2*eV, 2.25*eV, 6.2*eV}), std::vector<G4double>({0.33*mm, 0.35*mm, 0.4*mm}), true, true); // from Optical properties of mice skull bone in the 455- to 705-nm range
         }
