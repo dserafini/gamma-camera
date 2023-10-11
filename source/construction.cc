@@ -580,7 +580,7 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
     //HalfVoxelSize = 0.2*mm/2.;
     G4double HalfVoxelSize = 0.18*mm/2.;
     // G4int nVoxelX = 550;
-    G4int nVoxelX = 1; // per prova
+    G4int nVoxelX = 10; // per prova
     G4int nVoxelY = 200;
     G4int nVoxelZ = 200;
 
