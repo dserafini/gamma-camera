@@ -162,7 +162,7 @@ private:
 	std::vector<G4Material*> theMaterials;
 
 	// moby
-	G4int mVoxelX;
+	G4int nVoxelX, nVoxelY, nVoxelZ;
 	G4double mouseXsize;
 };
 
