@@ -7,6 +7,7 @@
 #include "G4LogicalVolume.hh"
 #include "G4Box.hh"
 #include "G4Tubs.hh"
+#include "G4PhantomParameterisation.hh"
 // per le unità di misura tipo metri m
 #include "G4SystemOfUnits.hh"
 #include "G4Material.hh"
@@ -36,6 +37,10 @@ public:
 
 	virtual G4VPhysicalVolume *Construct();
 	// virtual because it is defined in G4USerDetectorConstruction
+
+	// to build MOBY
+	void DefineMaterialsMOBY();
+    	void ConstructMOBY();
 
 private:
 	virtual void ConstructSDandField();
@@ -128,6 +133,31 @@ private:
 	G4int det_pixels_number;
 	G4String detPixelNoSlab;
 	G4ThreeVector detector_centre_position;
+	
+	// Materials MOBY
+	G4Material* fVoxelMaterial;
+	G4Material* fLung;
+	G4Material* fSoft;
+	G4Material* fCBone;
+	G4Material* fLungM;
+	G4Material* fBone;
+	G4Material* fAdipose;
+	G4Material* fBrain;
+	G4Material* fBlood;
+	G4Material* fMuscle;
+	G4Material* fStomachM;
+	G4Material* fLgIntestineM;
+	G4Material* fSmIntestineM;
+	G4Material* fLiverM;
+	G4Material* fPancreasM;
+	G4Material* fBladderM;
+	G4Material* fSpleenM;
+	G4Material* fBloodM;
+	G4Material* fBrainM;
+	G4Material* fHeartM;
+	G4Material* fThyroidM;
+	G4Material* fSkinM;
+	std::vector<G4Material*> theMaterials;
 };
 
 #endif
