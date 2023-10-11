@@ -8,6 +8,7 @@
 #include "G4Box.hh"
 #include "G4Tubs.hh"
 #include "G4PhantomParameterisation.hh"
+#include "G4PVParameterised.hh"
 // per le unità di misura tipo metri m
 #include "G4SystemOfUnits.hh"
 #include "G4Material.hh"
