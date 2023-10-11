@@ -2,6 +2,7 @@
 #define GENERATOR_HH
 
 #include "G4VUserPrimaryGeneratorAction.hh"
+#include "infoPhantom.hh"
 
 #include "G4GeneralParticleSource.hh"
 #include "G4SystemOfUnits.hh"
