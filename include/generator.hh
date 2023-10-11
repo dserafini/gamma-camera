@@ -25,6 +25,7 @@ public:
 private:
 	G4GeneralParticleSource* fParticleGPS;
 	G4GenericMessenger *fMessenger;
+	TH3F* fHisto;
 };
 
 #endif
