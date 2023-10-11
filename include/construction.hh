@@ -103,6 +103,7 @@ private:
 	G4GenericMessenger *fMessengerScintillator;
 	G4GenericMessenger *fMessengerDetector;
 	G4GenericMessenger *fMessengerCoupler;
+	G4GenericMessenger *fMessengerMoby;
 
 	G4LogicalVolume *fScoringScintillator, *fScoringDetector;
 	G4VPhysicalVolume *physScoringScintillator;
