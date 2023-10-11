@@ -77,7 +77,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// moby parameters
 	mouseXsize = 10*cm;
 	// G4int nVoxelX = 550;
-	nVoxelX = 10; // per prova
+	nVoxelX = 100; // per prova
 	nVoxelY = 200;
 	nVoxelZ = 200;
 
