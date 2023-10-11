@@ -16,7 +16,7 @@ find_package(Geant4 REQUIRED ui_all vis_all)
 include(${Geant4_USE_FILE})
 
 # Setup include directory for this project
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/include /home/isol/Applications/root-6.28.04-install/include/)
 
 # in our project we will put different class in different files
 # we want to compile all the source files (*.cc) that we have in our folder
