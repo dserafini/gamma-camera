@@ -926,6 +926,8 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	else
 		ConstructSlabDetector();
 
+	ConstructMOBY();
+
 	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
 
