@@ -501,7 +501,7 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
     SetMaterialProperties(mptBone, fBone, false);
 
     // Building Material "DataBase"
-    theMaterials.push_back(fMaterialAir);
+    theMaterials.push_back(materialAir);
     theMaterials.push_back(fLungM);
     theMaterials.push_back(fSoft);
     theMaterials.push_back(fBone);
