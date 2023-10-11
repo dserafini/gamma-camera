@@ -222,12 +222,12 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
 	mpt->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSoft, 2);
 	
         if(isSoft){
-            mpt->AddProperty("ABSLENGTH", energies, absorptionSoft, true, true);
+            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionSoft, true, true);
             //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm}), true, true);
             //mpt->AddProperty("RAYLEIGH", std::vector<G4double>({1.2*eV, 2.25*eV, 6.2*eV}), std::vector<G4double>({0.14*mm, 0.69*mm, 2.2*mm}), true, true); // from Experimental and analytical comparative study of optical coefficient of fresh and frozen rat tissues
         }
         else{
-            mpt->AddProperty("ABSLENGTH", energies, absorptionBone, true, true);
+            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionBone, true, true);
             //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.05*cm, 0.05*cm, 0.05*cm, 0.05*cm, 0.05*cm}), true, true);
             //mpt->AddProperty("RAYLEIGH", std::vector<G4double>({1.2*eV, 2.25*eV, 6.2*eV}), std::vector<G4double>({0.33*mm, 0.35*mm, 0.4*mm}), true, true); // from Optical properties of mice skull bone in the 455- to 705-nm range
         }
@@ -631,7 +631,7 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
 
     G4double HalfPhantomDepth = nVoxelZ*HalfVoxelSize;
     G4Box* cont_solid = new G4Box("PhantomContainer", nVoxelX*HalfVoxelSize, nVoxelY*HalfVoxelSize, HalfPhantomDepth);
-    G4LogicalVolume* cont_logic = new G4LogicalVolume( cont_solid, fMaterialAir, "PhantomContainer", 0, 0, 0 );
+    G4LogicalVolume* cont_logic = new G4LogicalVolume( cont_solid, materialAir, "PhantomContainer", 0, 0, 0 );
     G4VPhysicalVolume * cont_phys = new G4PVPlacement(0, G4ThreeVector(0, 0, HalfPhantomDepth), cont_logic, "PhantomContainer", flogicalWorld, false, true);
 
     voxelizedPhantom->BuildContainerSolid(cont_phys);
