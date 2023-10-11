@@ -642,7 +642,7 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
 
     // The parameterised volume which uses this parameterisation is placed in the container logical volume
     G4VSolid* solVoxel = new G4Box("phantom", HalfVoxelSize, HalfVoxelSize, HalfVoxelSize);
-    G4LogicalVolume* logicVoxel = new G4LogicalVolume(solVoxel, fMaterialAir, "phantom", 0, 0, 0);
+    G4LogicalVolume* logicVoxel = new G4LogicalVolume(solVoxel, materialAir, "phantom", 0, 0, 0);
     G4PVParameterised * patient_phys = new G4PVParameterised("Patient", logicVoxel, cont_logic, kUndefined, nVoxelX*nVoxelY*nVoxelZ, voxelizedPhantom);
 
     G4VisAttributes *vis = new G4VisAttributes();
