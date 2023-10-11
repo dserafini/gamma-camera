@@ -1,5 +1,7 @@
 #include "construction.hh"
 
+G4double HalfVoxelSize;
+
 MyDetectorConstruction::MyDetectorConstruction()
 {
 	fMessengerCollimator = new G4GenericMessenger(this, "/collimator/", "Collimator Construction");
@@ -589,7 +591,7 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
 
     // Setting up voxel
     //HalfVoxelSize = 0.2*mm/2.;
-    G4double HalfVoxelSize = 0.18*mm/2.;
+    HalfVoxelSize = 0.18*mm/2.;
 
     voxelizedPhantom->SetVoxelDimensions(HalfVoxelSize, HalfVoxelSize, HalfVoxelSize);
     voxelizedPhantom->SetNoVoxel(nVoxelX, nVoxelY, nVoxelZ);
