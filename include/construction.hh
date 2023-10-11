@@ -164,6 +164,7 @@ private:
 	// moby
 	G4int nVoxelX, nVoxelY, nVoxelZ;
 	G4double mouseXsize;
+	G4double mouseCollimatorDistance;
 };
 
 #endif
