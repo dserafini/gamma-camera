@@ -8,7 +8,7 @@ MyRunAction::MyRunAction()
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
   // histogram to test moby activity distribution
-  man->CreateH3("moby_act", "moby_act",
+  idH3 = man->CreateH3("moby_act", "moby_act",
                550, -550*0.18/2., +550*0.18/2.,
                200, -200*0.18/2., +200*0.18/2.,
                200, 0., -200*0.18); // [mm]
