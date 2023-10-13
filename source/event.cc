@@ -1,7 +1,8 @@
 #include "event.hh"
 
-MyEventAction::MyEventAction(MyRunAction*)
+MyEventAction::MyEventAction(MyRunAction* run)
 {
+  idH3 = run->idH3;
 }
 
 MyEventAction::~MyEventAction()
