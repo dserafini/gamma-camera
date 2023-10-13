@@ -24,7 +24,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *step)
   // G4cout << "volume: " << volume->GetName() << G4endl;
   // G4cout << "fScoringVolume: " << fScoringVolume->GetName() << G4endl;
 
-  if (step->GetTrack()->GetParticleDefinition == G4Gamma::Definition())
+  if (step->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
     G4cout << "vertex: " << step->GetTrack()->GetVertexPosition() << G4endl;
   
 
