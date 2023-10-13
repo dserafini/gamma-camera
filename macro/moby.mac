@@ -1,21 +1,26 @@
-/run/numberOfThreads 8
+/run/numberOfThreads 10
 
 ################################################################################
-# change geometry collimator
+# define scintillator
 ################################################################################
-/collimator/exist true
-/collimator/hole_length 30. mm
-/collimator/hole_thickness 2. mm
-/collimator/septa_thickness 1. mm
-/collimator/case_side 10. cm
 
-################################################################################
-# change geometry scintillator
-################################################################################
+/scintillator/pixel matrix
+# matrix or otherwise slab
 /scintillator/slab_side 10. cm
-/scintillator/slab_depth 3. cm
-/scintillator/scinti_hole_thickness 5 mm
-/scintillator/scinti_septa_thickness .1 mm
+/scintillator/slab_depth 26. mm
+/scintillator/scinti_pixel_size 1. mm
+
+################################################################################
+# define collimator
+################################################################################
+
+/collimator/exist 1
+/collimator/case_side 100. mm
+/collimator/hole_length 30. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
 
 ################################################################################
 # change geometry moby
