@@ -3,6 +3,8 @@
 MyEventAction::MyEventAction(MyRunAction* run)
 {
   idH3 = 0;
+  if (run)
+    idH3 = run->idH3;
 }
 
 MyEventAction::~MyEventAction()
@@ -11,7 +13,6 @@ MyEventAction::~MyEventAction()
 void MyEventAction::BeginOfEventAction(const G4Event* )
 {
   // G4cout << "MyEventAction::BeginOfEventAction" << G4endl;
-  idH3 = run->idH3;
 }
 
 void MyEventAction::EndOfEventAction(const G4Event* event)
