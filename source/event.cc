@@ -25,4 +25,6 @@ void MyEventAction::EndOfEventAction(const G4Event* event)
     G4cout << "event: " << v1 << G4endl;
     man->FillH3(0, v1.getX(), v1.getY(), v1.getZ());
   }
+  else
+    G4cout << "no vertex" << G4endl;
 }
