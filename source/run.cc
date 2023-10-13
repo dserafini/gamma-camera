@@ -7,6 +7,12 @@ MyRunAction::MyRunAction()
   // u can create the tuple here just one time
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
+  // histogram to test moby activity distribution
+  man->CreateH3("moby_act", "moby_act",
+               550, -550*0.18/2., +550*0.18/2.,
+               200, -200*0.18/2., +200*0.18/2.,
+               200, 0., -200*0.18); // [mm]
+
   // want to save energy deposition
   man->CreateNtuple("Scoring", "Scoring");
 
@@ -36,12 +42,6 @@ MyRunAction::MyRunAction()
 
   // finish tuple
   man->FinishNtuple(0);
-
-  // histogram to test moby activity distribution
-  man->CreateH3("moby_act", "moby_act",
-               550, -550*0.18/2., +550*0.18/2.,
-               200, -200*0.18/2., +200*0.18/2.,
-               200, 0., -200*0.18); // [mm]
 }
 
 MyRunAction::~MyRunAction()
