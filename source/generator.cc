@@ -23,6 +23,7 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 	
 	G4ThreeVector particlePosition;
 	particlePosition = GenerateParticlePositionMOBY();
+	fParticleGPS->SetParticlePosition(particlePosition);
 	
 	fParticleGPS->GeneratePrimaryVertex(anEvent);
 }
