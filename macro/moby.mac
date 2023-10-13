@@ -34,11 +34,13 @@
 /run/initialize
 
 ################################################################################
-# choose ion
+# choose source
 ################################################################################
-/gps/particle ion
-/gps/ion 47 111 0 0.
-/gps/energy 0. eV
+# /gps/particle ion
+# /gps/ion 47 111 0 0.
+# /gps/energy 0. eV
+/gps/particle gamma
+/gps/energy 342 keV
 /gps/direction 0 0 1
 # position and shape of the source is defined in the code
 
