@@ -17,7 +17,6 @@ void MyEventAction::EndOfEventAction(const G4Event* event)
   // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
 
   G4AnalysisManager *man = G4AnalysisManager::Instance();
-  man->AddNtupleRow(0);
   
   if (event->GetPrimaryVertex())
   {
@@ -27,4 +26,6 @@ void MyEventAction::EndOfEventAction(const G4Event* event)
   }
   else
     G4cout << "no vertex" << G4endl;
+
+  man->AddNtupleRow(0);
 }
