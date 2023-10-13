@@ -27,6 +27,7 @@ public:
 private:
 	G4ThreeVector GenerateParticlePositionMOBY();
 	G4GeneralParticleSource* fParticleGPS;
+	G4ParticleGun* fParticleGun;
 	G4GenericMessenger *fMessenger;
 	TH3F* fHisto;
 };
