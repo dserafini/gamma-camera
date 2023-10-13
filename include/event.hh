@@ -19,6 +19,9 @@ public:
 
   virtual void BeginOfEventAction(const G4Event*);
   virtual void EndOfEventAction(const G4Event*);
+
+private:
+  G4int idH3;
 };
 
 #endif
