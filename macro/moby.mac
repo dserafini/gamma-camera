@@ -1,0 +1,41 @@
+/run/numberOfThreads 8
+
+################################################################################
+# change geometry collimator
+################################################################################
+/collimator/exist true
+/collimator/hole_length 30. mm
+/collimator/hole_thickness 2. mm
+/collimator/septa_thickness 1. mm
+/collimator/case_side 10. cm
+
+################################################################################
+# change geometry scintillator
+################################################################################
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 3. cm
+/scintillator/scinti_hole_thickness 5 mm
+/scintillator/scinti_septa_thickness .1 mm
+
+/run/reinitializeGeometry
+
+# initalize if not done in the main
+/run/initialize
+
+################################################################################
+# choose ion
+################################################################################
+/gps/particle ion
+/gps/ion 47 111 0 0.
+/gps/energy 0. eV
+/gps/direction 0 0 1
+# position and shape of the source is defined in the code
+
+################################################################################
+# other visualization settings
+################################################################################
+
+# Set file name
+/analysis/setFileName outmoby.root
+/run/printProgress 1000000
+/run/beamOn 1000
