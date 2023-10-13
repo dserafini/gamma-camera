@@ -10,7 +10,8 @@ MyEventAction::~MyEventAction()
 void MyEventAction::BeginOfEventAction(const G4Event* event)
 {
   // G4cout << "MyEventAction::BeginOfEventAction" << G4endl;
-  G4cout << "event: " << event->GetPrimaryVertex() << G4endl;
+  if (event->GetPrimaryVertex())
+    G4cout << "event: " << event->GetPrimaryVertex()->GetPosition() << G4endl;
 }
 
 void MyEventAction::EndOfEventAction(const G4Event*)
