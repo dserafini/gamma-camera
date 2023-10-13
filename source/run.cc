@@ -38,15 +38,13 @@ MyRunAction::MyRunAction()
   man->FinishNtuple(0);
 
   // histogram to test moby activity distribution
-  idH3 = man->CreateH3("moby_act", "moby_act",
-               550, -550*0.18/2., +550*0.18/2.,
-               200, -200*0.18/2., +200*0.18/2.,
-               200, 0., -200*0.18); // [mm]
+  // idH3 = man->CreateH3("moby_act", "moby_act",
+  //              550, -550*0.18/2., +550*0.18/2.,
+  //              200, -200*0.18/2., +200*0.18/2.,
+  //              200, 0., -200*0.18); // [mm]
   man->CreateH2("moby_act", "moby_act",
                550, -550*0.18/2., +550*0.18/2.,
                200, -200*0.18/2., +200*0.18/2.); // [mm]
-
-  G4cout << "idH3" << idH3 << G4endl;
 }
 
 MyRunAction::~MyRunAction()
