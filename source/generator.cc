@@ -4,6 +4,7 @@ MyPrimaryGenerator::MyPrimaryGenerator()
 {
 	G4cout << "MyPrimaryGenerator::MyPrimaryGenerator" << G4endl;
 	fParticleGPS = new G4GeneralParticleSource();
+	fParticleGun = new G4ParticleGun();
 
 	// moby
 	ROOT::EnableThreadSafety();
@@ -15,6 +16,7 @@ MyPrimaryGenerator::MyPrimaryGenerator()
 MyPrimaryGenerator::~MyPrimaryGenerator()
 {
 	delete fParticleGPS;
+	delete fParticleGun;
 }
 
 void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
@@ -23,11 +25,13 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 	
 	// fParticleGPS->SetParticlePosition(GenerateParticlePositionMOBY());
 	fParticleGPS->SetParticlePosition(G4ThreeVector(10*mm,10*mm,0.*mm));
+	fParticleGun->SetParticlePosition(G4ThreeVector(10*mm,10*mm,0.*mm));
 
 	// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() << G4endl;
-	G4cout << "myPos: " << fParticleGPS->GetParticlePosition() << G4endl;
+	G4cout << "myPos: " << fParticleGun->GetParticlePosition() << G4endl;
 	
-	fParticleGPS->GeneratePrimaryVertex(anEvent);
+	// fParticleGPS->GeneratePrimaryVertex(anEvent);
+	fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 
 G4ThreeVector MyPrimaryGenerator::GenerateParticlePositionMOBY()
