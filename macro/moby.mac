@@ -17,6 +17,12 @@
 /scintillator/scinti_hole_thickness 5 mm
 /scintillator/scinti_septa_thickness .1 mm
 
+################################################################################
+# change geometry moby
+################################################################################
+/moby/voxelX 550
+/moby/distance 0. mm
+
 /run/reinitializeGeometry
 
 # initalize if not done in the main
