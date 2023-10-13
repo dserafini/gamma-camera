@@ -42,6 +42,8 @@ MyRunAction::MyRunAction()
                550, -550*0.18/2., +550*0.18/2.,
                200, -200*0.18/2., +200*0.18/2.,
                200, 0., -200*0.18); // [mm]
+
+  G4cout << "idH3" << idH3 << G4endl;
 }
 
 MyRunAction::~MyRunAction()
