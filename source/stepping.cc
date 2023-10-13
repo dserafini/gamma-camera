@@ -1,3 +1,4 @@
+#include "G4Gamma.hh"
 #include "stepping.hh"
 
 MySteppingAction::MySteppingAction(MyEventAction* eventAction)
