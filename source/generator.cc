@@ -24,7 +24,7 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 	// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() / eV << " eV" << G4endl;
 	
 	fParticleGun->SetParticlePosition(GenerateParticlePositionMOBY());
-	fParticleGPS->SetParticlePosition(G4ThreeVector(10*mm,10*mm,0.*mm));
+	// fParticleGPS->SetParticlePosition(G4ThreeVector(10*mm,10*mm,0.*mm));
 
 	// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() << G4endl;
 	G4cout << "myPos: " << fParticleGun->GetParticlePosition() << G4endl;
