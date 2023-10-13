@@ -27,7 +27,7 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 	// fParticleGPS->SetParticlePosition(G4ThreeVector(10*mm,10*mm,0.*mm));
 
 	// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() << G4endl;
-	G4cout << "myPos: " << fParticleGun->GetParticlePosition() << G4endl;
+	// G4cout << "myPos: " << fParticleGun->GetParticlePosition() << G4endl;
 	
 	// fParticleGPS->GeneratePrimaryVertex(anEvent);
 	fParticleGun->GeneratePrimaryVertex(anEvent);
