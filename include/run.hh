@@ -17,8 +17,10 @@ public:
 	MyRunAction();
 	~MyRunAction();
 
-  virtual void BeginOfRunAction(const G4Run*);
-  virtual void EndOfRunAction(const G4Run*);
+	virtual void BeginOfRunAction(const G4Run*);
+	virtual void EndOfRunAction(const G4Run*);
+
+	G4int idH3;
 };
 
 #endif
