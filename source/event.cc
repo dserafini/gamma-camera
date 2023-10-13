@@ -15,8 +15,8 @@ void MyEventAction::BeginOfEventAction(const G4Event* )
 void MyEventAction::EndOfEventAction(const G4Event* event)
 {
   // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
-  // if (event->GetPrimaryVertex())
-  //  G4cout << "event: " << event->GetPrimaryVertex()->GetPosition() << G4endl;
+  if (event->GetPrimaryVertex())
+    G4cout << "event: " << event->GetPrimaryVertex()->GetPosition() << G4endl;
 
   G4AnalysisManager *man = G4AnalysisManager::Instance();
   man->AddNtupleRow(0);
