@@ -22,7 +22,7 @@ void MyEventAction::EndOfEventAction(const G4Event* event)
   if (event->GetPrimaryVertex())
   {
     G4ThreeVector v1 = event->GetPrimaryVertex()->GetPosition();
-    // G4cout << "event: " << v1 << G4endl;
+    G4cout << "event: " << v1 << G4endl;
     // man->FillH3(idH3, v1.getX(), v1.getY(), v1.getZ());
     man->FillH2(0, v1.getX(), v1.getY());
   }
