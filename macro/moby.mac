@@ -53,11 +53,6 @@
 /gun/position 0 0 10 mm
 /gun/direction 0 0 1
 
-################################################################################
-# analysis
-################################################################################
-/analysis/h3/create hProva hProva
-
 # Set file name
 /analysis/setFileName outmoby.root
 /run/printProgress 100
