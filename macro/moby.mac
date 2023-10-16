@@ -56,7 +56,7 @@
 ################################################################################
 # analysis
 ################################################################################
-/analysis/h3/create hProva
+/analysis/h3/create hProva hProva
 
 # Set file name
 /analysis/setFileName outmoby.root
