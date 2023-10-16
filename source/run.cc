@@ -34,6 +34,11 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "xMostX"); // [mm]
   man->CreateNtupleDColumn(0, "xMostY"); // [mm]
 
+  // moby
+  man->CreateNtupleDColumn(0, "mX"); // [mm]
+  man->CreateNtupleDColumn(0, "mY"); // [mm]
+  man->CreateNtupleDColumn(0, "mZ"); // [mm]
+
   // finish tuple
   man->FinishNtuple(0);
 }
@@ -43,6 +48,8 @@ MyRunAction::~MyRunAction()
 
 void MyRunAction::BeginOfRunAction(const G4Run* run)
 {
+  G4cout << "MyRunAction::BeginOfRunAction" << G4endl;
+  
   // u can create a new output file here for every run
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
@@ -60,6 +67,7 @@ void MyRunAction::BeginOfRunAction(const G4Run* run)
 
 void MyRunAction::EndOfRunAction(const G4Run*)
 {
+  G4cout << "MyRunAction::EndOfRunAction" << G4endl;
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
   man->Write();
