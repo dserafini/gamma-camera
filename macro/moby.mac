@@ -54,8 +54,9 @@
 /gun/direction 0 0 1
 
 ################################################################################
-# other visualization settings
+# analysis
 ################################################################################
+/analysis/h3/create hProva
 
 # Set file name
 /analysis/setFileName outmoby.root
