@@ -34,17 +34,13 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "xMostX"); // [mm]
   man->CreateNtupleDColumn(0, "xMostY"); // [mm]
 
+  // moby
+  man->CreateNtupleDColumn(0, "mX"); // [mm]
+  man->CreateNtupleDColumn(0, "mY"); // [mm]
+  man->CreateNtupleDColumn(0, "mZ"); // [mm]
+
   // finish tuple
   man->FinishNtuple(0);
-
-  // histogram to test moby activity distribution
-  // idH3 = man->CreateH3("moby_act", "moby_act",
-  //              550, -550*0.18/2., +550*0.18/2.,
-  //              200, -200*0.18/2., +200*0.18/2.,
-  //              200, 0., -200*0.18); // [mm]
-  man->CreateH2("moby_act", "moby_act",
-               550, -550*0.18/2., +550*0.18/2.,
-               200, -200*0.18/2., +200*0.18/2.); // [mm]
 }
 
 MyRunAction::~MyRunAction()
