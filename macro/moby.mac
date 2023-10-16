@@ -34,16 +34,24 @@
 /run/initialize
 
 ################################################################################
-# choose source
+# choose gps source
 ################################################################################
 # /gps/particle ion
 # /gps/ion 47 111 0 0.
 # /gps/energy 0. eV
-/gps/particle gamma
-/gps/energy 342 keV
-/gps/position 0 0 10 mm
-/gps/direction 0 0 1
+# /gps/particle gamma
+# /gps/energy 342 keV
+# /gps/position 0 0 10 mm
+# /gps/direction 0 0 1
 # position and shape of the source is defined in the code
+
+################################################################################
+# choose general particle gun
+################################################################################
+/gun/particle gamma
+/gun/energy 342 keV
+/gun/position 0 0 10 mm
+/gun/direction 0 0 1
 
 ################################################################################
 # other visualization settings
