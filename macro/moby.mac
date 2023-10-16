@@ -48,9 +48,12 @@
 ################################################################################
 # choose general particle gun
 ################################################################################
-/gun/particle gamma
-/gun/energy 342 keV
-/gun/position 0 0 10 mm
+/gun/particle ion
+/gun/ion 47 111 0 0.
+/gun/energy 0. eV
+# /gun/particle gamma
+# /gun/energy 342 keV
+# /gun/position 0 0 10 mm
 /gun/direction 0 0 1
 
 # Set file name
