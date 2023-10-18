@@ -1,4 +1,6 @@
 # tutorial to start using the gamma-camera simulation tool from Geant4 macros
+# the list of commands (apart from the custom made ones) can be found here:
+# https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Control/AllResources/Control/UIcommands/_.html
 
 ################################################################################
 # global settings
