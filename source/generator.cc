@@ -45,7 +45,7 @@ G4ThreeVector MyPrimaryGenerator::GenerateParticlePositionMOBY()
 	
 	G4double my_x = (x + 0.5) * 2*HalfVoxelSize - (fHisto->GetNbinsX() * 2*HalfVoxelSize) / 2.0;
 	G4double my_y = (y + 0.5) * 2*HalfVoxelSize - (fHisto->GetNbinsY() * 2*HalfVoxelSize) / 2.0;
-	G4double my_z = (z + 0.5) * 2*HalfVoxelSize - (fHisto->GetNbinsZ() * 2*HalfVoxelSize) / 2.0 + HalfPhantomDepth;
+	G4double my_z = (z + 0.5) * 2*HalfVoxelSize - (fHisto->GetNbinsZ() * 2*HalfVoxelSize) / 2.0 - HalfPhantomDepth - mouseCollimatorDistance;
 	
 	G4ThreeVector myPos = G4ThreeVector(my_x, my_y, my_z);
 	
