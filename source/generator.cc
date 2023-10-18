@@ -40,6 +40,7 @@ G4ThreeVector MyPrimaryGenerator::GenerateParticlePositionMOBY()
 {
 	G4double x, y, z;
 	fHisto->GetRandom3(x,y,z);
+	// fHisto x[0,550], y[0,200], z[0,200]
 	
 	G4double my_x = (x + 0.5) * 2*HalfVoxelSize - (fHisto->GetNbinsX() * 2*HalfVoxelSize) / 2.0;
 	G4double my_y = (y + 0.5) * 2*HalfVoxelSize - (fHisto->GetNbinsY() * 2*HalfVoxelSize) / 2.0;
