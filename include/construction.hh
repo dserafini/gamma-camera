@@ -166,6 +166,7 @@ private:
 	G4int nVoxelX, nVoxelY, nVoxelZ;
 	G4double mouseXsize;
 	G4double mouseCollimatorDistance;
+	G4String buildMoby;
 };
 
 #endif
