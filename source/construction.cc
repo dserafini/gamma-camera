@@ -76,8 +76,10 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerMoby = new G4GenericMessenger(this, "/moby/", "MOBY parameters");
 	fMessengerMoby->DeclarePropertyWithUnit("distance", "mm", mouseCollimatorDistance, "Distance MOBY - collimator surface");
 	fMessengerMoby->DeclareProperty("voxelX", nVoxelX, "1 or more");
+	fMessengerMoby->DeclareProperty("construct", buildMoby, "yes (y) or no (n)");
 
 	// moby parameters
+	buildMoby = "yes";
 	nVoxelX = 550;
 	nVoxelY = 200;
 	nVoxelZ = 200;
@@ -85,6 +87,9 @@ MyDetectorConstruction::MyDetectorConstruction()
 	
 	// define materials just once
 	DefineMaterials();
+	// Define MOBY materials
+	DefineMaterialsMOBY();
+	
 	DefineMaterialsProperties();
 
 	// define world lengths
@@ -582,11 +587,10 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
        
     //std::cout << "TEST: " << fBone->GetMaterialPropertiesTable()->GetProperty("RINDEX")[0] << std::endl;
 
-}void MyDetectorConstruction::ConstructMOBY()
-{
-    // Define MOBY materials
-    DefineMaterialsMOBY();
+}
 
+void MyDetectorConstruction::ConstructMOBY()
+{
     // Defining the voxelPhantom parametrisation
     G4PhantomParameterisation* voxelizedPhantom = new G4PhantomParameterisation();
 
@@ -938,7 +942,10 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	else
 		ConstructSlabDetector();
 
-	ConstructMOBY();
+	if ((buildMoby == "yes") || (buildMoby == "y"))
+		ConstructMOBY();
+	else
+		G4cout << "not building MOBY" << G4endl;
 
 	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
