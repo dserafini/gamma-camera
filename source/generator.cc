@@ -10,7 +10,10 @@ MyPrimaryGenerator::MyPrimaryGenerator()
 	ROOT::EnableThreadSafety();
         TFile* rootfile = new TFile("../moby_20_act.root");
         //TFile* rootfile = new TFile("../moby_20_lsn_act.root");
-        fHisto = (TH3F*)rootfile->Get("histo");
+	if (rootfile)
+        	fHisto = (TH3F*)rootfile->Get("histo");
+	else
+		G4cout << "No activity root file found!!" << G4endl;
 }
 
 MyPrimaryGenerator::~MyPrimaryGenerator()
