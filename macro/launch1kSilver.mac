@@ -1,5 +1,7 @@
-# this macro generates Ag-111 events
+# this macro generates 1000 Ag-111 events
 # this macro should be launched only via silver.mac macro
+# only the gamma rays of the Ag-111 decay are generated in order to reduce the
+# computational time
 
 ################################################################################
 # global macros
@@ -18,7 +20,7 @@
 # set the output file name
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmPrimo342keV.root
 # launch 2 events, why 2?
-/run/beamOn 2
+/run/beamOn 848
 
 # calculate the ratio between the two branches intensities
 /control/divide v1 1.24 6.7
@@ -36,4 +38,4 @@
 # set the output file name
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmPrimo245keV.root
 # launch 3 events, why 3?
-/run/beamOn 3
+/run/beamOn 152
