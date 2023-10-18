@@ -93,12 +93,12 @@
 # primo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
 /gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
-/control/foreach launchSilver.mac decayedNucleik {decayedNucleik}
+/control/foreach launch1kSilver.mac decayedNucleik {decayedNucleik}
 # secondo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
 /gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
-/control/foreach launchSilver.mac decayedNucleik {decayedNucleik}
+/control/foreach launch1kSilver.mac decayedNucleik {decayedNucleik}
 # terzo
 /analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
 /gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
-/control/foreach launchSilver.mac decayedNucleik {decayedNucleik}
+/control/foreach launch1kSilver.mac decayedNucleik {decayedNucleik}
