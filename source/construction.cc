@@ -84,6 +84,8 @@ MyDetectorConstruction::MyDetectorConstruction()
 	nVoxelY = 200;
 	nVoxelZ = 200;
 	mouseCollimatorDistance = 0.*mm;
+	HalfVoxelSize = 0.18*mm/2.;
+	HalfPhantomDepth = nVoxelZ*HalfVoxelSize;
 	
 	// define materials just once
 	DefineMaterials();
@@ -594,10 +596,6 @@ void MyDetectorConstruction::ConstructMOBY()
     // Defining the voxelPhantom parametrisation
     G4PhantomParameterisation* voxelizedPhantom = new G4PhantomParameterisation();
 
-    // Setting up voxel
-    //HalfVoxelSize = 0.2*mm/2.;
-    HalfVoxelSize = 0.18*mm/2.;
-
     voxelizedPhantom->SetVoxelDimensions(HalfVoxelSize, HalfVoxelSize, HalfVoxelSize);
     voxelizedPhantom->SetNoVoxel(nVoxelX, nVoxelY, nVoxelZ);
     voxelizedPhantom->SetMaterials(theMaterials);
@@ -644,7 +642,6 @@ void MyDetectorConstruction::ConstructMOBY()
 
     voxelizedPhantom->SetMaterialIndices(materialIDs);
 
-    HalfPhantomDepth = nVoxelZ*HalfVoxelSize;
     G4ThreeVector moby_position = G4ThreeVector(0, 0, - HalfPhantomDepth - mouseCollimatorDistance);
     G4Box* cont_solid = new G4Box("PhantomContainer", nVoxelX*HalfVoxelSize, nVoxelY*HalfVoxelSize, HalfPhantomDepth);
     G4LogicalVolume* cont_logic = new G4LogicalVolume( cont_solid, materialAir, "PhantomContainer", 0, 0, 0 );
