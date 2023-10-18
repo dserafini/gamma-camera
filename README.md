@@ -12,9 +12,9 @@ This Monte Carlo simulation is written with [Geant4](https://geant4.web.cern.ch/
 
 ## Usage
 
-In the following we will assume that Geant4 v10.7 is installed. Otherwise it can be installed from the [download page](https://geant4.web.cern.ch/download/10.7.4.html) of the official website.
+In the following we will assume that Geant4 v10.7 is installed. Otherwise it can be installed from the [download page](https://geant4.web.cern.ch/download/10.7.4.html) of the official website following the [installation instructions](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/index.html).
 
-First step is cloning this repository locally. If git is installed, one can use
+First step is cloning this repository locally. One possibility is to [install git](https://github.com/git-guides/install-git) and use the following command.
 ````bash
 git clone https://github.com/dserafini/gamma-camera
 ````
