@@ -3,5 +3,6 @@
 
 extern double HalfVoxelSize;
 extern double HalfPhantomDepth;
+extern double mouseCollimatorDistance;
 
 #endif
