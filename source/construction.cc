@@ -76,7 +76,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerMoby = new G4GenericMessenger(this, "/moby/", "MOBY parameters");
 	fMessengerMoby->DeclarePropertyWithUnit("distance", "mm", mouseCollimatorDistance, "Distance MOBY - collimator surface");
 	fMessengerMoby->DeclareProperty("voxelX", nVoxelX, "1 or more");
-	fMessengerMoby->DeclareProperty("construct", buildMoby, "yes (y) or no (n)");
+	fMessengerMoby->DeclareProperty("build", buildMoby, "yes (y) or no (n)");
 
 	// moby parameters
 	buildMoby = "yes";
