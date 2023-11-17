@@ -46,14 +46,21 @@
 ################################################################################
 /gun/particle gamma
 /gun/energy 342 keV
-# /gps/particle opticalphoton
-# /gps/particle ion
+/gps/particle ion
 # /gps/ion 47 111 0 0.
-# /gps/energy 0. eV
+/gps/particle proton
+/gps/energy 1. keV
 # position must be < 0 
 /gun/position 0 0. -1. mm
 /gun/direction 0 0 1
-# /gps/ang/type iso
+/gps/ang/type iso
+/control/alias zDepth 1.5
+/gps/centre 0. 0. -{zDepth} mm
+/gps/pos/type Volume
+/gps/pos/shape Para
+/gps/pos/halfx 10 mm
+/gps/pos/halfy 10 mm
+/gps/pos/halfz {zDepth} mm
 
 ################################################################################
 # other visualization settings
