@@ -55,7 +55,7 @@
 /gun/direction 0 0 1
 /gps/ang/type iso
 /control/alias zDepth 1.5
-/gps/centre 0. 0. -{zDepth} mm
+/gps/pos/centre 0. 0. -{zDepth} mm
 /gps/pos/type Volume
 /gps/pos/shape Para
 /gps/pos/halfx 10 mm
