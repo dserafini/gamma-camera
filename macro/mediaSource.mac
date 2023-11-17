@@ -64,6 +64,6 @@
 /gun/direction 0 0 1
 
 # Set file name
-/analysis/setFileName outmoby.root
-/run/printProgress 10000000
-/run/beamOn 1000000000
+/analysis/setFileName outmediasource.root
+/run/printProgress 10000
+/run/beamOn 1000000
