@@ -43,13 +43,20 @@
 ################################################################################
 # choose gps source
 ################################################################################
-# /gps/particle ion
-# /gps/ion 47 111 0 0.
-# /gps/energy 0. eV
+/gps/particle ion
+/gps/ion 47 111 0 0.
+/gps/energy 0. eV
 # /gps/particle gamma
 # /gps/energy 342 keV
 # /gps/position 0 0 10 mm
 # /gps/direction 0 0 1
+/control/alias zDepth 15
+/gps/pos/centre 0. 0. -{zDepth} mm
+/gps/pos/type Volume
+/gps/pos/shape Para
+/gps/pos/halfx 40 mm
+/gps/pos/halfy 40 mm
+/gps/pos/halfz {zDepth} mm
 # position and shape of the source is defined in the code
 
 ################################################################################
