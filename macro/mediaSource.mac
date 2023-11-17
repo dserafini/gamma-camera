@@ -70,7 +70,18 @@
 # /gun/position 0 0 10 mm
 /gun/direction 0 0 1
 
+# background
 # Set file name
-/analysis/setFileName outmediasource.root
+/analysis/setFileName outmediabackground.root
 /run/printProgress 1000000
 /run/beamOn 100000000
+
+# signal
+/control/alias tumoradius 2.5
+/gps/pos/centre 0. 0. -{tumoradius} mm
+/gps/pos/type Volume
+/gps/pos/shape Sphere
+/gps/pos/radius {tumoradius} mm
+/analysis/setFileName outmediasignal1Mevents2p5mmRadius.root
+/run/printProgress 10000
+/run/beamOn 1000000
