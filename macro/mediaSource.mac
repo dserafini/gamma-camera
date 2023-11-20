@@ -72,9 +72,9 @@
 
 # background
 # Set file name
-/analysis/setFileName outmediabackground.root
-/run/printProgress 1000000
-/run/beamOn 100000000
+# /analysis/setFileName outmediabackground.root
+# /run/printProgress 1000000
+# /run/beamOn 100000000
 
 # signal
 /control/alias tumoradius 2.5
@@ -82,6 +82,6 @@
 /gps/pos/type Volume
 /gps/pos/shape Sphere
 /gps/pos/radius {tumoradius} mm
-/analysis/setFileName outmediasignal1Mevents2p5mmRadius.root
+/analysis/setFileName outmediasignal10Mevents2p5mmRadius.root
 /run/printProgress 10000
-/run/beamOn 1000000
+/run/beamOn 10000000
