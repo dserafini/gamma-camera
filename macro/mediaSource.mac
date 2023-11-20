@@ -83,5 +83,5 @@
 /gps/pos/shape Sphere
 /gps/pos/radius {tumoradius} mm
 /analysis/setFileName outmediasignal10Mevents2p5mmRadius.root
-/run/printProgress 10000
-/run/beamOn 10000000
+/run/printProgress 10000000
+/run/beamOn 100000000
