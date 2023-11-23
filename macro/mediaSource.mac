@@ -77,11 +77,11 @@
 # /run/beamOn 100000000
 
 # signal
-/control/alias tumoradius 1.5
+/control/alias tumoradius 4.5
 /gps/pos/centre 0. 0. -{tumoradius} mm
 /gps/pos/type Volume
 /gps/pos/shape Sphere
 /gps/pos/radius {tumoradius} mm
-/analysis/setFileName outmediasignal10Mevents1p5mmRadius.root
+/analysis/setFileName outmediasignal10Mevents4p5mmRadius.root
 /run/printProgress 1000000
 /run/beamOn 10000000
