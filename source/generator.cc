@@ -8,7 +8,7 @@ MyPrimaryGenerator::MyPrimaryGenerator()
 
 	// moby
 	ROOT::EnableThreadSafety();
-        TFile* rootfile = new TFile("../plain_auro_act.root");
+        TFile* rootfile = new TFile("../moby_background_prova_act.root");
         //TFile* rootfile = new TFile("../moby_20_lsn_act.root");
 	if (rootfile)
         	fHisto = (TH3F*)rootfile->Get("histo");
