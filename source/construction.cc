@@ -604,8 +604,8 @@ void MyDetectorConstruction::ConstructMOBY()
     size_t* materialIDs = new size_t[nVoxelX*nVoxelY*nVoxelZ];
 
     // Importing CT
-    // std::ifstream ctfile("../moby_20_atn.txt",std::ios::in);
-    std::ifstream ctfile("../moby_background_prova_atn.txt",std::ios::in);
+    std::ifstream ctfile("../moby_20_atn.txt",std::ios::in);
+    // std::ifstream ctfile("../moby_background_prova_atn.txt",std::ios::in);
 
     if(ctfile.fail()) std::cout << "no file for MOBY ct\n";
 
