@@ -56,6 +56,7 @@ MyRunAction::MyRunAction()
   man->FinishNtuple(0);
   man->FinishNtuple(Tuples::kScintillator);
   man->FinishNtuple(Tuples::kOptical);
+  man->FinishNtuple(Tuples::kSipm);
 }
 
 MyRunAction::~MyRunAction()
