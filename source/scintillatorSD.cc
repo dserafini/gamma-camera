@@ -46,11 +46,6 @@ void MySensitiveScintillator::EndOfEvent(G4HCofThisEvent*)
   // G4cout << "Position: " << fPosition << " keV" << G4endl;
   
   G4AnalysisManager *man = G4AnalysisManager::Instance();
-
-  man->FillNtupleDColumn(0, 1, fEdep/keV); // [keV]
-  man->FillNtupleDColumn(0, 2, fPosition.getX()/mm); // [mm]
-  man->FillNtupleDColumn(0, 3, fPosition.getY()/mm);
-  man->FillNtupleDColumn(0, 4, fPosition.getZ()/mm);
   
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kEdep, fEdep/keV); // [keV]
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kGammaX, fPosition.getX()/mm); // [mm]
