@@ -11,6 +11,7 @@ MyRunAction::MyRunAction()
   man->CreateNtuple("Scoring", "Scoring");
   man->CreateNtuple("Scintillator", "Scintillator");
   man->CreateNtuple("Optical", "Optical");
+  man->CreateNtuple("Sipm", "Sipm");
   man->CreateNtuple("Generation", "Generation");
 
   // initial
