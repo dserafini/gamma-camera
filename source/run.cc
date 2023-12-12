@@ -19,10 +19,10 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "fX"); // [mm]
   man->CreateNtupleDColumn(0, "fY"); // [mm]
   man->CreateNtupleDColumn(0, "fZ"); // [mm]
-  man->CreateNtupleDColumn(Tuples::kScintillator, "fEdep"); // [eV]
-  man->CreateNtupleDColumn(Tuples::kScintillator, "fX"); // [mm]
-  man->CreateNtupleDColumn(Tuples::kScintillator, "fY"); // [mm]
-  man->CreateNtupleDColumn(Tuples::kScintillator, "fZ"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fEdep1"); // [eV]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fX1"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fY1"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fZ1"); // [mm]
   
   // SiPM detector
   // optical photons
