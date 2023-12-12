@@ -5,7 +5,7 @@ namespace Tuples {
   enum {
     kGeneration,
     kScintillator,
-    kPhotons,
+    kOptical,
     kSiPM
   };
 }
@@ -24,6 +24,18 @@ namespace TScintillator {
     kGammaX,
     kGammaY,
     kGammaZ
+  };
+}
+
+namespace TOptical {
+  enum {
+    kNumber,
+    kMeanX,
+    kMeanY,
+    kMeanZ,
+    kSigmaX,
+    kSigmaY,
+    kSigmaR
   };
 }
 
