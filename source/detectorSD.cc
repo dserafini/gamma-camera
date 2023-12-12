@@ -195,6 +195,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     // G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
     man->FillNtupleDColumn(0, 14, mostPixelPos.getX());
     man->FillNtupleDColumn(0, 15, mostPixelPos.getY());
+    man->FillNtupleDColumn(Tuple::kSipm, Tsipm::kMostX, mostPixelPos.getX());
+    man->FillNtupleDColumn(Tuple::kSipm, Tsipm::kMostY, mostPixelPos.getY());
   }
 }
 
