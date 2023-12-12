@@ -32,4 +32,5 @@ void MyEventAction::EndOfEventAction(const G4Event* event)
     G4cout << "no vertex" << G4endl;
 
   man->AddNtupleRow(0);
+  man->AddNtupleRow(Tuples::kScintillator);
 }
