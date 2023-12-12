@@ -27,6 +27,9 @@ void MyEventAction::EndOfEventAction(const G4Event* event)
      man->FillNtupleDColumn(0, 16, v1.getX());
      man->FillNtupleDColumn(0, 17, v1.getY());
      man->FillNtupleDColumn(0, 18, v1.getZ());
+     man->FillNtupleDColumn(Tuple::kGeneration, TGeneration::kVertexX, v1.getX());
+     man->FillNtupleDColumn(Tuple::kGeneration, TGeneration::kVertexY, v1.getY());
+     man->FillNtupleDColumn(Tuple::kGeneration, TGeneration::kVertexZ, v1.getZ());
   }
   else
     G4cout << "no vertex" << G4endl;
