@@ -169,6 +169,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     
     man->FillNtupleDColumn(0, 12, meanPixelPos.getX());
     man->FillNtupleDColumn(0, 13, meanPixelPos.getY());
+    man->FillNtupleDColumn(Tuple::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
+    man->FillNtupleDColumn(Tuple::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
   
     // save pixel tree
     std::vector <G4ThreeVector> pixelPos = {};
