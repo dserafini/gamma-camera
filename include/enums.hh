@@ -3,6 +3,7 @@
 
 namespace Tuples {
   enum {
+kProva,
     kScintillator,
     kOptical,
     kSipm,
