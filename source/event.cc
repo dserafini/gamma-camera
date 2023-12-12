@@ -37,4 +37,5 @@ void MyEventAction::EndOfEventAction(const G4Event* event)
   man->AddNtupleRow(0);
   man->AddNtupleRow(Tuples::kScintillator);
   man->AddNtupleRow(Tuples::kOptical);
+  man->AddNtupleRow(Tuples::kGeneration);
 }
