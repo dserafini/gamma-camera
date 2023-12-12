@@ -145,13 +145,6 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     
     // fill the Ntuple
     G4AnalysisManager *man = G4AnalysisManager::Instance();
-    man->FillNtupleIColumn(0, 5, nofHits);
-    man->FillNtupleDColumn(0, 6, fMeanPos.getX());
-    man->FillNtupleDColumn(0, 7, fMeanPos.getY());
-    man->FillNtupleDColumn(0, 8, fMeanPos.getZ());
-    man->FillNtupleDColumn(0, 9, fSigmaPos.getX());
-    man->FillNtupleDColumn(0, 10, fSigmaPos.getY());
-    man->FillNtupleDColumn(0, 11, fSigmaMod);
     man->FillNtupleIColumn(Tuples::kOptical, TOptical::kNumber, nofHits);
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanX, fMeanPos.getX());
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanY, fMeanPos.getY());
@@ -167,8 +160,6 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     if (nofHits>0)
       meanPixelPos /= nofHits;
     
-    man->FillNtupleDColumn(0, 12, meanPixelPos.getX());
-    man->FillNtupleDColumn(0, 13, meanPixelPos.getY());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
   
@@ -195,8 +186,6 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     G4ThreeVector mostPixelPos = pixelPos.at(std::distance(pixelCount.begin(),std::max_element(pixelCount.begin(),pixelCount.end())));
     // G4cout << "found most pixel pos: " << mostPixelPos << G4endl;
     // G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
-    man->FillNtupleDColumn(0, 14, mostPixelPos.getX());
-    man->FillNtupleDColumn(0, 15, mostPixelPos.getY());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostX, mostPixelPos.getX());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostY, mostPixelPos.getY());
   }
