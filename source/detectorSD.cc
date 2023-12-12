@@ -169,8 +169,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     
     man->FillNtupleDColumn(0, 12, meanPixelPos.getX());
     man->FillNtupleDColumn(0, 13, meanPixelPos.getY());
-    man->FillNtupleDColumn(Tuple::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
-    man->FillNtupleDColumn(Tuple::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
+    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
+    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
   
     // save pixel tree
     std::vector <G4ThreeVector> pixelPos = {};
@@ -197,8 +197,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     // G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
     man->FillNtupleDColumn(0, 14, mostPixelPos.getX());
     man->FillNtupleDColumn(0, 15, mostPixelPos.getY());
-    man->FillNtupleDColumn(Tuple::kSipm, Tsipm::kMostX, mostPixelPos.getX());
-    man->FillNtupleDColumn(Tuple::kSipm, Tsipm::kMostY, mostPixelPos.getY());
+    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostX, mostPixelPos.getX());
+    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostY, mostPixelPos.getY());
   }
 }
 
