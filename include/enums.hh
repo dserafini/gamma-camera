@@ -39,4 +39,13 @@ namespace TOptical {
   };
 }
 
+namespace Tsipm {
+  enum {
+    kMeanX,
+    kMeanY,
+    kMostX,
+    kMostY
+  };
+}
+
 # endif
