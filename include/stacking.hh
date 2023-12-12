@@ -11,6 +11,7 @@
 #include "G4OpticalPhoton.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4VProcess.hh"
+#include "enums.hh"
 
 class MyStackingAction : public G4UserStackingAction
 {
