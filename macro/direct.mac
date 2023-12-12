@@ -13,7 +13,7 @@
 # define collimator
 ################################################################################
 
-/collimator/exist true
+/collimator/exist false
 /collimator/case_side 10. cm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1.5 mm
@@ -52,6 +52,6 @@
 # /run/beamOn 1850746
 
 /scintillator/pixel 0
-/analysis/setFileName directSlabColl1p5mm.root
+/analysis/setFileName prova.root
 /run/reinitializeGeometry
-/run/beamOn 10000000
+/run/beamOn 100
