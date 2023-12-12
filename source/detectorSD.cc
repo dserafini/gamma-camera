@@ -152,13 +152,13 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     man->FillNtupleDColumn(0, 9, fSigmaPos.getX());
     man->FillNtupleDColumn(0, 10, fSigmaPos.getY());
     man->FillNtupleDColumn(0, 11, fSigmaMod);
-    man->FillNtupleIColumn(TOptical::kNumber, 5, nofHits);
-    man->FillNtupleDColumn(TOptical::kMeanX, 6, fMeanPos.getX());
-    man->FillNtupleDColumn(TOptical::kMeanY, 7, fMeanPos.getY());
-    man->FillNtupleDColumn(TOptical::kMeanZ, 8, fMeanPos.getZ());
-    man->FillNtupleDColumn(TOptical::kSigmaX, 9, fSigmaPos.getX());
-    man->FillNtupleDColumn(TOptical::kSigmaY, 10, fSigmaPos.getY());
-    man->FillNtupleDColumn(TOptical::kSigmaZ, 11, fSigmaMod);
+    man->FillNtupleIColumn((Tuples::kOptical, TOptical::kNumber, nofHits);
+    man->FillNtupleDColumn(Tuples::kOptical, Optical::kMeanX, fMeanPos.getX());
+    man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanY, fMeanPos.getY());
+    man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanZ, fMeanPos.getZ());
+    man->FillNtupleDColumn(Tuples::kOptical, TOptical::kSigmaX, fSigmaPos.getX());
+    man->FillNtupleDColumn(Tuples::kOptical, TOptical::kSigmaY, fSigmaPos.getY());
+    man->FillNtupleDColumn(Tuples::kOptical, TOptical::kSigmaZ, fSigmaMod);
 
     // save pixel tree
     G4ThreeVector meanPixelPos = G4ThreeVector();
