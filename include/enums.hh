@@ -3,10 +3,10 @@
 
 namespace Tuples {
   enum {
-    kGeneration,
     kScintillator,
     kOptical,
-    kSipm
+    kSipm,
+    kGeneration
   };
 }
 
