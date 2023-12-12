@@ -47,10 +47,10 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "xMeanY"); // [mm]
   man->CreateNtupleDColumn(0, "xMostX"); // [mm]
   man->CreateNtupleDColumn(0, "xMostY"); // [mm]
-  man->CreateNtupleDColumn(Tuple::kSipm, "xMeanX"); // [mm]
-  man->CreateNtupleDColumn(Tuple::kSipm, "xMeanY"); // [mm]
-  man->CreateNtupleDColumn(Tuple::kSipm, "xMostX"); // [mm]
-  man->CreateNtupleDColumn(Tuple::kSipm, "xMostY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMeanX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMeanY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMostX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMostY"); // [mm]
 
   // moby
   man->CreateNtupleDColumn(0, "mX"); // [mm]
