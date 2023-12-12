@@ -9,6 +9,7 @@ MyRunAction::MyRunAction()
 
   // want to save energy deposition
   man->CreateNtuple("Scoring", "Scoring");
+  man->CreateNtuple("Scintillator", "Scintillator");
 
   // initial
   man->CreateNtupleDColumn(0, "fEini"); // [eV]
@@ -18,6 +19,10 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "fX"); // [mm]
   man->CreateNtupleDColumn(0, "fY"); // [mm]
   man->CreateNtupleDColumn(0, "fZ"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fEdep"); // [eV]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fZ"); // [mm]
   
   // SiPM detector
   // optical photons
@@ -41,6 +46,7 @@ MyRunAction::MyRunAction()
 
   // finish tuple
   man->FinishNtuple(0);
+  man->FinishNtuple(Tuples::kScintillator);
 }
 
 MyRunAction::~MyRunAction()
