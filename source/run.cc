@@ -42,15 +42,15 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaY"); // [mm]
   man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaR"); // [mm]
   // pixels of SiPM
-  man->CreateNtupleDColumn(0, "xMeanX"); // [mm]
-  man->CreateNtupleDColumn(0, "xMeanY"); // [mm]
-  man->CreateNtupleDColumn(0, "xMostX"); // [mm]
-  man->CreateNtupleDColumn(0, "xMostY"); // [mm]
+  man->CreateNtupleDColumn(Tsipm::kMeanX, "xMeanX"); // [mm]
+  man->CreateNtupleDColumn(Tsipm::kMeanY, "xMeanY"); // [mm]
+  man->CreateNtupleDColumn(Tsipm::kMostX, "xMostX"); // [mm]
+  man->CreateNtupleDColumn(Tsipm::kMostY, "xMostY"); // [mm]
 
   // moby
-  man->CreateNtupleDColumn(0, "mX"); // [mm]
-  man->CreateNtupleDColumn(0, "mY"); // [mm]
-  man->CreateNtupleDColumn(0, "mZ"); // [mm]
+  man->CreateNtupleDColumn(TGeneration::kVertexX, "mX"); // [mm]
+  man->CreateNtupleDColumn(TGeneration::kVertexY, "mY"); // [mm]
+  man->CreateNtupleDColumn(TGeneration::kVertexZ, "mZ"); // [mm]
 
   // finish tuple
   man->FinishNtuple(0);
