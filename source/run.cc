@@ -10,6 +10,7 @@ MyRunAction::MyRunAction()
   // want to save energy deposition
   man->CreateNtuple("Scoring", "Scoring");
   man->CreateNtuple("Scintillator", "Scintillator");
+  man->CreateNtuple("Optical", "Optical");
 
   // initial
   man->CreateNtupleDColumn(0, "fEini"); // [eV]
@@ -19,10 +20,10 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "fX"); // [mm]
   man->CreateNtupleDColumn(0, "fY"); // [mm]
   man->CreateNtupleDColumn(0, "fZ"); // [mm]
-  man->CreateNtupleDColumn(Tuples::kScintillator, "fEdep1"); // [eV]
-  man->CreateNtupleDColumn(Tuples::kScintillator, "fX1"); // [mm]
-  man->CreateNtupleDColumn(Tuples::kScintillator, "fY1"); // [mm]
-  man->CreateNtupleDColumn(Tuples::kScintillator, "fZ1"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fEdep"); // [eV]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fZ"); // [mm]
   
   // SiPM detector
   // optical photons
@@ -33,6 +34,13 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(0, "pSigmaX"); // [mm]
   man->CreateNtupleDColumn(0, "pSigmaY"); // [mm]
   man->CreateNtupleDColumn(0, "pSigmaR"); // [mm]
+  man->CreateNtupleIColumn(Tuples::kOptical, "pNumber"); // [1]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pMeanX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pMeanY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pMeanZ"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaR"); // [mm]
   // pixels of SiPM
   man->CreateNtupleDColumn(0, "xMeanX"); // [mm]
   man->CreateNtupleDColumn(0, "xMeanY"); // [mm]
@@ -47,6 +55,7 @@ MyRunAction::MyRunAction()
   // finish tuple
   man->FinishNtuple(0);
   man->FinishNtuple(Tuples::kScintillator);
+  man->FinishNtuple(Tuples::kOptical);
 }
 
 MyRunAction::~MyRunAction()
