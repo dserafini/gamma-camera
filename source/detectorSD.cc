@@ -152,7 +152,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     man->FillNtupleDColumn(0, 9, fSigmaPos.getX());
     man->FillNtupleDColumn(0, 10, fSigmaPos.getY());
     man->FillNtupleDColumn(0, 11, fSigmaMod);
-    man->FillNtupleIColumn((Tuples::kOptical, TOptical::kNumber, nofHits);
+    man->FillNtupleIColumn(Tuples::kOptical, TOptical::kNumber, nofHits);
     man->FillNtupleDColumn(Tuples::kOptical, Optical::kMeanX, fMeanPos.getX());
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanY, fMeanPos.getY());
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanZ, fMeanPos.getZ());
