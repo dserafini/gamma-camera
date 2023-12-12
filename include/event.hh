@@ -10,6 +10,7 @@
 #include "G4SystemOfUnits.hh"
 
 #include "run.hh"
+#include "enums.hh"
 
 class MyEventAction : public G4UserEventAction
 {
