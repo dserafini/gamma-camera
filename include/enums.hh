@@ -3,7 +3,6 @@
 
 namespace Tuples {
   enum {
-kProva,
     kScintillator,
     kOptical,
     kSipm,
@@ -13,6 +12,7 @@ kProva,
 
 namespace TGeneration {
   enum {
+    kEini,
     kVertexX,
     kVertexY,
     kVertexZ
