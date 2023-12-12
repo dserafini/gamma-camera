@@ -18,4 +18,13 @@ namespace TGeneration {
   };
 }
 
+namespace TScintillator {
+  enum {
+    kEdep,
+    kGammaX,
+    kGammaY,
+    kGammaZ
+  };
+}
+
 # endif
