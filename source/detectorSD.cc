@@ -145,7 +145,6 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     
     // fill the Ntuple
     G4AnalysisManager *man = G4AnalysisManager::Instance();
-    man->FillNtupleIColumn(Tuples::kOptical, TOptical::kNumber, nofHits);
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanX, fMeanPos.getX());
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanY, fMeanPos.getY());
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanZ, fMeanPos.getZ());
@@ -153,6 +152,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kSigmaY, fSigmaPos.getY());
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kSigmaR, fSigmaMod);
 
+    man->FillNtupleIColumn(Tuples::kSipm, Tsipm::kNumber, nofHits);
+    
     // save pixel tree
     G4ThreeVector meanPixelPos = G4ThreeVector();
     for ( G4int i=0; i<nofHits; i++ )
