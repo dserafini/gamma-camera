@@ -25,16 +25,17 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(Tuples::kScintillator, "fY"); // [mm]
   man->CreateNtupleDColumn(Tuples::kScintillator, "fZ"); // [mm]
   
-  // SiPM detector
-  // optical photons
-  man->CreateNtupleIColumn(Tuples::kOptical, "pNumber"); // [1]
+  // scintillation optical photons
   man->CreateNtupleDColumn(Tuples::kOptical, "pMeanX"); // [mm]
   man->CreateNtupleDColumn(Tuples::kOptical, "pMeanY"); // [mm]
   man->CreateNtupleDColumn(Tuples::kOptical, "pMeanZ"); // [mm]
   man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaX"); // [mm]
   man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaY"); // [mm]
   man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaR"); // [mm]
+  
+  // SiPM detector
   // pixels of SiPM
+  man->CreateNtupleIColumn(Tuples::kSipm, "xNumber"); // [1]
   man->CreateNtupleDColumn(Tuples::kSipm, "xMeanX"); // [mm]
   man->CreateNtupleDColumn(Tuples::kSipm, "xMeanY"); // [mm]
   man->CreateNtupleDColumn(Tuples::kSipm, "xMostX"); // [mm]
