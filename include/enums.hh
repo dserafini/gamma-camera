@@ -30,7 +30,6 @@ namespace TScintillator {
 
 namespace TOptical {
   enum {
-    kNumber,
     kMeanX,
     kMeanY,
     kMeanZ,
@@ -42,6 +41,7 @@ namespace TOptical {
 
 namespace Tsipm {
   enum {
+    kNumber,
     kMeanX,
     kMeanY,
     kMostX,
