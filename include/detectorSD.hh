@@ -9,6 +9,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4PhysicsOrderedFreeVector.hh"
 #include "G4OpticalPhoton.hh"
+#include "enums.hh"
 
 #include "detectorHit.hh"
 

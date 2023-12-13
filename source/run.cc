@@ -8,39 +8,43 @@ MyRunAction::MyRunAction()
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
   // want to save energy deposition
-  man->CreateNtuple("Scoring", "Scoring");
+  man->CreateNtuple("Generation", "Generation");
+  man->CreateNtuple("Scintillator", "Scintillator");
+  man->CreateNtuple("Optical", "Optical");
+  man->CreateNtuple("Sipm", "Sipm");
 
-  // initial
-  man->CreateNtupleDColumn(0, "fEini"); // [eV]
+  // moby
+  man->CreateNtupleDColumn(Tuples::kGeneration, "fEini"); // [eV]
+  man->CreateNtupleDColumn(Tuples::kGeneration, "mX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kGeneration, "mY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kGeneration, "mZ"); // [mm]
 
   // scintillator
-  man->CreateNtupleDColumn(0, "fEdep"); // [eV]
-  man->CreateNtupleDColumn(0, "fX"); // [mm]
-  man->CreateNtupleDColumn(0, "fY"); // [mm]
-  man->CreateNtupleDColumn(0, "fZ"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fEdep"); // [eV]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fZ"); // [mm]
   
   // SiPM detector
   // optical photons
-  man->CreateNtupleIColumn(0, "pNumber"); // [1]
-  man->CreateNtupleDColumn(0, "pMeanX"); // [mm]
-  man->CreateNtupleDColumn(0, "pMeanY"); // [mm]
-  man->CreateNtupleDColumn(0, "pMeanZ"); // [mm]
-  man->CreateNtupleDColumn(0, "pSigmaX"); // [mm]
-  man->CreateNtupleDColumn(0, "pSigmaY"); // [mm]
-  man->CreateNtupleDColumn(0, "pSigmaR"); // [mm]
+  man->CreateNtupleIColumn(Tuples::kOptical, "pNumber"); // [1]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pMeanX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pMeanY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pMeanZ"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaR"); // [mm]
   // pixels of SiPM
-  man->CreateNtupleDColumn(0, "xMeanX"); // [mm]
-  man->CreateNtupleDColumn(0, "xMeanY"); // [mm]
-  man->CreateNtupleDColumn(0, "xMostX"); // [mm]
-  man->CreateNtupleDColumn(0, "xMostY"); // [mm]
-
-  // moby
-  man->CreateNtupleDColumn(0, "mX"); // [mm]
-  man->CreateNtupleDColumn(0, "mY"); // [mm]
-  man->CreateNtupleDColumn(0, "mZ"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMeanX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMeanY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMostX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMostY"); // [mm]
 
   // finish tuple
-  man->FinishNtuple(0);
+  man->FinishNtuple(Tuples::kGeneration);
+  man->FinishNtuple(Tuples::kScintillator);
+  man->FinishNtuple(Tuples::kOptical);
+  man->FinishNtuple(Tuples::kSipm);
 }
 
 MyRunAction::~MyRunAction()

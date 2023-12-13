@@ -24,12 +24,15 @@ void MyEventAction::EndOfEventAction(const G4Event* event)
     G4ThreeVector v1 = event->GetPrimaryVertex()->GetPosition();
     // G4cout << "event: " << v1 << G4endl;
     // man->FillH3(idH3, v1.getX(), v1.getY(), v1.getZ());
-     man->FillNtupleDColumn(0, 16, v1.getX());
-     man->FillNtupleDColumn(0, 17, v1.getY());
-     man->FillNtupleDColumn(0, 18, v1.getZ());
+     man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexX, v1.getX());
+     man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexY, v1.getY());
+     man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexZ, v1.getZ());
   }
   else
     G4cout << "no vertex" << G4endl;
 
-  man->AddNtupleRow(0);
+  man->AddNtupleRow(Tuples::kGeneration);
+  man->AddNtupleRow(Tuples::kScintillator);
+  man->AddNtupleRow(Tuples::kOptical);
+  man->AddNtupleRow(Tuples::kSipm);
 }
