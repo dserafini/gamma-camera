@@ -21,6 +21,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
 
   if (numberDetectedPhotons>0)
   {
+    G4cout << "numberDetectedPhotons " << numberDetectedPhotons << G4endl;
     man->AddNtupleRow(Tuples::kGeneration);
     man->AddNtupleRow(Tuples::kScintillator);
     man->AddNtupleRow(Tuples::kOptical);
