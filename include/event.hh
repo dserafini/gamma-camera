@@ -11,6 +11,7 @@
 
 #include "run.hh"
 #include "enums.hh"
+#include "infoEvent.hh"
 
 class MyEventAction : public G4UserEventAction
 {
