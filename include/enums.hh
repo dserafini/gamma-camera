@@ -3,10 +3,17 @@
 
 namespace Tuples {
   enum {
+    kEvents,
     kGeneration,
     kScintillator,
     kOptical,
     kSipm
+  };
+}
+
+namespace TEvents {
+  enum {
+    kEvents,
   };
 }
 
