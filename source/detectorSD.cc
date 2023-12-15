@@ -116,7 +116,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
   
   nofHits = fHitsCollection->entries();
-  numberDetectedPhotons = nofhits;
+  numberDetectedPhotons = nofHits;
   if ( verboseLevel>1 ) {
      G4cout << G4endl
             << "-------->Hits Collection: in this event they are " << nofHits
