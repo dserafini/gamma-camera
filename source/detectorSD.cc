@@ -1,5 +1,7 @@
 #include "detectorSD.hh"
 
+G4int numberDetectedPhotons;
+
 MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsCollectionName)
   : G4VSensitiveDetector(name)
 {
@@ -114,6 +116,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
   
   nofHits = fHitsCollection->entries();
+  numberDetectedPhotons = nofhits;
   if ( verboseLevel>1 ) {
      G4cout << G4endl
             << "-------->Hits Collection: in this event they are " << nofHits
