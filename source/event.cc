@@ -15,7 +15,8 @@ void MyEventAction::BeginOfEventAction(const G4Event* )
 
 void MyEventAction::EndOfEventAction(const G4Event*)
 {
-
+  // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
+  
   if (numberDetectedPhotons>0)
   {
     // G4cout << "numberDetectedPhotons " << numberDetectedPhotons << G4endl;
