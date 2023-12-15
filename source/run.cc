@@ -73,17 +73,17 @@ void MyRunAction::BeginOfRunAction(const G4Run* run)
   //man->OpenFile("output" + strRunID.str() + ".root");
   // I prefer to give the file name from macro
   man->OpenFile();
+
+  // retrieve number of events in the run
+  man->FillNtupleIColumn(Tuples::kEvents, TEvents::kEvents, run->GetNumberOfEventToBeProcessed());
+  man->AddNtupleRow(Tuples::kEvents);
 }
 
 void MyRunAction::EndOfRunAction(const G4Run* aRun)
 {
   G4cout << "MyRunAction::EndOfRunAction" << G4endl;
+  
   G4AnalysisManager *man = G4AnalysisManager::Instance();
-
-  // retrieve number of events in the run
-  man->FillNtupleIColumn(Tuples::kEvents, TEvents::kEvents, aRun->GetNumberOfEvent());
-  man->AddNtupleRow(Tuples::kEvents);
-
   man->Write();
   // it is very important to always write before closing otherwise the root file could take heavy damage
   man->CloseFile();
