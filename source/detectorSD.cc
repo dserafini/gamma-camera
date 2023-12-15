@@ -113,7 +113,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 {
-  G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
+  // G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
   
   nofHits = fHitsCollection->entries();
   numberDetectedPhotons = nofHits;
