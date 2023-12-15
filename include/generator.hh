@@ -25,6 +25,7 @@ public:
 	virtual void GeneratePrimaries(G4Event*);
 
 private:
+	SaveVertexPosition();
 	G4ThreeVector GenerateParticlePositionMOBY();
 	G4GeneralParticleSource* fParticleGPS;
 	G4ParticleGun* fParticleGun;
