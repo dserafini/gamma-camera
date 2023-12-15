@@ -15,6 +15,7 @@
 #include "TFile.h"
 #include "TH3F.h"
 #include "TROOT.h"
+#include "enums.hh"
 
 class MyPrimaryGenerator : public G4VUserPrimaryGeneratorAction
 {
