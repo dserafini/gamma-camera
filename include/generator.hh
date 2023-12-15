@@ -11,7 +11,7 @@
 #include "G4Geantino.hh"
 #include "G4IonTable.hh"
 #include "G4GenericMessenger.hh"
-
+#include "g4root.hh"
 #include "TFile.h"
 #include "TH3F.h"
 #include "TROOT.h"
