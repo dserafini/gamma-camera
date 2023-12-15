@@ -65,6 +65,6 @@ void MyPrimaryGenerator::SaveVertexPosition(G4ThreeVector vertexPos)
 {
 	G4AnalysisManager *man = G4AnalysisManager::Instance();
 	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexX, vertexPos.getX());
-     	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexY, vertexPos.getY());
-     	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexZ, vertexPos.getZ());
+	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexY, vertexPos.getY());
+	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexZ, vertexPos.getZ());
 }
