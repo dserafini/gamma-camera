@@ -1,7 +1,5 @@
 #include "detectorSD.hh"
 
-G4int numberDetectedPhotons;
-
 MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsCollectionName)
   : G4VSensitiveDetector(name)
 {
