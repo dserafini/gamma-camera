@@ -35,7 +35,7 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 	
 	// fParticleGPS->GeneratePrimaryVertex(anEvent);
 	fParticleGun->GeneratePrimaryVertex(anEvent);
-	MyPrimaryGenerator::SaveVertexPosition(fParticleGun->GetParticlePosition());
+	SaveVertexPosition(fParticleGun->GetParticlePosition());
 }
 
 G4ThreeVector MyPrimaryGenerator::GenerateParticlePositionMOBY()
