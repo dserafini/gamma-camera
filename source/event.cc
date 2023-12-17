@@ -1,5 +1,8 @@
 #include "event.hh"
 
+int numberDetectedPhotons;
+double energyDeposited;
+
 MyEventAction::MyEventAction(MyRunAction*)
 {
   idH3 = 0;
