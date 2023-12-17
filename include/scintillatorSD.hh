@@ -9,7 +9,7 @@
 #include "G4OpticalPhoton.hh"
 #include "G4ThreeVector.hh"
 #include "enums.hh"
-
+#include "infoEvent.hh"
 
 class MySensitiveScintillator : public G4VSensitiveDetector
 {
