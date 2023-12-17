@@ -20,7 +20,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
 {
   // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
   
-  if (numberDetectedPhotons>0)
+  if (numberDetectedPhotons>0 || energyDeposited>0.)
   {
     // G4cout << "numberDetectedPhotons " << numberDetectedPhotons << G4endl;
     
