@@ -44,6 +44,6 @@ void MyEventAction::EndOfEventAction(const G4Event* anEvent)
     man->AddNtupleRow(Tuples::kOptical);
     man->AddNtupleRow(Tuples::kSipm);
 
-    G4cout << "numberDetectedPhotons " << numberDetectedPhotons << ", energyDeposited " << energyDeposited << G4endl;
+    G4cout << "hc0->entries " << hc0->entries << ", numberDetectedPhotons " << numberDetectedPhotons << G4endl;
   }
 }
