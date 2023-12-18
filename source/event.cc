@@ -1,4 +1,5 @@
 #include "event.hh"
+#include "detectorHit.hh"
 
 int numberDetectedPhotons;
 double energyDeposited;
@@ -21,7 +22,7 @@ void MyEventAction::EndOfEventAction(const G4Event* anEvent)
   // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
 
   G4HCofThisEvent *hce = anEvent->GetHCofThisEvent();
-  G4VHitsCollection *hc0;
+  detectorHitsCollection *hc0;
   if (hce)
     hc0 = hce->GetHC(0);
     if (!hc0) 
