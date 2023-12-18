@@ -20,7 +20,8 @@ void MyEventAction::EndOfEventAction(const G4Event* anEvent)
 {
   // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
 
-  G4HCofThisEvent *hcSipm = anEvent->GetHCofThisEvent();
+  G4HCofThisEvent *hce = anEvent->GetHCofThisEvent();
+  G4VHitsCollection *hc0 = hce->GetHC(0);
   
   if (numberDetectedPhotons>0 || energyDeposited>0.)
   {
