@@ -10,7 +10,6 @@
 #include "G4PhysicsOrderedFreeVector.hh"
 #include "G4OpticalPhoton.hh"
 #include "enums.hh"
-#include "infoEvent.hh"
 
 #include "detectorHit.hh"
 
