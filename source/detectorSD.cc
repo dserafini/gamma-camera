@@ -83,6 +83,14 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
     newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
     newHit->SetPixelPos (preStepPoint->GetTouchable()->GetTranslation());
     // G4cout << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() << ": " << aStep->GetPreStepPoint()->GetTouchable()->GetTranslation() << G4endl;
+
+    if (energyDeposited == 0)
+    {
+      G4StepPoint *p1 = aStep->GetPreStepPoint();
+      G4cout << "preStepVolume " << p1->GetPhysicalVolume()->GetName() << G4endl;
+      G4Track* aTrack = aStep->GetTrack();
+      G4cout << "process: " << aTrack->GetCreatorProcess()->GetProcessName() << G4endl;
+    } 
   
     if (fHitsCollection)
       fHitsCollection->insert( newHit );
