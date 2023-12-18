@@ -66,4 +66,4 @@
 # Set file name
 /analysis/setFileName outmoby.root
 /run/printProgress 100000
-/run/beamOn 1000000
+/run/beamOn 100000
