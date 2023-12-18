@@ -22,6 +22,7 @@ void MyEventAction::EndOfEventAction(const G4Event* anEvent)
 
   G4HCofThisEvent *hce = anEvent->GetHCofThisEvent();
   G4VHitsCollection *hc0 = hce->GetHC(0);
+  G4cout << "Got " << hc0->GetName() << G4endl;
   
   if (numberDetectedPhotons>0 || energyDeposited>0.)
   {
