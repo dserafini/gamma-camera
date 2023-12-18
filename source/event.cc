@@ -24,7 +24,7 @@ void MyEventAction::EndOfEventAction(const G4Event* anEvent)
   G4HCofThisEvent *hce = anEvent->GetHCofThisEvent();
   detectorHitsCollection *hc0;
   if (hce)
-    hc0 = hce->GetHC(0);
+    hc0 = (detectorHitsCollection*)hce->GetHC(0);
     if (!hc0) 
     {
       G4cout << "No hit collection for this event!!!" << G4endl;
