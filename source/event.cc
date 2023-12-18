@@ -17,26 +17,16 @@ void MyEventAction::BeginOfEventAction(const G4Event* )
   // G4cout << "MyEventAction::BeginOfEventAction" << G4endl;
 }
 
-void MyEventAction::EndOfEventAction(const G4Event* anEvent)
+void MyEventAction::EndOfEventAction(const G4Event* currentEvent)
 {
   // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
-
-  G4HCofThisEvent *hce = anEvent->GetHCofThisEvent();
-  detectorHitsCollection *hc0;
-  if (hce)
-    hc0 = (detectorHitsCollection*)hce->GetHC(0);
-    if (!hc0) 
-    {
-      G4cout << "No hit collection for this event!!!" << G4endl;
-      return;
-    }
-  else
-  {
-    G4cout << "No hit collection for this event!!!" << G4endl;
-    return;
-  }
   
-  if (hc0->entries() > 0)
+  G4SDManager* fSDM = G4SDManager::GetSDMpointer();
+  G4int collectionID = fSDM->GetCollectionID("SensitiveDetectorHitsCollection");
+  G4HCofThisEvent* HCofEvent = currentEvent->GetHCofThisEvent();
+  detectorHitsCollection* myCollection = (detectorHitsCollection*)(HCofEvent->GetHC(collectionID));
+  
+  if (myCollection->entries() > 0)
   {
     // G4cout << "numberDetectedPhotons " << numberDetectedPhotons << G4endl;
     
@@ -46,6 +36,6 @@ void MyEventAction::EndOfEventAction(const G4Event* anEvent)
     man->AddNtupleRow(Tuples::kOptical);
     man->AddNtupleRow(Tuples::kSipm);
 
-    G4cout << "hc0->entries " << hc0->entries << ", numberDetectedPhotons " << numberDetectedPhotons << G4endl;
+    G4cout << "hc0->entries " << myCollection->entries << ", numberDetectedPhotons " << numberDetectedPhotons << G4endl;
   }
 }
