@@ -1,9 +1,4 @@
 #include "event.hh"
-#include "detectorHit.hh"
-#include "G4SDManager.hh"
-
-int numberDetectedPhotons;
-double energyDeposited;
 
 MyEventAction::MyEventAction(MyRunAction*)
 {
@@ -36,7 +31,5 @@ void MyEventAction::EndOfEventAction(const G4Event* currentEvent)
     man->AddNtupleRow(Tuples::kScintillator);
     man->AddNtupleRow(Tuples::kOptical);
     man->AddNtupleRow(Tuples::kSipm);
-
-    G4cout << "hc0->entries " << myCollection->entries() << ", numberDetectedPhotons " << numberDetectedPhotons << G4endl;
   }
 }
