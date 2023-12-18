@@ -32,7 +32,7 @@
 # change geometry moby
 ################################################################################
 /moby/build yes
-/moby/voxelX 500
+/moby/voxelX 550
 /moby/distance 0. mm
 
 /run/reinitializeGeometry
