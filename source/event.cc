@@ -1,5 +1,6 @@
 #include "event.hh"
 #include "detectorHit.hh"
+#include "G4SDManager.hh"
 
 int numberDetectedPhotons;
 double energyDeposited;
