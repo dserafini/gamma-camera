@@ -29,5 +29,10 @@ void MyEventAction::EndOfEventAction(const G4Event*)
     man->AddNtupleRow(Tuples::kScintillator);
     man->AddNtupleRow(Tuples::kOptical);
     man->AddNtupleRow(Tuples::kSipm);
+
+    if (energyDeposited == 0)
+    {
+      G4cout << "numberDetectedPhotons " << numberDetectedPhotons << ", energyDeposited " << energyDeposited << G4endl;
+    } 
   }
 }
