@@ -21,14 +21,20 @@ void MyEventAction::EndOfEventAction(const G4Event* anEvent)
   // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
 
   G4HCofThisEvent *hce = anEvent->GetHCofThisEvent();
-  G4VHitsCollection *hc0 = hce->GetHC(0);
-  G4VHitsCollection *hc1 = hce->GetHC(1);
-  G4VHitsCollection *hc2 = hce->GetHC(2);
-  G4cout << "Got " << hc0->GetName() << G4endl;
-  G4cout << "Got " << hc1->GetName() << G4endl;
-  G4cout << "Got " << hc2->GetName() << G4endl;
+  if (hce)
+    G4VHitsCollection *hc0 = hce->GetHC(0);
+    if (!hc0) 
+    {
+      G4cout << "No hit collection for this event!!!" << G4endl;
+      return;
+    }
+  else
+  {
+    G4cout << "No hit collection for this event!!!" << G4endl;
+    return;
+  }
   
-  if (numberDetectedPhotons>0 || energyDeposited>0.)
+  if (hc0->entries() > 0)
   {
     // G4cout << "numberDetectedPhotons " << numberDetectedPhotons << G4endl;
     
