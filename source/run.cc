@@ -8,10 +8,14 @@ MyRunAction::MyRunAction()
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
   // want to save energy deposition
+  man->CreateNtuple("Events", "Events");
   man->CreateNtuple("Generation", "Generation");
   man->CreateNtuple("Scintillator", "Scintillator");
   man->CreateNtuple("Optical", "Optical");
   man->CreateNtuple("Sipm", "Sipm");
+
+  // number of generated events
+  man->CreateNtupleIColumn(Tuples::kEvents, "gEvents"); // [1]
 
   // moby
   man->CreateNtupleDColumn(Tuples::kGeneration, "fEini"); // [eV]
@@ -42,6 +46,7 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(Tuples::kSipm, "xMostY"); // [mm]
 
   // finish tuple
+  man->FinishNtuple(Tuples::kEvents);
   man->FinishNtuple(Tuples::kGeneration);
   man->FinishNtuple(Tuples::kScintillator);
   man->FinishNtuple(Tuples::kOptical);
@@ -68,13 +73,17 @@ void MyRunAction::BeginOfRunAction(const G4Run* run)
   //man->OpenFile("output" + strRunID.str() + ".root");
   // I prefer to give the file name from macro
   man->OpenFile();
+
+  // retrieve number of events in the run
+  man->FillNtupleIColumn(Tuples::kEvents, TEvents::kEvents, run->GetNumberOfEventToBeProcessed());
+  man->AddNtupleRow(Tuples::kEvents);
 }
 
-void MyRunAction::EndOfRunAction(const G4Run*)
+void MyRunAction::EndOfRunAction(const G4Run* aRun)
 {
   G4cout << "MyRunAction::EndOfRunAction" << G4endl;
+  
   G4AnalysisManager *man = G4AnalysisManager::Instance();
-
   man->Write();
   // it is very important to always write before closing otherwise the root file could take heavy damage
   man->CloseFile();

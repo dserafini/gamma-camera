@@ -10,7 +10,6 @@
 #include "G4ThreeVector.hh"
 #include "enums.hh"
 
-
 class MySensitiveScintillator : public G4VSensitiveDetector
 {
 public:

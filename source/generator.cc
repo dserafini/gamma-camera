@@ -35,6 +35,7 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 	
 	// fParticleGPS->GeneratePrimaryVertex(anEvent);
 	fParticleGun->GeneratePrimaryVertex(anEvent);
+	SaveVertexPosition(fParticleGun->GetParticlePosition());
 }
 
 G4ThreeVector MyPrimaryGenerator::GenerateParticlePositionMOBY()
@@ -58,4 +59,12 @@ G4ThreeVector MyPrimaryGenerator::GenerateParticlePositionMOBY()
 	std::cout << "Random position: (" << my_x << ", " << my_y << ", " << my_z << ")\n\n";*/
 	
 	return myPos;
+}
+
+void MyPrimaryGenerator::SaveVertexPosition(G4ThreeVector vertexPos)
+{
+	G4AnalysisManager *man = G4AnalysisManager::Instance();
+	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexX, vertexPos.getX());
+	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexY, vertexPos.getY());
+	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexZ, vertexPos.getZ());
 }
