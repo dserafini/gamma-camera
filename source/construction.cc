@@ -631,7 +631,7 @@ void MyDetectorConstruction::ConstructMOBY()
         k = std::stoi(buffer);
         ctfile >> buffer;
         G4double HU = std::stod(buffer);
-if (i>=binxmin && i<binxmax && k>=binymin && k<binymax && j2>=binzmin && j2<binzmax)
+if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
 {
         n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
 
