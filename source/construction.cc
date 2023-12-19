@@ -633,6 +633,7 @@ void MyDetectorConstruction::ConstructMOBY()
         G4double HU = std::stod(buffer);
 if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
 {
+	G4cout << i << "\t" << j << "\t" << k << G4endl;
         n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
 
         /*if (HU == 0) {materialIDs[n] = 0;} // air
