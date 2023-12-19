@@ -33,7 +33,7 @@
 ################################################################################
 /moby/build yes
 /moby/voxelX 430
-/moby/distance -10. mm
+/moby/distance 0. mm
 
 /run/reinitializeGeometry
 
