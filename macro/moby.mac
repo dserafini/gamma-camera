@@ -66,4 +66,11 @@
 # Set file name
 /analysis/setFileName outmoby.root
 /run/printProgress 1000000
-/run/beamOn 100000000
+# /run/beamOn 100000000
+
+################################################################################
+# tumore
+################################################################################
+/analysis/setFileName tumor.root
+/run/printProgress 10000
+/run/beamOn 100000
