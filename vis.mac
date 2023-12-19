@@ -131,3 +131,7 @@
 
 # macro are in macro folder
 /control/macroPath macro
+
+# visualization of parameterised volumes
+# https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Visualization/commandcontrol.html#visualization-of-a-parameterised-volume
+/vis/viewer/set/specialMeshRendering
