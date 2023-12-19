@@ -633,6 +633,9 @@ void MyDetectorConstruction::ConstructMOBY()
         G4double HU = std::stod(buffer);
 if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
 {
+	i = i - binxmin;
+	j = j - binymin;
+	k = k - binzmin;
 	G4cout << i << "\t" << j << "\t" << k << G4endl;
         n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
 
