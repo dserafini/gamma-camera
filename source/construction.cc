@@ -636,7 +636,7 @@ if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzma
 	i = i - binxmin;
 	j = j - binymin;
 	k = k - binzmin;
-	G4cout << i << "\t" << j << "\t" << k << G4endl;
+	// G4cout << i << "\t" << j << "\t" << k << G4endl;
         n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
 
         /*if (HU == 0) {materialIDs[n] = 0;} // air
