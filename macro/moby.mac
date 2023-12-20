@@ -71,6 +71,7 @@
 ################################################################################
 # tumore
 ################################################################################
+/control/alias nEvents 10000000
 /control/alias tumoradius .1
 /control/alias depth 1.0
 /control/add tumorCentre {tumoradius} {depth}
@@ -79,7 +80,7 @@
 /gps/pos/type Volume
 /gps/pos/shape Sphere
 /gps/pos/radius {tumoradius} mm
-/analysis/setFileName tumor{tumordiameter}mmDiameter.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events.root
 /particleSource/source gps
 /run/printProgress 1000000
-/run/beamOn 10000000
+/run/beamOn {nEvents}
