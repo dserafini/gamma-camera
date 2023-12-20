@@ -72,5 +72,6 @@
 # tumore
 ################################################################################
 /analysis/setFileName tumor.root
+/particleSource/source gps
 /run/printProgress 100000
 /run/beamOn 1000000
