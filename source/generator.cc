@@ -25,6 +25,7 @@ MyPrimaryGenerator::~MyPrimaryGenerator()
 {
 	delete fParticleGPS;
 	delete fParticleGun;
+	delete fMessengerParticleSource;
 }
 
 void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
