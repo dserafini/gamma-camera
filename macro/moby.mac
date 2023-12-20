@@ -79,7 +79,7 @@
 /gps/pos/type Volume
 /gps/pos/shape Sphere
 /gps/pos/radius {tumoradius} mm
-/analysis/setFileName tumor{tumorediameter}mmDiameter.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter.root
 /particleSource/source gps
 /run/printProgress 100000
 /run/beamOn 1000000
