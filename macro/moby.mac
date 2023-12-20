@@ -64,9 +64,10 @@
 /gun/direction 0 0 1
 
 # Set file name
-/analysis/setFileName outmoby.root
-/run/printProgress 1000000
-/run/beamOn 100000000
+/control/alias nEventsBackground 100000000
+/analysis/setFileName outmoby{nEventsBackground}events.root
+/run/printProgress 10000000
+/run/beamOn {nEventsBackground}
 
 ################################################################################
 # tumore
