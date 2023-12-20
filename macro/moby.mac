@@ -74,7 +74,7 @@
 /control/alias nEvents 10000000
 /control/alias tumoradius .5
 /control/alias depth 1.0
-/control/alias xcentre 1.0
+/control/alias xcentre 5.0
 /control/add tumorCentre {tumoradius} {depth}
 /control/multiply tumordiameter {tumoradius} 2
 /gps/pos/centre {xcentre} 0. -{tumorCentre} mm
