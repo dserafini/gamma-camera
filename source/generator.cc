@@ -19,7 +19,6 @@ MyPrimaryGenerator::MyPrimaryGenerator()
 	fMessengerParticleSource = new G4GenericMessenger(this, "/particleSource/", "Particle source generator");
 	fMessengerParticleSource->DeclareProperty("source", gunorgps, "gun or gps");
 	gunorgps = "gun";
-	G4cout << "gunorgps set to gun" << G4endl;
 }
 
 MyPrimaryGenerator::~MyPrimaryGenerator()
@@ -31,7 +30,6 @@ MyPrimaryGenerator::~MyPrimaryGenerator()
 
 void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 {
-	G4cout << "gunorgps " << gunorgps << G4endl;
 	// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() / eV << " eV" << G4endl;
 	if (gunorgps == "gun")
 	{
