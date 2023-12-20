@@ -30,6 +30,7 @@ MyPrimaryGenerator::~MyPrimaryGenerator()
 
 void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 {
+	G4cout << "gunorgps " << gunorgps << G4endl;
 	// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() / eV << " eV" << G4endl;
 	if (gunorgps = "gun")
 	{
