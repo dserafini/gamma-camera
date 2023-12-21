@@ -86,4 +86,4 @@
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /particleSource/source gps
 /run/printProgress 1000000
-# /run/beamOn {nEvents}
+/run/beamOn {nEvents}
