@@ -30,7 +30,8 @@ private:
 	G4ThreeVector GenerateParticlePositionMOBY();
 	G4GeneralParticleSource* fParticleGPS;
 	G4ParticleGun* fParticleGun;
-	G4GenericMessenger *fMessenger;
+	G4GenericMessenger *fMessengerParticleSource;
+	G4String gunorgps;
 	TH3F* fHisto;
 };
 

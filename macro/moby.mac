@@ -32,8 +32,8 @@
 # change geometry moby
 ################################################################################
 /moby/build yes
-/moby/voxelX 550
-/moby/distance -10. mm
+/moby/voxelX 430
+/moby/distance 0. mm
 
 /run/reinitializeGeometry
 
@@ -43,9 +43,9 @@
 ################################################################################
 # choose gps source
 ################################################################################
-# /gps/particle ion
-# /gps/ion 47 111 0 0.
-# /gps/energy 0. eV
+/gps/particle ion
+/gps/ion 47 111 0 0.
+/gps/energy 0. eV
 # /gps/particle gamma
 # /gps/energy 342 keV
 # /gps/position 0 0 10 mm
@@ -64,6 +64,56 @@
 /gun/direction 0 0 1
 
 # Set file name
-/analysis/setFileName outmoby.root
+/control/alias nEventsBackground 1000000000
+/analysis/setFileName outmoby{nEventsBackground}events.root
+/run/printProgress 10000000
+# /run/beamOn {nEventsBackground}
+
+################################################################################
+# tumore
+################################################################################
+/control/alias nEvents 100000000
+/control/alias tumoradius .5
+/control/alias depth 10.0
+/control/alias xcentre 0.0
+
+/control/add tumorDepth {tumoradius} {depth}
+/control/multiply tumordiameter {tumoradius} 2
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/gps/pos/type Volume
+/gps/pos/shape Sphere
+/gps/pos/radius {tumoradius} mm
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/particleSource/source gps
 /run/printProgress 1000000
-/run/beamOn 100000000
+/run/beamOn {nEvents}
+
+/control/alias xcentre 1.0
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/run/beamOn {nEvents}
+
+/control/alias xcentre 2.0
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/run/beamOn {nEvents}
+
+/control/alias xcentre 4.0
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/run/beamOn {nEvents}
+
+/control/alias xcentre 8.0
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/run/beamOn {nEvents}
+
+/control/alias xcentre 15.0
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/run/beamOn {nEvents}
+
+/control/alias xcentre 30.0
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/run/beamOn {nEvents}

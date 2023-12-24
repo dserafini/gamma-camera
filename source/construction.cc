@@ -81,9 +81,9 @@ MyDetectorConstruction::MyDetectorConstruction()
 
 	// moby parameters
 	buildMoby = "yes";
-	nVoxelX = 550;
-	nVoxelY = 200;
-	nVoxelZ = 200;
+	nVoxelX = 430;
+	nVoxelY = 115;
+	nVoxelZ = 115;
 	mouseCollimatorDistance = 0.*mm;
 	HalfVoxelSize = 0.18*mm/2.;
 	HalfPhantomDepth = nVoxelZ*HalfVoxelSize;
@@ -611,18 +611,33 @@ void MyDetectorConstruction::ConstructMOBY()
     if(ctfile.fail()) std::cout << "no file for MOBY ct\n";
 
     std::string buffer;
+	
+	G4int binxmin, binxmax, binymin, binymax, binzmin, binzmax;
+	binxmin = 120;
+	binxmax = 550;
+	binymin = 40;
+	binymax = 155;
+	binzmin = 35;
+	binzmax = 150;
+
+	G4int i, j, k, n;
 
     while (ctfile >> buffer) {
 
-        G4int i = std::stoi(buffer);
+        i = std::stoi(buffer);
         ctfile >> buffer;
-        G4int j = std::stoi(buffer);
+        j = std::stoi(buffer);
         ctfile >> buffer;
-        G4int k = std::stoi(buffer);
+        k = std::stoi(buffer);
         ctfile >> buffer;
         G4double HU = std::stod(buffer);
-
-        G4int n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
+if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
+{
+	i = i - binxmin;
+	j = j - binymin;
+	k = k - binzmin;
+	// G4cout << i << "\t" << j << "\t" << k << G4endl;
+        n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
 
         /*if (HU == 0) {materialIDs[n] = 0;} // air
         else if (HU > 57.4 and HU < 57.7) {materialIDs[n] = 1;} // lung
@@ -641,6 +656,7 @@ void MyDetectorConstruction::ConstructMOBY()
         else {materialIDs[n] = 2;} // soft tissue*/
         if(HU>85) {materialIDs[n] = 3;}
         else {materialIDs[n] = 2;}
+}
     }
 
     voxelizedPhantom->SetMaterialIndices(materialIDs);
