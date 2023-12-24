@@ -65,7 +65,7 @@
 
 # Set file name
 /control/alias nEventsBackground 10000000000
-/analysis/setFileName outmoby{nEventsBackground}events.root
+/analysis/setFileName outmoby10Gevents.root
 /run/printProgress 10000000
 /run/beamOn {nEventsBackground}
 
@@ -86,9 +86,4 @@
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /particleSource/source gps
 /run/printProgress 1000000
-/run/beamOn {nEvents}
-
-/control/alias xcentre 1.0
-/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 # /run/beamOn {nEvents}
