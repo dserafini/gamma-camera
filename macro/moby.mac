@@ -64,10 +64,29 @@
 /gun/direction 0 0 1
 
 # Set file name
-/control/alias nEventsBackground 10000000000
-/analysis/setFileName outmoby10Gevents.root
+/control/alias nEventsBackground 1000000000
+/analysis/setFileName outmoby{nEventsBackground}events.root
 /run/printProgress 10000000
-/run/beamOn 10000000000
+/analysis/setFileName outmoby{nEventsBackground}eventsRun0.root
+/run/beamOn {nEventsBackground}
+/analysis/setFileName outmoby{nEventsBackground}eventsRun1.root
+/run/beamOn {nEventsBackground}
+/analysis/setFileName outmoby{nEventsBackground}eventsRun2.root
+/run/beamOn {nEventsBackground}
+/analysis/setFileName outmoby{nEventsBackground}eventsRun3.root
+/run/beamOn {nEventsBackground}
+/analysis/setFileName outmoby{nEventsBackground}eventsRun4.root
+/run/beamOn {nEventsBackground}
+/analysis/setFileName outmoby{nEventsBackground}eventsRun5.root
+/run/beamOn {nEventsBackground}
+/analysis/setFileName outmoby{nEventsBackground}eventsRun6.root
+/run/beamOn {nEventsBackground}
+/analysis/setFileName outmoby{nEventsBackground}eventsRun7.root
+/run/beamOn {nEventsBackground}
+/analysis/setFileName outmoby{nEventsBackground}eventsRun8.root
+/run/beamOn {nEventsBackground}
+/analysis/setFileName outmoby{nEventsBackground}eventsRun9.root
+/run/beamOn {nEventsBackground}
 
 ################################################################################
 # tumore
