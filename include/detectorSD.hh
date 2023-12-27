@@ -30,7 +30,7 @@ private:
 	G4ThreeVector fSigmaPos;
 	G4double fSigmaMod;
 	G4int nofHits;
-	G4GenericMessenger fMessengerSipm;
+	G4GenericMessenger *fMessengerSipm;
 
 	// quantum efficiency
 	G4PhysicsOrderedFreeVector *quEff;
