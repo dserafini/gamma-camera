@@ -10,6 +10,7 @@
 #include "G4PhysicsOrderedFreeVector.hh"
 #include "G4OpticalPhoton.hh"
 #include "enums.hh"
+#include "G4GenericMessenger.hh"
 
 #include "detectorHit.hh"
 
@@ -29,9 +30,13 @@ private:
 	G4ThreeVector fSigmaPos;
 	G4double fSigmaMod;
 	G4int nofHits;
+	G4GenericMessenger fMessengerSipm;
 
 	// quantum efficiency
 	G4PhysicsOrderedFreeVector *quEff;
+
+	// energy threshold
+	G4int nofHitsThreshold;
 };
 
 #endif
