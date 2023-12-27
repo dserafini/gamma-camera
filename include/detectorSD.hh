@@ -10,7 +10,6 @@
 #include "G4PhysicsOrderedFreeVector.hh"
 #include "G4OpticalPhoton.hh"
 #include "enums.hh"
-#include "G4GenericMessenger.hh"
 
 #include "detectorHit.hh"
 
@@ -20,6 +19,7 @@ public:
 	MySensitiveDetector(G4String, const G4String&);
 	~MySensitiveDetector();
 	void Initialize(G4HCofThisEvent* hitCollection) override;
+	void SetDetectionThreshold(G4int threshold);
 
 private:
 	G4bool ProcessHits(G4Step*, G4TouchableHistory*) override;
@@ -30,7 +30,6 @@ private:
 	G4ThreeVector fSigmaPos;
 	G4double fSigmaMod;
 	G4int nofHits;
-	G4GenericMessenger *fMessengerSipm;
 
 	// quantum efficiency
 	G4PhysicsOrderedFreeVector *quEff;
