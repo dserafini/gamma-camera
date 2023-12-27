@@ -34,15 +34,11 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   quEff->SetSpline(false);
   quEff->DumpValues();
 
-  fMessengerSipm = new G4GenericMessenger(this, "/sipm/", "SiPM options");
-  fMessengerSipm->DeclareProperty("threshold", nofHitsThreshold, "minimum number of photons read");
+  // default energy detection threshold
   nofHitsThreshold = 1;
 }
 
-MySensitiveDetector::~MySensitiveDetector()
-{
-  delete fMessengerSipm;
-}
+MySensitiveDetector::~MySensitiveDetector() {}
 
 void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
 {
@@ -200,3 +196,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void MySensitiveDetector::SetDetectionThreshold(G4int aThreshold)
+{
+  nofHitsThreshold = aThreshold;
+}
