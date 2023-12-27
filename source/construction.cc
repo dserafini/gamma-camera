@@ -6,6 +6,7 @@ G4double mouseCollimatorDistance;
 
 MyDetectorConstruction::MyDetectorConstruction()
 {
+	G4cout << "MyDetectorConstruction::MyDetectorConstruction" << G4endl;
 	fMessengerCollimator = new G4GenericMessenger(this, "/collimator/", "Collimator Construction");
 	// first argument is the object to which it refers, this class
 	// the slashes in the folder argument are mandatory
