@@ -65,6 +65,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerDetector->DeclareProperty("pixel", detPixelNoSlab, "matrix or otherwise");
 	fMessengerDetector->DeclarePropertyWithUnit("det_scinti_distance", "mm", detector_scintillator_distance, "Optical coupling distance");
 	fMessengerDetector->DeclareProperty("fill_factor", det_fill_factor, "Ratio active over total pixel area");
+	fMessengerDetector->DeclareProperty("threshold", energyThreshold, "Minimum number of photons to be detected");
 
 	// detector parameters
 	det_pixel_size = 3*mm;
@@ -73,6 +74,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	detector_depth = 10*um;
 	fScoringDetector = 0;
 	det_fill_factor = .8;
+	energyThreshold = 1;
 	
 	// moby commands
 	fMessengerMoby = new G4GenericMessenger(this, "/moby/", "MOBY parameters");
@@ -1059,6 +1061,7 @@ void MyDetectorConstruction::ConstructSDandField()
 		MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector","SensitiveDetectorHitsCollection");
 		G4SDManager::GetSDMpointer()->AddNewDetector(sensDet);
 		fScoringDetector->SetSensitiveDetector(sensDet);
+		fScoringDetector->SetDetectionThreshold(energyThreshold);
 	}
 
 	if(fScoringScintillator != NULL)
