@@ -1061,7 +1061,7 @@ void MyDetectorConstruction::ConstructSDandField()
 		MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector","SensitiveDetectorHitsCollection");
 		G4SDManager::GetSDMpointer()->AddNewDetector(sensDet);
 		fScoringDetector->SetSensitiveDetector(sensDet);
-		fScoringDetector->SetDetectionThreshold(energyThreshold);
+		sensDet->SetDetectionThreshold(energyThreshold);
 	}
 
 	if(fScoringScintillator != NULL)
