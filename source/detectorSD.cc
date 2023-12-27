@@ -33,10 +33,16 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   datafile.close();
   quEff->SetSpline(false);
   quEff->DumpValues();
+
+  fMessengerSipm = new G4GenericMessenger(this, "/sipm/", "SiPM options");
+  fMessengerSipm->DeclareProperty("threshold", nofHitsThreshold, "minimum number of photons read");
+  nofHitsThreshold = 1;
 }
 
 MySensitiveDetector::~MySensitiveDetector()
-{}
+{
+  delete fMessengerSipm;
+}
 
 void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
 {
@@ -121,7 +127,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
      for ( G4int i=0; i<nofHits; i++ ) (*fHitsCollection)[i]->Print();
   }
   
-  if (nofHits > 0)
+  if (nofHits >= nofHitsThreshold)
   {
     // calculate mean position
     for ( G4int i=0; i<nofHits; i++ )
