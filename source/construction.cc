@@ -621,6 +621,7 @@ void MyDetectorConstruction::ConstructMOBY()
 	binzmax = 150;
 
 	G4int i, j, k, n;
+	G4double HU;
 
     while (ctfile >> buffer) {
 
@@ -630,7 +631,8 @@ void MyDetectorConstruction::ConstructMOBY()
         ctfile >> buffer;
         k = std::stoi(buffer);
         ctfile >> buffer;
-        G4double HU = std::stod(buffer);
+        HU = std::stod(buffer);
+	if (HU>0) G4cout << HU << G4endl;
 if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
 {
 	i = i - binxmin;
