@@ -543,53 +543,6 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
     theMaterials.push_back(fHeartM);
     theMaterials.push_back(fThyroidM);
     theMaterials.push_back(fSkinM);
-
-    // Set optical properties
-    /*std::vector<G4double> energies = {1.2*eV, 1.91*eV, 2.25*eV, 2.76*eV, 6.2*eV};
-    std::vector<G4double> absorptionSoft = {0.2*cm, 0.2*cm, 0.04*cm, 0.04*cm, 0.03*cm}; // from Optical properties of biological tissues: a review
-    std::vector<G4double> absorptionBone = {0.16*cm, 0.16*cm, 0.077*cm, 0.05*cm, 0.04*cm}; // https://hal.science/hal-02335596/document*/
-    /*std::vector<G4double> energy = {1.2*eV, 1.91*eV, 2.25*eV, 2.48*eV, 2.76*eV, 6.2*eV}
-    std::vector<G4double> absorptionHeart = {0.2*cm, 0.2*cm, 0.04*cm, 0.1*cm, 0.04*cm, 0.04*cm};
-    std::vector<G4double> absorptionKidney = {0.2*cm, 0.2*cm, 0.04*cm, 0.1*cm, 0.04*cm, 0.04*cm};
-    std::vector<G4double> absorptionBrain = {0.25*cm, 0.25*cm, 0.16*cm, 0.25*cm, 0.0125*cm, 0.0125*cm};
-    std::vector<G4double> absorptionBone = {0.16*cm, 0.16*cm, 0.077*cm, 0.1*cm, 0.005*cm, 0.005*cm};*/
-   
-    //std::vector<G4MaterialPropertiesTable*> theMPTables;
-    /*for(G4int i=0; i<theMaterials.size(); i++) {
-        G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
-        G4double rIndex = 0.3323 + 0.3422*(theMaterials[i]->GetDensity()/(g/cm3)-1) +1; // from Optical properties of biological tissues: a review
-        std::vector<G4double> rIndexVec = {rIndex, rIndex, rIndex, rIndex, rIndex};
-        if(theMaterials[i]==fBone) mpt->AddProperty("ABSLENGTH", energies, absorptionBone, true, true);
-        else mpt->AddProperty("ABSLENGTH", energies, absorptionSoft, true, true);
-        theMPTables.push_back(mpt);
-        //theMaterials[i]->SetMaterialPropertiesTable(mpt);
-    }*/
-
-    /*for(auto& material: theMaterials) {
-        G4double rIndex = 0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1; // from Optical properties of biological tissues: a review
-        G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
-        std::vector<G4double> rIndexVec = {rIndex, rIndex, rIndex, rIndex, rIndex};
-        mpt->AddProperty("RINDEX", energies, rIndexVec, true, true);
-        mpt->AddProperty("ABSLENGTH", energies, absorptionBone, true, true);
-        //theMPTables.push_back(mpt);
-        //material->SetMaterialPropertiesTable(theMPTables.back());
-        material->SetMaterialPropertiesTable(mpt);
-    }*/
-
-    /*G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
-    mpt->AddProperty("RINDEX", energies, std::vector<G4double>(energies.size(), Get_rIndex(fBone->GetDensity())), true, true);
-    mpt->AddProperty("ABSLENGTH", energies, absorptionBone, true, true);
-    fBone->SetMaterialPropertiesTable(mpt);*/
-
-    /*rIndex = 0.3323 + 0.3422*(fSoft->GetDensity()/(g/cm3)-1) +1; // from Optical properties of biological tissues: a review
-    G4MaterialPropertiesTable *mpt_2 = new G4MaterialPropertiesTable();
-    std::vector<G4double> rIndexVec_2(energies.size(), rIndex);
-    mpt_2->AddProperty("RINDEX", energies, rIndexVec_2, true, true);
-    mpt_2->AddProperty("ABSLENGTH", energies, absorptionSoft, true, true);
-    fSoft->SetMaterialPropertiesTable(mpt_2);*/
-       
-    //std::cout << "TEST: " << fBone->GetMaterialPropertiesTable()->GetProperty("RINDEX")[0] << std::endl;
-
 }
 
 void MyDetectorConstruction::ConstructMOBY()
@@ -635,6 +588,7 @@ void MyDetectorConstruction::ConstructMOBY()
 	if (HU>0) 
 	{if (HU>85) G4cout << "o";
 	 else G4cout << "s";}
+	    else G4cout << "a";
 if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
 {
 	i = i - binxmin;
@@ -643,8 +597,8 @@ if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzma
 	// G4cout << i << "\t" << j << "\t" << k << G4endl;
         n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
 
-        /*if (HU == 0) {materialIDs[n] = 0;} // air
-        else if (HU > 57.4 and HU < 57.7) {materialIDs[n] = 1;} // lung
+        if (HU == 0) {materialIDs[n] = 0;} // air
+        /*else if (HU > 57.4 and HU < 57.7) {materialIDs[n] = 1;} // lung
         else if (HU > 220) {materialIDs[n] = 3;} // bone
         else if (HU > 22.9 and HU < 23.1) {materialIDs[n] = 1;} // lung
         else if (HU > 90) {materialIDs[n] = 3;} // bone
