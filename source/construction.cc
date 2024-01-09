@@ -381,11 +381,13 @@ if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzma
 	// G4cout << i << "\t" << j << "\t" << k << G4endl;
         n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
 
+	G4cout << HU;
 	if (HU < 0) {G4cout << "errore!!!" << G4endl;
-        else if (HU == 0) {materialIDs[n] = 0;} // air
-        else if (HU > 15 and HU < 30) {materialIDs[n] = 1;} // lung
-        else if (HU > 65 and HU < 85) {materialIDs[n] = 2;} // soft tissue*/
-        else if (HU >= 85) {materialIDs[n] = 3;}
+        else if (HU == 0) {materialIDs[n] = 0; G4cout << "a"; } // air
+        else if (HU > 15 and HU < 30) {materialIDs[n] = 1; G4cout << "l"; } // lung
+        else if (HU > 65 and HU < 85) {materialIDs[n] = 2; G4cout << "s"; } // soft tissue*/
+        else if (HU >= 85) {materialIDs[n] = 3; G4cout << "b"; }
+	G4cout << G4endl;
 }
     }
 
