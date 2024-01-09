@@ -222,6 +222,41 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 
 void MyDetectorConstruction::DefineMaterialsMOBY()
 {
+    // Lambda function to set RINDEX and ABSLENGTH in a MPT and assign it to a material
+    auto SetMaterialProperties = [](G4MaterialPropertiesTable* mpt, G4Material* material, bool isSoft = true)
+    {
+        /*std::vector<G4double> energies = {1.2*eV, 1.91*eV, 2.25*eV, 2.76*eV, 6.2*eV};
+        std::vector<G4double> absorptionSoft = {0.2*cm, 0.2*cm, 0.04*cm, 0.04*cm, 0.03*cm}; // from Optical properties of biological tissues: a review
+        std::vector<G4double> absorptionBone = {0.16*cm, 0.16*cm, 0.077*cm, 0.05*cm, 0.04*cm}; // https://hal.science/hal-02335596/document*/
+
+	const G4int nEntries = 2;
+	G4double PhotonEnergy[nEntries] = {1.2*eV, 6.2*eV};
+
+	// soft
+	G4double absorptionLengthSoft[nEntries] = {0.5*cm,0.001*cm};
+	G4double refractiveIndexSoft[nEntries] = {0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1,0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1};
+
+	// bone
+	G4double absorptionLengthBone[nEntries] = {0.2*cm,0.001*cm};
+	G4double refractiveIndexBone[nEntries] = {0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1,0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1};
+
+	// use soft refractive index in every case
+	mpt->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSoft, nEntries);
+
+        if(isSoft){
+            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthSoft, nEntries);
+            //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm}), true, true);
+            //mpt->AddProperty("RAYLEIGH", std::vector<G4double>({1.2*eV, 2.25*eV, 6.2*eV}), std::vector<G4double>({0.14*mm, 0.69*mm, 2.2*mm}), true, true); // from Experimental and analytical comparative study of optical coefficient of fresh and frozen rat tissues
+        }
+        else{
+            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthBone, nEntries);
+            //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.05*cm, 0.05*cm, 0.05*cm, 0.05*cm, 0.05*cm}), true, true);
+            //mpt->AddProperty("RAYLEIGH", std::vector<G4double>({1.2*eV, 2.25*eV, 6.2*eV}), std::vector<G4double>({0.33*mm, 0.35*mm, 0.4*mm}), true, true); // from Optical properties of mice skull bone in the 455- to 705-nm range
+        }
+
+        material->SetMaterialPropertiesTable(mpt);
+    };
+	
     G4NistManager *nistManager = G4NistManager::Instance();
 
     // Setting up default voxels
@@ -295,42 +330,7 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
 }
 
 void MyDetectorConstruction::ConstructMOBY()
-{
-    // Lambda function to set RINDEX and ABSLENGTH in a MPT and assign it to a material
-    auto SetMaterialProperties = [](G4MaterialPropertiesTable* mpt, G4Material* material, bool isSoft = true)
-    {
-        /*std::vector<G4double> energies = {1.2*eV, 1.91*eV, 2.25*eV, 2.76*eV, 6.2*eV};
-        std::vector<G4double> absorptionSoft = {0.2*cm, 0.2*cm, 0.04*cm, 0.04*cm, 0.03*cm}; // from Optical properties of biological tissues: a review
-        std::vector<G4double> absorptionBone = {0.16*cm, 0.16*cm, 0.077*cm, 0.05*cm, 0.04*cm}; // https://hal.science/hal-02335596/document*/
-
-	const G4int nEntries = 2;
-	G4double PhotonEnergy[nEntries] = {1.2*eV, 6.2*eV};
-
-	// soft
-	G4double absorptionLengthSoft[nEntries] = {0.5*cm,0.001*cm};
-	G4double refractiveIndexSoft[nEntries] = {0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1,0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1};
-
-	// bone
-	G4double absorptionLengthBone[nEntries] = {0.2*cm,0.001*cm};
-	G4double refractiveIndexBone[nEntries] = {0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1,0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1};
-
-	// use soft refractive index in every case
-	mpt->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSoft, nEntries);
-
-        if(isSoft){
-            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthSoft, nEntries);
-            //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm}), true, true);
-            //mpt->AddProperty("RAYLEIGH", std::vector<G4double>({1.2*eV, 2.25*eV, 6.2*eV}), std::vector<G4double>({0.14*mm, 0.69*mm, 2.2*mm}), true, true); // from Experimental and analytical comparative study of optical coefficient of fresh and frozen rat tissues
-        }
-        else{
-            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthBone, nEntries);
-            //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.05*cm, 0.05*cm, 0.05*cm, 0.05*cm, 0.05*cm}), true, true);
-            //mpt->AddProperty("RAYLEIGH", std::vector<G4double>({1.2*eV, 2.25*eV, 6.2*eV}), std::vector<G4double>({0.33*mm, 0.35*mm, 0.4*mm}), true, true); // from Optical properties of mice skull bone in the 455- to 705-nm range
-        }
-
-        material->SetMaterialPropertiesTable(mpt);
-    };
-	
+{	
     // Defining the voxelPhantom parametrisation
     G4PhantomParameterisation* voxelizedPhantom = new G4PhantomParameterisation();
 
