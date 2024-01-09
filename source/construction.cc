@@ -343,10 +343,10 @@ void MyDetectorConstruction::ConstructMOBY()
 	        	if (HU == 0) {materialIDs[n] = 0; G4cout << "a"; } // air
 			else 
 			{
-				if (HU > 15 and HU < 30) {materialIDs[n] = 1; G4cout << "l"; } // lung
+				if (HU < 30) {materialIDs[n] = 1; G4cout << "l"; } // lung
 				else 
 				{
-					if (HU > 65 and HU < 85) {materialIDs[n] = 2; G4cout << "s"; } // soft tissue
+					if (HU < 85) {materialIDs[n] = 2; G4cout << "s"; } // soft tissue
 					else
 					{
 						if (HU >= 85) {materialIDs[n] = 3; G4cout << "b"; } // bone
