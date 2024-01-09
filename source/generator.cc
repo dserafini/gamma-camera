@@ -18,7 +18,9 @@ MyPrimaryGenerator::MyPrimaryGenerator()
 
 	fMessengerParticleSource = new G4GenericMessenger(this, "/particleSource/", "Particle source generator");
 	fMessengerParticleSource->DeclareProperty("source", gunorgps, "gun or gps");
+	fMessengerParticleSource->DeclareProperty("source", moby, "yes or no");
 	gunorgps = "gun";
+	moby = "yes";
 }
 
 MyPrimaryGenerator::~MyPrimaryGenerator()
@@ -33,7 +35,8 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 	// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() / eV << " eV" << G4endl;
 	if (gunorgps == "gun")
 	{
-		fParticleGun->SetParticlePosition(GenerateParticlePositionMOBY());
+		if (moby == "yes")
+			fParticleGun->SetParticlePosition(GenerateParticlePositionMOBY());
 		fParticleGun->GeneratePrimaryVertex(anEvent);
 		SaveVertexPosition(fParticleGun->GetParticlePosition());
 		// G4cout << "myPos: " << fParticleGun->GetParticlePosition() << G4endl;
