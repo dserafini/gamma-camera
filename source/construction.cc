@@ -370,6 +370,16 @@ void MyDetectorConstruction::ConstructMOBY()
         ctfile >> buffer;
         HU = std::stod(buffer);
 
+	// turn the mouse in space
+	if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
+	{
+		i = i - binxmin;
+		j = j - binymin;
+		k = k - binzmin;
+		// G4cout << i << "\t" << j << "\t" << k << G4endl;
+	        n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
+	}
+
 	G4cout << HU;
 	if (HU < 0) G4cout << "errore!!!" << G4endl;
 	else
@@ -389,15 +399,6 @@ void MyDetectorConstruction::ConstructMOBY()
 		}
 	}
 	G4cout << " ";
-	    
-if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
-{
-	i = i - binxmin;
-	j = j - binymin;
-	k = k - binzmin;
-	// G4cout << i << "\t" << j << "\t" << k << G4endl;
-        n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
-}
     }
 
     voxelizedPhantom->SetMaterialIndices(materialIDs);
