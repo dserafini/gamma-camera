@@ -632,7 +632,9 @@ void MyDetectorConstruction::ConstructMOBY()
         k = std::stoi(buffer);
         ctfile >> buffer;
         HU = std::stod(buffer);
-	if (HU>0) G4cout << HU;
+	if (HU>0) 
+	{if (HU>85) G4cout << "o";
+	 else G4cout << "s";}
 if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
 {
 	i = i - binxmin;
