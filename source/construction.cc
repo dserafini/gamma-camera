@@ -392,7 +392,7 @@ void MyDetectorConstruction::ConstructMOBY()
 			}
 		}
 	}
-	G4cout << G4endl;
+	G4cout << " ";
 	    
 if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
 {
