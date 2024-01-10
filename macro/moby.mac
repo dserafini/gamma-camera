@@ -25,9 +25,10 @@
 ################################################################################
 # change geometry detector
 ################################################################################
+/control/alias pThreshold 3
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
-/detector/threshold 3
+/detector/threshold {pThreshold}
 
 ################################################################################
 # change geometry moby
@@ -68,12 +69,12 @@
 /control/alias nEventsBackground 10000000
 /run/printProgress 1000000
 /analysis/setFileName outmoby{nEventsBackground}events.root
-/run/beamOn {nEventsBackground}
+# /run/beamOn {nEventsBackground}
 
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 100000000
+/control/alias nEvents 10000000
 /control/alias tumoradius .5
 /control/alias depth 10.0
 /control/alias xcentre 0.0
@@ -84,7 +85,7 @@
 /gps/pos/type Volume
 /gps/pos/shape Sphere
 /gps/pos/radius {tumoradius} mm
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
 /particleSource/source gps
 /run/printProgress 1000000
-# /run/beamOn {nEvents}
+/run/beamOn {nEvents}
