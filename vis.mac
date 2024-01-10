@@ -29,7 +29,7 @@
 ################################################################################
 # change geometry moby
 ################################################################################
-/moby/build yes
+/moby/build no
 /moby/voxelX 430
 /moby/distance 0. mm
 
@@ -44,6 +44,8 @@
 ################################################################################
 # change source
 ################################################################################
+/particleSource/gunorgps gun
+/particleSource/moby no
 /gun/particle gamma
 /gun/energy 342 keV
 # /gps/particle ion
