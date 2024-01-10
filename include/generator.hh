@@ -31,8 +31,7 @@ private:
 	G4GeneralParticleSource* fParticleGPS;
 	G4ParticleGun* fParticleGun;
 	G4GenericMessenger *fMessengerParticleSource;
-	G4String gunorgps;
-	G4String moby;
+	G4String sourceType;
 	TH3F* fHisto;
 };
 
