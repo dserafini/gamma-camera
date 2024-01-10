@@ -224,9 +224,6 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
 {	
     G4NistManager *nistManager = G4NistManager::Instance();
 
-    // Setting up default voxels
-    fVoxelMaterial = nistManager->FindOrBuildMaterial("G4_AIR");
-
     // Define Elements (for lung)
     G4double a;
     G4double z;
