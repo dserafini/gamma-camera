@@ -65,7 +65,7 @@
 /gun/direction 0 0 1
 
 # Set file name
-/control/alias nEventsBackground 1000000
+/control/alias nEventsBackground 10000000
 /analysis/setFileName outmoby{nEventsBackground}events.root
 /run/printProgress 10000000
 /analysis/setFileName outmoby{nEventsBackground}events.root
@@ -74,7 +74,7 @@
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 1000000
+/control/alias nEvents 10000000
 /control/alias tumoradius .5
 /control/alias depth 10.0
 /control/alias xcentre 0.0
@@ -88,4 +88,4 @@
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /particleSource/sourceType gps
 /run/printProgress 1000000
-# /run/beamOn {nEvents}
+/run/beamOn {nEvents}
