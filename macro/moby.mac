@@ -55,6 +55,7 @@
 ################################################################################
 # choose general particle gun
 ################################################################################
+/particleSource/sourceType moby
 /gun/particle ion
 /gun/ion 47 111 0 0.
 /gun/energy 0. eV
@@ -64,34 +65,16 @@
 /gun/direction 0 0 1
 
 # Set file name
-/control/alias nEventsBackground 1000000000
+/control/alias nEventsBackground 10000000
 /analysis/setFileName outmoby{nEventsBackground}events.root
 /run/printProgress 10000000
-/analysis/setFileName outmoby{nEventsBackground}eventsRun0.root
-/run/beamOn {nEventsBackground}
-/analysis/setFileName outmoby{nEventsBackground}eventsRun1.root
-/run/beamOn {nEventsBackground}
-/analysis/setFileName outmoby{nEventsBackground}eventsRun2.root
-/run/beamOn {nEventsBackground}
-/analysis/setFileName outmoby{nEventsBackground}eventsRun3.root
-/run/beamOn {nEventsBackground}
-/analysis/setFileName outmoby{nEventsBackground}eventsRun4.root
-/run/beamOn {nEventsBackground}
-/analysis/setFileName outmoby{nEventsBackground}eventsRun5.root
-/run/beamOn {nEventsBackground}
-/analysis/setFileName outmoby{nEventsBackground}eventsRun6.root
-/run/beamOn {nEventsBackground}
-/analysis/setFileName outmoby{nEventsBackground}eventsRun7.root
-/run/beamOn {nEventsBackground}
-/analysis/setFileName outmoby{nEventsBackground}eventsRun8.root
-/run/beamOn {nEventsBackground}
-/analysis/setFileName outmoby{nEventsBackground}eventsRun9.root
+/analysis/setFileName outmoby{nEventsBackground}events.root
 /run/beamOn {nEventsBackground}
 
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 100000000
+/control/alias nEvents 10000000
 /control/alias tumoradius .5
 /control/alias depth 10.0
 /control/alias xcentre 0.0
@@ -103,6 +86,6 @@
 /gps/pos/shape Sphere
 /gps/pos/radius {tumoradius} mm
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
-/particleSource/source gps
+/particleSource/sourceType gps
 /run/printProgress 1000000
-# /run/beamOn {nEvents}
+/run/beamOn {nEvents}

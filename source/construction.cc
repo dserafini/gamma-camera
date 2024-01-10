@@ -221,42 +221,7 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 // now you should see the changes
 
 void MyDetectorConstruction::DefineMaterialsMOBY()
-{
-    // Lambda function to set RINDEX and ABSLENGTH in a MPT and assign it to a material
-    auto SetMaterialProperties = [](G4MaterialPropertiesTable* mpt, G4Material* material, bool isSoft = true) {
-
-        /*std::vector<G4double> energies = {1.2*eV, 1.91*eV, 2.25*eV, 2.76*eV, 6.2*eV};
-        std::vector<G4double> absorptionSoft = {0.2*cm, 0.2*cm, 0.04*cm, 0.04*cm, 0.03*cm}; // from Optical properties of biological tissues: a review
-        std::vector<G4double> absorptionBone = {0.16*cm, 0.16*cm, 0.077*cm, 0.05*cm, 0.04*cm}; // https://hal.science/hal-02335596/document*/
-
-	const G4int nEntries = 2;
-	G4double PhotonEnergy[nEntries] = {1.2*eV, 6.2*eV};
-
-	// soft
-	G4double absorptionLengthSoft[nEntries] = {0.5*cm,0.001*cm};
-	G4double refractiveIndexSoft[nEntries] = {0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1,0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1};
-
-	// bone
-	G4double absorptionLengthBone[nEntries] = {0.2*cm,0.001*cm};
-	G4double refractiveIndexBone[nEntries] = {0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1,0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1};
-
-	// use soft refractive index in every case
-	mpt->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSoft, nEntries);
-	
-        if(isSoft){
-            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthSoft, nEntries);
-            //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm, 0.1*cm}), true, true);
-            //mpt->AddProperty("RAYLEIGH", std::vector<G4double>({1.2*eV, 2.25*eV, 6.2*eV}), std::vector<G4double>({0.14*mm, 0.69*mm, 2.2*mm}), true, true); // from Experimental and analytical comparative study of optical coefficient of fresh and frozen rat tissues
-        }
-        else{
-            mpt->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthBone, nEntries);
-            //mpt->AddProperty("RAYLEIGH", energies, std::vector<G4double>({0.05*cm, 0.05*cm, 0.05*cm, 0.05*cm, 0.05*cm}), true, true);
-            //mpt->AddProperty("RAYLEIGH", std::vector<G4double>({1.2*eV, 2.25*eV, 6.2*eV}), std::vector<G4double>({0.33*mm, 0.35*mm, 0.4*mm}), true, true); // from Optical properties of mice skull bone in the 455- to 705-nm range
-        }
-
-        material->SetMaterialPropertiesTable(mpt);
-    };
-
+{	
     G4NistManager *nistManager = G4NistManager::Instance();
 
     // Setting up default voxels
@@ -287,11 +252,6 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
     a = 39.10*g/mole;
     G4Element* elK = new G4Element(name="Potassium", symbol="K", z=19., a);
     a = 40.08*g/mole;
-    G4Element* elCa = new G4Element(name="Calcium", symbol="Ca", z=20., a);
-    a = 55.85*g/mole;
-    G4Element* elFe = new G4Element(name="Iron", symbol="Fe", z=26., a);
-    a = 126.90*g/mole;
-    G4Element* elI = new G4Element(name="Iodium", symbol="I", z=53., a);
 
     // Define MOBY lung
     G4int ncomponents;
@@ -307,293 +267,27 @@ void MyDetectorConstruction::DefineMaterialsMOBY()
     fLungM->AddElement(elS, fractionmass=0.003);
     fLungM->AddElement(elCl, fractionmass=0.003);
     fLungM->AddElement(elK, fractionmass=0.002);
-    G4MaterialPropertiesTable* mptLungM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptLungM, fLungM);
-
-    // Define MOBY stomach
-    density = 1.04*g/cm3;
-    fStomachM = new G4Material(name="STOMACH_MOBY", density, ncomponents=9);
-    fStomachM->AddElement(elH, fractionmass=0.106);
-    fStomachM->AddElement(elC, fractionmass=0.115);
-    fStomachM->AddElement(elN, fractionmass=0.022);
-    fStomachM->AddElement(elO, fractionmass=0.751);
-    fStomachM->AddElement(elNa, fractionmass=0.001);
-    fStomachM->AddElement(elP, fractionmass=0.001);
-    fStomachM->AddElement(elS, fractionmass=0.001);
-    fStomachM->AddElement(elCl, fractionmass=0.002);
-    fStomachM->AddElement(elK, fractionmass=0.001);
-    G4MaterialPropertiesTable* mptStomachM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptStomachM, fStomachM);
-
-    // Define MOBY smintestine
-    density = 1.04*g/cm3;
-    fSmIntestineM = new G4Material(name="SMINTESTINE_MOBY", density, ncomponents=9);
-    fSmIntestineM->AddElement(elH, fractionmass=0.106);
-    fSmIntestineM->AddElement(elC, fractionmass=0.115);
-    fSmIntestineM->AddElement(elN, fractionmass=0.022);
-    fSmIntestineM->AddElement(elO, fractionmass=0.751);
-    fSmIntestineM->AddElement(elNa, fractionmass=0.001);
-    fSmIntestineM->AddElement(elP, fractionmass=0.001);
-    fSmIntestineM->AddElement(elS, fractionmass=0.001);
-    fSmIntestineM->AddElement(elCl, fractionmass=0.002);
-    fSmIntestineM->AddElement(elK, fractionmass=0.001);
-    G4MaterialPropertiesTable* mptSmIntestineM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptSmIntestineM, fSmIntestineM);
-
-    // Define MOBY lgintestine
-    density = 1.04*g/cm3;
-    fLgIntestineM = new G4Material(name="LGINTESTINE_MOBY", density, ncomponents=9);
-    fLgIntestineM->AddElement(elH, fractionmass=0.106);
-    fLgIntestineM->AddElement(elC, fractionmass=0.115);
-    fLgIntestineM->AddElement(elN, fractionmass=0.022);
-    fLgIntestineM->AddElement(elO, fractionmass=0.751);
-    fLgIntestineM->AddElement(elNa, fractionmass=0.001);
-    fLgIntestineM->AddElement(elP, fractionmass=0.001);
-    fLgIntestineM->AddElement(elS, fractionmass=0.001);
-    fLgIntestineM->AddElement(elCl, fractionmass=0.002);
-    fLgIntestineM->AddElement(elK, fractionmass=0.001);
-    G4MaterialPropertiesTable* mptLgIntestineM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptLgIntestineM, fLgIntestineM);
-    
-
-    // Define MOBY liver
-    density = 1.05*g/cm3;
-    fLiverM = new G4Material(name="LIVER_MOBY", density, ncomponents=9);
-    fLiverM->AddElement(elH, fractionmass=0.103);
-    fLiverM->AddElement(elC, fractionmass=0.186);
-    fLiverM->AddElement(elN, fractionmass=0.028);
-    fLiverM->AddElement(elO, fractionmass=0.671);
-    fLiverM->AddElement(elNa, fractionmass=0.002);
-    fLiverM->AddElement(elP, fractionmass=0.002);
-    fLiverM->AddElement(elS, fractionmass=0.003);
-    fLiverM->AddElement(elCl, fractionmass=0.002);
-    fLiverM->AddElement(elK, fractionmass=0.003);
-    G4MaterialPropertiesTable* mptLiverM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptLiverM, fLiverM);
-
-    // Define MOBY pancreas
-    density = 1.05*g/cm3;
-    fPancreasM = new G4Material(name="PANCREAS_MOBY", density, ncomponents=9);
-    fPancreasM->AddElement(elH, fractionmass=0.106);
-    fPancreasM->AddElement(elC, fractionmass=0.169);
-    fPancreasM->AddElement(elN, fractionmass=0.022);
-    fPancreasM->AddElement(elO, fractionmass=0.694);
-    fPancreasM->AddElement(elNa, fractionmass=0.002);
-    fPancreasM->AddElement(elP, fractionmass=0.002);
-    fPancreasM->AddElement(elS, fractionmass=0.001);
-    fPancreasM->AddElement(elCl, fractionmass=0.002);
-    fPancreasM->AddElement(elK, fractionmass=0.002);
-    G4MaterialPropertiesTable* mptPancreasM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptPancreasM, fPancreasM);
-
-    // Define MOBY bladder
-    density = 1.04*g/cm3;
-    fBladderM = new G4Material(name="BLADDER_MOBY", density, ncomponents=9);
-    fBladderM->AddElement(elH, fractionmass=0.105);
-    fBladderM->AddElement(elC, fractionmass=0.096);
-    fBladderM->AddElement(elN, fractionmass=0.026);
-    fBladderM->AddElement(elO, fractionmass=0.761);
-    fBladderM->AddElement(elNa, fractionmass=0.002);
-    fBladderM->AddElement(elP, fractionmass=0.002);
-    fBladderM->AddElement(elS, fractionmass=0.002);
-    fBladderM->AddElement(elCl, fractionmass=0.003);
-    fBladderM->AddElement(elK, fractionmass=0.003);
-    G4MaterialPropertiesTable* mptBladderM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptBladderM, fBladderM);
-
-    // Define MOBY spleen
-    density = 1.06*g/cm3;
-    fSpleenM = new G4Material(name="SPLEEN_MOBY", density, ncomponents=9);
-    fSpleenM->AddElement(elH, fractionmass=0.103);
-    fSpleenM->AddElement(elC, fractionmass=0.113);
-    fSpleenM->AddElement(elN, fractionmass=0.032);
-    fSpleenM->AddElement(elO, fractionmass=0.741);
-    fSpleenM->AddElement(elNa, fractionmass=0.001);
-    fSpleenM->AddElement(elP, fractionmass=0.003);
-    fSpleenM->AddElement(elS, fractionmass=0.002);
-    fSpleenM->AddElement(elCl, fractionmass=0.002);
-    fSpleenM->AddElement(elK, fractionmass=0.003);
-    G4MaterialPropertiesTable* mptSpleenM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptSpleenM, fSpleenM);
-
-    // Define MOBY blood
-    density = 1.06*g/cm3;
-    fBloodM = new G4Material(name="BLOOD_MOBY", density, ncomponents=10);
-    fBloodM->AddElement(elH, fractionmass=0.102);
-    fBloodM->AddElement(elC, fractionmass=0.110);
-    fBloodM->AddElement(elN, fractionmass=0.033);
-    fBloodM->AddElement(elO, fractionmass=0.745);
-    fBloodM->AddElement(elNa, fractionmass=0.001);
-    fBloodM->AddElement(elP, fractionmass=0.001);
-    fBloodM->AddElement(elS, fractionmass=0.002);
-    fBloodM->AddElement(elCl, fractionmass=0.003);
-    fBloodM->AddElement(elK, fractionmass=0.002);
-    fBloodM->AddElement(elFe, fractionmass=0.001);
-    G4MaterialPropertiesTable* mptBloodM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptBloodM, fBloodM);
-
-    // Define MOBY brain
-    density = 1.06*g/cm3;
-    fBrainM = new G4Material(name="BRAIN_MOBY", density, ncomponents=9);
-    fBrainM->AddElement(elH, fractionmass=0.107);
-    fBrainM->AddElement(elC, fractionmass=0.145);
-    fBrainM->AddElement(elN, fractionmass=0.022);
-    fBrainM->AddElement(elO, fractionmass=0.712);
-    fBrainM->AddElement(elNa, fractionmass=0.002);
-    fBrainM->AddElement(elP, fractionmass=0.004);
-    fBrainM->AddElement(elS, fractionmass=0.002);
-    fBrainM->AddElement(elCl, fractionmass=0.003);
-    fBrainM->AddElement(elK, fractionmass=0.003);
-    G4MaterialPropertiesTable* mptBrainM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptBrainM, fBrainM);
-
-    // Define MOBY heart
-    density = 1.06*g/cm3;
-    fHeartM = new G4Material(name="HEART_MOBY", density, ncomponents=9);
-    fHeartM->AddElement(elH, fractionmass=0.104);
-    fHeartM->AddElement(elC, fractionmass=0.139);
-    fHeartM->AddElement(elN, fractionmass=0.029);
-    fHeartM->AddElement(elO, fractionmass=0.718);
-    fHeartM->AddElement(elNa, fractionmass=0.001);
-    fHeartM->AddElement(elP, fractionmass=0.002);
-    fHeartM->AddElement(elS, fractionmass=0.002);
-    fHeartM->AddElement(elCl, fractionmass=0.002);
-    fHeartM->AddElement(elK, fractionmass=0.003);
-    G4MaterialPropertiesTable* mptHeartM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptHeartM, fHeartM);
-
-    // Define MOBY thyroid
-    density = 1.05*g/cm3;
-    fThyroidM = new G4Material(name="THYROID_MOBY", density, ncomponents=10);
-    fThyroidM->AddElement(elH, fractionmass=0.104);
-    fThyroidM->AddElement(elC, fractionmass=0.119);
-    fThyroidM->AddElement(elN, fractionmass=0.024);
-    fThyroidM->AddElement(elO, fractionmass=0.745);
-    fThyroidM->AddElement(elNa, fractionmass=0.002);
-    fThyroidM->AddElement(elP, fractionmass=0.001);
-    fThyroidM->AddElement(elS, fractionmass=0.001);
-    fThyroidM->AddElement(elCl, fractionmass=0.002);
-    fThyroidM->AddElement(elK, fractionmass=0.001);
-    fThyroidM->AddElement(elI, fractionmass=0.001);
-    G4MaterialPropertiesTable* mptThyroidM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptThyroidM, fThyroidM);
-
-    // Define MOBY skin
-    density = 1.1*g/cm3;
-    fSkinM = new G4Material(name="SKIN_MOBY", density, ncomponents=9);
-    fSkinM->AddElement(elH, fractionmass=0.100);
-    fSkinM->AddElement(elC, fractionmass=0.204);
-    fSkinM->AddElement(elN, fractionmass=0.042);
-    fSkinM->AddElement(elO, fractionmass=0.645);
-    fSkinM->AddElement(elNa, fractionmass=0.002);
-    fSkinM->AddElement(elP, fractionmass=0.001);
-    fSkinM->AddElement(elS, fractionmass=0.002);
-    fSkinM->AddElement(elCl, fractionmass=0.003);
-    fSkinM->AddElement(elK, fractionmass=0.001);
-    G4MaterialPropertiesTable* mptSkinM = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptSkinM, fSkinM);
 
     // List of Materials
     //fLung = nistManager->FindOrBuildMaterial("G4_LUNG_ICRP");
     fSoft = nistManager->FindOrBuildMaterial("G4_TISSUE_SOFT_ICRP");
-    G4MaterialPropertiesTable* mptSoft = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptSoft, fSoft);
     fCBone = nistManager->FindOrBuildMaterial("G4_BONE_COMPACT_ICRU");
-    G4MaterialPropertiesTable* mptCBone = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptCBone, fCBone, false);
-    fAdipose = nistManager->FindOrBuildMaterial("G4_ADIPOSE_TISSUE_ICRP");
-    G4MaterialPropertiesTable* mptAdipose = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptAdipose, fAdipose);
-    fBrain = nistManager->FindOrBuildMaterial("G4_BRAIN_ICRP");
-    G4MaterialPropertiesTable* mptBrain = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptBrain, fBrain);
-    fBlood = nistManager->FindOrBuildMaterial("G4_BLOOD_ICRP");
-    G4MaterialPropertiesTable* mptBlood = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptBlood, fBlood);
-    fMuscle = nistManager->FindOrBuildMaterial("G4_MUSCLE_SKELETAL_ICRP");
-    G4MaterialPropertiesTable* mptMuscle = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptMuscle, fMuscle);
 
     // Define bone (compact + spongeous)
     density = 1.4*g/cm3;
     fBone = new G4Material(name="BONE", density, ncomponents=2);
     fBone->AddMaterial(fCBone, fractionmass=0.5);
     fBone->AddMaterial(fSoft, fractionmass=0.5);
-    G4MaterialPropertiesTable* mptBone = new G4MaterialPropertiesTable();
-    SetMaterialProperties(mptBone, fBone, false);
 
     // Building Material "DataBase"
     theMaterials.push_back(materialAir);
     theMaterials.push_back(fLungM);
     theMaterials.push_back(fSoft);
     theMaterials.push_back(fBone);
-    theMaterials.push_back(fAdipose);
-    theMaterials.push_back(fBrain);
-    theMaterials.push_back(fBlood);
-    theMaterials.push_back(fMuscle);
-    theMaterials.push_back(fStomachM);
-    theMaterials.push_back(fSmIntestineM);
-    theMaterials.push_back(fLgIntestineM);
-    theMaterials.push_back(fLiverM);
-    theMaterials.push_back(fPancreasM);
-    theMaterials.push_back(fBladderM);
-    theMaterials.push_back(fSpleenM);
-    theMaterials.push_back(fBloodM);
-    theMaterials.push_back(fBrainM);
-    theMaterials.push_back(fHeartM);
-    theMaterials.push_back(fThyroidM);
-    theMaterials.push_back(fSkinM);
-
-    // Set optical properties
-    /*std::vector<G4double> energies = {1.2*eV, 1.91*eV, 2.25*eV, 2.76*eV, 6.2*eV};
-    std::vector<G4double> absorptionSoft = {0.2*cm, 0.2*cm, 0.04*cm, 0.04*cm, 0.03*cm}; // from Optical properties of biological tissues: a review
-    std::vector<G4double> absorptionBone = {0.16*cm, 0.16*cm, 0.077*cm, 0.05*cm, 0.04*cm}; // https://hal.science/hal-02335596/document*/
-    /*std::vector<G4double> energy = {1.2*eV, 1.91*eV, 2.25*eV, 2.48*eV, 2.76*eV, 6.2*eV}
-    std::vector<G4double> absorptionHeart = {0.2*cm, 0.2*cm, 0.04*cm, 0.1*cm, 0.04*cm, 0.04*cm};
-    std::vector<G4double> absorptionKidney = {0.2*cm, 0.2*cm, 0.04*cm, 0.1*cm, 0.04*cm, 0.04*cm};
-    std::vector<G4double> absorptionBrain = {0.25*cm, 0.25*cm, 0.16*cm, 0.25*cm, 0.0125*cm, 0.0125*cm};
-    std::vector<G4double> absorptionBone = {0.16*cm, 0.16*cm, 0.077*cm, 0.1*cm, 0.005*cm, 0.005*cm};*/
-   
-    //std::vector<G4MaterialPropertiesTable*> theMPTables;
-    /*for(G4int i=0; i<theMaterials.size(); i++) {
-        G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
-        G4double rIndex = 0.3323 + 0.3422*(theMaterials[i]->GetDensity()/(g/cm3)-1) +1; // from Optical properties of biological tissues: a review
-        std::vector<G4double> rIndexVec = {rIndex, rIndex, rIndex, rIndex, rIndex};
-        if(theMaterials[i]==fBone) mpt->AddProperty("ABSLENGTH", energies, absorptionBone, true, true);
-        else mpt->AddProperty("ABSLENGTH", energies, absorptionSoft, true, true);
-        theMPTables.push_back(mpt);
-        //theMaterials[i]->SetMaterialPropertiesTable(mpt);
-    }*/
-
-    /*for(auto& material: theMaterials) {
-        G4double rIndex = 0.3323 + 0.3422*(material->GetDensity()/(g/cm3)-1) +1; // from Optical properties of biological tissues: a review
-        G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
-        std::vector<G4double> rIndexVec = {rIndex, rIndex, rIndex, rIndex, rIndex};
-        mpt->AddProperty("RINDEX", energies, rIndexVec, true, true);
-        mpt->AddProperty("ABSLENGTH", energies, absorptionBone, true, true);
-        //theMPTables.push_back(mpt);
-        //material->SetMaterialPropertiesTable(theMPTables.back());
-        material->SetMaterialPropertiesTable(mpt);
-    }*/
-
-    /*G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
-    mpt->AddProperty("RINDEX", energies, std::vector<G4double>(energies.size(), Get_rIndex(fBone->GetDensity())), true, true);
-    mpt->AddProperty("ABSLENGTH", energies, absorptionBone, true, true);
-    fBone->SetMaterialPropertiesTable(mpt);*/
-
-    /*rIndex = 0.3323 + 0.3422*(fSoft->GetDensity()/(g/cm3)-1) +1; // from Optical properties of biological tissues: a review
-    G4MaterialPropertiesTable *mpt_2 = new G4MaterialPropertiesTable();
-    std::vector<G4double> rIndexVec_2(energies.size(), rIndex);
-    mpt_2->AddProperty("RINDEX", energies, rIndexVec_2, true, true);
-    mpt_2->AddProperty("ABSLENGTH", energies, absorptionSoft, true, true);
-    fSoft->SetMaterialPropertiesTable(mpt_2);*/
-       
-    //std::cout << "TEST: " << fBone->GetMaterialPropertiesTable()->GetProperty("RINDEX")[0] << std::endl;
-
 }
 
 void MyDetectorConstruction::ConstructMOBY()
-{
+{	
     // Defining the voxelPhantom parametrisation
     G4PhantomParameterisation* voxelizedPhantom = new G4PhantomParameterisation();
 
@@ -621,42 +315,45 @@ void MyDetectorConstruction::ConstructMOBY()
 	binzmax = 150;
 
 	G4int i, j, k, n;
+	G4double HU;
 
-    while (ctfile >> buffer) {
-
+    while (ctfile >> buffer)
+    {
         i = std::stoi(buffer);
         ctfile >> buffer;
         j = std::stoi(buffer);
         ctfile >> buffer;
         k = std::stoi(buffer);
         ctfile >> buffer;
-        G4double HU = std::stod(buffer);
-if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
-{
-	i = i - binxmin;
-	j = j - binymin;
-	k = k - binzmin;
-	// G4cout << i << "\t" << j << "\t" << k << G4endl;
-        n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
+        HU = std::stod(buffer);
 
-        /*if (HU == 0) {materialIDs[n] = 0;} // air
-        else if (HU > 57.4 and HU < 57.7) {materialIDs[n] = 1;} // lung
-        else if (HU > 220) {materialIDs[n] = 3;} // bone
-        else if (HU > 22.9 and HU < 23.1) {materialIDs[n] = 1;} // lung
-        else if (HU > 90) {materialIDs[n] = 3;} // bone
-        else if (HU > 45.9 and HU < 46) {materialIDs[n] = 4;} // adipose
-        else if (HU > 76.888 and HU < 76.890) {materialIDs[n] = 16;} // brain
-        else if (HU > 80.680 and HU < 80.682) {materialIDs[n] = 15;} // blood
-        else if (HU > 78.099 and HU < 78.101) {materialIDs[n] = 7;} // muscle
-        else if (HU > 78.064 and HU < 78.065) {materialIDs[n] = 9;} // intestine (sm)
-        else if (HU > 78.988 and HU < 78.989) {materialIDs[n] = 11;} // liver
-        else if (HU > 76.001 and HU < 76.002) {materialIDs[n] = 12;} // pancreas
-        else if (HU > 80.277 and HU < 80.278) {materialIDs[n] = 14;} // spleen
-        else if (HU > 78.261 and HU < 78.262) {materialIDs[n] = 17;} // heart
-        else {materialIDs[n] = 2;} // soft tissue*/
-        if(HU>85) {materialIDs[n] = 3;}
-        else {materialIDs[n] = 2;}
-}
+	// turn the mouse in space
+	if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
+	{
+		i = i - binxmin;
+		j = j - binymin;
+		k = k - binzmin;
+		// G4cout << i << "\t" << j << "\t" << k << G4endl;
+	        n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
+		
+		if (HU < 0) G4cout << "errore!!!" << G4endl;
+		else
+		{
+	        	if (HU == 0) materialIDs[n] = 0; // air
+			else 
+			{
+				if (HU < 30) materialIDs[n] = 1; // lung
+				else 
+				{
+					if (HU < 85) materialIDs[n] = 2; // soft tissue
+					else
+					{
+						if (HU >= 85) materialIDs[n] = 3; // bone
+					}
+				}
+			}
+		}
+	}
     }
 
     voxelizedPhantom->SetMaterialIndices(materialIDs);
