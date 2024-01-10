@@ -44,8 +44,7 @@
 ################################################################################
 # change source
 ################################################################################
-/particleSource/gunorgps gun
-/particleSource/moby no
+/particleSource/sourceType gun
 /gun/particle gamma
 /gun/energy 342 keV
 # /gps/particle ion
