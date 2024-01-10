@@ -1,5 +1,9 @@
 #include "construction.hh"
 
+G4double HalfVoxelSize;
+G4double HalfPhantomDepth;
+G4double mouseCollimatorDistance;
+
 MyDetectorConstruction::MyDetectorConstruction()
 {
 	fMessengerCollimator = new G4GenericMessenger(this, "/collimator/", "Collimator Construction");
@@ -68,9 +72,27 @@ MyDetectorConstruction::MyDetectorConstruction()
 	detector_depth = 10*um;
 	fScoringDetector = 0;
 	det_fill_factor = .8;
+	
+	// moby commands
+	fMessengerMoby = new G4GenericMessenger(this, "/moby/", "MOBY parameters");
+	fMessengerMoby->DeclarePropertyWithUnit("distance", "mm", mouseCollimatorDistance, "Distance MOBY - collimator surface");
+	fMessengerMoby->DeclareProperty("voxelX", nVoxelX, "1 or more");
+	fMessengerMoby->DeclareProperty("build", buildMoby, "yes (y) or no (n)");
 
+	// moby parameters
+	buildMoby = "yes";
+	nVoxelX = 430;
+	nVoxelY = 115;
+	nVoxelZ = 115;
+	mouseCollimatorDistance = 0.*mm;
+	HalfVoxelSize = 0.18*mm/2.;
+	HalfPhantomDepth = nVoxelZ*HalfVoxelSize;
+	
 	// define materials just once
 	DefineMaterials();
+	// Define MOBY materials
+	DefineMaterialsMOBY();
+	
 	DefineMaterialsProperties();
 
 	// define world lengths
@@ -197,6 +219,167 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 // use /run/reinitializeGeometry
 // run one event
 // now you should see the changes
+
+void MyDetectorConstruction::DefineMaterialsMOBY()
+{	
+    G4NistManager *nistManager = G4NistManager::Instance();
+
+    // Define Elements (for lung)
+    G4double a;
+    G4double z;
+    G4double density;
+    G4String name;
+    G4String symbol;
+    a = 1.01*g/mole;
+    G4Element* elH  = new G4Element(name="Hydrogen", symbol="H", z=1., a);
+    a = 12.01*g/mole;
+    G4Element* elC  = new G4Element(name="Carbon", symbol="C", z=6., a);
+    a = 14.01*g/mole;
+    G4Element* elN  = new G4Element(name="Nitrogen", symbol="N", z=7., a);
+    a = 16.00*g/mole;
+    G4Element* elO  = new G4Element(name="Oxygen", symbol="O", z=8., a);
+    a = 22.99*g/mole;
+    G4Element* elNa = new G4Element(name="Sodium", symbol="Na", z=11., a);
+    a = 30.97*g/mole;
+    G4Element* elP = new G4Element(name="Phosphorus", symbol="P", z=15., a);
+    a = 32.07*g/mole;
+    G4Element* elS = new G4Element(name="Sulfur", symbol="S", z=16., a);
+    a = 35.45*g/mole;
+    G4Element* elCl = new G4Element(name="Chlorine", symbol="Cl", z=17., a);
+    a = 39.10*g/mole;
+    G4Element* elK = new G4Element(name="Potassium", symbol="K", z=19., a);
+    a = 40.08*g/mole;
+
+    // Define MOBY lung
+    G4int ncomponents;
+    G4double fractionmass;
+    density = 0.3*g/cm3;
+    fLungM = new G4Material(name="LUNG_MOBY", density, ncomponents=9);
+    fLungM->AddElement(elH, fractionmass=0.103);
+    fLungM->AddElement(elC, fractionmass=0.105);
+    fLungM->AddElement(elN, fractionmass=0.031);
+    fLungM->AddElement(elO, fractionmass=0.749);
+    fLungM->AddElement(elNa, fractionmass=0.002);
+    fLungM->AddElement(elP, fractionmass=0.002);
+    fLungM->AddElement(elS, fractionmass=0.003);
+    fLungM->AddElement(elCl, fractionmass=0.003);
+    fLungM->AddElement(elK, fractionmass=0.002);
+
+    // List of Materials
+    //fLung = nistManager->FindOrBuildMaterial("G4_LUNG_ICRP");
+    fSoft = nistManager->FindOrBuildMaterial("G4_TISSUE_SOFT_ICRP");
+    fCBone = nistManager->FindOrBuildMaterial("G4_BONE_COMPACT_ICRU");
+
+    // Define bone (compact + spongeous)
+    density = 1.4*g/cm3;
+    fBone = new G4Material(name="BONE", density, ncomponents=2);
+    fBone->AddMaterial(fCBone, fractionmass=0.5);
+    fBone->AddMaterial(fSoft, fractionmass=0.5);
+
+    // Building Material "DataBase"
+    theMaterials.push_back(materialAir);
+    theMaterials.push_back(fLungM);
+    theMaterials.push_back(fSoft);
+    theMaterials.push_back(fBone);
+}
+
+void MyDetectorConstruction::ConstructMOBY()
+{	
+    // Defining the voxelPhantom parametrisation
+    G4PhantomParameterisation* voxelizedPhantom = new G4PhantomParameterisation();
+
+    voxelizedPhantom->SetVoxelDimensions(HalfVoxelSize, HalfVoxelSize, HalfVoxelSize);
+    voxelizedPhantom->SetNoVoxel(nVoxelX, nVoxelY, nVoxelZ);
+    voxelizedPhantom->SetMaterials(theMaterials);
+
+    size_t* materialIDs = new size_t[nVoxelX*nVoxelY*nVoxelZ];
+
+    // Importing CT
+    // std::ifstream ctfile("../moby_20_atn.txt",std::ios::in);
+    // std::ifstream ctfile("../moby_background_prova_atn.txt",std::ios::in);
+    std::ifstream ctfile("../prova_ds_all_atn.txt",std::ios::in);
+
+    if(ctfile.fail()) std::cout << "no file for MOBY ct\n";
+
+    std::string buffer;
+	
+	G4int binxmin, binxmax, binymin, binymax, binzmin, binzmax;
+	binxmin = 120;
+	binxmax = 550;
+	binymin = 40;
+	binymax = 155;
+	binzmin = 35;
+	binzmax = 150;
+
+	G4int i, j, k, n;
+	G4double HU;
+
+    while (ctfile >> buffer)
+    {
+        i = std::stoi(buffer);
+        ctfile >> buffer;
+        j = std::stoi(buffer);
+        ctfile >> buffer;
+        k = std::stoi(buffer);
+        ctfile >> buffer;
+        HU = std::stod(buffer);
+
+	// turn the mouse in space
+	if (i>=binxmin && i<binxmax && j>=binymin && j<binymax && k>=binzmin && k<binzmax)
+	{
+		i = i - binxmin;
+		j = j - binymin;
+		k = k - binzmin;
+		// G4cout << i << "\t" << j << "\t" << k << G4endl;
+	        n = i+nVoxelX*j+nVoxelX*nVoxelY*k;
+		
+		if (HU < 0) G4cout << "errore!!!" << G4endl;
+		else
+		{
+	        	if (HU == 0) materialIDs[n] = 0; // air
+			else 
+			{
+				if (HU < 30) materialIDs[n] = 1; // lung
+				else 
+				{
+					if (HU < 85) materialIDs[n] = 2; // soft tissue
+					else
+					{
+						if (HU >= 85) materialIDs[n] = 3; // bone
+					}
+				}
+			}
+		}
+	}
+    }
+
+    voxelizedPhantom->SetMaterialIndices(materialIDs);
+
+    G4ThreeVector moby_position = G4ThreeVector(0, 0, - HalfPhantomDepth - mouseCollimatorDistance);
+    G4Box* cont_solid = new G4Box("PhantomContainer", nVoxelX*HalfVoxelSize, nVoxelY*HalfVoxelSize, HalfPhantomDepth);
+    G4LogicalVolume* cont_logic = new G4LogicalVolume( cont_solid, materialAir, "PhantomContainer", 0, 0, 0 );
+    G4VPhysicalVolume * cont_phys = new G4PVPlacement(0, moby_position, cont_logic, "PhantomContainer", logicWorld, false, true);
+
+    voxelizedPhantom->BuildContainerSolid(cont_phys);
+
+    // Assure that the voxels are completely filling the container volume
+    voxelizedPhantom->CheckVoxelsFillContainer(cont_solid->GetXHalfLength(), cont_solid->GetYHalfLength(), cont_solid->GetZHalfLength() );
+    voxelizedPhantom->SetSkipEqualMaterials(false);
+
+    // The parameterised volume which uses this parameterisation is placed in the container logical volume
+    G4VSolid* solVoxel = new G4Box("phantom", HalfVoxelSize, HalfVoxelSize, HalfVoxelSize);
+    G4LogicalVolume* logicVoxel = new G4LogicalVolume(solVoxel, materialAir, "phantom", 0, 0, 0);
+    G4PVParameterised * patient_phys = new G4PVParameterised("Patient", logicVoxel, cont_logic, kUndefined, nVoxelX*nVoxelY*nVoxelZ, voxelizedPhantom);
+
+    G4VisAttributes *vis = new G4VisAttributes();
+    vis->SetVisibility(false);
+    logicVoxel->SetVisAttributes(vis);
+    //cont_logic->SetVisAttributes(vis);
+
+    // Indicate that this physical volume is having a regular structure
+    patient_phys->SetRegularStructureId(0);
+}
+
 
 void MyDetectorConstruction::ConstructCollimator()
 {
@@ -468,6 +651,11 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		ConstructPixelDetector();
 	else
 		ConstructSlabDetector();
+
+	if ((buildMoby == "yes") || (buildMoby == "y"))
+		ConstructMOBY();
+	else
+		G4cout << "not building MOBY" << G4endl;
 
 	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();

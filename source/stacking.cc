@@ -41,7 +41,7 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 		if(aTrack->GetDefinition() == G4Gamma::Definition() && (aProcessName == "RadioactiveDecayBase" || aProcessName == "none"))
 		{
 			// G4cout << "energy: " << aTrack->GetKineticEnergy()/keV << " keV" << G4endl;
-			man->FillNtupleDColumn(0, 0, aTrack->GetKineticEnergy()/keV); // [keV]
+			man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kEini, aTrack->GetKineticEnergy()/keV); // [keV]
 			// if ( aTrack->GetKineticEnergy() != 245*keV)
 			// {
 			// 	G4cout << "Kinetic energy: " << aTrack->GetKineticEnergy() / keV << " keV" << ", ";

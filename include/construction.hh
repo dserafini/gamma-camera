@@ -7,6 +7,8 @@
 #include "G4LogicalVolume.hh"
 #include "G4Box.hh"
 #include "G4Tubs.hh"
+#include "G4PhantomParameterisation.hh"
+#include "G4PVParameterised.hh"
 // per le unità di misura tipo metri m
 #include "G4SystemOfUnits.hh"
 #include "G4Material.hh"
@@ -22,6 +24,7 @@
 #include "G4SDManager.hh"
 #include "detectorSD.hh"
 #include "scintillatorSD.hh"
+#include "infoPhantom.hh"
 
 class MyDetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -36,6 +39,10 @@ public:
 
 	virtual G4VPhysicalVolume *Construct();
 	// virtual because it is defined in G4USerDetectorConstruction
+
+	// to build MOBY
+	void DefineMaterialsMOBY();
+    	void ConstructMOBY();
 
 private:
 	virtual void ConstructSDandField();
@@ -97,6 +104,7 @@ private:
 	G4GenericMessenger *fMessengerScintillator;
 	G4GenericMessenger *fMessengerDetector;
 	G4GenericMessenger *fMessengerCoupler;
+	G4GenericMessenger *fMessengerMoby;
 
 	G4LogicalVolume *fScoringScintillator, *fScoringDetector;
 	G4VPhysicalVolume *physScoringScintillator;
@@ -128,6 +136,19 @@ private:
 	G4int det_pixels_number;
 	G4String detPixelNoSlab;
 	G4ThreeVector detector_centre_position;
+	
+	// Materials MOBY
+	G4Material* fVoxelMaterial;
+	G4Material* fSoft;
+	G4Material* fCBone;
+	G4Material* fLungM;
+	G4Material* fBone;
+	std::vector<G4Material*> theMaterials;
+
+	// moby
+	G4int nVoxelX, nVoxelY, nVoxelZ;
+	G4double mouseXsize;
+	G4String buildMoby;
 };
 
 #endif

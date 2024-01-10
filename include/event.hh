@@ -10,6 +10,9 @@
 #include "G4SystemOfUnits.hh"
 
 #include "run.hh"
+#include "enums.hh"
+#include "detectorHit.hh"
+#include "G4SDManager.hh"
 
 class MyEventAction : public G4UserEventAction
 {
@@ -19,6 +22,9 @@ public:
 
   virtual void BeginOfEventAction(const G4Event*);
   virtual void EndOfEventAction(const G4Event*);
+
+private:
+  G4int idH3;
 };
 
 #endif

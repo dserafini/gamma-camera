@@ -1,0 +1,180 @@
+# tutorial to start using the gamma-camera simulation tool from Geant4 macros
+# the list of commands (apart from the custom made ones) can be found here:
+# https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Control/AllResources/Control/UIcommands/_.html
+
+################################################################################
+# global settings
+################################################################################
+# set the address relative to the build folder where the macros whould be found
+/control/macroPath macro
+# set the number of threads to be used during the simulation, if you do not know
+# just put 1
+/run/numberOfThreads 10
+
+################################################################################
+# scintillator
+################################################################################
+# define scintillator features
+# write "matrix" if you want a pixellated scintillator or anything else if you
+# want a single slab of material
+/scintillator/pixel matrix
+# choose the length of the scintillator case side
+/scintillator/slab_side 10. cm
+# choose the depth of the scintillator case (= length of the matchsticks)
+/scintillator/slab_depth 26. mm
+# choose the length of the matchsticks square section side
+/scintillator/scinti_pixel_size 1. mm
+
+################################################################################
+# define collimator
+################################################################################
+# write true if you want to build the collimator and false otherwise
+/collimator/exist true
+# choose the length of the collimator case side
+/collimator/case_side 100. mm
+# choose the depth of the collimator case (= length of the holes)
+/collimator/hole_length 30. mm
+# choose the thickness of the collimator septa between two squared holes
+/collimator/septa_thickness 1. mm
+# choose the thickness of the collimator holes squared aperture
+/collimator/hole_thickness 2. mm
+# choose the XY position of the collimator holes squared aperture
+# it makes sense to change the xy values within [0,(hole_thickness+septa_thickness)/2]
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
+
+################################################################################
+# change geometry CCD detector
+################################################################################
+# write "matrix" if you want a pixellated detector or anything else if you
+# want a single slab of material
+/detector/pixel matrix
+# choose the CCD pixel size
+/detector/det_pixel_size 3. mm
+
+################################################################################
+# reinitialize geometry and initialize run
+################################################################################
+/run/reinitializeGeometry
+/run/initialize
+
+################################################################################
+# define primary particle generation
+################################################################################
+# write the type of particle you want to generate
+# "gamma" for gammas, "ion" for ions, etc.
+/gps/particle gamma
+# choose the energy associated to the generated particles
+# Ag-111 has two gammas: the first one at 342 keV and the second one at 245 keV
+/gps/energy 342 keV
+# choose the position of the primary vertex, that is where the particles are generated
+/gps/position 0 0 -1. mm
+# choose particle direction
+# uncomment if you want particles to go straight toward the detector
+# such as in the case of a collimated beam
+# /gps/direction 0 0 1
+# uncomment if you want particles go isotropically starting from the vertex
+/gps/ang/type iso
+
+################################################################################
+# global settings
+################################################################################
+# one event has to be launched before the real start of the simulation
+# in order to avoid having the very first event with wrong energy
+# choose the name of the root file to be discarded along with the first event
+/analysis/setFileName discard.root
+# generate the first event
+/run/beamOn 1
+
+################################################################################
+# run settings
+################################################################################
+# choose after how many events you want a feedback from the simulation
+# in general I use 1% or 10% of the total number of generated events
+/run/printProgress 100000
+# choose the activity of the source in kBq
+# activitykBq if greater or equal than 1M then is cast as float
+# since beamOn needs an integer input parameter, avoid activitykBq values > 1M
+/control/alias activitykBq 45
+# the control repeat the activity inserted
+/control/echo "activity in kBq: "
+/control/echo {activitykBq}
+# /run/beamOn 10000000
+# /run/beamOn 1850746
+# choose how much the acquisition time interval lasts in seconds
+/control/alias acquisitionTimes 300
+# calculates automatically the number of nuclei that decayed during the
+# acquisition
+/control/multiply decayedNucleik {activitykBq} {acquisitionTimes}
+
+################################################################################
+# define some specific source and simulate
+################################################################################
+# define cylinder dimensions
+# diameter
+/control/alias cylDiam 5
+# half heigth
+/control/alias cylHalfZ 2.5
+# distance along the z-axis from zero, that is the collimator surface
+# distanceZ = 0 means that the cylinder has one face in contact with the
+# collimator surface
+/control/alias distanceZ 0
+# calculate the cylinder radius
+/control/multiply cylRad {cylDiam} .5
+
+# define the source distribution as a 3D volume
+/gps/pos/type Volume
+# define the source 3D distribution as a cylinder
+/gps/pos/shape Cylinder
+# define the cylindrical source distribution using the paramters specified above
+/gps/pos/radius {cylRad} mm
+/gps/pos/halfz {cylHalfZ} mm
+
+################################################################################
+# define a specific 3-cylinders source
+################################################################################
+# calculate the xy position of the cylinders centres in order to have them on
+# the vertexes of an equilateral triangle with side equal to two times the
+# cylinders diameter
+/control/multiply cylPosY {cylDiam} 1.1547
+/control/multiply cylPosHY {cylPosY} .5
+/control/alias cylPosX {cylDiam}
+/control/add cylPosZ {distanceZ} {cylHalfZ}
+
+# check aliases on the output terminal to be sure that you set them properly
+/control/listAlias
+
+################################################################################
+# define the xy position of the collimator and re-initialize geometry
+################################################################################
+# small variations between acquisiiton with the same source allow to acquire
+# images with less artifacts due to the collimator septa dark areas where there
+# are less counts but not due to the source
+/collimator/positionY 0. mm
+/collimator/positionX 0. mm
+/run/reinitializeGeometry
+
+################################################################################
+# repeat the generation of primaries for each one of the three cylinders
+################################################################################
+# first cylinder
+# change the file name for each one cylinder
+# automatically state the cylinder diameter and the z-distance of the phantom
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Primo.root
+# set the cylinder centre position
+/gps/pos/centre {cylPosX} -{cylPosHY} -{cylPosZ} mm
+# launch macro launchSilver as many times as many nuclei have to decay in the
+# acquisition
+# macro launchSilver simply generates 1 Ag-111 nucleus in the specified source
+# distribution
+/control/foreach launchSilver.mac decayedNucleik {decayedNucleik}
+
+# second cylinder
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Secondo.root
+/gps/pos/centre -{cylPosX} -{cylPosHY} -{cylPosZ} mm
+/control/foreach launchSilver.mac decayedNucleik {decayedNucleik}
+
+# third cylinder
+/analysis/setFileName realThreeCylindersDiameter{cylDiam}mmDistance{distanceZ}mmP1Terzo.root
+/gps/pos/centre 0. {cylPosY} -{cylPosZ} mm
+/control/foreach launchSilver.mac decayedNucleik {decayedNucleik}

@@ -1,5 +1,7 @@
 /run/numberOfThreads 10
 
+/moby/build no
+
 ################################################################################
 # define scintillator
 ################################################################################
@@ -13,7 +15,7 @@
 # define collimator
 ################################################################################
 
-/collimator/exist true
+/collimator/exist false
 /collimator/case_side 10. cm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1.5 mm
@@ -37,8 +39,8 @@
 /gps/energy 342 keV
 # /gps/energy 245 keV
 /gps/position 0 0 -1. mm
-# /gps/direction 0 0 1
-/gps/ang/type iso
+/gps/direction 0 0 1
+# /gps/ang/type iso
 /analysis/setFileName discard.root
 /run/beamOn 1
 # devo lanciare il primo evento che ha l'energia sbagliata
@@ -47,11 +49,11 @@
 # run
 ################################################################################
 
-/run/printProgress 1000000
+/run/printProgress 10
 # /run/beamOn 10000000
 # /run/beamOn 1850746
 
 /scintillator/pixel 0
-/analysis/setFileName directSlabColl1p5mm.root
+/analysis/setFileName prova.root
 /run/reinitializeGeometry
-/run/beamOn 10000000
+/run/beamOn 100

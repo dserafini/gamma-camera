@@ -8,34 +8,49 @@ MyRunAction::MyRunAction()
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
   // want to save energy deposition
-  man->CreateNtuple("Scoring", "Scoring");
+  man->CreateNtuple("Events", "Events");
+  man->CreateNtuple("Generation", "Generation");
+  man->CreateNtuple("Scintillator", "Scintillator");
+  man->CreateNtuple("Optical", "Optical");
+  man->CreateNtuple("Sipm", "Sipm");
 
-  // initial
-  man->CreateNtupleDColumn(0, "fEini"); // [eV]
+  // number of generated events
+  man->CreateNtupleIColumn(Tuples::kEvents, "gEvents"); // [1]
+
+  // moby
+  man->CreateNtupleDColumn(Tuples::kGeneration, "fEini"); // [eV]
+  man->CreateNtupleDColumn(Tuples::kGeneration, "mX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kGeneration, "mY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kGeneration, "mZ"); // [mm]
 
   // scintillator
-  man->CreateNtupleDColumn(0, "fEdep"); // [eV]
-  man->CreateNtupleDColumn(0, "fX"); // [mm]
-  man->CreateNtupleDColumn(0, "fY"); // [mm]
-  man->CreateNtupleDColumn(0, "fZ"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fEdep"); // [eV]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kScintillator, "fZ"); // [mm]
+  
+  // scintillation optical photons
+  man->CreateNtupleDColumn(Tuples::kOptical, "pMeanX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pMeanY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pMeanZ"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kOptical, "pSigmaR"); // [mm]
   
   // SiPM detector
-  // optical photons
-  man->CreateNtupleIColumn(0, "pNumber"); // [1]
-  man->CreateNtupleDColumn(0, "pMeanX"); // [mm]
-  man->CreateNtupleDColumn(0, "pMeanY"); // [mm]
-  man->CreateNtupleDColumn(0, "pMeanZ"); // [mm]
-  man->CreateNtupleDColumn(0, "pSigmaX"); // [mm]
-  man->CreateNtupleDColumn(0, "pSigmaY"); // [mm]
-  man->CreateNtupleDColumn(0, "pSigmaR"); // [mm]
   // pixels of SiPM
-  man->CreateNtupleDColumn(0, "xMeanX"); // [mm]
-  man->CreateNtupleDColumn(0, "xMeanY"); // [mm]
-  man->CreateNtupleDColumn(0, "xMostX"); // [mm]
-  man->CreateNtupleDColumn(0, "xMostY"); // [mm]
+  man->CreateNtupleIColumn(Tuples::kSipm, "xNumber"); // [1]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMeanX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMeanY"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMostX"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kSipm, "xMostY"); // [mm]
 
   // finish tuple
-  man->FinishNtuple(0);
+  man->FinishNtuple(Tuples::kEvents);
+  man->FinishNtuple(Tuples::kGeneration);
+  man->FinishNtuple(Tuples::kScintillator);
+  man->FinishNtuple(Tuples::kOptical);
+  man->FinishNtuple(Tuples::kSipm);
 }
 
 MyRunAction::~MyRunAction()
@@ -43,6 +58,8 @@ MyRunAction::~MyRunAction()
 
 void MyRunAction::BeginOfRunAction(const G4Run* run)
 {
+  G4cout << "MyRunAction::BeginOfRunAction" << G4endl;
+  
   // u can create a new output file here for every run
   G4AnalysisManager *man = G4AnalysisManager::Instance();
 
@@ -56,12 +73,17 @@ void MyRunAction::BeginOfRunAction(const G4Run* run)
   //man->OpenFile("output" + strRunID.str() + ".root");
   // I prefer to give the file name from macro
   man->OpenFile();
+
+  // retrieve number of events in the run
+  man->FillNtupleIColumn(Tuples::kEvents, TEvents::kEvents, run->GetNumberOfEventToBeProcessed());
+  man->AddNtupleRow(Tuples::kEvents);
 }
 
-void MyRunAction::EndOfRunAction(const G4Run*)
+void MyRunAction::EndOfRunAction(const G4Run* aRun)
 {
+  G4cout << "MyRunAction::EndOfRunAction" << G4endl;
+  
   G4AnalysisManager *man = G4AnalysisManager::Instance();
-
   man->Write();
   // it is very important to always write before closing otherwise the root file could take heavy damage
   man->CloseFile();

@@ -1,0 +1,87 @@
+/run/numberOfThreads 10
+
+################################################################################
+# define scintillator
+################################################################################
+
+/scintillator/pixel matrix
+# matrix or otherwise slab
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 26. mm
+/scintillator/scinti_pixel_size 1. mm
+
+################################################################################
+# define collimator
+################################################################################
+
+/collimator/exist 1
+/collimator/case_side 100. mm
+/collimator/hole_length 30. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
+
+################################################################################
+# change geometry detector
+################################################################################
+/detector/pixel matrix
+/detector/det_pixel_size 3. mm
+
+################################################################################
+# change geometry moby
+################################################################################
+/moby/build no
+/moby/voxelX 550
+/moby/distance 0. mm
+
+/run/reinitializeGeometry
+
+# initalize if not done in the main
+/run/initialize
+
+################################################################################
+# choose gps source
+################################################################################
+/gps/particle ion
+/gps/ion 47 111 0 0.
+/gps/energy 0. eV
+# /gps/particle gamma
+# /gps/energy 342 keV
+# /gps/position 0 0 10 mm
+# /gps/direction 0 0 1
+/control/alias zDepth 15
+/gps/pos/centre 0. 0. -{zDepth} mm
+/gps/pos/type Volume
+/gps/pos/shape Para
+/gps/pos/halfx 40 mm
+/gps/pos/halfy 40 mm
+/gps/pos/halfz {zDepth} mm
+# position and shape of the source is defined in the code
+
+################################################################################
+# choose general particle gun
+################################################################################
+/gun/particle ion
+/gun/ion 47 111 0 0.
+/gun/energy 0. eV
+# /gun/particle gamma
+# /gun/energy 342 keV
+# /gun/position 0 0 10 mm
+/gun/direction 0 0 1
+
+# background
+# Set file name
+# /analysis/setFileName outmediabackground.root
+# /run/printProgress 1000000
+# /run/beamOn 100000000
+
+# signal
+/control/alias tumoradius 3.0
+/gps/pos/centre 0. 0. -{tumoradius} mm
+/gps/pos/type Volume
+/gps/pos/shape Sphere
+/gps/pos/radius {tumoradius} mm
+/analysis/setFileName outmediasignal10Mevents3p0mmRadius.root
+/run/printProgress 1000000
+/run/beamOn 10000000

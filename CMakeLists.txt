@@ -16,7 +16,17 @@ find_package(Geant4 REQUIRED ui_all vis_all)
 include(${Geant4_USE_FILE})
 
 # Setup include directory for this project
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/include /home/isol/Applications/root-6.28.04-install/include/)
+include_directories(${PROJECT_SOURCE_DIR}/include /home/isol/Applications/root-6.28.04-install/include/)
+find_package(ROOT REQUIRED)
+include(${ROOT_USE_FILE})
+if (ROOT_FOUND)
+  message("ROOT found: ${ROOT_INCLUDE_DIRS}")
+else()
+   message (FATAL_ERROR "ROOT not found")
+endif()
+
+include_directories(${ROOT_INCLUDE_DIRS})
 
 # in our project we will put different class in different files
 # we want to compile all the source files (*.cc) that we have in our folder
@@ -47,6 +57,7 @@ add_executable(sim sim.cc ${sources} ${headers})
 
 # link to Geant4 libraries otherwise it cannot find them
 target_link_libraries(sim ${Geant4_LIBRARIES})
+target_link_libraries(sim ${ROOT_LIBRARIES})
 
 # Adds a target with the given name that executes the given commands
 add_custom_target(Simulation DEPENDS sim)
