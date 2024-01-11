@@ -75,8 +75,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
   G4double enePhoton = aStep->GetTrack()->GetKineticEnergy();
   G4double wlen = (1.239841939*eV/enePhoton)*1e3;
-  if (G4UniformRand() < quEff->Value(wlen))
-  {
+  //if (G4UniformRand() < quEff->Value(wlen))
+ // {
     // energy deposit
     G4double edep = aStep->GetTotalEnergyDeposit(); // [keV]
   
@@ -107,9 +107,9 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
     // }
     
     // kill every detected photon
-  }
-  else
-    return false;
+  //}
+  //else
+ //   return false;
 
   return true;
 }
