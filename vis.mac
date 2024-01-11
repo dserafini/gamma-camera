@@ -129,6 +129,9 @@
 /gps/ene/type Mono
 /gps/energy 2.76 eV
 /particleSource/source gps
+/run/beamOn 2
+/gps/position 50. 0. 0. mm
+/run/beamOn 3
 
 # macro are in macro folder
 /control/macroPath macro
