@@ -69,6 +69,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
     return false;
 
+  aStep->GetTrack()->SetTrackStatus(fStopAndKill);
+
   // filter on optical photon wavelength
   G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
   G4double enePhoton = aStep->GetTrack()->GetKineticEnergy();
@@ -106,8 +108,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
     
     // kill every detected photon
   }
-
-  aStep->GetTrack()->SetTrackStatus(fStopAndKill);
+  else
+    return false;
 
   return true;
 }
