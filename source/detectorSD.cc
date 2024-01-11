@@ -105,8 +105,9 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
     // }
     
     // kill every detected photon
-    aStep->GetTrack()->SetTrackStatus(fStopAndKill);
   }
+
+  aStep->GetTrack()->SetTrackStatus(fStopAndKill);
 
   return true;
 }
