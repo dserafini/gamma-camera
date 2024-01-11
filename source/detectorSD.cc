@@ -192,23 +192,26 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     G4int imax = 0;
   G4cout << "eof::3" << G4endl;
 
-    for (unsigned long i=0; i<pixelCount.size();)
+    if (pixelCount.size() > 0)
     {
-    	if (pixelCount.at(i) < nofHitsThreshold)
-    	{
-  G4cout << "eof::4" << G4endl;
-    		pixelCount.erase(pixelCount.begin() + i);
-    		pixelPos.erase(pixelPos.begin() + i);
-    	}
-    	else
-    	{
-  G4cout << "eof::5" << G4endl;
-    		totalGoodCounts += pixelCount.at(i);
-    		meanPixelPos += pixelCount.at(i)*pixelPos.at(i);
-        if (pixelCount.at(i) > pixelCount.at(imax))
-          imax = i;
-    		i++;
-    	}
+      for (unsigned long i=0; i<pixelCount.size();)
+      {
+      	if (pixelCount.at(i) < nofHitsThreshold)
+      	{
+    G4cout << "eof::4" << G4endl;
+      		pixelCount.erase(pixelCount.begin() + i);
+      		pixelPos.erase(pixelPos.begin() + i);
+      	}
+      	else
+      	{
+    G4cout << "eof::5" << G4endl;
+      		totalGoodCounts += pixelCount.at(i);
+      		meanPixelPos += pixelCount.at(i)*pixelPos.at(i);
+          if (pixelCount.at(i) > pixelCount.at(imax))
+            imax = i;
+      		i++;
+      	}
+      }
     }
     
     meanPixelPos /= totalGoodCounts;
