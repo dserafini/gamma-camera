@@ -1,3 +1,6 @@
+# macro are in macro folder
+/control/macroPath macro
+
 ################################################################################
 # change geometry collimator
 ################################################################################
@@ -130,11 +133,4 @@
 /gps/ene/type Mono
 /gps/energy 2.76 eV
 /particleSource/source gps
-/run/beamOn 2
-/gps/position 15. 0. 0. mm
-/run/beamOn 5
-/gps/position 15. 15. 0. mm
-/run/beamOn 5
-
-# macro are in macro folder
-/control/macroPath macro
+/run/beamOn 6 changePos.mac 2
