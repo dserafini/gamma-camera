@@ -189,7 +189,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     G4ThreeVector meanPixelPos = G4ThreeVector();
     G4int imax = 0;
 
-    for (G4int i=0; i<pixelCount.size();)
+    for (unsigned G4long i=0; i<pixelCount.size();)
     {
     	if (pixelCount.at(i) < nofHitsThreshold)
     	{
