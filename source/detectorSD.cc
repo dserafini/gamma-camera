@@ -192,7 +192,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     G4int imax = 0;
   G4cout << "eof::3" << G4endl;
     if (pixelCount.size() > 0)
-      return;
+    {
 
     for (unsigned long i=0; i<pixelCount.size();)
     {
@@ -215,6 +215,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     
     meanPixelPos /= totalGoodCounts;
     G4ThreeVector mostPixelPos = pixelPos.at(imax);
+    }
   /*
     // print to check
     // for ( G4int i=0; i<((G4int)pixelPos.size()); i++)
