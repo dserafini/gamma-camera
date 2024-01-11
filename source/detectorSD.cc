@@ -126,8 +126,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
      for ( G4int i=0; i<nofHits; i++ ) (*fHitsCollection)[i]->Print();
   }
   
-  if (nofHits >= nofHitsThreshold)
-  {
+//  if (nofHits >= nofHitsThreshold)
+  //{
     // calculate mean position
     for ( G4int i=0; i<nofHits; i++ )
       fMeanPos += (*fHitsCollection)[i]->GetPos();
@@ -147,7 +147,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   
     // G4cout << "nofHits: " << nofHits << G4endl;
     
-    // fill the Ntuple
+    // fill the Ntuple of optical photons
     G4AnalysisManager *man = G4AnalysisManager::Instance();
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanX, fMeanPos.getX());
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanY, fMeanPos.getY());
@@ -157,7 +157,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kSigmaR, fSigmaMod);
 
     man->FillNtupleIColumn(Tuples::kSipm, Tsipm::kNumber, nofHits);
-    
+    /*
     // save pixel tree
     G4ThreeVector meanPixelPos = G4ThreeVector();
     if (nofHits>0)
@@ -169,7 +169,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
-  
+  */
     // save pixel tree
     std::vector <G4ThreeVector> pixelPos = {};
     std::vector <G4int> pixelCount = {};
@@ -184,7 +184,31 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
       else
         pixelCount.at(std::distance(pixelPos.begin(),it)) += 1;
     }
-  
+    
+    G4int totalGoodCounts = 0;
+    G4ThreeVector meanPixelPos = G4ThreeVector();
+    G4int imax = 0;
+
+    for (G4int i=0; i<pixelCount.size();)
+    {
+    	if (pixelCount.at(i) < nofhitsThreshold)
+    	{
+    		pixelCount.erase(i);
+    		pixelPos.erase(i);
+    	}
+    	else
+    	{
+    		totalGoodCounts += pixelCount.at(i);
+    		meanPixelPos += pixelCount.at(i)*pixelPos.at(i);
+        if (pixelCount.at(i) > pixelCount.at(imax))
+          imax = i;
+    		i++;
+    	}
+    }
+    
+    meanPixelPos /= totalGoodCounts;
+    G4ThreeVector mostPixelPos = pixelPos.at(imax);
+  /*
     // print to check
     // for ( G4int i=0; i<((G4int)pixelPos.size()); i++)
     //   G4cout << pixelPos.at(i) << "\t" << pixelCount.at(i) << G4endl;
@@ -193,9 +217,12 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     G4ThreeVector mostPixelPos = pixelPos.at(std::distance(pixelCount.begin(),std::max_element(pixelCount.begin(),pixelCount.end())));
     // G4cout << "found most pixel pos: " << mostPixelPos << G4endl;
     // G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
+    */
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostX, mostPixelPos.getX());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostY, mostPixelPos.getY());
-  }
+    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
+    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
+//  }
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
