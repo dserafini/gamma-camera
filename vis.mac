@@ -132,5 +132,4 @@
 /gps/position 0. 0. 0. mm
 /gps/ene/type Mono
 /gps/energy 2.76 eV
-/particleSource/source gps
-/run/beamOn 6 changePos.mac 2
+/run/beamOn 6
