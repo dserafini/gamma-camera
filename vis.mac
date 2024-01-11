@@ -133,4 +133,3 @@
 /gps/position 0. 0. 0. mm
 /gps/ene/type Mono
 /gps/energy 2.76 eV
-/run/beamOn 10
