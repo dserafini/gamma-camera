@@ -193,8 +193,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     {
     	if (pixelCount.at(i) < nofHitsThreshold)
     	{
-    		pixelCount.erase(i);
-    		pixelPos.erase(i);
+    		pixelCount.erase(pixelCount.begin() + i);
+    		pixelPos.erase(pixelPos.begin() + i);
     	}
     	else
     	{
