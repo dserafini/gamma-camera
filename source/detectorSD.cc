@@ -177,8 +177,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     for ( G4int i=0; i<nofHits; i++ )
     {
       auto it = std::find(pixelPos.begin(),pixelPos.end(),(*fHitsCollection)[i]->GetPixelPos());
-      G4cout << " end: " << pixelPos.end() << G4endl;
-     G4cout << "it: " << it << G4endl;
+      G4cout << " end: " << pixelPos.end() - pixelPos.begin() << G4endl;
+     G4cout << "it: " << it - pixelPos.begin() << G4endl;
       if(it == pixelPos.end())
       {
   G4cout << "eof::2" << G4endl;
