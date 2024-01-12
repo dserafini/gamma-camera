@@ -53,7 +53,7 @@
 # /gps/particle ion
 # /gps/ion 47 111 0 0.
 /gps/particle proton
-/gps/energy 10. keV
+/gps/energy 100. keV
 # position must be < 0 
 /gun/position 0 0. -1. mm
 /gps/position 0 0. -1. mm
