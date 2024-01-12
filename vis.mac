@@ -48,12 +48,12 @@
 ################################################################################
 # change sourcee
 ################################################################################
-/gun/particle proton
+/gun/particle gamma
 /gun/energy 342 keV
 # /gps/particle ion
 # /gps/ion 47 111 0 0.
-# /gps/particle proton
-# /gps/energy 1. keV
+/gps/particle proton
+/gps/energy 1. keV
 # position must be < 0 
 /gun/position 0 0. -1. mm
 /gun/direction 0 0 1
@@ -136,5 +136,5 @@
 # /gps/pos/halfx 15 mm
 # /gps/pos/halfy 15 mm
 # /gps/number 1000
-/gps/ene/type Mono
-/gps/energy 2. MeV
+# /gps/ene/type Mono
+# /gps/energy 2. MeV
