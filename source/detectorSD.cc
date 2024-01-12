@@ -175,15 +175,15 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     // save pixel tree
     std::vector <G4ThreeVector> pixelPos = {};
     std::vector <G4int> pixelCount = {};
-  //G4cout << "eof::1" << G4endl;
+  G4cout << "eof::1" << G4endl;
     for ( G4int i=0; i<nofHits; i++ )
     {
       auto it = std::find(pixelPos.begin(),pixelPos.end(),(*fHitsCollection)[i]->GetPixelPos());
-      //G4cout << " end: " << pixelPos.end() - pixelPos.begin() << G4endl;
-     //G4cout << "it: " << it - pixelPos.begin() << G4endl;
+      G4cout << " end: " << pixelPos.end() - pixelPos.begin() << G4endl;
+     G4cout << "it: " << it - pixelPos.begin() << G4endl;
       if(it == pixelPos.end())
       {
-  //G4cout << "eof::2" << G4endl;
+  G4cout << "eof::2" << G4endl;
         pixelPos.push_back((*fHitsCollection)[i]->GetPixelPos());
         pixelCount.push_back(1);
       }
@@ -195,7 +195,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     G4ThreeVector meanPixelPos = G4ThreeVector();
   G4ThreeVector mostPixelPos = G4ThreeVector();
     G4int imax = 0;
-  //G4cout << "eof::3" << G4endl;
+  G4cout << "eof::3" << G4endl;
     if (pixelCount.size() > 0)
     {
 
@@ -203,13 +203,13 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     {
       if (pixelCount.at(i) < nofHitsThreshold)
       {
-  //G4cout << "eof::4" << G4endl;
+  G4cout << "eof::4" << G4endl;
         pixelCount.erase(pixelCount.begin() + i);
         pixelPos.erase(pixelPos.begin() + i);
       }
       else
       {
-  //G4cout << "eof::5" << G4endl;
+  G4cout << "eof::5" << G4endl;
         totalGoodCounts += pixelCount.at(i);
         meanPixelPos += pixelCount.at(i)*pixelPos.at(i);
         if (pixelCount.at(i) > pixelCount.at(imax))
