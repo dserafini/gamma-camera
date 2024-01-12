@@ -48,7 +48,7 @@
 ################################################################################
 # change sourcee
 ################################################################################
-/gun/particle gamma
+/gun/particle proton
 /gun/energy 342 keV
 # /gps/particle ion
 # /gps/ion 47 111 0 0.
@@ -127,9 +127,9 @@
 
 # test with optical photons
 /particleSource/source gps
-/gps/particle proton
+# /gps/particle opticalphoton
 # /gps/polarization 1 1 1
-/gps/direction 0 0 1
+# /gps/direction 0 0 1
 # /gps/pos/type Plane
 # /gps/pos/shape Square
 # /gps/pos/centre 0 0 0 mm
