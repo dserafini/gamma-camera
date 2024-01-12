@@ -129,7 +129,7 @@
 /particleSource/source gps
 /gps/particle proton
 # /gps/polarization 1 1 1
-# /gps/direction 0 0 1
+/gps/direction 0 0 1
 # /gps/pos/type Plane
 # /gps/pos/shape Square
 # /gps/pos/centre 0 0 0 mm
