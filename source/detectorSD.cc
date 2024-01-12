@@ -201,11 +201,10 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   G4cout << "eof::3" << G4endl;
     if (pixelCount.size() > 0)
     {
-      G4cout << pixelCount.at(i) << G4endl;
-      G4cout << pixelPos.at(i) << G4endl;
-
     for (unsigned long i=0; i<pixelCount.size();)
     {
+      G4cout << pixelCount.at(i) << G4endl;
+      G4cout << pixelPos.at(i) << G4endl;
       if (pixelCount.at(i) < nofHitsThreshold)
       {
   G4cout << "eof::4" << G4endl;
