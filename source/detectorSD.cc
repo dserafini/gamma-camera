@@ -191,8 +191,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
       else
         pixelCount.at(std::distance(pixelPos.begin(),it)) += 1;
     }
-      G4cout << pixelCount << G4endl;
-      G4cout << pixelPos << G4endl;
+    G4cout << "pixelCount.size: " << pixelCount.size() << G4endl;
+    G4cout << "pixelPos.size: " << pixelPos.size() << G4endl;
     
     G4int totalGoodCounts = 0;
     G4ThreeVector meanPixelPos = G4ThreeVector();
@@ -201,6 +201,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   G4cout << "eof::3" << G4endl;
     if (pixelCount.size() > 0)
     {
+      G4cout << pixelCount.at(i) << G4endl;
+      G4cout << pixelPos.at(i) << G4endl;
 
     for (unsigned long i=0; i<pixelCount.size();)
     {
