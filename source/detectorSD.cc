@@ -175,48 +175,48 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     // save pixel tree
     std::vector <G4ThreeVector> pixelPos = {};
     std::vector <G4int> pixelCount = {};
-  G4cout << "eof::1" << G4endl;
+  // G4cout << "eof::1" << G4endl;
     for ( G4int i=0; i<nofHits; i++ )
     {
       auto it = std::find(pixelPos.begin(),pixelPos.end(),(*fHitsCollection)[i]->GetPixelPos());
-      G4cout << " pixel pos: " << (*fHitsCollection)[i]->GetPixelPos() << G4endl;
-      G4cout << " end: " << pixelPos.end() - pixelPos.begin() << G4endl;
-     G4cout << "it: " << it - pixelPos.begin() << G4endl;
+     //  G4cout << " pixel pos: " << (*fHitsCollection)[i]->GetPixelPos() << G4endl;
+      // G4cout << " end: " << pixelPos.end() - pixelPos.begin() << G4endl;
+     // G4cout << "it: " << it - pixelPos.begin() << G4endl;
       if(it == pixelPos.end())
       {
-  G4cout << "eof::2" << G4endl;
+ //  G4cout << "eof::2" << G4endl;
         pixelPos.push_back((*fHitsCollection)[i]->GetPixelPos());
         pixelCount.push_back(1);
       }
       else
         pixelCount.at(std::distance(pixelPos.begin(),it)) += 1;
     }
-    G4cout << "pixelCount.size: " << pixelCount.size() << G4endl;
-    G4cout << "pixelPos.size: " << pixelPos.size() << G4endl;
+    // G4cout << "pixelCount.size: " << pixelCount.size() << G4endl;
+    // G4cout << "pixelPos.size: " << pixelPos.size() << G4endl;
     
     G4int totalGoodCounts = 0;
     G4ThreeVector meanPixelPos = G4ThreeVector();
   G4ThreeVector mostPixelPos = G4ThreeVector();
     G4int imax = 0;
-  G4cout << "eof::3" << G4endl;
+  // G4cout << "eof::3" << G4endl;
     if (pixelCount.size() > 0)
     {
     for (unsigned long i=0; i<pixelCount.size();)
     {
-      G4cout << pixelCount.at(i) << G4endl;
-      G4cout << pixelPos.at(i) << G4endl;
+      // G4cout << pixelCount.at(i) << G4endl;
+     //  G4cout << pixelPos.at(i) << G4endl;
       if (pixelCount.at(i) < nofHitsThreshold)
       {
-  G4cout << "eof::4" << G4endl;
-        G4cout << i << G4endl;
+  // G4cout << "eof::4" << G4endl;
+     //    G4cout << i << G4endl;
         pixelCount.erase(pixelCount.begin() + i);
-  G4cout << "eof::4b" << G4endl;
+  // G4cout << "eof::4b" << G4endl;
         pixelPos.erase(pixelPos.begin() + i);
-  G4cout << "eof::4c" << G4endl;
+  // G4cout << "eof::4c" << G4endl;
       }
       else
       {
-  G4cout << "eof::5" << G4endl;
+  // G4cout << "eof::5" << G4endl;
         totalGoodCounts += pixelCount.at(i);
         meanPixelPos += pixelCount.at(i)*pixelPos.at(i);
         if (pixelCount.at(i) > pixelCount.at(imax))
