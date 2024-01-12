@@ -211,6 +211,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   G4cout << "eof::4" << G4endl;
         G4cout << i << G4endl;
         pixelCount.erase(pixelCount.begin() + i);
+  G4cout << "eof::4b" << G4endl;
         pixelPos.erase(pixelPos.begin() + i);
       }
       else
