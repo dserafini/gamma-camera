@@ -42,13 +42,7 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 	{
 		if (gunorgps == "gps")
 		{
-			G4cout << "launched 1" << G4endl;
-			fParticleGPS->SetParticlePosition(G4ThreeVector(0*mm,15*mm,0.*mm));
-			fParticleGPS->GeneratePrimaryVertex(anEvent);
-			G4cout << "launched 2" << G4endl;
-			fParticleGPS->SetParticlePosition(G4ThreeVector(15*mm,15*mm,0.*mm));
-			fParticleGPS->GeneratePrimaryVertex(anEvent);
-			G4cout << "launched 3" << G4endl;
+			// fParticleGPS->SetParticlePosition(G4ThreeVector(0*mm,15*mm,0.*mm));
 			fParticleGPS->GeneratePrimaryVertex(anEvent);
 			SaveVertexPosition(fParticleGPS->GetParticlePosition());
 		}
