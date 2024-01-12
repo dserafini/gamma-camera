@@ -126,7 +126,7 @@
 
 # test with optical photons
 /particleSource/source gps
-/gps/particle opticalphoton
+/gps/particle proton
 /gps/polarization 1 1 1
 /gps/direction 0 0 1
 /gps/pos/type Plane
@@ -134,6 +134,6 @@
 /gps/pos/centre 0 0 0 mm
 /gps/pos/halfx 15 mm
 /gps/pos/halfy 15 mm
-/gps/number 10
+/gps/number 1000
 /gps/ene/type Mono
 /gps/energy 2.76 eV
