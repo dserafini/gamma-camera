@@ -68,17 +68,17 @@
 /gps/direction 0 0 1
 /gps/ang/type iso
 /control/alias zDepth 15
-# /gps/pos/centre 0. 0. -{zDepth} mm
-# /gps/pos/type Volume
-# /gps/pos/shape Para
-# /gps/pos/halfx 50 mm
-# /gps/pos/halfy 50 mm
-# /gps/pos/halfz {zDepth} mm
-/gps/pos/type Plane
-/gps/pos/shape Square
-/gps/pos/centre 0 0 0 mm
-/gps/pos/halfx 15 mm
-/gps/pos/halfy 15 mm
+/gps/pos/type Volume
+/gps/pos/shape Para
+/gps/pos/centre 0. 0. -{zDepth} mm
+/gps/pos/halfx 50 mm
+/gps/pos/halfy 50 mm
+/gps/pos/halfz {zDepth} mm
+# /gps/pos/type Plane
+# /gps/pos/shape Square
+# /gps/pos/centre 0 0 0 mm
+# /gps/pos/halfx 15 mm
+# /gps/pos/halfy 15 mm
 # /gps/ene/type Mono
 # /gps/energy 2. MeV
 
