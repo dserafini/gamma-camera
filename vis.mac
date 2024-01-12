@@ -48,6 +48,8 @@
 ################################################################################
 # change source
 ################################################################################
+/particleSource/source gps
+
 # gun
 /gun/particle gamma
 /gun/energy 342 keV
@@ -59,6 +61,8 @@
 # /gps/particle ion
 # /gps/ion 47 111 0 0.
 /gps/particle proton
+/gps/number 1000
+/gps/polarization 1 1 1
 /gps/energy 500. keV
 /gps/position 0 0. -1. mm
 /gps/direction 0 0 1
@@ -70,18 +74,11 @@
 # /gps/pos/halfx 50 mm
 # /gps/pos/halfy 50 mm
 # /gps/pos/halfz {zDepth} mm
-
-# test with optical photons
-/particleSource/source gps
-# /gps/particle opticalphoton
-# /gps/polarization 1 1 1
-# /gps/direction 0 0 1
 /gps/pos/type Plane
 /gps/pos/shape Square
 /gps/pos/centre 0 0 0 mm
 /gps/pos/halfx 15 mm
 /gps/pos/halfy 15 mm
-/gps/number 1000
 # /gps/ene/type Mono
 # /gps/energy 2. MeV
 
