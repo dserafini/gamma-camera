@@ -136,4 +136,4 @@
 # /gps/pos/halfy 15 mm
 # /gps/number 1000
 /gps/ene/type Mono
-/gps/energy 2. keV
+/gps/energy 2. MeV
