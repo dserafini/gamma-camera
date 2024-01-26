@@ -31,7 +31,7 @@ void channelHit::Draw()
   G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
   if(pVVisManager)
   {
-    G4Circle circle(fPos);
+    G4Circle circle(fPixelPos);
     circle.SetScreenSize(4.);
     circle.SetFillStyle(G4Circle::filled);
     G4Colour colour(1.,0.,0.);
