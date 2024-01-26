@@ -11,7 +11,7 @@
 
 #include "run.hh"
 #include "enums.hh"
-#include "detectorHit.hh"
+#include "detectorSD.hh"
 #include "G4SDManager.hh"
 
 class MyEventAction : public G4UserEventAction
