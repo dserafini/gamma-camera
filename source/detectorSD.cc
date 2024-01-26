@@ -43,7 +43,7 @@ MySensitiveDetector::~MySensitiveDetector() {}
 
 void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
 {
-  G4cout << "MySensitiveDetector::Initialize" << G4endl;
+  // G4cout << "MySensitiveDetector::Initialize" << G4endl;
   
   // Create hits collection
   fHitsCollection = new detectorHitsCollection(SensitiveDetectorName, collectionName[0]);
@@ -65,7 +65,7 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
-  G4cout << "MySensitiveDetector::ProcessHits" << G4endl;
+  // G4cout << "MySensitiveDetector::ProcessHits" << G4endl;
   
   // process hits only for optical photons
   if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
@@ -120,7 +120,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 {
-  G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
+  // G4cout << "MySensitiveDetector::EndOfEvent" << G4endl;
   
   nofHits = fHitsCollection->entries();
   if ( verboseLevel>1 ) {
@@ -149,7 +149,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     fSigmaPos.setY(sqrt(fSigmaPos.getY() / (nofHits - 1)));
     fSigmaMod = sqrt(fSigmaMod / (nofHits - 1));
   
-    G4cout << "nofHits: " << nofHits << G4endl;
+    // G4cout << "nofHits: " << nofHits << G4endl;
     
     // fill the Ntuple of optical photons
     G4AnalysisManager *man = G4AnalysisManager::Instance();
@@ -242,8 +242,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     // find maximum pixel
     G4ThreeVector mostPixelPos = pixelPos.at(std::distance(pixelCount.begin(),std::max_element(pixelCount.begin(),pixelCount.end())));
   */
-    G4cout << "found most pixel pos: " << mostPixelPos << G4endl;
-    G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
+    // G4cout << "found most pixel pos: " << mostPixelPos << G4endl;
+    // G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
     
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostX, mostPixelPos.getX());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostY, mostPixelPos.getY());
