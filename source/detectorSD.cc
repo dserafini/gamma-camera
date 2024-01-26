@@ -11,6 +11,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   fSigmaPos = G4ThreeVector();
   fSigmaMod = 0.;
   nofHits = 0;
+  fSaveEvent = false;
 
   // quantum efficiency
   quEff = new G4PhysicsOrderedFreeVector();
@@ -56,6 +57,7 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
   fSigmaPos = G4ThreeVector();
   fSigmaMod = 0.;
   nofHits = 0;
+  fSaveEvent = false;
 
   // G4cout << "SiPM reads at least " << nofHitsThreshold << " photons" << G4endl;
 }
@@ -227,6 +229,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     
     if (pixelCount.size() > 0)
     {
+      IShouldSaveEvent();
       meanPixelPos /= totalGoodCounts;
       mostPixelPos = pixelPos.at(imax);
     }
