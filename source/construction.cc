@@ -1058,9 +1058,12 @@ void MyDetectorConstruction::ConstructSDandField()
 
 	if(fScoringDetector != NULL)
 	{
-		MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector","SensitiveDetectorHitsCollection");
+		MySensitiveDetector *sensDet = new MySensitiveDetector("/detectorpixel");
+		MySensitiveDetector *sensChannel = new MySensitiveDetector("/detectorchannel");
 		G4SDManager::GetSDMpointer()->AddNewDetector(sensDet);
+		G4SDManager::GetSDMpointer()->AddNewDetector(sensChannel);
 		fScoringDetector->SetSensitiveDetector(sensDet);
+		fScoringDetector->SetSensitiveDetector(sensChannel);
 		sensDet->SetDetectionThreshold(energyThreshold);
 	}
 
