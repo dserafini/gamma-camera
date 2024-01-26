@@ -14,7 +14,7 @@ class channelHit : public G4VHit
 {
   public:
     channelHit() = default;
-    channelHit(const detectorHit&) = default;
+    channelHit(const channelHit&) = default;
     ~channelHit() override = default;
 
     // operators
@@ -29,11 +29,11 @@ class channelHit : public G4VHit
     void Draw() override;
 
     // Set methods
-    void SetNopti     (G4double de)      { fEdep = de; };
+    void SetNopti     (G4int de)      { fNopti = de; };
     void SetPixelPos      (G4ThreeVector xyz){ fPixelPos = xyz; };
 
     // Get methods
-    G4double GetNopti() const     { return fEdep; };
+    G4double GetNopti() const     { return fNopti; };
     G4ThreeVector GetPixelPos() const { return fPixelPos; };
 
   private:
