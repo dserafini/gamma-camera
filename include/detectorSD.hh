@@ -20,6 +20,7 @@ public:
 	~MySensitiveDetector();
 	void Initialize(G4HCofThisEvent* hitCollection) override;
 	void SetDetectionThreshold(G4int threshold);
+	G4int GetDetectionThreshold() {return nofHitsThreshold;}
 
 private:
 	G4bool ProcessHits(G4Step*, G4TouchableHistory*) override;
