@@ -18,8 +18,9 @@ void MyEventAction::EndOfEventAction(const G4Event* currentEvent)
   // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
   
   G4SDManager* fSDM = G4SDManager::GetSDMpointer();
+  MySensitiveDetector *sdet = fSDM->FindSensitiveDetector("MySensitiveDetector");
   
-  if (fSDM->FindSensitiveDetector("MySensitiveDetector")->ShouldISaveEvent())
+  if (sdet->ShouldISaveEvent())
   {
     // G4cout << "numberDetectedPhotons " << numberDetectedPhotons << G4endl;
     
