@@ -18,7 +18,7 @@ void MyEventAction::EndOfEventAction(const G4Event* currentEvent)
   // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
   
   G4SDManager* fSDM = G4SDManager::GetSDMpointer();
-  MySensitiveDetector *sdet = fSDM->FindSensitiveDetector("MySensitiveDetector");
+  MySensitiveDetector *sdet = (MySensitiveDetector*)fSDM->FindSensitiveDetector("MySensitiveDetector");
   
   if (sdet->ShouldISaveEvent())
   {
