@@ -153,6 +153,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     
     // fill the Ntuple of optical photons
     G4AnalysisManager *man = G4AnalysisManager::Instance();
+    man->FillNtupleIColumn(Tuples::kOptical, TOptical::kNumber, nofHits);
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanX, fMeanPos.getX());
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanY, fMeanPos.getY());
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kMeanZ, fMeanPos.getZ());
@@ -160,7 +161,6 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kSigmaY, fSigmaPos.getY());
     man->FillNtupleDColumn(Tuples::kOptical, TOptical::kSigmaR, fSigmaMod);
 
-    man->FillNtupleIColumn(Tuples::kSipm, Tsipm::kNumber, nofHits);
     /*
     // save pixel tree
     G4ThreeVector meanPixelPos = G4ThreeVector();
@@ -245,6 +245,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     // G4cout << "found most pixel pos: " << mostPixelPos << G4endl;
     // G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
     
+    man->FillNtupleIColumn(Tuples::kSipm, Tsipm::kNumber, totalGoodCounts);
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostX, mostPixelPos.getX());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostY, mostPixelPos.getY());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
