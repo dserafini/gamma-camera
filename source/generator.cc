@@ -43,7 +43,9 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 		if (gunorgps == "gps")
 		{
 			// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() / eV << " eV" << G4endl;
-			// fParticleGPS->SetParticlePosition(G4ThreeVector(0*mm,15*mm,0.*mm));
+			fParticleGPS->SetParticlePosition(G4ThreeVector(0*mm,15*mm,0.*mm));
+			fParticleGPS->GeneratePrimaryVertex(anEvent);
+			fParticleGPS->SetParticlePosition(G4ThreeVector(15*mm,15*mm,0.*mm));
 			fParticleGPS->GeneratePrimaryVertex(anEvent);
 			SaveVertexPosition(fParticleGPS->GetParticlePosition());
 		}
