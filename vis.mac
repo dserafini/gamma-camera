@@ -60,13 +60,13 @@
 # gps
 # /gps/particle ion
 # /gps/ion 47 111 0 0.
-/gps/particle proton
-/gps/number 1000
+/gps/particle opticalphoton
+/gps/number 1
 /gps/polarization 1 1 1
-/gps/energy 50. keV
+/gps/energy 5. eV
 /gps/position 0 0. -1. mm
 /gps/direction 0 0 1
-/gps/ang/type iso
+# /gps/ang/type iso
 /control/alias zDepth 15
 /gps/pos/type Volume
 /gps/pos/shape Para
