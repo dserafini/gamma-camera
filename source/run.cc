@@ -30,6 +30,7 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(Tuples::kScintillator, "fZ"); // [mm]
   
   // scintillation optical photons
+  man->CreateNtupleIColumn(Tuples::kOptical, "pNumber"); // [1]
   man->CreateNtupleDColumn(Tuples::kOptical, "pMeanX"); // [mm]
   man->CreateNtupleDColumn(Tuples::kOptical, "pMeanY"); // [mm]
   man->CreateNtupleDColumn(Tuples::kOptical, "pMeanZ"); // [mm]
