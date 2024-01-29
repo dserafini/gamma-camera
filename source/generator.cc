@@ -37,8 +37,8 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 		fParticleGun->SetParticlePosition(G4ThreeVector(0*mm,15*mm,0.*mm));
 		fParticleGun->GeneratePrimaryVertex(anEvent);
 		fParticleGun->GeneratePrimaryVertex(anEvent);
-		fParticleGun->SetParticlePosition(G4ThreeVector(15*mm,15*mm,0.*mm));
 		fParticleGun->GeneratePrimaryVertex(anEvent);
+		fParticleGun->SetParticlePosition(G4ThreeVector(15*mm,15*mm,0.*mm));
 		fParticleGun->GeneratePrimaryVertex(anEvent);
 		fParticleGun->GeneratePrimaryVertex(anEvent);
 		SaveVertexPosition(fParticleGun->GetParticlePosition());
