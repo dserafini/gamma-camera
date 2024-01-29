@@ -33,7 +33,13 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 	if (gunorgps == "gun")
 	{
 		// G4cout << "energy: " << fParticleGun->GetParticleEnergy() / eV << " eV" << G4endl;
-		fParticleGun->SetParticlePosition(GenerateParticlePositionMOBY());
+		// fParticleGun->SetParticlePosition(GenerateParticlePositionMOBY());
+		fParticleGun->SetParticlePosition(G4ThreeVector(0*mm,15*mm,0.*mm));
+		fParticleGun->GeneratePrimaryVertex(anEvent);
+		fParticleGun->GeneratePrimaryVertex(anEvent);
+		fParticleGun->SetParticlePosition(G4ThreeVector(15*mm,15*mm,0.*mm));
+		fParticleGun->GeneratePrimaryVertex(anEvent);
+		fParticleGun->GeneratePrimaryVertex(anEvent);
 		fParticleGun->GeneratePrimaryVertex(anEvent);
 		SaveVertexPosition(fParticleGun->GetParticlePosition());
 		// G4cout << "myPos: " << fParticleGun->GetParticlePosition() << G4endl;
@@ -44,11 +50,6 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 		{
 			// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() / eV << " eV" << G4endl;
 			fParticleGPS->SetParticlePosition(G4ThreeVector(0*mm,15*mm,0.*mm));
-			fParticleGPS->GeneratePrimaryVertex(anEvent);
-			fParticleGPS->GeneratePrimaryVertex(anEvent);
-			fParticleGPS->SetParticlePosition(G4ThreeVector(15*mm,15*mm,0.*mm));
-			fParticleGPS->GeneratePrimaryVertex(anEvent);
-			fParticleGPS->GeneratePrimaryVertex(anEvent);
 			fParticleGPS->GeneratePrimaryVertex(anEvent);
 			SaveVertexPosition(fParticleGPS->GetParticlePosition());
 		}
