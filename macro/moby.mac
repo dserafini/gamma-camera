@@ -25,7 +25,7 @@
 ################################################################################
 # change geometry detector
 ################################################################################
-/control/alias pThreshold 1000
+/control/alias pThreshold 10
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
 /detector/threshold {pThreshold}
@@ -77,7 +77,7 @@
 /control/alias nEvents 100000000
 /control/alias tumoradius .5
 /control/alias depth 10.0
-/control/alias xcentre 0.0
+/control/alias xcentre 10.0
 
 /control/add tumorDepth {tumoradius} {depth}
 /control/multiply tumordiameter {tumoradius} 2
@@ -90,7 +90,21 @@
 /run/printProgress 1000000
 /run/beamOn {nEvents}
 
-/control/alias pThreshold 10
+/control/alias pThreshold 100
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/run/beamOn {nEvents}
+
+
+/control/alias pThreshold 1000
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/run/beamOn {nEvents}
+
+
+/control/alias pThreshold 10000
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
