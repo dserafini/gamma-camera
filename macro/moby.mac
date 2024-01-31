@@ -25,7 +25,7 @@
 ################################################################################
 # change geometry detector
 ################################################################################
-/control/alias pThreshold 10
+/control/alias pThreshold 10000
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
 /detector/threshold {pThreshold}
@@ -90,22 +90,9 @@
 /run/printProgress 1000000
 /run/beamOn {nEvents}
 
-/control/alias pThreshold 100
-/detector/threshold {pThreshold}
-/run/reinitializeGeometry
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
-/run/beamOn {nEvents}
-
-
-/control/alias pThreshold 1000
-/detector/threshold {pThreshold}
-/run/reinitializeGeometry
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
-/run/beamOn {nEvents}
-
 
 /control/alias pThreshold 10000
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
