@@ -88,11 +88,59 @@
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
 /particleSource/source gps
 /run/printProgress 1000000
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 
-/control/alias pThreshold 1000
+/control/alias pThreshold 200
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
-#/run/beamOn {nEvents}
+/run/beamOn {nEvents}
+
+/control/alias pThreshold 500
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/run/beamOn {nEvents}
+
+/control/alias pThreshold 2000
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/run/beamOn {nEvents}
+
+/control/alias pThreshold 5000
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/run/beamOn {nEvents}
+
+
+
+/control/alias pThreshold 200
+/control/alias xcentre 5.0
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/run/beamOn {nEvents}
+
+/control/alias pThreshold 500
+/control/alias xcentre 5.0
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/run/beamOn {nEvents}
+
+/control/alias pThreshold 2000
+/control/alias xcentre 5.0
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/run/beamOn {nEvents}
+
+/control/alias pThreshold 5000
+/control/alias xcentre 5.0
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/run/beamOn {nEvents}
