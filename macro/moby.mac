@@ -77,7 +77,7 @@
 /control/alias nEvents 100000000
 /control/alias tumoradius .5
 /control/alias depth 10.0
-/control/alias xcentre 5.0
+/control/alias xcentre 0.0
 
 /control/add tumorDepth {tumoradius} {depth}
 /control/multiply tumordiameter {tumoradius} 2
@@ -95,25 +95,25 @@
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 /control/alias pThreshold 500
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 /control/alias pThreshold 2000
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 /control/alias pThreshold 5000
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 
 
@@ -122,14 +122,14 @@
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 /control/alias pThreshold 500
 /control/alias xcentre 5.0
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 /control/alias pThreshold 2000
 /control/alias xcentre 5.0
