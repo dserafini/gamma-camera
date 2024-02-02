@@ -91,7 +91,7 @@
 #/run/beamOn {nEvents}
 
 /control/alias pThreshold 200
-/control/alias xcentre 5.0
+/control/alias xcentre 10.0
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
