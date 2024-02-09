@@ -90,7 +90,7 @@
 #/run/beamOn {nEvents}
 
 /control/alias pThreshold 10
-/control/alias xcentre 9.0
+/control/alias xcentre 7.0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /collimator/positionX 0. mm
 /detector/threshold {pThreshold}
