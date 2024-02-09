@@ -90,7 +90,7 @@
 #/run/beamOn {nEvents}
 
 /control/alias pThreshold 10
-/control/alias xcentre 9.0
+/control/alias xcentre 11.0
 /collimator/positionX 2.5 mm
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
@@ -98,7 +98,7 @@
 /run/beamOn {nEvents}
 
 /control/alias pThreshold 10000
-/control/alias xcentre 9.0
+/control/alias xcentre 11.0
 /collimator/positionX 2.5 mm
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
