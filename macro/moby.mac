@@ -19,6 +19,7 @@
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
+/collimator/positionX 0. mm
 /collimator/positionY 0. mm
 
 ################################################################################
@@ -56,6 +57,7 @@
 ################################################################################
 # choose general particle gun
 ################################################################################
+/particleSource/sourceType gun
 /gun/particle ion
 /gun/ion 47 111 0 0.
 /gun/energy 0. eV

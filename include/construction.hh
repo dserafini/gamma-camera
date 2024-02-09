@@ -139,27 +139,10 @@ private:
 	
 	// Materials MOBY
 	G4Material* fVoxelMaterial;
-	G4Material* fLung;
 	G4Material* fSoft;
 	G4Material* fCBone;
 	G4Material* fLungM;
 	G4Material* fBone;
-	G4Material* fAdipose;
-	G4Material* fBrain;
-	G4Material* fBlood;
-	G4Material* fMuscle;
-	G4Material* fStomachM;
-	G4Material* fLgIntestineM;
-	G4Material* fSmIntestineM;
-	G4Material* fLiverM;
-	G4Material* fPancreasM;
-	G4Material* fBladderM;
-	G4Material* fSpleenM;
-	G4Material* fBloodM;
-	G4Material* fBrainM;
-	G4Material* fHeartM;
-	G4Material* fThyroidM;
-	G4Material* fSkinM;
 	std::vector<G4Material*> theMaterials;
 
 	// moby

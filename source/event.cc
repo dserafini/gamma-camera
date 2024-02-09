@@ -13,7 +13,7 @@ void MyEventAction::BeginOfEventAction(const G4Event* )
   // G4cout << "MyEventAction::BeginOfEventAction" << G4endl;
 }
 
-void MyEventAction::EndOfEventAction(const G4Event*)
+void MyEventAction::EndOfEventAction(const G4Event* currentEvent)
 {
   // G4cout << "MyEventAction::EndOfEventAction" << G4endl;
   

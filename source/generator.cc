@@ -17,8 +17,8 @@ MyPrimaryGenerator::MyPrimaryGenerator()
 		G4cout << "No activity root file found!!" << G4endl;
 
 	fMessengerParticleSource = new G4GenericMessenger(this, "/particleSource/", "Particle source generator");
-	fMessengerParticleSource->DeclareProperty("source", gunorgps, "gun or gps");
-	gunorgps = "gun";
+	fMessengerParticleSource->DeclareProperty("sourceType", sourceType, "gun or gps or moby");
+	sourceType = "gun";
 }
 
 MyPrimaryGenerator::~MyPrimaryGenerator()
@@ -30,23 +30,23 @@ MyPrimaryGenerator::~MyPrimaryGenerator()
 
 void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 {
-	if (gunorgps == "gun")
+	// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() / eV << " eV" << G4endl;
+	if (sourceType == "gun" || sourceType == "moby")
 	{
-		// G4cout << "energy: " << fParticleGun->GetParticleEnergy() / eV << " eV" << G4endl;
-		fParticleGun->SetParticlePosition(GenerateParticlePositionMOBY());
-		// fParticleGun->SetParticlePosition(G4ThreeVector(0*mm,15*mm,0.*mm));
+		if (sourceType == "moby")
+			fParticleGun->SetParticlePosition(GenerateParticlePositionMOBY());
 		fParticleGun->GeneratePrimaryVertex(anEvent);
 		SaveVertexPosition(fParticleGun->GetParticlePosition());
 		// G4cout << "myPos: " << fParticleGun->GetParticlePosition() << G4endl;
 	}
 	else
 	{
-		if (gunorgps == "gps")
+		if (sourceType == "gps")
 		{
-			// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() / eV << " eV" << G4endl;
-			// fParticleGPS->SetParticlePosition(G4ThreeVector(0*mm,15*mm,0.*mm));
+			// fParticleGPS->SetParticlePosition(G4ThreeVector(10*mm,10*mm,0.*mm));
 			fParticleGPS->GeneratePrimaryVertex(anEvent);
 			SaveVertexPosition(fParticleGPS->GetParticlePosition());
+			// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() << G4endl;
 		}
 		else
 			G4cout << "Error with the particle generator!!!" << G4endl;
