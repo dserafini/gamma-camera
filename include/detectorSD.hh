@@ -19,6 +19,11 @@ public:
 	MySensitiveDetector(G4String, const G4String&);
 	~MySensitiveDetector();
 	void Initialize(G4HCofThisEvent* hitCollection) override;
+	void SetDetectionThreshold(G4int threshold);
+	G4int GetDetectionThreshold() {return nofHitsThreshold;}
+	G4bool ShouldISaveEvent() {return fSaveEvent;}
+	void IShouldSaveEvent() {fSaveEvent = true;}
+	void IShouldNotSaveEvent() {fSaveEvent = false;}
 
 private:
 	G4bool ProcessHits(G4Step*, G4TouchableHistory*) override;
@@ -32,6 +37,10 @@ private:
 
 	// quantum efficiency
 	G4PhysicsOrderedFreeVector *quEff;
+
+	// energy threshold
+	G4int nofHitsThreshold;
+	G4bool fSaveEvent;
 };
 
 #endif

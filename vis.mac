@@ -1,7 +1,10 @@
+# macro are in macro folder
+/control/macroPath macro
+
 ################################################################################
 # change geometry collimator
 ################################################################################
-/collimator/exist true
+/collimator/exist false
 /collimator/hole_length 30. mm
 /collimator/hole_thickness 15. mm
 /collimator/septa_thickness 5. mm
@@ -12,7 +15,7 @@
 ################################################################################
 # change geometry scintillator
 ################################################################################
-/scintillator/exist true
+/scintillator/exist false
 /scintillator/pixel matrix
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
@@ -25,6 +28,7 @@
 /detector/det_pixel_size 20. mm
 /detector/det_scinti_distance 10 mm
 /detector/fill_factor .8
+/detector/threshold 3
 
 ################################################################################
 # change geometry moby
@@ -120,15 +124,3 @@
 # color first gamma
 /vis/modeling/trajectories/create/drawByParticleID
 /vis/modeling/trajectories/drawByParticleID-0/set gamma blue
-
-# test with optical photons
-# /gps/particle opticalphoton
-# /gps/polarization 1 1 1
-# /gps/direction 0 0 1
-# /gps/number 10
-# /gps/position 0. 0. 0. mm
-# /gps/ene/type Mono
-# /gps/energy 4 eV
-
-# macro are in macro folder
-/control/macroPath macro
