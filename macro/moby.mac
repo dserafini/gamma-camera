@@ -92,14 +92,14 @@
 /control/alias pThreshold 10
 /control/alias xcentre 9.0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
-/collimator/positionX 2.5 mm
+/collimator/positionX 0. mm
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThreCollPos0mm.root
 /run/beamOn {nEvents}
 
 
-/control/alias pThreshold 10
+/control/alias pThreshold 100
 /control/alias xcentre 7.0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /collimator/positionX 2.5 mm
