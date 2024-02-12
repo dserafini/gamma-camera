@@ -91,8 +91,8 @@
 /run/printProgress 1000000
 #/run/beamOn {nEvents}
 
-/control/alias pThreshold 100
-/control/alias xcentre .0
+/control/alias pThreshold 0
+/control/alias xcentre 0.0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /control/alias xcollimator 0.
 /collimator/positionX {xcollimator} mm
@@ -101,8 +101,8 @@
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl.root
 /run/beamOn {nEvents}
 
-/control/alias pThreshold 1000
-/control/alias xcentre .0
+/control/alias pThreshold 2000
+/control/alias xcentre 0.0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /control/alias xcollimator 0.
 /collimator/positionX {xcollimator} mm
