@@ -92,7 +92,7 @@
 #/run/beamOn {nEvents}
 
 /control/alias pThreshold 100
-/control/alias xcentre 8.0
+/control/alias xcentre .0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /control/alias xcollimator 0.
 /collimator/positionX {xcollimator} mm
@@ -102,7 +102,7 @@
 /run/beamOn {nEvents}
 
 /control/alias pThreshold 1000
-/control/alias xcentre 8.0
+/control/alias xcentre .0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /control/alias xcollimator 0.
 /collimator/positionX {xcollimator} mm
