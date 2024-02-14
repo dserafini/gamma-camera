@@ -28,7 +28,7 @@
 /control/alias pThreshold 10
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
-/detector/fill_factor 99.
+/detector/fill_factor 1.
 /detector/threshold {pThreshold}
 
 ################################################################################
@@ -94,10 +94,36 @@
 
 /control/alias pThreshold 0
 /control/alias xcentre 0.0
+/control/alias fillfactor 1.0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /control/alias xcollimator 0.
 /collimator/positionX {xcollimator} mm
+/detector/fill_factor {fillfactor}
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
+/run/beamOn {nEvents}
+
+/control/alias pThreshold 0
+/control/alias xcentre 0.0
+/control/alias fillfactor .5
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/control/alias xcollimator 0.
+/collimator/positionX {xcollimator} mm
+/detector/fill_factor {fillfactor}
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
+/run/beamOn {nEvents}
+
+/control/alias pThreshold 0
+/control/alias xcentre 0.0
+/control/alias fillfactor 0.1
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/control/alias xcollimator 0.
+/collimator/positionX {xcollimator} mm
+/detector/fill_factor {fillfactor}
+/detector/threshold {pThreshold}
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
 /run/beamOn {nEvents}
