@@ -64,6 +64,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerDetector->DeclarePropertyWithUnit("det_pixel_size", "mm", det_pixel_size, "Size of the detector pixels");
 	fMessengerDetector->DeclareProperty("pixel", detPixelNoSlab, "matrix or otherwise");
 	fMessengerDetector->DeclarePropertyWithUnit("det_scinti_distance", "mm", detector_scintillator_distance, "Optical coupling distance");
+	fMessengerDetector->DeclarePropertyWithUnit("channel_dead_space", "mm", channel_dead_space, "Dead space between channels");
 	fMessengerDetector->DeclareProperty("fill_factor", det_fill_factor, "Ratio active over total pixel area");
 	fMessengerDetector->DeclareProperty("threshold", energyThreshold, "Minimum number of photons to be detected");
 
@@ -74,6 +75,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	detector_depth = 10*um;
 	fScoringDetector = 0;
 	det_fill_factor = .8;
+	channel_dead_space = .2 * mm;
 	energyThreshold = 1;
 	
 	// moby commands
