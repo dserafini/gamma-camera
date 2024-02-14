@@ -224,3 +224,12 @@ void MySensitiveDetector::SetDetectionThreshold(G4int aThreshold)
 {
   nofHitsThreshold = aThreshold;
 }
+
+void MySensitiveDetector::SetFillFactor(G4double aFactor)
+{
+  if (aFactor<0 || aFactor >1)
+    G4cout << "Error: " << aFactor << " is invalid as fill factor value!!!" << G4endl;
+  else
+    fillfactor = aFactor;
+  return;
+}
