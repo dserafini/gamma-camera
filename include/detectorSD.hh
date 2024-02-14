@@ -39,7 +39,7 @@ private:
 
 	// quantum efficiency
 	G4PhysicsOrderedFreeVector *quEff;
-	G4double *fillfactor;
+	G4double fillfactor;
 
 	// energy threshold
 	G4int nofHitsThreshold;
