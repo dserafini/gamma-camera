@@ -37,6 +37,9 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
 
   // default energy detection threshold
   nofHitsThreshold = 1;
+
+  // default fill factor
+  fillfactor = 1;
 }
 
 MySensitiveDetector::~MySensitiveDetector() {}
