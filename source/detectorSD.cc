@@ -63,7 +63,7 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
   fSaveEvent = false;
 
   // G4cout << "SiPM reads at least " << nofHitsThreshold << " photons" << G4endl;
-  G4cout << "SiPM fill factor " << fillfactor << G4endl;
+  // G4cout << "SiPM fill factor " << fillfactor << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -78,8 +78,11 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   aStep->GetTrack()->SetTrackStatus(fStopAndKill);
 
   // filter on geometrical fill factor
-  if (G4UniformRand() > fillfactor)
+  G4double xr = G4UniformRand();
+  G4cout << xr << " : " << fillfactor << G4endl;
+  if (xr > fillfactor)
     return false;
+  G4cout << "fillfactor accepted" << G4endl;
 
   // filter on optical photon wavelength
   G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
