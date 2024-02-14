@@ -58,7 +58,6 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
   fSigmaMod = 0.;
   nofHits = 0;
   fSaveEvent = false;
-  fillfactor = 1.;
 
   // G4cout << "SiPM reads at least " << nofHitsThreshold << " photons" << G4endl;
 }
