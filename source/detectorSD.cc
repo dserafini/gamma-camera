@@ -75,6 +75,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
     return false;
 
+  // kill every detected optical photon
   aStep->GetTrack()->SetTrackStatus(fStopAndKill);
 
   // filter on geometrical fill factor
