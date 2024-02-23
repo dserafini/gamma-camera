@@ -74,7 +74,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	detector_side = slab_side;
 	detector_depth = 10*um;
 	fScoringDetector = 0;
-	det_fill_factor = .8;
+	det_fill_factor = .74;
 	channel_dead_space = .2 * mm;
 	energyThreshold = 1;
 	
