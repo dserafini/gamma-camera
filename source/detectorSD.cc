@@ -79,7 +79,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   aStep->GetTrack()->SetTrackStatus(fStopAndKill);
 
   // filter on geometrical fill factor
-  if ( G4UniformRand() > .5 )
+  if ( G4UniformRand() > fillfactor )
     return false;
 
   // filter on optical photon wavelength
