@@ -20,7 +20,9 @@ public:
 	~MySensitiveDetector();
 	void Initialize(G4HCofThisEvent* hitCollection) override;
 	void SetDetectionThreshold(G4int threshold);
+	void SetFillFactor(G4double value);
 	G4int GetDetectionThreshold() {return nofHitsThreshold;}
+	G4double GetFillFactor() {return fillfactor;}
 	G4bool ShouldISaveEvent() {return fSaveEvent;}
 	void IShouldSaveEvent() {fSaveEvent = true;}
 	void IShouldNotSaveEvent() {fSaveEvent = false;}
@@ -37,6 +39,7 @@ private:
 
 	// quantum efficiency
 	G4PhysicsOrderedFreeVector *quEff;
+	G4double fillfactor;
 
 	// energy threshold
 	G4int nofHitsThreshold;

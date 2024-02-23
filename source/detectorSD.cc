@@ -37,6 +37,9 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
 
   // default energy detection threshold
   nofHitsThreshold = 1;
+
+  // default fill factor
+  fillfactor = 1;
 }
 
 MySensitiveDetector::~MySensitiveDetector() {}
@@ -60,6 +63,7 @@ void MySensitiveDetector::Initialize(G4HCofThisEvent* hce)
   fSaveEvent = false;
 
   // G4cout << "SiPM reads at least " << nofHitsThreshold << " photons" << G4endl;
+  // G4cout << "SiPM fill factor " << fillfactor << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -71,48 +75,36 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   if (aStep->GetTrack()->GetParticleDefinition() != G4OpticalPhoton::Definition())
     return false;
 
+  // kill every detected optical photon
   aStep->GetTrack()->SetTrackStatus(fStopAndKill);
+
+  // filter on geometrical fill factor
+  if ( G4UniformRand() > fillfactor )
+    return false;
 
   // filter on optical photon wavelength
   G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
   G4double enePhoton = aStep->GetTrack()->GetKineticEnergy();
   G4double wlen = (1.239841939*eV/enePhoton)*1e3;
-  //if (G4UniformRand() < quEff->Value(wlen))
- // {
-    // energy deposit
-    G4double edep = aStep->GetTotalEnergyDeposit(); // [keV]
+  if (G4UniformRand() > quEff->Value(wlen))
+    return false;
   
-    // if (edep==0.) return false;
-  
-    auto newHit = new detectorHit();
-  
-    newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
-    newHit->SetEdep(edep);
-    newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
-    newHit->SetPixelPos (preStepPoint->GetTouchable()->GetTranslation());
-    // G4cout << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() << ": " << aStep->GetPreStepPoint()->GetTouchable()->GetTranslation() << G4endl;
-  
-    if (fHitsCollection)
-      fHitsCollection->insert( newHit );
-  
-    // newHit->Print();
-    // newHit->Draw();
-  
-    // get volume position
-    // G4VPhysicalVolume *vol = aStep->GetTrack()->GetVolume();
-    // if (vol)
-    // {
-      // G4cout << "name " << vol->GetName();
-      // G4cout << "\t, copyno " << vol->GetCopyNo();
-      // G4cout << "\t, copyno " << vol->GetObjectTranslation();
-      // G4cout << G4endl;
-    // }
-    
-    // kill every detected photon
-  //}
-  //else
- //   return false;
+  // energy deposit
+  G4double edep = aStep->GetTotalEnergyDeposit(); // [keV]
 
+  // if (edep==0.) return false;
+
+  auto newHit = new detectorHit();
+
+  newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
+  newHit->SetEdep(edep);
+  newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
+  newHit->SetPixelPos (preStepPoint->GetTouchable()->GetTranslation());
+  // G4cout << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() << ": " << aStep->GetPreStepPoint()->GetTouchable()->GetTranslation() << G4endl;
+
+  if (fHitsCollection)
+    fHitsCollection->insert( newHit );
+  
   return true;
 }
 
@@ -236,4 +228,13 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 void MySensitiveDetector::SetDetectionThreshold(G4int aThreshold)
 {
   nofHitsThreshold = aThreshold;
+}
+
+void MySensitiveDetector::SetFillFactor(G4double aFactor)
+{
+  if (aFactor<0 || aFactor >1)
+    G4cout << "Error: " << aFactor << " is invalid as fill factor value!!!" << G4endl;
+  else
+    fillfactor = aFactor;
+  return;
 }
