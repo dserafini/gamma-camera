@@ -102,7 +102,7 @@
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 /control/alias pThreshold 0
 /control/alias xcentre 0.0
@@ -114,11 +114,11 @@
 /detector/threshold {pThreshold}
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 /control/alias pThreshold 0
-/control/alias xcentre 1.5
-/control/alias fillfactor 0.1
+/control/alias xcentre 0.0
+/control/alias fillfactor 1.5
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /control/alias xcollimator 0.
 /collimator/positionX {xcollimator} mm
