@@ -1,4 +1,4 @@
-/run/numberOfThreads 1
+/run/numberOfThreads 10
 
 ################################################################################
 # define scintillator
@@ -14,7 +14,7 @@
 # define collimator
 ################################################################################
 
-/collimator/exist 0
+/collimator/exist 1
 /collimator/case_side 100. mm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
@@ -76,7 +76,7 @@
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 1000
+/control/alias nEvents 100000000
 /control/alias tumoradius .5
 /control/alias depth 10.0
 /control/alias xcentre 0.0
