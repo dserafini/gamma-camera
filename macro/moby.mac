@@ -89,7 +89,7 @@
 /gps/pos/radius {tumoradius} mm
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
 /particleSource/sourceType gps
-/run/printProgress 100
+/run/printProgress 1000000
 #/run/beamOn {nEvents}
 
 /control/alias pThreshold 0
