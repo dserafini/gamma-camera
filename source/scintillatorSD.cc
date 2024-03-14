@@ -33,8 +33,8 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
   G4ThreeVector delta = aStep->GetPreStepPoint()->GetPosition() * edep;
   fPosition += delta;
 
-  if (aStep->GetPreStepPoint()->GetCreatorProcess())
-    fProcName = aStep->GetPreStepPoint()->GetCreatorProcess()->GetProcessName();
+  if (aStep->GetTrack()->GetCreatorProcess())
+    fProcName = aStep->GetTrack()->GetCreatorProcess()->GetProcessName();
   
   return true;
 }
