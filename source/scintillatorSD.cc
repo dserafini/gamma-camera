@@ -35,12 +35,12 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
 
   const G4VProcess *tProcess = aStep->GetPostStepPoint()->GetProcessDefinedStep();
   const G4ParticleDefinition *aDef = aStep->GetTrack()->GetParticleDefinition();
-  if (aDef == G4Gamma::Definition())
+  if (tProcess)
   {
-    fProcName = tProcess->GetProcessName();
-    fProcName += "-";
-    fProcName += aDef->GetParticleName();
-    G4cout << fProcName << G4endl;
+    if (tProcess->GetProcessName() == "compt")
+    {
+      fProcName = tProcess->GetProcessName();
+    }
   }
   
   return true;
