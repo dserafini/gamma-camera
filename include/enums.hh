@@ -31,7 +31,8 @@ namespace TScintillator {
     kEdep,
     kGammaX,
     kGammaY,
-    kGammaZ
+    kGammaZ,
+    kProc
   };
 }
 
