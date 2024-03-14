@@ -1,4 +1,4 @@
-/run/numberOfThreads 10
+/run/numberOfThreads 1
 
 ################################################################################
 # define scintillator
@@ -76,7 +76,7 @@
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 10000
+/control/alias nEvents 100000
 /control/alias tumoradius .5
 /control/alias depth 10.0
 /control/alias xcentre 0.0
