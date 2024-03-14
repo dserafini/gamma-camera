@@ -33,11 +33,13 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
   G4ThreeVector delta = aStep->GetPreStepPoint()->GetPosition() * edep;
   fPosition += delta;
 
-  if (aStep->GetPostStepPoint()->GetProcessDefinedStep() && aStep->GetTrack()->GetParticleDefinition() == G4Gamma::Definition())
+  G4VProcess *tProcess = aStep->GetPostStepPoint()->GetProcessDefinedStep();
+  G4ParticleDefinition *aDef = aStep->GetTrack()->GetParticleDefinition();
+  if (aDef == G4Gamma::Definition())
   {
-    fProcName = aStep->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName();
+    fProcName = tProcess->GetProcessName();
     fProcName += "-";
-    fProcName += aStep->GetTrack()->GetParticleDefinition()->GetParticleName();
+    fProcName += aDef->GetParticleName();
     G4cout << fProcName << G4endl;
   }
   
