@@ -5,6 +5,7 @@ MySensitiveScintillator::MySensitiveScintillator(G4String name) : G4VSensitiveDe
   // G4cout << "MySensitiveScintillator::MySensitiveScintillator" << G4endl;
   fEdep = 0.;
   fPosition = G4ThreeVector(0.,0.,0.);
+  fProcName = "none";
 }
 
 MySensitiveScintillator::~MySensitiveScintillator()
@@ -15,6 +16,7 @@ void MySensitiveScintillator::Initialize(G4HCofThisEvent*)
   // G4cout << "MySensitiveScintillator::Initialize" << G4endl;
   fEdep = 0.;
   fPosition = G4ThreeVector(0.,0.,0.);
+  fProcName = "none";
   return;
 }
 
@@ -30,6 +32,9 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
 
   G4ThreeVector delta = aStep->GetPreStepPoint()->GetPosition() * edep;
   fPosition += delta;
+
+  if (aStep->GetPreStepPoint()->GetCreatorProcess())
+    fProcName = aStep->GetPreStepPoint()->GetCreatorProcess()->GetProcessName();
   
   return true;
 }
@@ -51,6 +56,7 @@ void MySensitiveScintillator::EndOfEvent(G4HCofThisEvent*)
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kGammaX, fPosition.getX()/mm); // [mm]
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kGammaY, fPosition.getY()/mm);
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kGammaZ, fPosition.getZ()/mm);
+  man->FillNtupleSColumn(Tuples::kScintillator, TScintillator::kProc, fProcName); // [1]
   
   return;
 }
