@@ -34,7 +34,11 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
   fPosition += delta;
 
   if (aStep->GetTrack()->GetCreatorProcess())
+  {
     fProcName = aStep->GetTrack()->GetCreatorProcess()->GetProcessName();
+    fProcName += "-";
+    fProcName += aStep->GetTrack()->GetParticleDefinition()->GetParticleName();
+  }
   
   return true;
 }
