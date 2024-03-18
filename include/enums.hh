@@ -58,4 +58,12 @@ namespace Tsipm {
   };
 }
 
+namespace Pgamma {
+  enum {
+    kNone,
+    kCompt,
+    kPhoto,
+  };
+}
+
 # endif
