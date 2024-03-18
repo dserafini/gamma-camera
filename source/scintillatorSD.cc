@@ -5,7 +5,7 @@ MySensitiveScintillator::MySensitiveScintillator(G4String name) : G4VSensitiveDe
   // G4cout << "MySensitiveScintillator::MySensitiveScintillator" << G4endl;
   fEdep = 0.;
   fPosition = G4ThreeVector(0.,0.,0.);
-  fProcName = "none";
+  fProcName = Pgamma::kNone;
 }
 
 MySensitiveScintillator::~MySensitiveScintillator()
@@ -16,7 +16,7 @@ void MySensitiveScintillator::Initialize(G4HCofThisEvent*)
   // G4cout << "MySensitiveScintillator::Initialize" << G4endl;
   fEdep = 0.;
   fPosition = G4ThreeVector(0.,0.,0.);
-  fProcName = "none";
+  fProcName = Pgamma::kNone;
   return;
 }
 
@@ -39,7 +39,7 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
   {
     if (tProcess->GetProcessName() == "compt")
     {
-      fProcName = tProcess->GetProcessName();
+      fProcName = Pgamma::kCompt;
     }
   }
   
