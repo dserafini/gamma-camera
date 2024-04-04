@@ -95,25 +95,25 @@
 /run/reinitializeGeometry
 
 /control/alias nEvents 1000
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /run/beamOn {nEvents}
 
 /control/alias nEvents 10000
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /run/beamOn {nEvents}
 
 /control/alias nEvents 100000
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /run/beamOn {nEvents}
 
 /control/alias nEvents 1000000
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /run/beamOn {nEvents}
 
 /control/alias nEvents 10000000
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /run/beamOn {nEvents}
 
 /control/alias nEvents 100000000
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre{xcollimator}mmxColl{fillfactor}Fill.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /run/beamOn {nEvents}
