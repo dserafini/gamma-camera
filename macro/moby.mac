@@ -71,7 +71,7 @@
 /control/alias nEventsBackground 100000000
 /run/printProgress 1000000
 /analysis/setFileName outmoby{nEventsBackground}events.root
-/run/beamOn {nEventsBackground}
+#/run/beamOn {nEventsBackground}
 
 ################################################################################
 # tumore
@@ -94,6 +94,18 @@
 
 /run/reinitializeGeometry
 
-/control/alias nEvents 1000
+/control/alias nEvents 30000000
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
-#/run/beamOn {nEvents}
+/run/beamOn {nEvents}
+
+/control/alias nEvents 80000000
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/run/beamOn {nEvents}
+
+/control/alias nEvents 50000000
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/run/beamOn {nEvents}
+
+/control/alias nEvents 200000000
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+/run/beamOn {nEvents}
