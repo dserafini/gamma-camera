@@ -60,9 +60,11 @@ namespace Tsipm {
 
 namespace Pgamma {
   enum {
-    kNone,
+    kDefault,
     kCompt,
     kPhoto,
+    kNoElectron,
+    kNoProcess
   };
 }
 
