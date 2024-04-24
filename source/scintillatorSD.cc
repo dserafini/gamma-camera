@@ -41,6 +41,13 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
     {
       fProcName = Pgamma::kCompt;
     }
+    else
+    {
+      if (fProcName == Pgamma::kNone && tProcess->GetProcessName() == "phot")
+      {
+        fProcName = Pgamma::kPhoto;
+      }
+    }
   }
   
   return true;
