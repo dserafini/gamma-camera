@@ -64,6 +64,7 @@ namespace Pgamma {
     kCompt,
     kPhoto,
     kNoElectron,
+    kOtherProcess,
     kNoProcess
   };
 }
