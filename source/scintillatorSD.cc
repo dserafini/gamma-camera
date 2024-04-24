@@ -24,7 +24,8 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
 {
   // G4cout << "MySensitiveScintillator::ProcessHits" << G4endl;
 
-  if (aStep->GetTrack()->GetParticleDefinition() == G4OpticalPhoton::Definition())
+  const G4ParticleDefinition *aDef = aStep->GetTrack()->GetParticleDefinition();
+  if (aDef == G4OpticalPhoton::Definition())
     return false;
 
   G4double edep = aStep->GetTotalEnergyDeposit();
@@ -33,19 +34,23 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
   G4ThreeVector delta = aStep->GetPreStepPoint()->GetPosition() * edep;
   fPosition += delta;
 
-  const G4VProcess *tProcess = aStep->GetPostStepPoint()->GetProcessDefinedStep();
-  // const G4ParticleDefinition *aDef = aStep->GetTrack()->GetParticleDefinition();
-  if (tProcess)
+  if (aDef == G4Electron::Definition())
   {
-    if (tProcess->GetProcessName() == "compt")
+    const G4VProcess *tProcess = aStep->GetPostStepPoint()->GetProcessDefinedStep();
+    if (tProcess)
     {
-      fProcName = Pgamma::kCompt;
-    }
-    else
-    {
-      if (fProcName == Pgamma::kNone && tProcess->GetProcessName() == "phot")
+      // Compton scattered electron
+      if (tProcess->GetProcessName() == "compt")
       {
-        fProcName = Pgamma::kPhoto;
+        fProcName = Pgamma::kCompt;
+      }
+      else
+      {
+        // photoelectron
+        if (fProcName == Pgamma::kNone && tProcess->GetProcessName() == "phot")
+        {
+          fProcName = Pgamma::kPhoto;
+        }
       }
     }
   }
