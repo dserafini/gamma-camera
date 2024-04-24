@@ -47,7 +47,7 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
       else
       {
         // photoelectron
-        if (fProcName == Pgamma::kNone && tProcess->GetProcessName() == "phot")
+        if (fProcName == Pgamma::kDefault && tProcess->GetProcessName() == "phot")
         {
           fProcName = Pgamma::kPhoto;
         }
