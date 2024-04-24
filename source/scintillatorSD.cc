@@ -38,10 +38,17 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
   {
     const G4VProcess *tProcess = aStep->GetPostStepPoint()->GetProcessDefinedStep();
     if (tProcess)
-      if (fProcName.length() < 100)
-        fProcName = fProcName + tProcess->GetProcessName();
+    {
+      if (fProcName.length() < 100 && fProcName != "toomany")
+      {
+        G4String thisProcName = tProcess->GetProcessName();
+        if (thisProcName != Transportation)
+          fProcName = fProcName + thisProcName;
+      }
       else
         fProcName = "toomany";
+      }
+    }
   }
   return true;
 }
