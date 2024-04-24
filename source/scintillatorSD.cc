@@ -47,7 +47,6 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
       }
       else
         fProcName = "toomany";
-      }
     }
   }
   return true;
