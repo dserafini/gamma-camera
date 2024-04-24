@@ -41,17 +41,14 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
       const G4VProcess *tProcess = aStep->GetPostStepPoint()->GetProcessDefinedStep();
       if (tProcess)
       {
-        switch (tProcess->GetProcessName())
-        {
-        case "compt": // Compton scattered electron
+        if (tProcess->GetProcessName() == "compt") // Compton scattered electron
           fProcName = Pgamma::kCompt;
-          break;
-        case "phot": // photoelectron
-          fProcName = Pgamma::kPhoto;
-          break;
-        default:
-          fProcName = Pgamma::kOtherProcess;
-          break;
+        else
+        {
+          if (tProcess->GetProcessName() == "phot") // photoelectron
+            fProcName = Pgamma::kPhoto;
+          else
+            fProcName = Pgamma::kOtherProcess;
         }
       }
       else
