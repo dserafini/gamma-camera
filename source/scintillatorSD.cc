@@ -34,31 +34,32 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
   G4ThreeVector delta = aStep->GetPreStepPoint()->GetPosition() * edep;
   fPosition += delta;
 
-  if (aDef == G4Electron::Definition())
+  if (fProcName == Pgamma::kDefault)
   {
-    const G4VProcess *tProcess = aStep->GetPostStepPoint()->GetProcessDefinedStep();
-    if (tProcess)
+    if (aDef == G4Electron::Definition())
     {
-      // Compton scattered electron
-      if (tProcess->GetProcessName() == "compt")
+      const G4VProcess *tProcess = aStep->GetPostStepPoint()->GetProcessDefinedStep();
+      if (tProcess)
       {
-        fProcName = Pgamma::kCompt;
-      }
-      else
-      {
-        // photoelectron
-        if (fProcName == Pgamma::kDefault && tProcess->GetProcessName() == "phot")
+        switch (tProcess->GetProcessName())
         {
+        case "compt": // Compton scattered electron
+          fProcName = Pgamma::kCompt;
+          break;
+        case "phot": // photoelectron
           fProcName = Pgamma::kPhoto;
+          break;
+        default:
+          fProcName = Pgamma::kOtherProcess;
+          break;
         }
       }
+      else
+        fProcName = Pgamma::kNoProcess;
     }
     else
-      fProcName = Pgamma::kNoProcess;
+      fProcName = Pgamma::kNoElectron;
   }
-  else
-    fProcName = Pgamma::kNoElectron;
-  
   return true;
 }
 
