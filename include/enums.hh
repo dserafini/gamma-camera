@@ -58,15 +58,4 @@ namespace Tsipm {
   };
 }
 
-namespace Pgamma {
-  enum {
-    kDefault,
-    kCompt,
-    kPhoto,
-    kNoElectron,
-    kOtherProcess,
-    kNoProcess
-  };
-}
-
 # endif
