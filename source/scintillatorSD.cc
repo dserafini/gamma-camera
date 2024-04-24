@@ -63,7 +63,7 @@ void MySensitiveScintillator::EndOfEvent(G4HCofThisEvent*)
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kGammaX, fPosition.getX()/mm); // [mm]
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kGammaY, fPosition.getY()/mm);
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kGammaZ, fPosition.getZ()/mm);
-  man->FillNtupleIColumn(Tuples::kScintillator, TScintillator::kProc, fProcName); // [1]
+  man->FillNtupleSColumn(Tuples::kScintillator, TScintillator::kProc, fProcName); // [1]
   
   return;
 }
