@@ -42,7 +42,7 @@ G4bool MySensitiveScintillator::ProcessHits(G4Step * aStep, G4TouchableHistory *
       if (fProcName.length() < 100 && fProcName != "toomany")
       {
         G4String thisProcName = tProcess->GetProcessName();
-        if (thisProcName != Transportation)
+        if (thisProcName != "Transportation")
           fProcName = fProcName + thisProcName;
       }
       else
