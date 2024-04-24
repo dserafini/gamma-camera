@@ -24,7 +24,7 @@ private:
 	void EndOfEvent(G4HCofThisEvent*) override;
 	G4double fEdep;
 	G4ThreeVector fPosition;
-	G4int fProcName;
+	G4String fProcName;
 };
 
 #endif
