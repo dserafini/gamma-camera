@@ -197,7 +197,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
         i++;
       }
     }
-    
+
+    G4cout << "There are " << pixelCount.size() << " read optical photons" << G4endl;
     if (pixelCount.size() > 0)
     {
       IShouldSaveEvent();
