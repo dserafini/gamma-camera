@@ -8,6 +8,7 @@ namespace Tuples {
     kScintillator,
     kOptical,
     kSipm
+    kAllOptical,
   };
 }
 
@@ -22,7 +23,8 @@ namespace TGeneration {
     kEini,
     kVertexX,
     kVertexY,
-    kVertexZ
+    kVertexZ,
+    kEventID
   };
 }
 
@@ -54,6 +56,14 @@ namespace Tsipm {
     kMeanY,
     kMostX,
     kMostY
+  };
+}
+
+namespace TAllOptical {
+  enum {
+    kEventID,
+    kSipmX,
+    kSipmY
   };
 }
 
