@@ -20,9 +20,10 @@ void MyEventAction::EndOfEventAction(const G4Event* currentEvent)
   G4SDManager* fSDM = G4SDManager::GetSDMpointer();
   MySensitiveDetector *sdet = (MySensitiveDetector*)fSDM->FindSensitiveDetector("SensitiveDetector");
   
+  G4cout << "Should I save the event? ";
   if (sdet->ShouldISaveEvent())
   {
-    G4cout << "numberDetectedPhotons " << numberDetectedPhotons << G4endl;
+    G4cout << "yes" << G4endl;
     
     G4AnalysisManager *man = G4AnalysisManager::Instance();
     man->AddNtupleRow(Tuples::kGeneration);
@@ -30,4 +31,6 @@ void MyEventAction::EndOfEventAction(const G4Event* currentEvent)
     man->AddNtupleRow(Tuples::kOptical);
     man->AddNtupleRow(Tuples::kSipm);
   }
+  else
+    G4cout << "no" << G4endl;
 }
