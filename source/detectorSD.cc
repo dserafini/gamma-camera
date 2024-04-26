@@ -142,7 +142,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     fSigmaPos.setY(sqrt(fSigmaPos.getY() / (nofHits - 1)));
     fSigmaMod = sqrt(fSigmaMod / (nofHits - 1));
   
-    // G4cout << "nofHits: " << nofHits << G4endl;
+    G4cout << "nofHits: " << nofHits << G4endl;
     
     // fill the Ntuple of optical photons
     G4AnalysisManager *man = G4AnalysisManager::Instance();
