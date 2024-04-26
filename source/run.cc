@@ -22,6 +22,7 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(Tuples::kGeneration, "mX"); // [mm]
   man->CreateNtupleDColumn(Tuples::kGeneration, "mY"); // [mm]
   man->CreateNtupleDColumn(Tuples::kGeneration, "mZ"); // [mm]
+  man->CreateNtupleIColumn(Tuples::kGeneration, "eventID"); // [1]
 
   // scintillator
   man->CreateNtupleDColumn(Tuples::kScintillator, "fEdep"); // [eV]
