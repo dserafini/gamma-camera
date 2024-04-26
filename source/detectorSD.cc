@@ -220,6 +220,15 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostY, mostPixelPos.getY());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
+
+    G4int thisEventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+    for ( G4int i=0; i<nofHits; i++ )
+    {
+      man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmX, (*fHitsCollection)[i]->GetPos().getX());
+      man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmY, (*fHitsCollection)[i]->GetPos().getY());
+      man->FillNtupleIColumn(Tuples::kAllOptical, TAllOptical::kEventID, thisEventID);
+      man->AddNtupleRow(Tuples::kAllOptical);
+    }
   }
 }
 
