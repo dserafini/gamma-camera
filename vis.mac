@@ -69,7 +69,7 @@
 /gps/pos/halfz {zDepth} mm
 
 # muon
-/gun/particle muon
+/gun/particle mu-
 /gun/energy 3 GeV
 
 
