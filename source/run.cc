@@ -13,6 +13,7 @@ MyRunAction::MyRunAction()
   man->CreateNtuple("Scintillator", "Scintillator");
   man->CreateNtuple("Optical", "Optical");
   man->CreateNtuple("Sipm", "Sipm");
+  man->CreateNtuple("AllOptical", "AllOptical");
 
   // number of generated events
   man->CreateNtupleIColumn(Tuples::kEvents, "gEvents"); // [1]
@@ -47,12 +48,18 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(Tuples::kSipm, "xMostX"); // [mm]
   man->CreateNtupleDColumn(Tuples::kSipm, "xMostY"); // [mm]
 
+  // all optical photons info, not average
+  man->CreateNtupleIColumn(Tuples::kAllOptical, "eventID"); // [1]
+  man->CreateNtupleDColumn(Tuples::kAllOptical, "xSipm"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kAllOptical, "ySipm"); // [mm]
+
   // finish tuple
   man->FinishNtuple(Tuples::kEvents);
   man->FinishNtuple(Tuples::kGeneration);
   man->FinishNtuple(Tuples::kScintillator);
   man->FinishNtuple(Tuples::kOptical);
   man->FinishNtuple(Tuples::kSipm);
+  man->FinishNtuple(Tuples::kAllOptical);
 }
 
 MyRunAction::~MyRunAction()
