@@ -68,6 +68,11 @@
 /gps/pos/halfy 50 mm
 /gps/pos/halfz {zDepth} mm
 
+# muon
+/gun/particle muon
+/gun/energy 3 GeV
+
+
 ################################################################################
 # other visualization settings
 ################################################################################
