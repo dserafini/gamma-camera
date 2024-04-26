@@ -70,8 +70,8 @@
 
 # muon
 /gun/particle mu-
-/gun/energy 300 GeV
-/gun/position -20 -20 47.7 mm
+/gun/energy 3 GeV
+/gun/position -75 -75 47.7 mm
 /gun/direction 1 1 0
 
 ################################################################################
