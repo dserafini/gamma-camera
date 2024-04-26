@@ -47,7 +47,7 @@
 # choose gps source
 ################################################################################
 # muon
-/control/alias muonEnergyGeV .000003
+/control/alias muonEnergyGeV .003
 /gps/particle mu-
 /gps/energy {muonEnergyGeV} GeV
 /gps/position -75 -75 47.7 mm
