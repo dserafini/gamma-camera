@@ -51,6 +51,9 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 		else
 			G4cout << "Error with the particle generator!!!" << G4endl;
 	}
+	
+	G4AnalysisManager *man = G4AnalysisManager::Instance();
+	man->FillNtupleIColumn(Tuples::kGeneration, TGeneration::kEventID, anEvent->GetEventID());
 }
 
 G4ThreeVector MyPrimaryGenerator::GenerateParticlePositionMOBY()
