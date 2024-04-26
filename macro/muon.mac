@@ -1,0 +1,63 @@
+/run/numberOfThreads 1
+
+################################################################################
+# define scintillator
+################################################################################
+
+/scintillator/pixel matrix
+# matrix or otherwise slab
+/scintillator/slab_side 10. cm
+/scintillator/slab_depth 26. mm
+/scintillator/scinti_pixel_size 1. mm
+
+################################################################################
+# define collimator
+################################################################################
+
+/collimator/exist 0
+/collimator/case_side 100. mm
+/collimator/hole_length 30. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
+
+################################################################################
+# change geometry detector
+################################################################################
+/control/alias pThreshold 10
+/detector/pixel matrix
+/detector/det_pixel_size 3. mm
+/detector/fill_factor .8
+/detector/threshold {pThreshold}
+
+################################################################################
+# change geometry moby
+################################################################################
+/moby/build no
+/moby/voxelX 430
+/moby/distance 0. mm
+
+/run/reinitializeGeometry
+
+# initalize if not done in the main
+/run/initialize
+
+################################################################################
+# choose gps source
+################################################################################
+# muon
+/control/alias muonEnergyGeV 3
+/gps/particle mu-
+/gps/energy {muonEnergyGeV} GeV
+/gps/position -75 -75 47.7 mm
+/gps/direction 1 1 0
+
+################################################################################
+# tumore
+################################################################################
+/control/alias nEvents 1
+/analysis/setFileName muon{muonEnergyGeV}GeV{nEvents}events.root
+/particleSource/sourceType gps
+/run/printProgress 1000000
+/run/beamOn {nEvents}
