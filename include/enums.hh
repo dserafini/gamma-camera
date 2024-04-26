@@ -7,7 +7,7 @@ namespace Tuples {
     kGeneration,
     kScintillator,
     kOptical,
-    kSipm
+    kSipm,
     kAllOptical,
   };
 }
