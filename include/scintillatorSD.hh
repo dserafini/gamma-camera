@@ -8,7 +8,6 @@
 #include "G4SystemOfUnits.hh"
 #include "G4OpticalPhoton.hh"
 #include "G4Gamma.hh"
-#include "G4Electron.hh"
 #include "G4ThreeVector.hh"
 #include "enums.hh"
 
