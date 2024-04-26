@@ -15,7 +15,7 @@
 ################################################################################
 # change geometry scintillator
 ################################################################################
-/scintillator/exist false
+/scintillator/exist true
 /scintillator/pixel matrix
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
