@@ -36,8 +36,8 @@ MyDetectorConstruction::MyDetectorConstruction()
 	
 	// scintillator commands
 	fMessengerScintillator = new G4GenericMessenger(this, "/scintillator/", "Scintillator Construction");
-	fMessengerScintillator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the collimator");
-	fMessengerScintillator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
+	fMessengerScintillator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the scintillator");
+	fMessengerScintillator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the scintillator");
 	fMessengerScintillator->DeclareProperty("pixel", scintiPixelNoSlab, "matrix or otherwise slab");
 	fMessengerScintillator->DeclarePropertyWithUnit("scinti_pixel_size", "mm", scinti_pixel_size, "Size of the scintillator pixels");
 	fMessengerScintillator->DeclareProperty("exist", scintillatorExist, "true or false");
@@ -62,6 +62,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// detector commands
 	fMessengerDetector = new G4GenericMessenger(this, "/detector/", "Detector Construction");
 	fMessengerDetector->DeclarePropertyWithUnit("det_pixel_size", "mm", det_pixel_size, "Size of the detector pixels");
+	fMessengerDetector->DeclarePropertyWithUnit("detector_side", "mm", detector_side, "Side of the SiPM");
 	fMessengerDetector->DeclareProperty("pixel", detPixelNoSlab, "matrix or otherwise");
 	fMessengerDetector->DeclarePropertyWithUnit("det_scinti_distance", "mm", detector_scintillator_distance, "Optical coupling distance");
 	fMessengerDetector->DeclarePropertyWithUnit("channel_dead_space", "mm", channel_dead_space, "Dead space between channels");
