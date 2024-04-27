@@ -565,8 +565,8 @@ void MyDetectorConstruction::ConstructPixelDetector()
 		det_pixel_size = 3*mm;
 		det_pixels_number = (G4int) detector_side / det_pixel_size;
 	}
-	if ((det_pixels_number % 2) < 1)
-		det_pixels_number = det_pixels_number - 1;
+	// if ((det_pixels_number % 2) < 1)
+	// 	det_pixels_number = det_pixels_number - 1;
 	if (det_pixel_size < channel_dead_space)
 	{
 		G4cout << "Error: dead space larger than sensitive space!" << G4endl;
