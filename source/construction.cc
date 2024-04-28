@@ -469,7 +469,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	// Derived parameters
 	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
 	scinti_hole_length = slab_depth;
-	scinti_holes_number = (G4int) case_side / scinti_pixel_size;
+	scinti_holes_number = (G4int) slab_side / scinti_pixel_size;
 	
 	// check proper parameters
 	if (scinti_holes_number < 1)
@@ -479,7 +479,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 		scinti_septa_thickness = 10.*um;
 		scinti_hole_thickness = 2.*mm - scinti_septa_thickness;
 		scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
-		scinti_holes_number = (G4int) case_side / scinti_pixel_size;
+		scinti_holes_number = (G4int) slab_side / scinti_pixel_size;
 	}
 	if ((scinti_holes_number % 2) < 1)
 		scinti_holes_number = scinti_holes_number - 1;
@@ -488,17 +488,17 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	case_side = (G4double) scinti_pixel_size * scinti_holes_number;
 	G4cout << "scinti_pixel_size: " << scinti_pixel_size << " mm" << G4endl;
 	G4cout << "scinti_holes_number: " << scinti_holes_number << " " << G4endl;
-	G4cout << "scinti_case_side: " << case_side << " mm" << G4endl;
+	G4cout << "scinti_case_side: " << slab_side << " mm" << G4endl;
 	
 	// case
 	G4cout << "defining the scintillator case" << G4endl;
-	solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", case_side/2., case_side/2., scinti_hole_length/2.);
+	solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", slab_side/2., slab_side/2., scinti_hole_length/2.);
 	logicScintillatorMatrix = new G4LogicalVolume(solidScintillatorMatrix, materialPlastic, "logicScintillatorMatrix");
 	physScintillator = new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth/2.), logicScintillatorMatrix, "physScintillatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the scintillator array element" << G4endl;
-	solidScintillatorArray = new G4Box("solidScintillatorArray", case_side/2., scinti_pixel_size/2., scinti_hole_length/2.);
+	solidScintillatorArray = new G4Box("solidScintillatorArray", slab_side/2., scinti_pixel_size/2., scinti_hole_length/2.);
 	logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialPlastic, "logicScintillatorArray");
 	new G4PVReplica("physScintillatorArray", logicScintillatorArray, logicScintillatorMatrix, kYAxis, scinti_holes_number, scinti_pixel_size, 0);
 	
