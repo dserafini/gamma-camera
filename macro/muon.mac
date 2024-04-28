@@ -6,7 +6,7 @@
 
 /scintillator/pixel matrix
 # matrix or otherwise slab
-/scintillator/slab_side 24 mm
+/scintillator/slab_side 22 mm
 /scintillator/slab_depth 26. mm
 /scintillator/scinti_pixel_size 1. mm
 
