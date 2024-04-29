@@ -485,10 +485,10 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 		scinti_holes_number = scinti_holes_number - 1;
 	
 	// derived parameters
-	case_side = (G4double) scinti_pixel_size * scinti_holes_number;
+	slab_side = (G4double) scinti_pixel_size * scinti_holes_number;
 	G4cout << "scinti_pixel_size: " << scinti_pixel_size << " mm" << G4endl;
 	G4cout << "scinti_holes_number: " << scinti_holes_number << " " << G4endl;
-	G4cout << "scinti_case_side: " << slab_side << " mm" << G4endl;
+	G4cout << "scinti_slab_side: " << slab_side << " mm" << G4endl;
 	
 	// case
 	G4cout << "defining the scintillator case" << G4endl;
