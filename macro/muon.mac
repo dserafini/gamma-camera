@@ -58,7 +58,15 @@
 # tumore
 ################################################################################
 /control/alias nEvents 1
-/analysis/setFileName muon{muonEnergyGeV}GeV{nEvents}events64channelsRightFillFactor.root
 /particleSource/sourceType gps
-/run/printProgress 1000000
+/analysis/setFileName muon{muonEnergyGeV}GeV{nEvents}events64channelsA.root
+/run/beamOn {nEvents}
+
+/analysis/setFileName muon{muonEnergyGeV}GeV{nEvents}events64channelsB.root
+/run/beamOn {nEvents}
+
+/analysis/setFileName muon{muonEnergyGeV}GeV{nEvents}events64channelsC.root
+/run/beamOn {nEvents}
+
+/analysis/setFileName muon{muonEnergyGeV}GeV{nEvents}events64channelsD.root
 /run/beamOn {nEvents}
