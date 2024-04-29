@@ -481,8 +481,8 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 		scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
 		scinti_holes_number = (G4int) slab_side / scinti_pixel_size;
 	}
-	if ((scinti_holes_number % 2) < 1)
-		scinti_holes_number = scinti_holes_number - 1;
+	// if ((scinti_holes_number % 2) < 1)
+	// 	scinti_holes_number = scinti_holes_number - 1;
 	
 	// derived parameters
 	slab_side = (G4double) scinti_pixel_size * scinti_holes_number;
