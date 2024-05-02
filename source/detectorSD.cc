@@ -222,6 +222,7 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
 
+    // threshold on the number of optical photons is not considered in AllOpticals tree
     if (ShouldISaveAllOpticals())
     {
       G4int thisEventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
