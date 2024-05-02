@@ -519,6 +519,8 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 
 void MyDetectorConstruction::ConstructCoupler()
 {
+	G4cout << "Optical coupling distance: " << detector_scintillator_distance / mm << " mm" << G4endl;
+	
 	solidCoupler = new G4Box("solidScintillator", slab_side/2., slab_side/2., detector_scintillator_distance/2.);
 	logicCoupler = new G4LogicalVolume(solidCoupler, materialAir, "logicCoupler");
 	physCoupler = new G4PVPlacement(0,  // no rotation
@@ -651,7 +653,6 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		ConstructCoupler();
 
 	detector_centre_position = G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance + detector_depth/2.);
-	G4cout << "Optical coupling distance: " << detector_scintillator_distance << G4endl;
 	if (detPixelNoSlab == "matrix")
 		ConstructPixelDetector();
 	else
