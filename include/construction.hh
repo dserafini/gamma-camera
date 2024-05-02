@@ -136,6 +136,7 @@ private:
 	G4int det_pixels_number, energyThreshold;
 	G4String detPixelNoSlab;
 	G4ThreeVector detector_centre_position;
+	G4bool detSaveAllOpticals;
 	
 	// Materials MOBY
 	G4Material* fVoxelMaterial;
