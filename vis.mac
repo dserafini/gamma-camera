@@ -51,7 +51,7 @@
 ################################################################################
 /particleSource/sourceType gun
 /gun/particle gamma
-/gun/energy 342 keV
+/gun/energy 661 keV
 # /gps/particle ion
 # /gps/ion 47 111 0 0.
 # /gps/particle proton
@@ -69,10 +69,10 @@
 /gps/pos/halfz {zDepth} mm
 
 # muon
-/gun/particle mu-
-/gun/energy 3 GeV
-/gun/position -75 -75 47.7 mm
-/gun/direction 1 1 0
+#/gun/particle mu-
+#/gun/energy 3 GeV
+#/gun/position -75 -75 47.7 mm
+#/gun/direction 1 1 0
 
 ################################################################################
 # other visualization settings
