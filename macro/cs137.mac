@@ -50,15 +50,16 @@
 ################################################################################
 /particleSource/sourceType gps
 # Cs-137
-/gps/particle ion
-/gps/ion 55 137 0 0.
-/gps/energy 0. eV
+/gps/particle gamma
+#/gps/ion 55 137 0 0.
+/gps/energy 661. keV
 /gps/position  0 0 0 mm
-/gps/direction 1 1 0
+/gps/direction 0 0 1
 
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 1000
+/control/alias nEvents 10000
+/run/printProgress 1000
 /analysis/setFileName Cs137{nEvents}events.root
 /run/beamOn {nEvents}
