@@ -68,6 +68,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerDetector->DeclarePropertyWithUnit("channel_dead_space", "mm", channel_dead_space, "Dead space between channels");
 	fMessengerDetector->DeclareProperty("fill_factor", det_fill_factor, "Ratio active over total pixel area");
 	fMessengerDetector->DeclareProperty("threshold", energyThreshold, "Minimum number of photons to be detected");
+	fMessengerDetector->DeclareProperty("save_all_opticals", saveAllOpticals, "flag to save or not all optical photons");
 
 	// detector parameters
 	det_pixel_size = 3*mm;
@@ -78,6 +79,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	det_fill_factor = .74;
 	channel_dead_space = .2 * mm;
 	energyThreshold = 1;
+	saveAllOpticals = false;
 	
 	// moby commands
 	fMessengerMoby = new G4GenericMessenger(this, "/moby/", "MOBY parameters");
@@ -760,6 +762,10 @@ void MyDetectorConstruction::ConstructSDandField()
 		fScoringDetector->SetSensitiveDetector(sensDet);
 		sensDet->SetDetectionThreshold(energyThreshold);
 		sensDet->SetFillFactor(det_fill_factor);
+		if (saveAllOpticals)
+			sensDet->IShouldSaveAllOpticals();
+		else
+			sensDet->IShouldNotSaveAllOpticals();
 	}
 
 	if(fScoringScintillator != NULL)
