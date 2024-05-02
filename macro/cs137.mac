@@ -31,6 +31,7 @@
 /detector/detector_side 24 mm
 /detector/fill_factor .74
 /detector/threshold {pThreshold}
+/detector/save_all_opticals False
 
 ################################################################################
 # change geometry moby
@@ -58,18 +59,6 @@
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 1
-/analysis/setFileName Cs137{nEvents}events.root
-/run/beamOn {nEvents}
-
-/control/alias nEvents 10
-/analysis/setFileName Cs137{nEvents}events.root
-/run/beamOn {nEvents}
-
-/control/alias nEvents 100
-/analysis/setFileName Cs137{nEvents}events.root
-/run/beamOn {nEvents}
-
 /control/alias nEvents 1000
 /analysis/setFileName Cs137{nEvents}events.root
 /run/beamOn {nEvents}
