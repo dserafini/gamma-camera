@@ -62,4 +62,4 @@
 /control/alias nEvents 10000
 /run/printProgress 1000
 /analysis/setFileName Cs137{nEvents}eventsAverage.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
