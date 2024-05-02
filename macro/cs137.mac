@@ -61,5 +61,5 @@
 ################################################################################
 /control/alias nEvents 10000
 /run/printProgress 1000
-/analysis/setFileName Cs137{nEvents}events.root
+/analysis/setFileName Cs137{nEvents}eventsAverage.root
 /run/beamOn {nEvents}
