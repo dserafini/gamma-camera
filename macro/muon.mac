@@ -51,8 +51,8 @@
 /control/alias muonEnergyGeV 3
 /gps/particle mu-
 /gps/energy {muonEnergyGeV} GeV
-/gps/position -75 -75 47.7 mm
-/gps/direction 1 1 0
+/gps/position -75 -50 47.7 mm
+/gps/direction 1 1.5 0
 
 ################################################################################
 # tumore
