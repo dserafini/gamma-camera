@@ -158,6 +158,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   
     // save pixel tree
     std::vector <G4ThreeVector> pixelPos = {};
+    std::vector <G4int> pixelIndexX = {};
+    std::vector <G4int> pixelIndexY = {};
     std::vector <G4int> pixelCount = {};
     for ( G4int i=0; i<nofHits; i++ )
     {
@@ -165,6 +167,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
       if(it == pixelPos.end())
       {
         pixelPos.push_back((*fHitsCollection)[i]->GetPixelPos());
+        pixelIndexX.push_back((*fHitsCollection)[i]->GetPixelIndexX());
+        pixelIndexY.push_back((*fHitsCollection)[i]->GetPixelIndexY());
         pixelCount.push_back(1);
       }
       else
@@ -177,35 +181,43 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     G4ThreeVector meanPixelPos = G4ThreeVector();
     G4ThreeVector mostPixelPos = G4ThreeVector();
     G4int imax = 0;
+    G4int thisEventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
     if (pixelCount.size() > 0)
     {
-    for (unsigned long i=0; i<pixelCount.size();)
-    {
-     // G4cout << pixelCount.at(i) << G4endl;
-     //  G4cout << pixelPos.at(i) << G4endl;
-
-      // threshold must be applied pixel wise
-      if (pixelCount.at(i) < nofHitsThreshold)
+      for (unsigned long i=0; i<pixelCount.size();)
       {
-        pixelCount.erase(pixelCount.begin() + i);
-        pixelPos.erase(pixelPos.begin() + i);
+       // G4cout << pixelCount.at(i) << G4endl;
+       //  G4cout << pixelPos.at(i) << G4endl;
+  
+        // threshold must be applied pixel wise
+        if (pixelCount.at(i) < nofHitsThreshold)
+        {
+          pixelCount.erase(pixelCount.begin() + i);
+          pixelPos.erase(pixelPos.begin() + i);
+          pixelIndexX.erase(pixelPos.begin() + i);
+          pixelIndexY.erase(pixelPos.begin() + i);
+        }
+        else
+        {
+          totalGoodCounts += pixelCount.at(i);
+          meanPixelPos += pixelCount.at(i)*pixelPos.at(i);
+          man->FillNtupleIColumn(Tuples::kChannels, Tchannels::kEventID, thisEventID);
+          man->FillNtupleIColumn(Tuples::kChannels, Tchannels::kNumber, pixelCount.at(i));
+          man->FillNtupleIColumn(Tuples::kChannels, Tchannels::kIndexX, pixelIndexX.at(i));
+          man->FillNtupleIColumn(Tuples::kChannels, Tchannels::kIndexY, pixelIndexY.at(i));
+          man->AddNtupleRow(Tuples::kChannels);
+          if (pixelCount.at(i) > pixelCount.at(imax))
+            imax = i;
+          i++;
+        }
       }
-      else
+      
+      if (pixelCount.size() > 0)
       {
-        totalGoodCounts += pixelCount.at(i);
-        meanPixelPos += pixelCount.at(i)*pixelPos.at(i);
-        if (pixelCount.at(i) > pixelCount.at(imax))
-          imax = i;
-        i++;
+        IShouldSaveEvent();
+        meanPixelPos /= totalGoodCounts;
+        mostPixelPos = pixelPos.at(imax);
       }
-    }
-    
-    if (pixelCount.size() > 0)
-    {
-      IShouldSaveEvent();
-      meanPixelPos /= totalGoodCounts;
-      mostPixelPos = pixelPos.at(imax);
-    }
     }
   /*
     // print to check
@@ -224,7 +236,6 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
 
     // threshold on the number of optical photons is not considered in AllOpticals tree
-    G4int thisEventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
     for ( G4int i=0; i<nofHits; i++ )
     {
       man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmX, (*fHitsCollection)[i]->GetPos().getX());
