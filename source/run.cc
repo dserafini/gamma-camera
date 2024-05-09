@@ -13,6 +13,7 @@ MyRunAction::MyRunAction()
   man->CreateNtuple("Scintillator", "Scintillator");
   man->CreateNtuple("Optical", "Optical");
   man->CreateNtuple("Sipm", "Sipm");
+  man->CreateNtuple("AllOptical", "AllOptical");
 
   // number of generated events
   man->CreateNtupleIColumn(Tuples::kEvents, "gEvents"); // [1]
@@ -22,6 +23,7 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(Tuples::kGeneration, "mX"); // [mm]
   man->CreateNtupleDColumn(Tuples::kGeneration, "mY"); // [mm]
   man->CreateNtupleDColumn(Tuples::kGeneration, "mZ"); // [mm]
+  man->CreateNtupleIColumn(Tuples::kGeneration, "eventID"); // [1]
 
   // scintillator
   man->CreateNtupleDColumn(Tuples::kScintillator, "fEdep"); // [eV]
@@ -46,12 +48,23 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(Tuples::kSipm, "xMostX"); // [mm]
   man->CreateNtupleDColumn(Tuples::kSipm, "xMostY"); // [mm]
 
+  // all optical photons info, not average
+  man->CreateNtupleIColumn(Tuples::kAllOptical, "eventID"); // [1]
+  man->CreateNtupleDColumn(Tuples::kAllOptical, "xSipm"); // [mm]
+  man->CreateNtupleDColumn(Tuples::kAllOptical, "ySipm"); // [mm]
+
+  // deactivate all optical ntuple by default
+  man->SetActivation(true);
+  G4UImanager *UImanager = G4UImanager::GetUIpointer();
+  UImanager->ApplyCommand("/analysis/ntuple/setActivation " + std::to_string(Tuples::kAllOptical) + " False");
+
   // finish tuple
   man->FinishNtuple(Tuples::kEvents);
   man->FinishNtuple(Tuples::kGeneration);
   man->FinishNtuple(Tuples::kScintillator);
   man->FinishNtuple(Tuples::kOptical);
   man->FinishNtuple(Tuples::kSipm);
+  man->FinishNtuple(Tuples::kAllOptical);
 }
 
 MyRunAction::~MyRunAction()
@@ -80,7 +93,7 @@ void MyRunAction::BeginOfRunAction(const G4Run* run)
   man->AddNtupleRow(Tuples::kEvents);
 }
 
-void MyRunAction::EndOfRunAction(const G4Run* aRun)
+void MyRunAction::EndOfRunAction(const G4Run*)
 {
   G4cout << "MyRunAction::EndOfRunAction" << G4endl;
   

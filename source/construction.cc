@@ -36,8 +36,8 @@ MyDetectorConstruction::MyDetectorConstruction()
 	
 	// scintillator commands
 	fMessengerScintillator = new G4GenericMessenger(this, "/scintillator/", "Scintillator Construction");
-	fMessengerScintillator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the collimator");
-	fMessengerScintillator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the collimator");
+	fMessengerScintillator->DeclarePropertyWithUnit("slab_side", "mm", slab_side, "Side of the scintillator");
+	fMessengerScintillator->DeclarePropertyWithUnit("slab_depth", "mm", slab_depth, "Depth of the scintillator");
 	fMessengerScintillator->DeclareProperty("pixel", scintiPixelNoSlab, "matrix or otherwise slab");
 	fMessengerScintillator->DeclarePropertyWithUnit("scinti_pixel_size", "mm", scinti_pixel_size, "Size of the scintillator pixels");
 	fMessengerScintillator->DeclareProperty("exist", scintillatorExist, "true or false");
@@ -62,11 +62,13 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// detector commands
 	fMessengerDetector = new G4GenericMessenger(this, "/detector/", "Detector Construction");
 	fMessengerDetector->DeclarePropertyWithUnit("det_pixel_size", "mm", det_pixel_size, "Size of the detector pixels");
+	fMessengerDetector->DeclarePropertyWithUnit("detector_side", "mm", detector_side, "Side of the SiPM");
 	fMessengerDetector->DeclareProperty("pixel", detPixelNoSlab, "matrix or otherwise");
 	fMessengerDetector->DeclarePropertyWithUnit("det_scinti_distance", "mm", detector_scintillator_distance, "Optical coupling distance");
 	fMessengerDetector->DeclarePropertyWithUnit("channel_dead_space", "mm", channel_dead_space, "Dead space between channels");
 	fMessengerDetector->DeclareProperty("fill_factor", det_fill_factor, "Ratio active over total pixel area");
 	fMessengerDetector->DeclareProperty("threshold", energyThreshold, "Minimum number of photons to be detected");
+	fMessengerDetector->DeclareProperty("save_all_opticals", detSaveAllOpticals, "flag to save or not all optical photons");
 
 	// detector parameters
 	det_pixel_size = 3*mm;
@@ -77,6 +79,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	det_fill_factor = .74;
 	channel_dead_space = .2 * mm;
 	energyThreshold = 1;
+	detSaveAllOpticals = false;
 	
 	// moby commands
 	fMessengerMoby = new G4GenericMessenger(this, "/moby/", "MOBY parameters");
@@ -468,7 +471,7 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	// Derived parameters
 	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
 	scinti_hole_length = slab_depth;
-	scinti_holes_number = (G4int) case_side / scinti_pixel_size;
+	scinti_holes_number = (G4int) slab_side / scinti_pixel_size;
 	
 	// check proper parameters
 	if (scinti_holes_number < 1)
@@ -478,26 +481,26 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 		scinti_septa_thickness = 10.*um;
 		scinti_hole_thickness = 2.*mm - scinti_septa_thickness;
 		scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
-		scinti_holes_number = (G4int) case_side / scinti_pixel_size;
+		scinti_holes_number = (G4int) slab_side / scinti_pixel_size;
 	}
-	if ((scinti_holes_number % 2) < 1)
-		scinti_holes_number = scinti_holes_number - 1;
+	// if ((scinti_holes_number % 2) < 1)
+	// 	scinti_holes_number = scinti_holes_number - 1;
 	
 	// derived parameters
-	case_side = (G4double) scinti_pixel_size * scinti_holes_number;
+	slab_side = (G4double) scinti_pixel_size * scinti_holes_number;
 	G4cout << "scinti_pixel_size: " << scinti_pixel_size << " mm" << G4endl;
 	G4cout << "scinti_holes_number: " << scinti_holes_number << " " << G4endl;
-	G4cout << "scinti_case_side: " << case_side << " mm" << G4endl;
+	G4cout << "scinti_slab_side: " << slab_side << " mm" << G4endl;
 	
 	// case
 	G4cout << "defining the scintillator case" << G4endl;
-	solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", case_side/2., case_side/2., scinti_hole_length/2.);
+	solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", slab_side/2., slab_side/2., scinti_hole_length/2.);
 	logicScintillatorMatrix = new G4LogicalVolume(solidScintillatorMatrix, materialPlastic, "logicScintillatorMatrix");
 	physScintillator = new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth/2.), logicScintillatorMatrix, "physScintillatorMatrix", logicWorld, false, 0, true);
 	
 	// array
 	G4cout << "defining the scintillator array element" << G4endl;
-	solidScintillatorArray = new G4Box("solidScintillatorArray", case_side/2., scinti_pixel_size/2., scinti_hole_length/2.);
+	solidScintillatorArray = new G4Box("solidScintillatorArray", slab_side/2., scinti_pixel_size/2., scinti_hole_length/2.);
 	logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialPlastic, "logicScintillatorArray");
 	new G4PVReplica("physScintillatorArray", logicScintillatorArray, logicScintillatorMatrix, kYAxis, scinti_holes_number, scinti_pixel_size, 0);
 	
@@ -518,6 +521,8 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 
 void MyDetectorConstruction::ConstructCoupler()
 {
+	G4cout << "Optical coupling distance: " << detector_scintillator_distance / mm << " mm" << G4endl;
+	
 	solidCoupler = new G4Box("solidScintillator", slab_side/2., slab_side/2., detector_scintillator_distance/2.);
 	logicCoupler = new G4LogicalVolume(solidCoupler, materialAir, "logicCoupler");
 	physCoupler = new G4PVPlacement(0,  // no rotation
@@ -564,8 +569,8 @@ void MyDetectorConstruction::ConstructPixelDetector()
 		det_pixel_size = 3*mm;
 		det_pixels_number = (G4int) detector_side / det_pixel_size;
 	}
-	if ((det_pixels_number % 2) < 1)
-		det_pixels_number = det_pixels_number - 1;
+	// if ((det_pixels_number % 2) < 1)
+	// 	det_pixels_number = det_pixels_number - 1;
 	if (det_pixel_size < channel_dead_space)
 	{
 		G4cout << "Error: dead space larger than sensitive space!" << G4endl;
@@ -650,7 +655,6 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		ConstructCoupler();
 
 	detector_centre_position = G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance + detector_depth/2.);
-	G4cout << "Optical coupling distance: " << detector_scintillator_distance << G4endl;
 	if (detPixelNoSlab == "matrix")
 		ConstructPixelDetector();
 	else
@@ -758,6 +762,10 @@ void MyDetectorConstruction::ConstructSDandField()
 		fScoringDetector->SetSensitiveDetector(sensDet);
 		sensDet->SetDetectionThreshold(energyThreshold);
 		sensDet->SetFillFactor(det_fill_factor);
+		if (detSaveAllOpticals)
+			sensDet->IShouldSaveAllOpticals();
+		else
+			sensDet->IShouldNotSaveAllOpticals();
 	}
 
 	if(fScoringScintillator != NULL)

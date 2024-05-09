@@ -15,7 +15,7 @@
 ################################################################################
 # change geometry scintillator
 ################################################################################
-/scintillator/exist false
+/scintillator/exist true
 /scintillator/pixel matrix
 /scintillator/slab_side 10. cm
 /scintillator/slab_depth 3. cm
@@ -29,7 +29,7 @@
 /detector/det_scinti_distance 10 mm
 /detector/fill_factor .8
 /detector/channel_dead_space 2. mm
-/detector/threshold 3
+/detector/threshold 0
 
 ################################################################################
 # change geometry moby
@@ -51,7 +51,7 @@
 ################################################################################
 /particleSource/sourceType gun
 /gun/particle gamma
-/gun/energy 342 keV
+/gun/energy 661 keV
 # /gps/particle ion
 # /gps/ion 47 111 0 0.
 # /gps/particle proton
@@ -67,6 +67,12 @@
 /gps/pos/halfx 50 mm
 /gps/pos/halfy 50 mm
 /gps/pos/halfz {zDepth} mm
+
+# muon
+#/gun/particle mu-
+#/gun/energy 3 GeV
+#/gun/position -75 -75 47.7 mm
+#/gun/direction 1 1 0
 
 ################################################################################
 # other visualization settings
@@ -118,6 +124,9 @@
 
 # Set file name
 /analysis/setFileName output.root
+
+# set tuples activation
+/analysis/ntuple/setActivation 5 True
 
 # reduce scintillation yield to allow visualization
 /process/optical/scintillation/setYieldFactor .001

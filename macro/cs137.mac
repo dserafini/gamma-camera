@@ -1,0 +1,65 @@
+/run/numberOfThreads 10
+
+################################################################################
+# define scintillator
+################################################################################
+
+/scintillator/pixel matrix
+# matrix or otherwise slab
+/scintillator/slab_side 22 mm
+/scintillator/slab_depth 26. mm
+/scintillator/scinti_pixel_size 1. mm
+
+################################################################################
+# define collimator
+################################################################################
+
+/collimator/exist 0
+/collimator/case_side 100. mm
+/collimator/hole_length 30. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
+
+################################################################################
+# change geometry detector
+################################################################################
+/control/alias pThreshold 10
+/detector/pixel matrix
+/detector/det_pixel_size 3. mm
+/detector/detector_side 24 mm
+/detector/fill_factor .74
+/detector/threshold {pThreshold}
+/detector/save_all_opticals False
+
+################################################################################
+# change geometry moby
+################################################################################
+/moby/build no
+/moby/voxelX 430
+/moby/distance 0. mm
+
+/run/reinitializeGeometry
+
+# initalize if not done in the main
+/run/initialize
+
+################################################################################
+# choose gps source
+################################################################################
+/particleSource/sourceType gps
+# Cs-137
+/gps/particle gamma
+#/gps/ion 55 137 0 0.
+/gps/energy 661. keV
+/gps/position 0 0 0 mm
+/gps/direction 0 0 1
+
+################################################################################
+# tumore
+################################################################################
+/control/alias nEvents 10000
+/run/printProgress 1000
+/analysis/setFileName Cs137average{nEvents}events.root
+/run/beamOn {nEvents}
