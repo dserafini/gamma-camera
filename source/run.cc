@@ -55,7 +55,7 @@ MyRunAction::MyRunAction()
 
   // deactivate all optical ntuple by default
   man->SetActivation(true);
-  man->SetT1Activation(Tuples::kAllOptical, false);
+  man->SetH1Activation(Tuples::kAllOptical, false);
 
   // finish tuple
   man->FinishNtuple(Tuples::kEvents);
