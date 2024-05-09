@@ -201,10 +201,10 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
         {
           totalGoodCounts += pixelCount.at(i);
           meanPixelPos += pixelCount.at(i)*pixelPos.at(i);
-          man->FillNtupleIColumn(Tuples::kChannels, Tchannels::kEventID, thisEventID);
-          man->FillNtupleIColumn(Tuples::kChannels, Tchannels::kNumber, pixelCount.at(i));
-          man->FillNtupleIColumn(Tuples::kChannels, Tchannels::kIndexX, pixelIndexX.at(i));
-          man->FillNtupleIColumn(Tuples::kChannels, Tchannels::kIndexY, pixelIndexY.at(i));
+          man->FillNtupleIColumn(Tuples::kChannels, TChannels::kEventID, thisEventID);
+          man->FillNtupleIColumn(Tuples::kChannels, TChannels::kNumber, pixelCount.at(i));
+          man->FillNtupleIColumn(Tuples::kChannels, TChannels::kIndexX, pixelIndexX.at(i));
+          man->FillNtupleIColumn(Tuples::kChannels, TChannels::kIndexY, pixelIndexY.at(i));
           man->AddNtupleRow(Tuples::kChannels);
           if (pixelCount.at(i) > pixelCount.at(imax))
             imax = i;
@@ -229,11 +229,11 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   */
     // G4cout << "found most pixel pos: " << mostPixelPos << G4endl;
     // G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
-    man->FillNtupleIColumn(Tuples::kSipm, Tsipm::kNumber, totalGoodCounts);
-    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostX, mostPixelPos.getX());
-    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostY, mostPixelPos.getY());
-    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
-    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
+    man->FillNtupleIColumn(Tuples::kSipm, TSipm::kNumber, totalGoodCounts);
+    man->FillNtupleDColumn(Tuples::kSipm, TSipm::kMostX, mostPixelPos.getX());
+    man->FillNtupleDColumn(Tuples::kSipm, TSipm::kMostY, mostPixelPos.getY());
+    man->FillNtupleDColumn(Tuples::kSipm, TSipm::kMeanX, meanPixelPos.getX());
+    man->FillNtupleDColumn(Tuples::kSipm, TSipm::kMeanY, meanPixelPos.getY());
 
     // threshold on the number of optical photons is not considered in AllOpticals tree
     for ( G4int i=0; i<nofHits; i++ )
