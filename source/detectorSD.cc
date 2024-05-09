@@ -12,7 +12,6 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   fSigmaMod = 0.;
   nofHits = 0;
   fSaveEvent = false;
-  fSaveAllOpticals = false;
 
   // quantum efficiency
   quEff = new G4PhysicsOrderedFreeVector();
