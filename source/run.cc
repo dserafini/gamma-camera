@@ -57,7 +57,7 @@ MyRunAction::MyRunAction()
   // deactivate all optical ntuple by default
   man->SetActivation(true);
   G4UImanager *UImanager = G4UImanager::GetUIpointer();
-  UImanager->ApplyCommand(TString::Format("/analysis/ntuple/setActivation %d False",Tuples::kAllOptical));
+  UImanager->ApplyCommand("/analysis/ntuple/setActivation " + std::to_string(Tuples::kAllOptical) + " False");
 
   // finish tuple
   man->FinishNtuple(Tuples::kEvents);
