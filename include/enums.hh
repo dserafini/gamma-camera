@@ -9,6 +9,7 @@ namespace Tuples {
     kOptical,
     kSipm,
     kAllOptical,
+    kChannels,
   };
 }
 
@@ -64,6 +65,15 @@ namespace TAllOptical {
     kEventID,
     kSipmX,
     kSipmY
+  };
+}
+
+namespace TChannels {
+  enum {
+    kEventID,
+    kNumber,
+    kIndexX,
+    kIndexY,
   };
 }
 
