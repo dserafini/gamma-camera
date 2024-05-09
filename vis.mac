@@ -126,7 +126,7 @@
 /analysis/setFileName output.root
 
 # set tuples activation
-/analysis/ntuple/setActivation 5 True
+/analysis/ntuple/setActivation 5 False
 
 # reduce scintillation yield to allow visualization
 /process/optical/scintillation/setYieldFactor .001
