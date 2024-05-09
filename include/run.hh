@@ -10,6 +10,7 @@
 // #include "G4AnalysisManager.hh" // v11.0
 #include "G4Run.hh"
 #include "enums.hh"
+#include "G4UImanager.hh"
 
 
 class MyRunAction : public G4UserRunAction
