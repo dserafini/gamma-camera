@@ -33,18 +33,24 @@ class detectorHit : public G4VHit
     void SetEdep     (G4double de)      { fEdep = de; };
     void SetPos      (G4ThreeVector xyz){ fPos = xyz; };
     void SetPixelPos      (G4ThreeVector xyz){ fPixelPos = xyz; };
+    void SetPixelIndexX      (G4int ix){ fPixelIndexX = ix; };
+    void SetPixelIndexY      (G4int iy){ fPixelIndexY = iy; };
 
     // Get methods
     G4int GetTrackID() const     { return fTrackID; };
     G4double GetEdep() const     { return fEdep; };
     G4ThreeVector GetPos() const { return fPos; };
     G4ThreeVector GetPixelPos() const { return fPixelPos; };
+    G4int GetPixelIndexX const      (){ return fPixelIndexX; };
+    G4int GetPixelIndexY const      (){ return fPixelIndexY; };
 
   private:
     G4int         fTrackID = -1;
     G4double      fEdep = 0.;
     G4ThreeVector fPos;
     G4ThreeVector fPixelPos;
+    G4int fPixelIndexX;
+    G4int fPixelIndexY;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
