@@ -97,15 +97,6 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
   auto newHit = new detectorHit();
 
-
-namespace DetectorDepth {
-  enum {
-    activePixel,
-    xDirection,
-    yDirection,
-    matrix,
-  };
-}
   newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
   newHit->SetEdep(edep);
   newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
