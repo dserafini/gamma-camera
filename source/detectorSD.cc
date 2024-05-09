@@ -194,8 +194,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
         {
           pixelCount.erase(pixelCount.begin() + i);
           pixelPos.erase(pixelPos.begin() + i);
-          pixelIndexX.erase(pixelPos.begin() + i);
-          pixelIndexY.erase(pixelPos.begin() + i);
+          pixelIndexX.erase(pixelIndexX.begin() + i);
+          pixelIndexY.erase(pixelIndexY.begin() + i);
         }
         else
         {
