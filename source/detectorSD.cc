@@ -97,12 +97,21 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
   auto newHit = new detectorHit();
 
+
+namespace DetectorDepth {
+  enum {
+    activePixel,
+    xDirection,
+    yDirection,
+    matrix,
+  };
+}
   newHit->SetTrackID  (aStep->GetTrack()->GetTrackID());
   newHit->SetEdep(edep);
   newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
   newHit->SetPixelPos (preStepPoint->GetTouchable()->GetTranslation());
-  newHit->SetPixelIndexX (preStepPoint->GetTouchable()->GetCopyNumber(0));
-  newHit->SetPixelIndexY (preStepPoint->GetTouchable()->GetCopyNumber(1));
+  newHit->SetPixelIndexX (preStepPoint->GetTouchable()->GetCopyNumber(DetectorDepth::xDirection));
+  newHit->SetPixelIndexY (preStepPoint->GetTouchable()->GetCopyNumber(DetectorDepth::yDirection));
   G4cout << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() << ": " << newHit->GetPixelIndexX() << "\t" << newHit->GetPixelIndexY() << G4endl;
 
   if (fHitsCollection)
