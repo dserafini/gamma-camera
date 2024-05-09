@@ -50,7 +50,7 @@ namespace TOptical {
   };
 }
 
-namespace Tsipm {
+namespace TSipm {
   enum {
     kNumber,
     kMeanX,
