@@ -1,5 +1,4 @@
 #include "run.hh"
-#include "G4UImanager.hh"
 
 MyRunAction::MyRunAction()
 {
