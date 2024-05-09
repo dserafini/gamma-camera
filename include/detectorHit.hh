@@ -41,8 +41,8 @@ class detectorHit : public G4VHit
     G4double GetEdep() const     { return fEdep; };
     G4ThreeVector GetPos() const { return fPos; };
     G4ThreeVector GetPixelPos() const { return fPixelPos; };
-    G4int GetPixelIndexX const      (){ return fPixelIndexX; };
-    G4int GetPixelIndexY const      (){ return fPixelIndexY; };
+    G4int GetPixelIndexX() const { return fPixelIndexX; };
+    G4int GetPixelIndexY() const { return fPixelIndexY; };
 
   private:
     G4int         fTrackID = -1;
