@@ -53,6 +53,10 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(Tuples::kAllOptical, "xSipm"); // [mm]
   man->CreateNtupleDColumn(Tuples::kAllOptical, "ySipm"); // [mm]
 
+  // deactivate all optical ntuple by default
+  man->SetActivation(true);
+  man->SetT1Activation(Tuples::kAllOptical, false);
+
   // finish tuple
   man->FinishNtuple(Tuples::kEvents);
   man->FinishNtuple(Tuples::kGeneration);
