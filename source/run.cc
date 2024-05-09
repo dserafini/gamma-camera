@@ -94,7 +94,7 @@ void MyRunAction::BeginOfRunAction(const G4Run* run)
   man->AddNtupleRow(Tuples::kEvents);
 }
 
-void MyRunAction::EndOfRunAction(const G4Run* aRun)
+void MyRunAction::EndOfRunAction(const G4Run*)
 {
   G4cout << "MyRunAction::EndOfRunAction" << G4endl;
   
