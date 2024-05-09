@@ -1,4 +1,5 @@
 #include "run.hh"
+#include "G4UImanager.hh"
 
 MyRunAction::MyRunAction()
 {
@@ -55,7 +56,7 @@ MyRunAction::MyRunAction()
 
   // deactivate all optical ntuple by default
   man->SetActivation(true);
-  man->SetH1Activation(Tuples::kAllOptical, false);
+  UImanager->ApplyCommand("/analysis/ntuple/setActivation 5 False");
 
   // finish tuple
   man->FinishNtuple(Tuples::kEvents);
