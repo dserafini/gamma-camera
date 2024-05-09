@@ -225,16 +225,13 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
 
     // threshold on the number of optical photons is not considered in AllOpticals tree
-    if (ShouldISaveAllOpticals())
+    G4int thisEventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+    for ( G4int i=0; i<nofHits; i++ )
     {
-      G4int thisEventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
-      for ( G4int i=0; i<nofHits; i++ )
-      {
-        man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmX, (*fHitsCollection)[i]->GetPos().getX());
-        man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmY, (*fHitsCollection)[i]->GetPos().getY());
-        man->FillNtupleIColumn(Tuples::kAllOptical, TAllOptical::kEventID, thisEventID);
-        man->AddNtupleRow(Tuples::kAllOptical);
-      }
+      man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmX, (*fHitsCollection)[i]->GetPos().getX());
+      man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmY, (*fHitsCollection)[i]->GetPos().getY());
+      man->FillNtupleIColumn(Tuples::kAllOptical, TAllOptical::kEventID, thisEventID);
+      man->AddNtupleRow(Tuples::kAllOptical);
     }
   }
 }
