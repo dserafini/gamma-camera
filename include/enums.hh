@@ -77,4 +77,13 @@ namespace TChannels {
   };
 }
 
+namespace DetectorDepth {
+  enum {
+    activePixel,
+    xDirection,
+    yDirection,
+    matrix,
+  };
+}
+
 # endif
