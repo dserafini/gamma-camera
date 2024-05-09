@@ -31,7 +31,7 @@
 /detector/detector_side 24 mm
 /detector/fill_factor .74
 /detector/threshold {pThreshold}
-/detector/save_all_opticals False
+/analysis/ntuple/setActivation 5 True
 
 ################################################################################
 # change geometry moby
