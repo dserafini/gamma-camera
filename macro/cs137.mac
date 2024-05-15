@@ -25,7 +25,7 @@
 ################################################################################
 # change geometry detector
 ################################################################################
-/control/alias pThreshold 10
+/control/alias pThreshold 0
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
 /detector/detector_side 24 mm
