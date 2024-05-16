@@ -60,7 +60,7 @@
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 1000000
-/run/printProgress 100000
+/control/alias nEvents 100000
+/run/printProgress 10000
 /analysis/setFileName Cs137average{nEvents}eventsPos1.root
 /run/beamOn {nEvents}
