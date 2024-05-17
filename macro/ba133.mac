@@ -50,6 +50,7 @@
 ################################################################################
 /particleSource/sourceType gps
 # Ba-133
+/gps/particle ion
 /gps/ion 56 133 0 0.
 /gps/energy 0. eV
 /gps/position 1.5 1.5 0 mm
