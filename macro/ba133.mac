@@ -50,9 +50,9 @@
 ################################################################################
 /particleSource/sourceType gps
 # Ba-133
-/gps/particle ion
-/gps/ion 56 133 0 0.
-/gps/energy 0. eV
+@/gps/particle ion
+#/gps/ion 56 133 0 0.
+/gps/particle gamma
 /gps/position 1.5 1.5 0 mm
 /gps/direction 0 0 1
 #/gps/ang/type iso
@@ -60,7 +60,11 @@
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 1000000
 /run/printProgress 100000
-/analysis/setFileName Ba133average{nEvents}eventsPos1.root
+
+
+/control/alias energy 4.29
+/control/alias nEvents 15700
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
 /run/beamOn {nEvents}
