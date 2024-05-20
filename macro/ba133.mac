@@ -60,11 +60,83 @@
 ################################################################################
 # tumore
 ################################################################################
-/run/printProgress 100000
+/run/printProgress 10000
 
 
 /control/alias energy 4.29
 /control/alias nEvents 15700
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 30.625
+/control/alias nEvents 33900
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 30.973
+/control/alias nEvents 62200
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 34.92
+/control/alias nEvents 5800
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 34.987
+/control/alias nEvents 11400
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 35.818
+/control/alias nEvents 3510
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 53.1622
+/control/alias nEvents 2.14
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 79.6142
+/control/alias nEvents 2650
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 80.9979
+/control/alias nEvents 32900
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 276.3989
+/control/alias nEvents 7160
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 302.8508
+/control/alias nEvents 18340
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 356.0129
+/control/alias nEvents 62050
+/gps/energy {energy} keV
+/analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
+/run/beamOn {nEvents}
+
+/control/alias energy 383.8485
+/control/alias nEvents 8940
 /gps/energy {energy} keV
 /analysis/setFileName Ba133energy{energy}keV{nEvents}eventsPos1.root
 /run/beamOn {nEvents}
