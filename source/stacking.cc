@@ -38,9 +38,9 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 			return fKill;
 		
 		// particle is gamma, primary or from de-excitation
+		G4cout << aTrack->GetDefinition()->GetParticleName() << " of " << aTrack->GetKineticEnergy()/keV << " keV from " << aProcessName << G4endl;
 		if(aTrack->GetDefinition() == G4Gamma::Definition() && (aProcessName == "RadioactiveDecayBase" || aProcessName == "none"))
 		{
-			G4cout << "gamma of " << aTrack->GetKineticEnergy()/keV << " keV from " << aProcessName << G4endl;
 			man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kEini, aTrack->GetKineticEnergy()/keV); // [keV]
 			// if ( aTrack->GetKineticEnergy() != 245*keV)
 			// {
