@@ -49,6 +49,8 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 			// 	G4cout << "vertex: " << aTrack->GetVertexPosition() << ", ";
 			// 	G4cout << "from: " << aProcessName << G4endl;
 			// }
+			if(aTrack->GetDefinition() == G4Gamma::Definition() && aProcessName == "RadioactiveDecayBase")
+				aTrack->SetMomentumDirection(G4ThreeVector(0,1,1));
 		}
 	}
 	return fUrgent;
