@@ -26,9 +26,6 @@ public:
 	G4bool ShouldISaveEvent() {return fSaveEvent;}
 	void IShouldSaveEvent() {fSaveEvent = true;}
 	void IShouldNotSaveEvent() {fSaveEvent = false;}
-	G4bool ShouldISaveAllOpticals() {return fSaveAllOpticals;}
-	void IShouldSaveAllOpticals() {fSaveAllOpticals = true;}
-	void IShouldNotSaveAllOpticals() {fSaveAllOpticals = false;}
 
 private:
 	G4bool ProcessHits(G4Step*, G4TouchableHistory*) override;
@@ -47,9 +44,8 @@ private:
 	// energy threshold
 	G4int nofHitsThreshold;
 
-	// save or not
+	// save or not the event
 	G4bool fSaveEvent;
-	G4bool fSaveAllOpticals;
 };
 
 #endif

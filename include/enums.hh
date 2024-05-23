@@ -9,6 +9,7 @@ namespace Tuples {
     kOptical,
     kSipm,
     kAllOptical,
+    kChannels,
   };
 }
 
@@ -49,7 +50,7 @@ namespace TOptical {
   };
 }
 
-namespace Tsipm {
+namespace TSipm {
   enum {
     kNumber,
     kMeanX,
@@ -64,6 +65,24 @@ namespace TAllOptical {
     kEventID,
     kSipmX,
     kSipmY
+  };
+}
+
+namespace TChannels {
+  enum {
+    kEventID,
+    kNumber,
+    kIndexX,
+    kIndexY,
+  };
+}
+
+namespace DetectorDepth {
+  enum {
+    activePixel,
+    xDirection,
+    yDirection,
+    matrix,
   };
 }
 

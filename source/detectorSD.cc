@@ -12,7 +12,6 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   fSigmaMod = 0.;
   nofHits = 0;
   fSaveEvent = false;
-  fSaveAllOpticals = false;
 
   // quantum efficiency
   quEff = new G4PhysicsOrderedFreeVector();
@@ -101,7 +100,9 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   newHit->SetEdep(edep);
   newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
   newHit->SetPixelPos (preStepPoint->GetTouchable()->GetTranslation());
-  // G4cout << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() << ": " << aStep->GetPreStepPoint()->GetTouchable()->GetTranslation() << G4endl;
+  newHit->SetPixelIndexX (preStepPoint->GetTouchable()->GetCopyNumber(DetectorDepth::xDirection));
+  newHit->SetPixelIndexY (preStepPoint->GetTouchable()->GetCopyNumber(DetectorDepth::yDirection));
+  // G4cout << aStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() << ": " << newHit->GetPixelIndexX() << "\t" << newHit->GetPixelIndexY() << G4endl;
 
   if (fHitsCollection)
     fHitsCollection->insert( newHit );
@@ -157,6 +158,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   
     // save pixel tree
     std::vector <G4ThreeVector> pixelPos = {};
+    std::vector <G4int> pixelIndexX = {};
+    std::vector <G4int> pixelIndexY = {};
     std::vector <G4int> pixelCount = {};
     for ( G4int i=0; i<nofHits; i++ )
     {
@@ -164,6 +167,8 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
       if(it == pixelPos.end())
       {
         pixelPos.push_back((*fHitsCollection)[i]->GetPixelPos());
+        pixelIndexX.push_back((*fHitsCollection)[i]->GetPixelIndexX());
+        pixelIndexY.push_back((*fHitsCollection)[i]->GetPixelIndexY());
         pixelCount.push_back(1);
       }
       else
@@ -176,35 +181,43 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
     G4ThreeVector meanPixelPos = G4ThreeVector();
     G4ThreeVector mostPixelPos = G4ThreeVector();
     G4int imax = 0;
+    G4int thisEventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
     if (pixelCount.size() > 0)
     {
-    for (unsigned long i=0; i<pixelCount.size();)
-    {
-     // G4cout << pixelCount.at(i) << G4endl;
-     //  G4cout << pixelPos.at(i) << G4endl;
-
-      // threshold must be applied pixel wise
-      if (pixelCount.at(i) < nofHitsThreshold)
+      for (unsigned long i=0; i<pixelCount.size();)
       {
-        pixelCount.erase(pixelCount.begin() + i);
-        pixelPos.erase(pixelPos.begin() + i);
+       // G4cout << pixelCount.at(i) << G4endl;
+       //  G4cout << pixelPos.at(i) << G4endl;
+  
+        // threshold must be applied pixel wise
+        if (pixelCount.at(i) < nofHitsThreshold)
+        {
+          pixelCount.erase(pixelCount.begin() + i);
+          pixelPos.erase(pixelPos.begin() + i);
+          pixelIndexX.erase(pixelIndexX.begin() + i);
+          pixelIndexY.erase(pixelIndexY.begin() + i);
+        }
+        else
+        {
+          totalGoodCounts += pixelCount.at(i);
+          meanPixelPos += pixelCount.at(i)*pixelPos.at(i);
+          man->FillNtupleIColumn(Tuples::kChannels, TChannels::kEventID, thisEventID);
+          man->FillNtupleIColumn(Tuples::kChannels, TChannels::kNumber, pixelCount.at(i));
+          man->FillNtupleIColumn(Tuples::kChannels, TChannels::kIndexX, pixelIndexX.at(i));
+          man->FillNtupleIColumn(Tuples::kChannels, TChannels::kIndexY, pixelIndexY.at(i));
+          man->AddNtupleRow(Tuples::kChannels);
+          if (pixelCount.at(i) > pixelCount.at(imax))
+            imax = i;
+          i++;
+        }
       }
-      else
+      
+      if (pixelCount.size() > 0)
       {
-        totalGoodCounts += pixelCount.at(i);
-        meanPixelPos += pixelCount.at(i)*pixelPos.at(i);
-        if (pixelCount.at(i) > pixelCount.at(imax))
-          imax = i;
-        i++;
+        IShouldSaveEvent();
+        meanPixelPos /= totalGoodCounts;
+        mostPixelPos = pixelPos.at(imax);
       }
-    }
-    
-    if (pixelCount.size() > 0)
-    {
-      IShouldSaveEvent();
-      meanPixelPos /= totalGoodCounts;
-      mostPixelPos = pixelPos.at(imax);
-    }
     }
   /*
     // print to check
@@ -216,23 +229,19 @@ void MySensitiveDetector::EndOfEvent(G4HCofThisEvent*)
   */
     // G4cout << "found most pixel pos: " << mostPixelPos << G4endl;
     // G4cout << "found mean pixel pos: " << meanPixelPos << G4endl;
-    man->FillNtupleIColumn(Tuples::kSipm, Tsipm::kNumber, totalGoodCounts);
-    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostX, mostPixelPos.getX());
-    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMostY, mostPixelPos.getY());
-    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanX, meanPixelPos.getX());
-    man->FillNtupleDColumn(Tuples::kSipm, Tsipm::kMeanY, meanPixelPos.getY());
+    man->FillNtupleIColumn(Tuples::kSipm, TSipm::kNumber, totalGoodCounts);
+    man->FillNtupleDColumn(Tuples::kSipm, TSipm::kMostX, mostPixelPos.getX());
+    man->FillNtupleDColumn(Tuples::kSipm, TSipm::kMostY, mostPixelPos.getY());
+    man->FillNtupleDColumn(Tuples::kSipm, TSipm::kMeanX, meanPixelPos.getX());
+    man->FillNtupleDColumn(Tuples::kSipm, TSipm::kMeanY, meanPixelPos.getY());
 
     // threshold on the number of optical photons is not considered in AllOpticals tree
-    if (ShouldISaveAllOpticals())
+    for ( G4int i=0; i<nofHits; i++ )
     {
-      G4int thisEventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
-      for ( G4int i=0; i<nofHits; i++ )
-      {
-        man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmX, (*fHitsCollection)[i]->GetPos().getX());
-        man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmY, (*fHitsCollection)[i]->GetPos().getY());
-        man->FillNtupleIColumn(Tuples::kAllOptical, TAllOptical::kEventID, thisEventID);
-        man->AddNtupleRow(Tuples::kAllOptical);
-      }
+      man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmX, (*fHitsCollection)[i]->GetPos().getX());
+      man->FillNtupleDColumn(Tuples::kAllOptical, TAllOptical::kSipmY, (*fHitsCollection)[i]->GetPos().getY());
+      man->FillNtupleIColumn(Tuples::kAllOptical, TAllOptical::kEventID, thisEventID);
+      man->AddNtupleRow(Tuples::kAllOptical);
     }
   }
 }

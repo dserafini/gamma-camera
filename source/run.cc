@@ -14,6 +14,7 @@ MyRunAction::MyRunAction()
   man->CreateNtuple("Optical", "Optical");
   man->CreateNtuple("Sipm", "Sipm");
   man->CreateNtuple("AllOptical", "AllOptical");
+  man->CreateNtuple("Channels", "Channels");
 
   // number of generated events
   man->CreateNtupleIColumn(Tuples::kEvents, "gEvents"); // [1]
@@ -52,11 +53,19 @@ MyRunAction::MyRunAction()
   man->CreateNtupleIColumn(Tuples::kAllOptical, "eventID"); // [1]
   man->CreateNtupleDColumn(Tuples::kAllOptical, "xSipm"); // [mm]
   man->CreateNtupleDColumn(Tuples::kAllOptical, "ySipm"); // [mm]
+  
+  // real pixels of SiPM
+  man->CreateNtupleIColumn(Tuples::kChannels, "eventID"); // [1]
+  man->CreateNtupleIColumn(Tuples::kChannels, "dNumber"); // [1]
+  man->CreateNtupleIColumn(Tuples::kChannels, "dIndexX"); // [1]
+  man->CreateNtupleIColumn(Tuples::kChannels, "dIndexY"); // [1]
 
   // deactivate all optical ntuple by default
   man->SetActivation(true);
   G4UImanager *UImanager = G4UImanager::GetUIpointer();
   UImanager->ApplyCommand("/analysis/ntuple/setActivation " + std::to_string(Tuples::kAllOptical) + " False");
+  UImanager->ApplyCommand("/analysis/ntuple/setActivation " + std::to_string(Tuples::kOptical) + " False");
+  UImanager->ApplyCommand("/analysis/ntuple/setActivation " + std::to_string(Tuples::kSipm) + " False");
 
   // finish tuple
   man->FinishNtuple(Tuples::kEvents);
@@ -65,6 +74,7 @@ MyRunAction::MyRunAction()
   man->FinishNtuple(Tuples::kOptical);
   man->FinishNtuple(Tuples::kSipm);
   man->FinishNtuple(Tuples::kAllOptical);
+  man->FinishNtuple(Tuples::kChannels);
 }
 
 MyRunAction::~MyRunAction()

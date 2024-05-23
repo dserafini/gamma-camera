@@ -25,13 +25,13 @@
 ################################################################################
 # change geometry detector
 ################################################################################
-/control/alias pThreshold 10
+/control/alias pThreshold 0
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
 /detector/detector_side 24 mm
 /detector/fill_factor .74
 /detector/threshold {pThreshold}
-/detector/save_all_opticals False
+/analysis/ntuple/setActivation 5 True
 
 ################################################################################
 # change geometry moby
@@ -53,13 +53,14 @@
 /gps/particle gamma
 #/gps/ion 55 137 0 0.
 /gps/energy 661. keV
-/gps/position 0 0 0 mm
+/gps/position 1.5 1.5 0 mm
 /gps/direction 0 0 1
+#/gps/ang/type iso
 
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 10000
-/run/printProgress 1000
-/analysis/setFileName Cs137average{nEvents}events.root
+/control/alias nEvents 100000
+/run/printProgress 10000
+/analysis/setFileName Cs137average{nEvents}eventsPos1.root
 /run/beamOn {nEvents}
