@@ -61,9 +61,9 @@
 ################################################################################
 # tumore
 ################################################################################
-/run/printProgress 10000
+/run/printProgress 1000
 
 
 /control/alias nEvents 10000
-/analysis/setFileName Ba133{nEvents}events.root
+/analysis/setFileName Ba133_{nEvents}events.root
 /run/beamOn {nEvents}
