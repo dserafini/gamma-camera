@@ -43,10 +43,13 @@ THStack* vectorchannels2(TString fileName = "Cs137average100kevents.root", Int_t
 	TList *l2;
 	Float_t gainMatrix[nBinsX][nBinsX];
 	
+	hAllPixels->SetDirectory(gDirectory);
+	hEdepVsCounts->SetDirectory(gDirectory);
+	
 	// set gain matrix
 	cout << "Gain matrix" << endl;
 	TRandom *r1 = new TRandom();
-	const Float_t halfRandomWidth = 0.;
+	const Float_t halfRandomWidth = 0.0;
 	for (int iy=0; iy< nBinsX; iy++)
 	{
 		for (int ix=0; ix< nBinsX; ix++)
@@ -66,15 +69,17 @@ THStack* vectorchannels2(TString fileName = "Cs137average100kevents.root", Int_t
 		if (!tgen) cout << "Generation tree not found in " << fileName << "!" << endl;
 		else
 		{
-			int nGenerationEvents = tgen->Draw("eventID", "", "goff");
+			const int nGenerationEvents = tgen->Draw("eventID", "", "goff");
 			Double_t *eventsGenerationArray = tgen->GetV1();
+			cout << "Generation tree has " << nGenerationEvents << " entries" << endl;
 			
 			TTree* tscin = (TTree*)files->Get("Scintillator");
 			if (!tscin) cout << "Scintillator tree not found in " << fileName << "!" << endl;
 			else
 			{
-				int nScintillatorEdep = tscin->Draw("fEdep", "", "goff");
+				const int nScintillatorEdep = tscin->Draw("fEdep", "", "goff");
 				Double_t *edepScintillatorArray = tscin->GetV1();
+				cout << "Scintillator tree has " << nScintillatorEdep << " entries" << endl;
 				
 				if (nGenerationEvents != nScintillatorEdep)
 					cout << nGenerationEvents << " != " << nScintillatorEdep << "!" << endl;
@@ -88,24 +93,24 @@ THStack* vectorchannels2(TString fileName = "Cs137average100kevents.root", Int_t
 						// save vectors from trees
 						cout << "reading vectors from trees" << endl;
 						const int nChannelsEvents = tcha->GetEntries();
+						cout << "Channels tree has " << nChannelsEvents << " entries" << endl;
 						vector <Double_t> eventsChannelsVector(nChannelsEvents);
 						vector <Double_t> dNumberChannelsVector(nChannelsEvents);
 						vector <Double_t> dIndexXChannelsVector(nChannelsEvents);
 						vector <Double_t> dIndexYChannelsVector(nChannelsEvents);
+						tcha->SetEstimate(-1); // essenziale o Draw si ferma a 1M
 						tcha->Draw("eventID", "", "goff");
 						for (int i=0; i<nChannelsEvents; i++)
 							eventsChannelsVector.at(i) = tcha->GetV1()[i];
-						tcha->Draw("dNumber", "", "goff");
+						tcha->Draw("dIndexX:dIndexY:dNumber", "", "goff");
 						for (int i=0; i<nChannelsEvents; i++)
-							dNumberChannelsVector.at(i) = tcha->GetV1()[i];
-						tcha->Draw("dIndexX", "", "goff");
-						for (int i=0; i<nChannelsEvents; i++)
+						{
 							dIndexXChannelsVector[i] = tcha->GetV1()[i];
-						tcha->Draw("dIndexY", "", "goff");
-						for (int i=0; i<nChannelsEvents; i++)
-							dIndexYChannelsVector[i] = tcha->GetV1()[i];
+							dIndexYChannelsVector[i] = tcha->GetV2()[i];
+							dNumberChannelsVector.at(i) = tcha->GetV3()[i];
+						}
 						
-						Double_t maxCountsForOnePixel = *max_element(dNumberChannelsVector.begin(), dNumberChannelsVector.end());
+						// Double_t maxCountsForOnePixel = *max_element(dNumberChannelsVector.begin(), dNumberChannelsVector.end());
 						
 						// fill the TH2 from the tree vectors
 						cout << "filling the TH2 from the tree vectors" << endl;
@@ -177,7 +182,7 @@ THStack* vectorchannels2(TString fileName = "Cs137average100kevents.root", Int_t
 						leg2->AddEntry(hOneCentralPixels,"One central");
 						leg2->AddEntry(hOneLateralPixels,"One lateral");
 						leg2->Draw();
-						//hEdepVsCounts->Draw("colz");
+						hEdepVsCounts->Draw("colz");
 						if (save) c1->SaveAs("TH1" + fileName + ".png");
 					}
 				}
