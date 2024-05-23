@@ -136,3 +136,5 @@
 # color first gamma
 /vis/modeling/trajectories/create/drawByParticleID
 /vis/modeling/trajectories/drawByParticleID-0/set gamma blue
+
+/tracking/verbose 2
