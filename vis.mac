@@ -50,8 +50,10 @@
 # change source
 ################################################################################
 /particleSource/sourceType gun
-/gun/particle gamma
-/gun/energy 661 keV
+#/gun/particle gamma
+/gun/particle ion
+/gun/ion 47 111 0 0.
+/gun/energy 0 keV
 # /gps/particle ion
 # /gps/ion 47 111 0 0.
 # /gps/particle proton
