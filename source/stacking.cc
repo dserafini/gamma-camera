@@ -10,7 +10,7 @@ MyStackingAction::~MyStackingAction() {}
 G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 	const G4Track* aTrack)
 {
-	G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
+	//G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
 	// G4cout << "Particle: " << aTrack->GetParticleDefinition()->GetParticleName() << ", ";
 	if (aTrack->GetParticleDefinition() == G4OpticalPhoton::Definition())
 	{
@@ -27,7 +27,7 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 			aProcessName = aProcess->GetProcessName();
 		// G4cout << "from: " << aProcessName << G4endl;
 		
-		G4cout << aTrack->GetDefinition()->GetParticleName() << " of " << aTrack->GetKineticEnergy()/keV << " keV from " << aProcessName << G4endl;
+		//G4cout << aTrack->GetDefinition()->GetParticleName() << " of " << aTrack->GetKineticEnergy()/keV << " keV from " << aProcessName << G4endl;
 		G4AnalysisManager *man = G4AnalysisManager::Instance();
 		
 		// particle is beta-
@@ -49,8 +49,6 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 			// 	G4cout << "vertex: " << aTrack->GetVertexPosition() << ", ";
 			// 	G4cout << "from: " << aProcessName << G4endl;
 			// }
-			if(aTrack->GetDefinition() == G4Gamma::Definition() && aProcessName == "RadioactiveDecayBase")
-				aTrack->SetMomentumDirection(G4ThreeVector(0,1,1));
 		}
 	}
 	return fUrgent;
