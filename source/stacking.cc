@@ -10,7 +10,7 @@ MyStackingAction::~MyStackingAction() {}
 G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 	const G4Track* aTrack)
 {
-	// G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
+	G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
 	// G4cout << "Particle: " << aTrack->GetParticleDefinition()->GetParticleName() << ", ";
 	if (aTrack->GetParticleDefinition() == G4OpticalPhoton::Definition())
 	{
