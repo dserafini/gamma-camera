@@ -14,7 +14,7 @@
 # define collimator
 ################################################################################
 
-/collimator/exist 0
+/collimator/exist 1
 /collimator/case_side 100. mm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
@@ -53,7 +53,7 @@
 /gps/particle ion
 /gps/ion 56 133 0 0.
 #/gps/particle gamma
-/gps/position 1.5 1.5 0 mm
+/gps/position 0 0 0 mm
 /gps/direction 0 0 1
 #/gps/ang/type iso
 /gps/energy 0 eV
@@ -65,5 +65,5 @@
 
 
 /control/alias nEvents 10000000
-/analysis/setFileName Ba133_{nEvents}events.root
+/analysis/setFileName Ba133collimator{nEvents}events.root
 /run/beamOn {nEvents}
