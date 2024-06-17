@@ -1,4 +1,4 @@
-#/run/numberOfThreads 10
+/run/numberOfThreads 10
 
 ################################################################################
 # define scintillator
@@ -66,5 +66,5 @@
 
 /control/alias nEvents 10000000
 /analysis/setFileName Ba133collimator{nEvents}events.root
-#/run/beamOn {nEvents}
-/run/beamOn 10
+/run/beamOn {nEvents}
+#/run/beamOn 10
