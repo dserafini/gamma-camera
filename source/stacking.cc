@@ -10,7 +10,7 @@ MyStackingAction::~MyStackingAction() {}
 G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 	const G4Track* aTrack)
 {
-	// G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
+	//G4cout << "MyStackingAction::ClassifyNewTrack" << G4endl;
 	// G4cout << "Particle: " << aTrack->GetParticleDefinition()->GetParticleName() << ", ";
 	if (aTrack->GetParticleDefinition() == G4OpticalPhoton::Definition())
 	{
@@ -27,6 +27,7 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 			aProcessName = aProcess->GetProcessName();
 		// G4cout << "from: " << aProcessName << G4endl;
 		
+		//G4cout << aTrack->GetDefinition()->GetParticleName() << " of " << aTrack->GetKineticEnergy()/keV << " keV from " << aProcessName << G4endl;
 		G4AnalysisManager *man = G4AnalysisManager::Instance();
 		
 		// particle is beta-
@@ -40,7 +41,6 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 		// particle is gamma, primary or from de-excitation
 		if(aTrack->GetDefinition() == G4Gamma::Definition() && (aProcessName == "RadioactiveDecayBase" || aProcessName == "none"))
 		{
-			// G4cout << "energy: " << aTrack->GetKineticEnergy()/keV << " keV" << G4endl;
 			man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kEini, aTrack->GetKineticEnergy()/keV); // [keV]
 			// if ( aTrack->GetKineticEnergy() != 245*keV)
 			// {
