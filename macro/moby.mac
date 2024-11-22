@@ -92,20 +92,23 @@
 /run/printProgress 1000000
 #/run/beamOn {nEvents}
 
+/control/alias xcentre 5.0
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /run/reinitializeGeometry
-
 /control/alias nEvents 30000000
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /run/beamOn {nEvents}
 
-/control/alias nEvents 80000000
+/control/alias xcentre 10.0
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/run/reinitializeGeometry
+/control/alias nEvents 30000000
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /run/beamOn {nEvents}
 
-/control/alias nEvents 50000000
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
-/run/beamOn {nEvents}
-
-/control/alias nEvents 200000000
+/control/alias xcentre 2.0
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/run/reinitializeGeometry
+/control/alias nEvents 30000000
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /run/beamOn {nEvents}
