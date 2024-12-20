@@ -1,6 +1,10 @@
 # which is the minimum version of cmake that we need to compile our code
 cmake_minimum_required(VERSION 2.6...3.22.1)
 
+# ROOT requires c++ 17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # what is the name of the project that we want to start
 project(Simulation)
 
@@ -11,22 +15,16 @@ project(Simulation)
 find_package(Geant4 REQUIRED ui_all vis_all)
 # when these packages are found then everything is working
 
+# moby phantom event generation in generator.cc requires the maniupulation of a ROOT tfile
+# find ROOT
+find_package(ROOT REQUIRED COMPONENTS Core RIO Hist Tree)
+# Add ROOT include directories
+include_directories(${ROOT_INCLUDE_DIRS})
+
 # we also have to use the include files of Geant4 that have been set by sourcing
 # so we include the files that are in the path ${Geant4_USE_FILE}
 include(${Geant4_USE_FILE})
-
-# Setup include directory for this project
-include_directories(${PROJECT_SOURCE_DIR}/include /home/isol/Applications/root-6.28.04-install/include/)
-include_directories(${PROJECT_SOURCE_DIR}/include /home/isol/Applications/root-6.28.04-install/include/)
-find_package(ROOT REQUIRED)
-include(${ROOT_USE_FILE})
-if (ROOT_FOUND)
-  message("ROOT found: ${ROOT_INCLUDE_DIRS}")
-else()
-   message (FATAL_ERROR "ROOT not found")
-endif()
-
-include_directories(${ROOT_INCLUDE_DIRS})
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # in our project we will put different class in different files
 # we want to compile all the source files (*.cc) that we have in our folder
