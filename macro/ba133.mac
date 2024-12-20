@@ -1,4 +1,4 @@
-/run/numberOfThreads 10
+/run/numberOfThreads 1
 
 ################################################################################
 # define scintillator
@@ -14,7 +14,7 @@
 # define collimator
 ################################################################################
 
-/collimator/exist 1
+/collimator/exist 0
 /collimator/case_side 40. mm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 5. mm
@@ -28,7 +28,7 @@
 /control/alias pThreshold 0
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
-/detector/detector_side 24 mm
+#/detector/detector_side 24 mm
 /detector/fill_factor .74
 /detector/threshold {pThreshold}
 /analysis/ntuple/setActivation 5 True
@@ -50,21 +50,21 @@
 ################################################################################
 /particleSource/sourceType gps
 # Ba-133
-/gps/particle ion
-/gps/ion 56 133 0 0.
-#/gps/particle gamma
+#/gps/particle ion
+#/gps/ion 56 133 0 0.
+/gps/particle gamma
 /gps/position 0 0 0 mm
 /gps/direction 0 0 1
 #/gps/ang/type iso
-/gps/energy 0 eV
+/gps/energy 340 keV
 
 ################################################################################
 # tumore
 ################################################################################
-/run/printProgress 100
+/run/printProgress 1000
 
 
-/control/alias nEvents 1000
+/control/alias nEvents 10
 /analysis/setFileName Ba133collimator{nEvents}events.root
 /run/beamOn {nEvents}
 #/run/beamOn 10

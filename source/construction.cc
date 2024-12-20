@@ -62,7 +62,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// detector commands
 	fMessengerDetector = new G4GenericMessenger(this, "/detector/", "Detector Construction");
 	fMessengerDetector->DeclarePropertyWithUnit("det_pixel_size", "mm", det_pixel_size, "Size of the detector pixels");
-	fMessengerDetector->DeclarePropertyWithUnit("detector_side", "mm", detector_side, "Side of the SiPM");
+	fMessengerDetector->DeclarePropertyWithUnit("det_side", "mm", detector_side, "Side of the SiPM");
 	fMessengerDetector->DeclareProperty("pixel", detPixelNoSlab, "matrix or otherwise");
 	fMessengerDetector->DeclarePropertyWithUnit("det_scinti_distance", "mm", detector_scintillator_distance, "Optical coupling distance");
 	fMessengerDetector->DeclarePropertyWithUnit("channel_dead_space", "mm", channel_dead_space, "Dead space between channels");

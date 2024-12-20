@@ -52,14 +52,14 @@
 ################################################################################
 
 /run/printProgress 100000
-/control/alias activitykBq 45
+/control/alias activitykBq 1
 /control/echo "activity in kBq: "
 /control/echo {activitykBq}
 # activitykBq if greater or equal than 1M then is cast as float
 # beamOn needs an integer, thus a smaller activitykBq
 # /run/beamOn 10000000
 # /run/beamOn 1850746
-/control/alias acquisitionTimes 300
+/control/alias acquisitionTimes 3
 /control/multiply decayedNucleik {activitykBq} {acquisitionTimes}
 
 ################################################################################
