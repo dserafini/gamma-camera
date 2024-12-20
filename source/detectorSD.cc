@@ -18,6 +18,12 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   // read the data files
   std::ifstream datafile;
   datafile.open("eff.dat");
+  if (!datafile.is_open()) {
+    G4Exception("MySensitiveDetector::LoadEfficiencyFile",
+                "FileNotFoundError",
+                FatalException,
+                "Impossible to open file eff.dat.");
+  }
   // put the read data files into the quEff vector
   while(datafile.good())
   {
