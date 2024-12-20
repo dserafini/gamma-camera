@@ -1,0 +1,119 @@
+# tutorial to start using the gamma-camera simulation tool from Geant4 macros
+# the list of commands (apart from the custom made ones) can be found here:
+# https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Control/AllResources/Control/UIcommands/_.html
+
+################################################################################
+# global settings
+################################################################################
+# set the address relative to the build folder where the macros would be found
+/control/macroPath macro
+# set the number of threads to be used during the simulation, if you do not know
+# just put 1
+# comment if you want to launch the macro from the gui
+# /run/numberOfThreads 1
+
+################################################################################
+# scintillator
+################################################################################
+# define scintillator features
+# write "matrix" if you want a pixellated scintillator or anything else if you
+# want a single slab of material
+/scintillator/pixel matrix
+# choose the length of the scintillator case side
+/scintillator/slab_side 24. mm
+# choose the depth of the scintillator case (= length of the matchsticks)
+/scintillator/slab_depth 26. mm
+# choose the length of the matchsticks square section side
+/scintillator/scinti_pixel_size 1. mm
+
+################################################################################
+# define collimator
+################################################################################
+# write true if you want to build the collimator and false otherwise
+/collimator/exist false
+# choose the length of the collimator case side
+/collimator/case_side 24. mm
+# choose the depth of the collimator case (= length of the holes)
+/collimator/hole_length 30. mm
+# choose the thickness of the collimator septa between two squared holes
+/collimator/septa_thickness 1. mm
+# choose the thickness of the collimator holes squared aperture
+/collimator/hole_thickness 2. mm
+# choose the XY position of the collimator holes squared aperture
+# it makes sense to change the xy values within [0,(hole_thickness+septa_thickness)/2]
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
+
+################################################################################
+# change geometry CCD detector
+################################################################################
+# write "matrix" if you want a pixellated detector or anything else if you
+# want a single slab of material
+/detector/pixel matrix
+# choose the CCD pixel size
+/detector/det_pixel_size 3. mm
+# choose sipm side (for 8 channels: 8 x 3 mm = 24 mm)
+/detector/det_side 24. mm
+# optical interface distance between scintillator and sipm
+/detector/det_scinti_distance 1 mm
+# fill factor acts as a probability similar to quantum efficiency
+/detector/fill_factor .8
+# set dead space between channels
+/detector/channel_dead_space .01 mm
+# set minimum number of optical photons to be recorded
+/detector/threshold 0
+
+################################################################################
+# reinitialize geometry and initialize run
+################################################################################
+/run/reinitializeGeometry
+/run/initialize
+
+################################################################################
+# define primary particle generation
+################################################################################
+# choose between gun / gps / moby
+/particleSource/sourceType gps
+# write the type of particle you want to generate
+# "gamma" for gammas, "ion" for ions, etc.
+/gps/particle gamma
+# choose the energy associated to the generated particles
+# Ag-111 has two gammas: the first one at 342 keV and the second one at 245 keV
+/gps/energy 342 keV
+# choose the position of the primary vertex, that is where the particles are generated
+/gps/position 0 0 -1. mm
+# choose particle direction
+# uncomment if you want particles to go straight toward the detector
+# such as in the case of a collimated beam
+/gps/direction 0 0 1
+# uncomment if you want particles go isotropically starting from the vertex
+# /gps/ang/type iso
+
+################################################################################
+# global settings
+################################################################################
+# one event has to be launched before the real start of the simulation
+# in order to avoid having the very first event with wrong energy
+# choose the name of the root file to be discarded along with the first event
+/analysis/setFileName discard.root
+# generate the first event
+/tracking/verbose 1
+/run/beamOn 1
+
+################################################################################
+# run settings
+################################################################################
+# choose after how many events you want a feedback from the simulation
+# in general I use 1% or 10% of the total number of generated events
+/run/printProgress 10
+/control/alias nPrimaries 100
+/control/listAlias
+
+################################################################################
+# repeat the generation of primaries for each one of the three cylinders
+################################################################################
+# first cylinder
+# change the file name for each one cylinder
+# automatically state the cylinder diameter and the z-distance of the phantom
+/analysis/setFileName tutorial.root
+/run/beamOn {nPrimaries}
