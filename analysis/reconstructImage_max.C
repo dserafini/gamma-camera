@@ -66,7 +66,7 @@ void reconstructImage_max(TString file_name) {
         eventMax[eventID].nN += dNumber;
     }
     
-    Int_t nBinX = 100;
+    Int_t nBinX = 50;
     Int_t nBinY = nBinX;
     Float_t startX = -1.5;
     Float_t startY = startX;
