@@ -41,7 +41,6 @@ G4ClassificationOfNewTrack MyStackingAction::ClassifyNewTrack(
 		// particle is gamma, primary or from de-excitation
 		if(aTrack->GetDefinition() == G4Gamma::Definition() && (aProcessName == "RadioactiveDecayBase" || aProcessName == "none"))
 		{
-			man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kEini, aTrack->GetKineticEnergy()/keV); // [keV]
 			// if ( aTrack->GetKineticEnergy() != 245*keV)
 			// {
 			// 	G4cout << "Kinetic energy: " << aTrack->GetKineticEnergy() / keV << " keV" << ", ";

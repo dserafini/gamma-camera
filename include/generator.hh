@@ -27,6 +27,7 @@ public:
 
 private:
 	void SaveVertexPosition(G4ThreeVector);
+	void SavePrimaryEnergy(G4double);
 	G4ThreeVector GenerateParticlePositionMOBY();
 	G4GeneralParticleSource* fParticleGPS;
 	G4ParticleGun* fParticleGun;

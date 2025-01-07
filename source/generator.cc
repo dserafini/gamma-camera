@@ -37,6 +37,7 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 			fParticleGun->SetParticlePosition(GenerateParticlePositionMOBY());
 		fParticleGun->GeneratePrimaryVertex(anEvent);
 		SaveVertexPosition(fParticleGun->GetParticlePosition());
+		SavePrimaryEnergy(fParticleGun->GetParticleEnergy());
 		// G4cout << "myPos: " << fParticleGun->GetParticlePosition() << G4endl;
 	}
 	else
@@ -46,6 +47,7 @@ void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 			// fParticleGPS->SetParticlePosition(G4ThreeVector(10*mm,10*mm,0.*mm));
 			fParticleGPS->GeneratePrimaryVertex(anEvent);
 			SaveVertexPosition(fParticleGPS->GetParticlePosition());
+			SavePrimaryEnergy(fParticleGPS->GetParticleEnergy());
 			// G4cout << "energy: " << fParticleGPS->GetParticleEnergy() << G4endl;
 		}
 		else
@@ -85,4 +87,10 @@ void MyPrimaryGenerator::SaveVertexPosition(G4ThreeVector vertexPos)
 	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexX, vertexPos.getX());
 	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexY, vertexPos.getY());
 	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kVertexZ, vertexPos.getZ());
+}
+
+void MyPrimaryGenerator::SavePrimaryEnergy(G4double energy)
+{
+	G4AnalysisManager *man = G4AnalysisManager::Instance();
+	man->FillNtupleDColumn(Tuples::kGeneration, TGeneration::kEini, energy / keV); // [keV]
 }
