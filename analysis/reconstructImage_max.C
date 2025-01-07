@@ -66,12 +66,13 @@ void reconstructImage_max(TString file_name) {
         eventMax[eventID].nN += dNumber;
     }
     
-    Int_t nBinX = 35;
+    Int_t nBinX = 100;
     Int_t nBinY = nBinX;
     Float_t startX = -1.5;
     Float_t startY = startX;
-    Int_t unBin = 1;
-    TH2F *hMax = new TH2F("hMax","hMax",nBinX*unBin,startX,startX+nBinX,nBinY*unBin,startY,startY+nBinY);
+    Float_t endX = 8.5;
+    Float_t endY = endX;
+    TH2F *hMax = new TH2F("hMax","hMax",nBinX,startX,endX,nBinY,startY,endY);
     
     for (const auto& [event, anEvent] : eventMax) {
 //    cout << anEvent.nX << " \t" << anEvent.nY << "\t" << anEvent.nN << endl;
