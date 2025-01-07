@@ -28,7 +28,7 @@
 /control/alias pThreshold 0
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
-#/detector/detector_side 24 mm
+/detector/det_side 24 mm
 /detector/fill_factor .74
 /detector/threshold {pThreshold}
 /analysis/ntuple/setActivation 5 True
@@ -56,14 +56,14 @@
 /gps/position 0 0 0 mm
 /gps/direction 0 0 1
 #/gps/ang/type iso
-/gps/energy 340 keV
+/gps/energy 14 keV
 
 ################################################################################
 # tumore
 ################################################################################
 /run/printProgress 1000
 
-
+#/tracking/verbose 2
 /control/alias nEvents 10
 /analysis/setFileName Ba133collimator{nEvents}events.root
 /run/beamOn {nEvents}
