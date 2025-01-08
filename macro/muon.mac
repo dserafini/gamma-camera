@@ -28,7 +28,7 @@
 /control/alias pThreshold 10
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
-/detector/detector_side 24 mm
+/detector/det_side 24 mm
 /detector/fill_factor .74
 /detector/threshold {pThreshold}
 
@@ -51,8 +51,8 @@
 /control/alias muonEnergyGeV 3
 /gps/particle mu-
 /gps/energy {muonEnergyGeV} GeV
-/gps/position -75 -50 47.7 mm
-/gps/direction 1 1.5 0
+/gps/position -50 -50 47.7 mm
+/gps/direction 1 1 0
 
 ################################################################################
 # tumore
@@ -60,13 +60,4 @@
 /control/alias nEvents 1
 /particleSource/sourceType gps
 /analysis/setFileName muon{muonEnergyGeV}GeV{nEvents}events64channelsA.root
-/run/beamOn {nEvents}
-
-/analysis/setFileName muon{muonEnergyGeV}GeV{nEvents}events64channelsB.root
-/run/beamOn {nEvents}
-
-/analysis/setFileName muon{muonEnergyGeV}GeV{nEvents}events64channelsC.root
-/run/beamOn {nEvents}
-
-/analysis/setFileName muon{muonEnergyGeV}GeV{nEvents}events64channelsD.root
 /run/beamOn {nEvents}
