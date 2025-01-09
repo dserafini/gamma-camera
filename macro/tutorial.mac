@@ -73,6 +73,7 @@
 # define primary particle generation
 ################################################################################
 # choose between gun / gps / moby
+# for the moby option you need an additional root file
 /particleSource/sourceType gps
 # write the type of particle you want to generate
 # "gamma" for gammas, "ion" for ions, etc.
@@ -88,17 +89,6 @@
 /gps/direction 0 0 1
 # uncomment if you want particles go isotropically starting from the vertex
 # /gps/ang/type iso
-
-################################################################################
-# global settings
-################################################################################
-# one event has to be launched before the real start of the simulation
-# in order to avoid having the very first event with wrong energy
-# choose the name of the root file to be discarded along with the first event
-/analysis/setFileName discard.root
-# generate the first event
-/tracking/verbose 1
-/run/beamOn 1
 
 ################################################################################
 # run settings
