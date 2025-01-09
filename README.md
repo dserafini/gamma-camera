@@ -31,5 +31,10 @@ Finally the executable can be executed opening the GUI
 ````
 or with a macro file, for instance:
 ````bash
-./sim macro/moby.mac
+./sim macro/tutorial.mac
+````
+
+You can process an output file to obtain an image using the code in the analysis folder. For instance, supposing that you have launched the tutorial macro, you can process the corresepondent output file typing:
+````bash
+root 'analysis/reconstructImage_gravity.C("tutorial2_t0.root")'
 ````
