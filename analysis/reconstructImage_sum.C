@@ -48,11 +48,11 @@ void reconstructImage_sum(TString file_name) {
     tree_channels->SetBranchAddress("dIndexX", &dIndexX);
     tree_channels->SetBranchAddress("dIndexY", &dIndexY);
     
-    Int_t nBinX = 8;
+    Int_t nBinX = 50;
     Int_t nBinY = nBinX;
-    Float_t startX = -.5;
+    Float_t startX = -1.5;
     Float_t startY = startX;
-    Float_t endX = 7.5;
+    Float_t endX = 8.5;
     Float_t endY = endX;
     TH2F *hSum = new TH2F("hSum","hSum",nBinX,startX,endX,nBinY,startY,endY);
 
