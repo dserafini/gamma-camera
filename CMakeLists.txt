@@ -8,6 +8,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # what is the name of the project that we want to start
 project(Simulation)
 
+# copy analysis file in the build directory
+file(GLOB ANALYSIS_FILES
+  "analysis/*.C"
+)
+file(COPY ${ANALYSIS_FILES} DESTINATION ${PROJECT_BINARY_DIR}/analysis)
+
 # when you compile and source Geant4 then it automatically find that packages: Geant4
 # Geant4 is required so without that you cannot run: REQUIRED
 # we also need one package for user interface: ui_all
