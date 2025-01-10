@@ -36,5 +36,6 @@ or with a macro file, for instance:
 
 You can process an output file to obtain an image using the code in the analysis folder. For instance, supposing that you have launched the tutorial macro, you can process the corresepondent output file typing:
 ````bash
-root 'analysis/reconstructImage_gravity.C("tutorial2_t0.root")'
+root 'analysis/reconstructImage_gravity.C("tutorial_t0.root")'
 ````
+If Geant4 is build with multithreading option off, then the name of the output file is "tutorial.root".
