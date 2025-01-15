@@ -68,13 +68,16 @@ void reconstructImage_gravity(TString file_name) {
     	eventMean[event] = anEvent;
     }
     
-    Int_t nBinX = 50;
+    Int_t nBinX = 400;
     Int_t nBinY = nBinX;
     Float_t startX = -1.5;
     Float_t startY = startX;
     Float_t endX = 8.5;
     Float_t endY = endX;
-    TH2F *hGravity = new TH2F("hGravity","hGravity",nBinX,startX,endX,nBinY,startY,endY);
+    TH2F *hGravity = new TH2F("hGravity","SiPM hGravity",nBinX,startX,endX,nBinY,startY,endY);
+    hGravity->GetXaxis()->SetTitle("X bin number (= 3 mm)");
+    hGravity->GetYaxis()->SetTitle("Y bin number (= 3 mm)");
+    hGravity->GetZaxis()->SetTitle("Counts");
     
     for (const auto& [event, anEvent] : eventMean) {
 		// cout << anEvent.dX << " \t" << anEvent.dY << "\t" << anEvent.nN << endl;
@@ -84,7 +87,7 @@ void reconstructImage_gravity(TString file_name) {
     
     TCanvas *c2 = new TCanvas("c2","c2");
     c2->cd();
-	hGravity->SetStats(kFALSE);
+	hGravity->SetStats(kTRUE);
     hGravity->Draw("colz");
 	c2->SaveAs("hGravity.png");
     

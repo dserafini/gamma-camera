@@ -72,7 +72,10 @@ void reconstructImage_max(TString file_name) {
     Float_t startY = startX;
     Float_t endX = 8.5;
     Float_t endY = endX;
-    TH2F *hMax = new TH2F("hMax","hMax",nBinX,startX,endX,nBinY,startY,endY);
+    TH2F *hMax = new TH2F("hMax","SiPM hMax",nBinX,startX,endX,nBinY,startY,endY);
+    hMax->GetXaxis()->SetTitle("X bin number (= 3 mm)");
+    hMax->GetYaxis()->SetTitle("Y bin number (= 3 mm)");
+    hMax->GetZaxis()->SetTitle("Counts");
     
     for (const auto& [event, anEvent] : eventMax) {
 //    cout << anEvent.nX << " \t" << anEvent.nY << "\t" << anEvent.nN << endl;
@@ -82,7 +85,7 @@ void reconstructImage_max(TString file_name) {
     
     TCanvas *c2 = new TCanvas("c2","c2");
     c2->cd();
-	hMax->SetStats(kFALSE);
+	hMax->SetStats(kTRUE);
     hMax->Draw("colz");
 	c2->SaveAs("hMax.png");
     

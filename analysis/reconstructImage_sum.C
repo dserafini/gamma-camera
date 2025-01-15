@@ -54,7 +54,10 @@ void reconstructImage_sum(TString file_name) {
     Float_t startY = startX;
     Float_t endX = 8.5;
     Float_t endY = endX;
-    TH2F *hSum = new TH2F("hSum","hSum",nBinX,startX,endX,nBinY,startY,endY);
+    TH2F *hSum = new TH2F("hSum","SiPM hSum",nBinX,startX,endX,nBinY,startY,endY);
+    hSum->GetXaxis()->SetTitle("X bin number (= 3 mm)");
+    hSum->GetYaxis()->SetTitle("Y bin number (= 3 mm)");
+    hSum->GetZaxis()->SetTitle("Counts");
 
     // Loop sugli eventi
     Long64_t nEntries = tree_channels->GetEntries();
@@ -66,7 +69,7 @@ void reconstructImage_sum(TString file_name) {
     
     TCanvas *c2 = new TCanvas("c2","c2");
     c2->cd();
-	hSum->SetStats(kFALSE);
+	hSum->SetStats(kTRUE);
     hSum->Draw("colz");
 	c2->SaveAs("hSum.png");
     
