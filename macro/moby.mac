@@ -6,7 +6,7 @@
 
 /scintillator/pixel matrix
 # matrix or otherwise slab
-/scintillator/slab_side 10. cm
+/scintillator/slab_side 22. mm
 /scintillator/slab_depth 26. mm
 /scintillator/scinti_pixel_size 1. mm
 
@@ -15,7 +15,7 @@
 ################################################################################
 
 /collimator/exist 1
-/collimator/case_side 100. mm
+/collimator/case_side 22. mm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
@@ -29,7 +29,7 @@
 /detector/pixel matrix
 /detector/det_pixel_size 3. mm
 /detector/det_side 24. mm
-/detector/fill_factor .8
+/detector/fill_factor .74
 /detector/threshold {pThreshold}
 
 ################################################################################
@@ -77,7 +77,7 @@
 ################################################################################
 # tumore
 ################################################################################
-/control/alias nEvents 10000000
+/control/alias nEvents 100000000
 /control/alias tumoradius .5
 /control/alias depth 10.0
 /control/alias xcentre 0.0
@@ -91,25 +91,22 @@
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
 /particleSource/sourceType gps
 /run/printProgress 1000000
-#/run/beamOn {nEvents}
+/run/beamOn {nEvents}
 
 /control/alias xcentre 5.0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /run/reinitializeGeometry
-/control/alias nEvents 30000000
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 /control/alias xcentre 10.0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /run/reinitializeGeometry
-/control/alias nEvents 30000000
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 /control/alias xcentre 2.0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /run/reinitializeGeometry
-/control/alias nEvents 30000000
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
