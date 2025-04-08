@@ -181,12 +181,13 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	G4double ScintEnergy[nEntries] = {3.25*eV, 3.44*eV};
 	G4double ScintFast[nEntries] = {1.0,1.0};
 
-	mptGAGG->AddProperty("FASTCOMPONENT",ScintEnergy, ScintFast, nEntries);
+	mptGAGG->AddProperty("SCINTILLATIONCOMPONENT1",ScintEnergy, ScintFast, nEntries);
 
 	mptGAGG->AddConstProperty("SCINTILLATIONYIELD", 42000/MeV);
+	mptGAGG->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
 	mptGAGG->AddConstProperty("RESOLUTIONSCALE", 1.0);
-	mptGAGG->AddConstProperty("FASTTIMECONSTANT",90.0*ns);
-	mptGAGG->AddConstProperty("YIELDRATIO",1.0);
+	mptGAGG->AddConstProperty("SCINTILLATIONTIMECONSTANT1",90.0*ns);
+	// mptGAGG->AddConstProperty("YIELDRATIO",1.0); // only for v10.7
 
 	materialGAGG->SetMaterialPropertiesTable(mptGAGG);
 	
@@ -295,7 +296,7 @@ void MyDetectorConstruction::ConstructMOBY()
     G4PhantomParameterisation* voxelizedPhantom = new G4PhantomParameterisation();
 
     voxelizedPhantom->SetVoxelDimensions(HalfVoxelSize, HalfVoxelSize, HalfVoxelSize);
-    voxelizedPhantom->SetNoVoxel(nVoxelX, nVoxelY, nVoxelZ);
+    voxelizedPhantom->SetNoVoxels(nVoxelX, nVoxelY, nVoxelZ);
     voxelizedPhantom->SetMaterials(theMaterials);
 
     size_t* materialIDs = new size_t[nVoxelX*nVoxelY*nVoxelZ];

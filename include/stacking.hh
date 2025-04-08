@@ -2,7 +2,9 @@
 #define STACKINGACTION_HH 1
 
 #include "globals.hh"
-#include "g4root.hh"
+// #include "g4root.hh" // v10.7
+#include "g4root_defs.hh" // v11.0
+#include "G4AnalysisManager.hh" // v11.0
 #include "G4UserStackingAction.hh"
 #include "G4Track.hh"
 #include "G4Electron.hh"

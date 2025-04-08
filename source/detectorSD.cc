@@ -38,7 +38,7 @@ MySensitiveDetector::MySensitiveDetector(G4String name, const G4String& hitsColl
   }
   // close data file
   datafile.close();
-  quEff->SetSpline(false);
+  // quEff->SetSpline(false); // only for v10.7
   quEff->DumpValues();
 
   // default energy detection threshold

@@ -1,4 +1,4 @@
-/run/numberOfThreads 1
+/run/numberOfThreads 10
 
 ################################################################################
 # define scintillator
@@ -50,13 +50,13 @@
 ################################################################################
 /particleSource/sourceType gps
 # Ba-133
-#/gps/particle ion
-#/gps/ion 56 133 0 0.
-/gps/particle gamma
+/gps/particle ion
+/gps/ion 56 133 0 0.
+#/gps/particle gamma
 /gps/position 0 0 0 mm
 /gps/direction 0 0 1
-#/gps/ang/type iso
-/gps/energy 14 keV
+/gps/ang/type iso
+/gps/energy 1 eV
 
 ################################################################################
 # tumore
@@ -64,7 +64,7 @@
 /run/printProgress 1000
 
 #/tracking/verbose 2
-/control/alias nEvents 10
+/control/alias nEvents 10000
 /analysis/setFileName Ba133collimator{nEvents}events.root
 /run/beamOn {nEvents}
 #/run/beamOn 10
