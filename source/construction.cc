@@ -167,10 +167,13 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	G4cout << "MyDetectorConstruction::DefineMaterialsProperties" << G4endl;
 	const G4int nEntries = 2;
 
-	G4double PhotonEnergy[nEntries] = {1.0*eV, 7.0*eV};
+	G4double PhotonEnergy[nEntries] = {1.77*eV, 2.61*eV};
+	// = [700, 475] nm
 
 	// gagg
-	G4double refractiveIndexGAGG[nEntries] = {1.9,1.9};
+	// in experiment we use GAGG:Ce with higher light output (HL) from epic crystal
+	// https://www.epic-crystal.com/scintillation-crystals/gaggce-crystal.html
+	G4double refractiveIndexGAGG[nEntries] = {1.91,1.91};
 	G4double absorptionLengthGAGG[nEntries] = {645.*mm,645.*mm};
 
 	G4MaterialPropertiesTable* mptGAGG = new G4MaterialPropertiesTable();
@@ -178,15 +181,17 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	mptGAGG->AddProperty("RINDEX", PhotonEnergy, refractiveIndexGAGG, nEntries);
 	mptGAGG->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthGAGG, nEntries);
 
-	G4double ScintEnergy[nEntries] = {3.25*eV, 3.44*eV};
-	G4double ScintFast[nEntries] = {1.0,1.0};
+	G4double ScintEnergy[10] = {1.77*eV, 1.84*eV, 1.91*eV, 1.98*eV, 2.07*eV, 2.16*eV, 2.25*eV, 2.36*eV, 2.48*eV, 2.61*eV};
+	// = inv of [475, 500, 525, 550, 575, 600, 625, 650, 675, 700] nm
+	// Wavelength of Emission Peak is 530 nm (= 2.34 eV)
+	G4double ScintFast[10] = {0.08, 0.8, 0.99, 0.82, 0.58, 0.34, 0.24, 0.16, 0.12, 0.08};
 
-	mptGAGG->AddProperty("SCINTILLATIONCOMPONENT1",ScintEnergy, ScintFast, nEntries);
+	mptGAGG->AddProperty("SCINTILLATIONCOMPONENT1",ScintEnergy, ScintFast, 10);
 
-	mptGAGG->AddConstProperty("SCINTILLATIONYIELD", 42000/MeV);
+	mptGAGG->AddConstProperty("SCINTILLATIONYIELD", 54000/MeV);
 	mptGAGG->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
 	mptGAGG->AddConstProperty("RESOLUTIONSCALE", 1.0);
-	mptGAGG->AddConstProperty("SCINTILLATIONTIMECONSTANT1",90.0*ns);
+	mptGAGG->AddConstProperty("SCINTILLATIONTIMECONSTANT1",150.0*ns);
 	// mptGAGG->AddConstProperty("YIELDRATIO",1.0); // only for v10.7
 
 	materialGAGG->SetMaterialPropertiesTable(mptGAGG);
