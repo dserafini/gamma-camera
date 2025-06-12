@@ -129,6 +129,9 @@ void MyDetectorConstruction::DefineMaterials()
 	materialAluminum = nist->FindOrBuildMaterial("G4_Al");
 	materialPlastic = nist->FindOrBuildMaterial("G4_POLYETHYLENE");
 	materialSilicon = nist->FindOrBuildMaterial("G4_SILICON_DIOXIDE");
+	materialBariumSulfate = nist->FindOrBuildMaterial("G4_BARIUM_SULFATE");
+	materialScintillatorReflector = materialBariumSulfate;
+	materialScintillatorCase = materialAluminum;
 
 	elLa = new G4Element("Lanthanum", "La", 57, 138.905*g/mole);
 	elBr = new G4Element("Bromine", "Br", 35, 79.904*g/mole);
@@ -146,19 +149,28 @@ void MyDetectorConstruction::DefineMaterials()
 	// the difference between the types of GaGGs involves only the properties and not the constituents
 	G4cout << "Define Material GAGG" << G4endl;
 	materialGAGG = new G4Material("materialGAGG", 6.6*g/cm3, 4);
-	G4cout << "Add Element Gd" << G4endl;
 	materialGAGG->AddElement(nist->FindOrBuildElement("Gd"), 3);
-	G4cout << "Add Element Al" << G4endl;
 	materialGAGG->AddElement(nist->FindOrBuildElement("Al"), 2);
-	G4cout << "Add Element Ga" << G4endl;
 	materialGAGG->AddElement(nist->FindOrBuildElement("Ga"), 3);
-	G4cout << "Add Element O" << G4endl;
 	materialGAGG->AddElement(nist->FindOrBuildElement("O"), 12);
-	G4cout << "Added Element O" << G4endl;
 	
 	//G4Material *materialWater = new G4Material("water", 1.0*g/cm3, 3);
 	//materialWater->AddElement(nist->FindOrBuildElement("G4_H"), 2);
 	//materialWater->AddElement(nist->FindOrBuildElement("G4_O"), 1);
+
+	// silicon rubber
+	// Si(CH3)2O many times
+	// https://eljentechnology.com/products/accessories/ej-560
+	// https://en.wikipedia.org/wiki/Polydimethylsiloxane
+	G4cout << "Define Material Silicon Rubber" << G4endl;
+	materialSiliconRubber = new G4Material("SiliconRubber", 1.03*g/cm3, 4);
+	materialSiliconRubber->AddElement(nist->FindOrBuildElement("Si"), 1);
+	materialSiliconRubber->AddElement(nist->FindOrBuildElement("C"), 2);
+	materialSiliconRubber->AddElement(nist->FindOrBuildElement("H"), 6);
+	materialSiliconRubber->AddElement(nist->FindOrBuildElement("O"), 1);
+
+	// optical coupler
+	materialOpticalCoupler = materialSiliconRubber;
 }
 
 
@@ -211,12 +223,29 @@ void MyDetectorConstruction::DefineMaterialsProperties()
 	materialPlastic->SetMaterialPropertiesTable(mptPlastic);
 
 	// silicon
-	G4double refractiveIndexSilicon[nEntries] = {1.45,1.54};
+	// https://www.hamamatsu.com/eu/en/product/optical-sensors/mppc/mppc_mppc-array.html
+	// S14161-3050HS-04, window of
+	G4double refractiveIndexSilicon[nEntries] = {1.57,1.57};
 	G4double absorptionLengthSilicon[nEntries] = {1e-8*m,1*m}; // per silicon dioxide
 	G4MaterialPropertiesTable* mptSilicon = new G4MaterialPropertiesTable();
 	mptSilicon->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSilicon, nEntries);
 	mptSilicon->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthSilicon, nEntries);
 	materialSilicon->SetMaterialPropertiesTable(mptSilicon);
+
+	// silicon rubber
+	G4double refractiveIndexSiliconRubber[nEntries] = {1.43,1.43};
+	G4double absorptionLengthSiliconRubber[nEntries] = {18.98*mm,18.98*mm};
+	G4MaterialPropertiesTable* mptSiliconRubber = new G4MaterialPropertiesTable();
+	mptSiliconRubber->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSiliconRubber, nEntries);
+	mptSiliconRubber->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthSiliconRubber, nEntries);
+	materialSiliconRubber->SetMaterialPropertiesTable(mptSiliconRubber);
+
+	// BaSO4
+	G4double refractiveIndexBariumSulfate[nEntries] = {1.636,1.636};
+	// no absorption length for BaSO4 found
+	G4MaterialPropertiesTable* mptBariumSulfate = new G4MaterialPropertiesTable();
+	mptBariumSulfate->AddProperty("RINDEX", PhotonEnergy, refractiveIndexBariumSulfate, nEntries);
+	materialBariumSulfate->SetMaterialPropertiesTable(mptBariumSulfate);
 }
 
 // when u change something in the detector construction u have to tell Geant4 to construct the whole world again
@@ -520,12 +549,80 @@ void MyDetectorConstruction::ConstructPixelScintillator()
 	physScoringScintillator = physScintillatorPinhole;
 }
 
+void MyDetectorConstruction::ConstructEpicPixelScintillator()
+{
+	G4cout << "MyDetectorConstruction::ConstructPixelScintillator" << G4endl;
+	
+	// Real parameters
+	scinti_case_side = 27.86 * mm;
+	scinti_case_depth = 17.23 * mm;
+	scinti_outer_reflector_side = 27.80 * mm;
+	scinti_outer_reflector_depth = 17.20 * mm;
+	scinti_matrix_side = 27.60 * mm;
+	scinti_matrix_depth = 17.00 * mm;
+	scinti_pixel_size = 1.2 * mm;
+	scinti_pixel_depth = 17.00 * mm;
+	scinti_gagg_side = 1.0 * mm;
+	scinti_gagg_depth = scinti_pixel_depth;
+	scinti_septa_thickness = 0.2 * mm;
+	scinti_hole_thickness = scinti_gagg_side;
+	scinti_hole_length = scinti_pixel_depth;
+	scinti_holes_number = 23;
+	scinti_reflector_thickness = 0.2 * mm;
+	scinti_aluminum_thickness = 0.03 * mm;
+	slab_depth = scinti_case_depth;
+	slab_side = scinti_case_side;
+
+	// check proper parameters
+	G4cout << "scinti_pixel_size: " << scinti_pixel_size << " mm" << G4endl;
+	G4cout << "scinti_holes_number: " << scinti_holes_number << " " << G4endl;
+	G4cout << "scinti_slab_side: " << slab_side << " mm" << G4endl;
+
+	// aluminum case
+	G4cout << "defining the scintillator case" << G4endl;
+	solidScintillatorAluminumCase = new G4Box("solidScintillatorAluminumCase", scinti_case_side/2., scinti_case_side/2., scinti_case_depth/2.);
+	logicScintillatorAluminumCase = new G4LogicalVolume(solidScintillatorAluminumCase, materialAluminum, "logicScintillatorAluminumCase");
+	new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + scinti_case_depth/2.), logicScintillatorAluminumCase, "physScintillatorAluminumCase", logicWorld, false, 0, true);
+
+	// BaSO4 reflector case
+	G4cout << "defining the scintillator case" << G4endl;
+	solidScintillatorReflectorCase = new G4Box("solidScintillatorReflectorCase", scinti_outer_reflector_side/2., scinti_outer_reflector_side/2., scinti_outer_reflector_depth/2.);
+	logicScintillatorReflectorCase = new G4LogicalVolume(solidScintillatorReflectorCase, materialScintillatorReflector, "logicScintillatorReflectorCase");
+	new G4PVPlacement(0, G4ThreeVector(0.,0.,scinti_aluminum_thickness/2.), logicScintillatorReflectorCase, "physScintillatorReflectorCase", logicScintillatorAluminumCase, false, 0, true);
+	
+	// matrix
+	G4cout << "defining the scintillator case" << G4endl;
+	solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", scinti_matrix_side/2., scinti_matrix_side/2., scinti_pixel_depth/2.);
+	logicScintillatorMatrix = new G4LogicalVolume(solidScintillatorMatrix, materialScintillatorReflector, "logicScintillatorMatrix");
+	new G4PVPlacement(0, G4ThreeVector(0.,0.,scinti_reflector_thickness/2.), logicScintillatorMatrix, "physScintillatorMatrix", logicScintillatorReflectorCase, false, 0, true);
+	
+	// array
+	G4cout << "defining the scintillator array element" << G4endl;
+	solidScintillatorArray = new G4Box("solidScintillatorArray", scinti_matrix_side/2., scinti_pixel_size/2., scinti_pixel_depth/2.);
+	logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialScintillatorReflector, "logicScintillatorArray");
+	new G4PVReplica("physScintillatorArray", logicScintillatorArray, logicScintillatorMatrix, kYAxis, scinti_holes_number, scinti_pixel_size, 0);
+	
+	// pixel
+	G4cout << "defining the scintillator pixel element" << G4endl;
+	solidScintillatorPixel = new G4Box("solidScintillatorPixel", scinti_pixel_size/2., scinti_pixel_size/2., scinti_pixel_depth/2.);
+	logicScintillatorPixel = new G4LogicalVolume(solidScintillatorPixel, materialScintillatorReflector, "logicScintillatorPixel");
+	physScintillatorPixel = new G4PVReplica("physScintillatorPixel", logicScintillatorPixel, logicScintillatorArray, kXAxis, scinti_holes_number, scinti_pixel_size, 0);
+	
+	// pinhole
+	solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", scinti_gagg_side/2., scinti_gagg_side/2., scinti_gagg_depth/2.);
+	logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialGAGG, "logicScintillatorPinhole");
+	physScintillatorPinhole = new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
+
+	fScoringScintillator = logicScintillatorPinhole;
+	physScoringScintillator = physScintillatorPinhole;
+}
+
 void MyDetectorConstruction::ConstructCoupler()
 {
 	G4cout << "Optical coupling distance: " << detector_scintillator_distance / mm << " mm" << G4endl;
 	
 	solidCoupler = new G4Box("solidScintillator", slab_side/2., slab_side/2., detector_scintillator_distance/2.);
-	logicCoupler = new G4LogicalVolume(solidCoupler, materialAir, "logicCoupler");
+	logicCoupler = new G4LogicalVolume(solidCoupler, materialOpticalCoupler, "logicCoupler");
 	physCoupler = new G4PVPlacement(0,  // no rotation
 		G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance/2.),
 		logicCoupler,             // its logical volume
@@ -559,6 +656,8 @@ void MyDetectorConstruction::ConstructPixelDetector()
 {
 	G4cout << "MyDetectorConstruction::ConstructPixelDetector" << G4endl;
 	
+	detector_centre_position = G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance + detector_depth/2.);
+
 	// Derived parameters
 	det_pixels_number = (G4int) detector_side / det_pixel_size;
 	
@@ -629,6 +728,89 @@ void MyDetectorConstruction::ConstructPixelDetector()
 	fScoringDetector = logicDetectorPixel;
 }
 
+void MyDetectorConstruction::ConstructHamaPixelDetector()
+{
+	G4cout << "MyDetectorConstruction::ConstructHamaPixelDetector" << G4endl;
+
+	det_pwb_case_side = 25.8 * mm;
+	det_pwb_case_thickness = 1.35 * mm;
+	det_seal_side = det_pwb_case_side;
+	det_seal_thickness = 0.15 * mm;
+	det_matrix_side = 25.6 * mm;
+	det_matrix_thickness = 0.2 * mm; // arbitrary looking at the technical drawing
+	det_channel_dead_space = 0.2 * mm;
+	det_channel_active_side = 3.0 * mm;
+	det_channel_number = 8;
+	det_channel_pitch = det_channel_active_side + det_channel_dead_space; // = 3.2 mm
+	det_pixels_number = det_channel_number;
+	det_pixel_size = det_channel_pitch;
+	det_fill_factor = 0.74;
+	detector_side = det_pwb_case_side;
+	channel_dead_space = det_channel_dead_space;
+	det_pixel_active_size = det_channel_active_side;
+	detector_depth = det_pwb_case_thickness;
+	detector_centre_position = G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance + detector_depth/2.);
+
+	// check proper parameters
+	G4cout << "det_pixel_size: " << det_pixel_size / mm << " mm" << G4endl;
+	G4cout << "channel_dead_space: " << channel_dead_space / mm << " mm" << G4endl;
+	G4cout << "det_fill_factor: " << det_fill_factor * 100. << " %" << G4endl;
+	G4cout << "det_pixel_size: " << det_pixel_size / mm << " mm" << G4endl;
+	G4cout << "det_pixel_active_size: " << det_pixel_active_size / mm << " mm" << G4endl;
+	G4cout << "det_pixels_number: " << det_pixels_number << " " << G4endl;
+	G4cout << "detector_side: " << detector_side / mm << " mm" << G4endl;
+
+	solidDetectorPwbCase = new G4Box("solidDetectorPwbCase", det_pwb_case_side/2., det_pwb_case_side/2., det_pwb_case_thickness/2.);
+	logicDetectorPwbCase = new G4LogicalVolume(solidDetectorPwbCase, materialPlastic, "logicDetectorPwbCase");
+	new G4PVPlacement(0,  // no rotation
+		detector_centre_position,
+		logicDetectorPwbCase,             // its logical volume
+		"physDetectorPwbCase",           // its name
+		logicWorld,                  // its mother volume
+		false,                   // no boolean operations
+		0,                       // copy number
+		true); // checking overlaps
+	
+	// seal
+	G4cout << "defining the detector seal" << G4endl;
+	solidDetectorSeal = new G4Box("solidDetectorSeal", det_seal_side/2., det_seal_side/2., det_seal_thickness/2.);
+	logicDetectorSeal = new G4LogicalVolume(solidDetectorSeal, materialPlastic, "logicDetectorSeal");
+	new G4PVPlacement(0,  // no rotation
+		G4ThreeVector(0.,0., - det_pwb_case_thickness/2. + det_seal_thickness/2.),
+		logicDetectorSeal,             // its logical volume
+		"physDetectorSeal",           // its name
+		logicDetectorPwbCase,                  // its mother volume
+		false,                   // no boolean operations
+		0,                       // copy number
+		true); // checking overlaps
+	
+	// matrix
+	G4cout << "defining the detector matrix container" << G4endl;
+	solidDetectorMatrix = new G4Box("solidDetectorMatrix", det_matrix_side/2., det_matrix_side/2., det_matrix_thickness/2.);
+	logicDetectorMatrix = new G4LogicalVolume(solidDetectorMatrix, materialPlastic, "logicDetectorMatrix");
+	physDetector = new G4PVPlacement(0, G4ThreeVector(0, 0, - det_pwb_case_thickness/2. + det_seal_thickness +det_matrix_thickness/2. ), logicDetectorMatrix, "physDetectorMatrix", logicDetectorPwbCase, false, 0, true);
+	
+	// array
+	G4cout << "defining the detector array element" << G4endl;
+	solidDetectorArray = new G4Box("solidDetectorArray", det_matrix_side/2., det_channel_pitch/2., det_matrix_thickness/2.);
+	logicDetectorArray = new G4LogicalVolume(solidDetectorArray, materialPlastic, "logicDetectorArray");
+	new G4PVReplica("physDetectorArray", logicDetectorArray, logicDetectorMatrix, kYAxis, det_pixels_number, det_channel_pitch, 0);
+
+	// dead boundary of a channel
+	G4cout << "defining the detector pixel element, both active and not-active" << G4endl;
+	solidDetectorFullPixel = new G4Box("solidDetectorFullPixel", det_channel_pitch/2., det_channel_pitch/2., det_matrix_thickness/2.);
+	logicDetectorFullPixel = new G4LogicalVolume(solidDetectorFullPixel, materialPlastic, "logicDetectorFullPixel");
+	physDetectorFullPixel = new G4PVReplica("physDetectorFullPixel", logicDetectorFullPixel, logicDetectorArray, kXAxis, det_pixels_number, det_channel_pitch, 0);
+	
+	// channel sensitive area
+	G4cout << "defining the detector pixel active element" << G4endl;
+	solidDetectorPixel = new G4Box("solidDetectorPixel", det_pixel_active_size/2., det_pixel_active_size/2., det_matrix_thickness/2.);
+	logicDetectorPixel = new G4LogicalVolume(solidDetectorPixel, materialSilicon, "logicDetectorPixel");
+	physDetectorPixel = new G4PVPlacement(0, G4ThreeVector(), logicDetectorPixel, "physDetectorActivePixel", logicDetectorFullPixel, false, 0, true);
+	
+	fScoringDetector = logicDetectorPixel;
+}
+
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
 {
 	G4cout << "MyDetectorConstruction::Construct" << G4endl;
@@ -647,7 +829,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	if(scintillatorExist)
 	{
 		if (scintiPixelNoSlab == "matrix")
-			ConstructPixelScintillator();
+			ConstructEpicPixelScintillator();
 		else
 			ConstructSlabScintillator();
 	}
@@ -655,9 +837,8 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	if(scintillatorExist && detector_scintillator_distance > 0)
 		ConstructCoupler();
 
-	detector_centre_position = G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance + detector_depth/2.);
 	if (detPixelNoSlab == "matrix")
-		ConstructPixelDetector();
+		ConstructHamaPixelDetector();
 	else
 		ConstructSlabDetector();
 
