@@ -4,11 +4,12 @@
 ################################################################################
 # change geometry collimator
 ################################################################################
-/collimator/exist false
+/collimator/exist true
 /collimator/hole_length 30. mm
 /collimator/hole_thickness 15. mm
 /collimator/septa_thickness 5. mm
-/collimator/case_side 10. cm
+#/collimator/case_side 10. cm
+/collimator/case_side 25. mm
 /collimator/positionX 0. mm
 /collimator/positionY 0. mm
 
@@ -50,26 +51,30 @@
 ################################################################################
 # change source
 ################################################################################
-/particleSource/sourceType gun
+/particleSource/sourceType gps
 #/gun/particle gamma
-/gun/particle ion
-/gun/ion 47 111 0 0.
-/gun/energy 0 keV
-# /gps/particle ion
-# /gps/ion 47 111 0 0.
-# /gps/particle proton
-# /gps/energy 1. keV
+/gun/particle opticalphoton
+/gun/energy 2.3 eV
+#/gun/particle ion
+#/gun/ion 47 111 0 0.
+#/gun/energy 0 keV
+/gps/particle ion
+/gps/ion 47 111 0 0.
+#/gps/particle proton
+/gps/energy 0. eV
+/gps/position 0 0 -1 mm
 # position must be < 0 
-/gun/position 0 0. -1. mm
-/gun/direction 0 0 1
+/gun/position 0 0. 32. mm
+/gun/direction 0 1 1
+/gun/polarization 1 0 0
 # /gps/ang/type iso
 /control/alias zDepth 15
-/gps/pos/centre 0. 0. -{zDepth} mm
-/gps/pos/type Volume
-/gps/pos/shape Para
-/gps/pos/halfx 50 mm
-/gps/pos/halfy 50 mm
-/gps/pos/halfz {zDepth} mm
+#/gps/pos/centre 0. 0. -{zDepth} mm
+#/gps/pos/type Volume
+#/gps/pos/shape Para
+#/gps/pos/halfx 50 mm
+#/gps/pos/halfy 50 mm
+#/gps/pos/halfz {zDepth} mm
 
 # muon
 #/gun/particle mu-
