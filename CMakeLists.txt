@@ -10,7 +10,7 @@ project(Simulation)
 
 # copy analysis file in the build directory
 file(GLOB ANALYSIS_FILES
-  "analysis/*.C"
+  "analysis/*"
 )
 file(COPY ${ANALYSIS_FILES} DESTINATION ${PROJECT_BINARY_DIR}/analysis)
 
