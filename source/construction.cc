@@ -558,7 +558,7 @@ void MyDetectorConstruction::ConstructEpicPixelScintillator()
 	scinti_case_depth = 17.23 * mm;
 	scinti_outer_reflector_side = 27.80 * mm;
 	scinti_outer_reflector_depth = 17.20 * mm;
-	scinti_matrix_side = 27.60 * mm;
+	scinti_matrix_side = 27.60 * mm; // 1.2mm*23 = 27.60*mm
 	scinti_matrix_depth = 17.00 * mm;
 	scinti_pixel_size = 1.2 * mm;
 	scinti_pixel_depth = 17.00 * mm;
@@ -567,7 +567,7 @@ void MyDetectorConstruction::ConstructEpicPixelScintillator()
 	scinti_septa_thickness = 0.2 * mm;
 	scinti_hole_thickness = scinti_gagg_side;
 	scinti_hole_length = scinti_pixel_depth;
-	scinti_holes_number = 23;
+	scinti_holes_number = 23; // 23
 	scinti_reflector_thickness = 0.2 * mm;
 	scinti_aluminum_thickness = 0.03 * mm;
 	slab_depth = scinti_case_depth;
@@ -736,11 +736,11 @@ void MyDetectorConstruction::ConstructHamaPixelDetector()
 	det_pwb_case_thickness = 1.35 * mm;
 	det_seal_side = det_pwb_case_side;
 	det_seal_thickness = 0.15 * mm;
-	det_matrix_side = 25.6 * mm;
+	det_matrix_side = 25.6 * mm; // 3.2mm*8 = 25.6 mm
 	det_matrix_thickness = 0.2 * mm; // arbitrary looking at the technical drawing
 	det_channel_dead_space = 0.2 * mm;
 	det_channel_active_side = 3.0 * mm;
-	det_channel_number = 8;
+	det_channel_number = 8; // 8
 	det_channel_pitch = det_channel_active_side + det_channel_dead_space; // = 3.2 mm
 	det_pixels_number = det_channel_number;
 	det_pixel_size = det_channel_pitch;
@@ -870,14 +870,14 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	MPTtransmitting->AddProperty("REFLECTIVITY", ephoton, reflectivity);
 	MPTtransmitting->AddProperty("TRANSMITTANCE", ephoton, transmittance);
 	
-	// define he material properties table for a fully absorbing surface
+	// define the material properties table for a fully absorbing surface
 	std::vector<G4double> reflectivity2 = { 0., 0. };
 	std::vector<G4double> transmittance2 = { 0., 0. };
 	G4MaterialPropertiesTable* MPTabsorbing = new G4MaterialPropertiesTable();
 	MPTabsorbing->AddProperty("REFLECTIVITY", ephoton, reflectivity2);
 	MPTabsorbing->AddProperty("TRANSMITTANCE", ephoton, transmittance2);
 	
-	// define he material properties table for a fully Fresnel surface
+	// define the material properties table for a fully Fresnel surface
 	std::vector<G4double> reflectivity3 = { 1., 1. };
 	std::vector<G4double> transmittance3 = { 0., 0. };
 	G4MaterialPropertiesTable* MPTfresnel = new G4MaterialPropertiesTable();
@@ -888,7 +888,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
 	opGaggPlasticSurface->SetModel(unified);
 	opGaggPlasticSurface->SetType(dielectric_metal);
-	opGaggPlasticSurface->SetFinish(polished);
+	opGaggPlasticSurface->SetFinish(polished); // ground would be more appropriated but requires time
 	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
 	
 	// build fully transmitting surface
