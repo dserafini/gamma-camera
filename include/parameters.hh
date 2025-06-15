@@ -15,6 +15,8 @@ namespace Scintillator {
 
 namespace Sipm {
     constexpr G4int channel_side_number = 8;
+    constexpr G4double channel_dead_space = 0.2 * mm;
+    constexpr G4double det_channel_active_side = 3.0 * mm;
 }
 
 #endif
