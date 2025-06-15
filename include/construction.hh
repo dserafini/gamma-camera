@@ -96,7 +96,6 @@ private:
 	void ConstructCollimator();
 	void ConstructSlabDetector();
 	void ConstructCoupler();
-	void ConstructPixelDetector();
 	void ConstructHamaPixelDetector();
 	void SetVisualizationFeatures();
 
