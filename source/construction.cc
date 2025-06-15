@@ -99,7 +99,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// Define MOBY materials
 	DefineMaterialsMOBY();
 	
-	DefineMaterialsProperties();
+	DefineMaterialsOpticalProperties();
 
 	// define world lengths
 	xWorld = 5*m;
@@ -174,9 +174,9 @@ void MyDetectorConstruction::DefineMaterials()
 }
 
 
-void MyDetectorConstruction::DefineMaterialsProperties()
+void MyDetectorConstruction::DefineMaterialsOpticalProperties()
 {
-	G4cout << "MyDetectorConstruction::DefineMaterialsProperties" << G4endl;
+	G4cout << "MyDetectorConstruction::DefineMaterialsOpticalProperties" << G4endl;
 	const G4int nEntries = 2;
 
 	G4double PhotonEnergy[nEntries] = {1.77*eV, 2.61*eV};

@@ -88,7 +88,7 @@ private:
 	G4Element *elLa, *elBr;
 
 	void DefineMaterials();
-	void DefineMaterialsProperties();
+	void DefineMaterialsOpticalProperties();
 	void DefineOpticalSurfaceProperties();
 
 	void ConstructSlabScintillator();
