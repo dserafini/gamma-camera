@@ -605,12 +605,12 @@ void MyDetectorConstruction::ConstructHamaPixelDetector()
 	det_pwb_case_thickness = 1.35 * mm;
 	det_seal_side = det_pwb_case_side;
 	det_seal_thickness = 0.15 * mm;
-	det_matrix_side = 25.6 * mm; // 3.2mm*8 = 25.6 mm
 	det_matrix_thickness = 0.2 * mm; // arbitrary looking at the technical drawing
-	det_channel_dead_space = 0.2 * mm;
-	det_channel_active_side = 3.0 * mm;
-	det_channel_number = 8; // 8
+	det_channel_dead_space = Sipm::channel_dead_space; // 0.2 * mm;
+	det_channel_active_side = Sipm::det_channel_active_side; // 3.0 * mm;
+	det_channel_number = Sipm::channel_side_number; // 8
 	det_channel_pitch = det_channel_active_side + det_channel_dead_space; // = 3.2 mm
+	det_matrix_side = det_channel_pitch * det_channel_number; // 25.6 * mm; // 3.2mm*8 = 25.6 mm
 	det_pixels_number = det_channel_number;
 	det_pixel_size = det_channel_pitch;
 	det_fill_factor = 0.74;
@@ -727,6 +727,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 {
 	// scintillator pixel surfaces
 	G4cout << "MyDetectorConstruction::DefineOpticalSurfaceProperties" << G4endl;
+	// absorption = 1 - reflectivity so
 	// reflectivity 0 and transmission 0 means total absorption
 	// reflectivity 0 and transmission 1 means total transmission
 	// reflectivity 1 and transmission 0 (or whatever) means Fresnel
@@ -752,13 +753,20 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	G4MaterialPropertiesTable* MPTfresnel = new G4MaterialPropertiesTable();
 	MPTfresnel->AddProperty("REFLECTIVITY", ephoton, reflectivity3);
 	MPTfresnel->AddProperty("TRANSMITTANCE", ephoton, transmittance3);
+	
+	// define the material properties table for a test surface
+	std::vector<G4double> reflectivity4 = { .99, .99 };
+	std::vector<G4double> transmittance4 = { 0., 0. };
+	G4MaterialPropertiesTable* MPTtest = new G4MaterialPropertiesTable();
+	MPTtest->AddProperty("REFLECTIVITY", ephoton, reflectivity4);
+	MPTtest->AddProperty("TRANSMITTANCE", ephoton, transmittance4);
 
 	// build reflective skin surface
 	G4OpticalSurface* opGaggPlasticSurface = new G4OpticalSurface("opGaggPlasticSurface");
 	opGaggPlasticSurface->SetModel(unified);
 	opGaggPlasticSurface->SetType(dielectric_metal);
 	opGaggPlasticSurface->SetFinish(polished); // ground would be more appropriated but requires time
-	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTfresnel);
+	opGaggPlasticSurface->SetMaterialPropertiesTable(MPTtest);
 	
 	// build fully transmitting surface
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
