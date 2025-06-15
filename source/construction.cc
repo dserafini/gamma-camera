@@ -770,7 +770,9 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	
 	// build fully transmitting surface
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
-	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTtransmitting);
+	opGaggDetectorSurface->SetModel(unified);
+	opGaggDetectorSurface->SetType(dielectric_dielectric);
+	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTfresnel);
 
 
 	if(scintillatorExist)
@@ -778,23 +780,11 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 		// build reflective skin surface around the scintillator pixel hole
 		new G4LogicalSkinSurface("skin",fScoringScintillator, opGaggPlasticSurface);
 
-		if (detector_scintillator_distance > 0)
-		{
-			// fully transmit optical photons escaping toward the detector
-			new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
-						   physScoringScintillator, physCoupler, opGaggDetectorSurface);
-			
-			// fully transmit optical photons escaping toward the detector
-			new G4LogicalBorderSurface("logicBorderCouplerDetectorSurface", 
-				  physCoupler, physDetector, opGaggDetectorSurface);
-		}
-		else
-		{
-			// fully transmit optical photons escaping toward the detector
-			new G4LogicalBorderSurface("logicBorderGaggDetectorSurface", 
-						   physScoringScintillator, physDetector, opGaggDetectorSurface);
-			G4cout << "Optical coupling distance is zero!!!" << G4endl;
-		}
+		// manually define gagg-coupler and coupler-sipm surfaces
+		// new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
+		// 				physScoringScintillator, physCoupler, opGaggDetectorSurface);
+		// new G4LogicalBorderSurface("logicBorderCouplerDetectorSurface", 
+		//		physCoupler, physDetector, opGaggDetectorSurface);
 	}
 }
 
