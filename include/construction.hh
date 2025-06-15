@@ -9,7 +9,6 @@
 #include "G4Tubs.hh"
 #include "G4PhantomParameterisation.hh"
 #include "G4PVParameterised.hh"
-// per le unità di misura tipo metri m
 #include "G4SystemOfUnits.hh"
 #include "G4Material.hh"
 #include "G4NistManager.hh"
@@ -19,12 +18,12 @@
 #include "G4LogicalSkinSurface.hh"
 #include "G4LogicalBorderSurface.hh"
 #include "G4VisAttributes.hh"
-// per cambiare geometria on the way
 #include "G4GenericMessenger.hh"
 #include "G4SDManager.hh"
 #include "detectorSD.hh"
 #include "scintillatorSD.hh"
 #include "infoPhantom.hh"
+#include "parameters.hh"
 
 class MyDetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -93,7 +92,6 @@ private:
 	void DefineOpticalSurfaceProperties();
 
 	void ConstructSlabScintillator();
-	void ConstructPixelScintillator();
 	void ConstructEpicPixelScintillator();
 	void ConstructCollimator();
 	void ConstructSlabDetector();

@@ -494,61 +494,6 @@ void MyDetectorConstruction::ConstructSlabScintillator()
 	physScoringScintillator = physScintillator;
 }
 
-void MyDetectorConstruction::ConstructPixelScintillator()
-{
-	G4cout << "MyDetectorConstruction::ConstructPixelScintillator" << G4endl;
-	
-	// Derived parameters
-	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
-	scinti_hole_length = slab_depth;
-	scinti_holes_number = (G4int) slab_side / scinti_pixel_size;
-	
-	// check proper parameters
-	if (scinti_holes_number < 1)
-	{
-		G4cout << "Error: pixel larger than case!" << G4endl;
-		G4cout << "return to default values" << G4endl;
-		scinti_septa_thickness = 10.*um;
-		scinti_hole_thickness = 2.*mm - scinti_septa_thickness;
-		scinti_pixel_size = scinti_hole_thickness + scinti_septa_thickness;
-		scinti_holes_number = (G4int) slab_side / scinti_pixel_size;
-	}
-	// if ((scinti_holes_number % 2) < 1)
-	// 	scinti_holes_number = scinti_holes_number - 1;
-	
-	// derived parameters
-	slab_side = (G4double) scinti_pixel_size * scinti_holes_number;
-	G4cout << "scinti_pixel_size: " << scinti_pixel_size << " mm" << G4endl;
-	G4cout << "scinti_holes_number: " << scinti_holes_number << " " << G4endl;
-	G4cout << "scinti_slab_side: " << slab_side << " mm" << G4endl;
-	
-	// case
-	G4cout << "defining the scintillator case" << G4endl;
-	solidScintillatorMatrix = new G4Box("solidScintillatorMatrix", slab_side/2., slab_side/2., scinti_hole_length/2.);
-	logicScintillatorMatrix = new G4LogicalVolume(solidScintillatorMatrix, materialPlastic, "logicScintillatorMatrix");
-	physScintillator = new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + slab_depth/2.), logicScintillatorMatrix, "physScintillatorMatrix", logicWorld, false, 0, true);
-	
-	// array
-	G4cout << "defining the scintillator array element" << G4endl;
-	solidScintillatorArray = new G4Box("solidScintillatorArray", slab_side/2., scinti_pixel_size/2., scinti_hole_length/2.);
-	logicScintillatorArray = new G4LogicalVolume(solidScintillatorArray, materialPlastic, "logicScintillatorArray");
-	new G4PVReplica("physScintillatorArray", logicScintillatorArray, logicScintillatorMatrix, kYAxis, scinti_holes_number, scinti_pixel_size, 0);
-	
-	// pixel
-	G4cout << "defining the scintillator pixel element" << G4endl;
-	solidScintillatorPixel = new G4Box("solidScintillatorPixel", scinti_pixel_size/2., scinti_pixel_size/2., scinti_hole_length/2.);
-	logicScintillatorPixel = new G4LogicalVolume(solidScintillatorPixel, materialPlastic, "logicScintillatorPixel");
-	physScintillatorPixel = new G4PVReplica("physScintillatorPixel", logicScintillatorPixel, logicScintillatorArray, kXAxis, scinti_holes_number, scinti_pixel_size, 0);
-	
-	// pinhole
-	solidScintillatorPinhole = new G4Box("solidScintillatorPinhole", scinti_hole_thickness/2., scinti_hole_thickness/2., scinti_hole_length/2.);
-	logicScintillatorPinhole = new G4LogicalVolume(solidScintillatorPinhole, materialGAGG, "logicScintillatorPinhole");
-	physScintillatorPinhole = new G4PVPlacement(0, G4ThreeVector(), logicScintillatorPinhole, "physScintillatorPinhole", logicScintillatorPixel, false, 0, true);
-
-	fScoringScintillator = logicScintillatorPinhole;
-	physScoringScintillator = physScintillatorPinhole;
-}
-
 void MyDetectorConstruction::ConstructEpicPixelScintillator()
 {
 	G4cout << "MyDetectorConstruction::ConstructPixelScintillator" << G4endl;
@@ -559,12 +504,12 @@ void MyDetectorConstruction::ConstructEpicPixelScintillator()
 	scinti_outer_reflector_side = 27.80 * mm;
 	scinti_outer_reflector_depth = 17.20 * mm;
 	scinti_matrix_side = 27.60 * mm; // 1.2mm*23 = 27.60*mm
-	scinti_matrix_depth = 17.00 * mm;
-	scinti_pixel_size = 1.2 * mm;
-	scinti_pixel_depth = 17.00 * mm;
-	scinti_gagg_side = 1.0 * mm;
+	scinti_matrix_depth = Scintillator::gagg_thickness;
+	scinti_pixel_depth = scinti_matrix_depth;
+	scinti_gagg_side = Scintillator::gagg_side;
 	scinti_gagg_depth = scinti_pixel_depth;
-	scinti_septa_thickness = 0.2 * mm;
+	scinti_septa_thickness = Scintillator::baso4_side;
+	scinti_pixel_size = scinti_gagg_side + scinti_septa_thickness; // 1.2 * mm
 	scinti_hole_thickness = scinti_gagg_side;
 	scinti_hole_length = scinti_pixel_depth;
 	scinti_holes_number = 23; // 23
