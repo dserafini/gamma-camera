@@ -85,7 +85,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   aStep->GetTrack()->SetTrackStatus(fStopAndKill);
 
   // filter on geometrical fill factor
-  if ( G4UniformRand() > fillfactor )
+  //if ( G4UniformRand() > fillfactor )
+  if ( false )
     return false;
 
   // filter on optical photon wavelength
@@ -93,8 +94,14 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   G4double enePhoton = aStep->GetTrack()->GetKineticEnergy();
   G4double wlen = (1.239841939*eV/enePhoton)*1e3;
   if (G4UniformRand() > quEff->Value(wlen))
+  //if (false)
+  {
     return false;
-  
+  }
+  else
+  {
+    // G4cout << wlen << G4endl;
+  }
   // energy deposit
   G4double edep = aStep->GetTotalEnergyDeposit(); // [keV]
 
