@@ -52,35 +52,45 @@
 # change source
 ################################################################################
 /particleSource/sourceType gps
+/control/alias zDepth 15
+
+################################################################################
+# gun
+################################################################################
 #/gun/particle gamma
 /gun/particle opticalphoton
 /gun/energy 2.3 eV
 #/gun/particle ion
 #/gun/ion 47 111 0 0.
 #/gun/energy 0 keV
-/gps/particle ion
-/gps/ion 47 111 0 0.
-#/gps/particle proton
-/gps/energy 0. eV
-/gps/position 0 0 -1 mm
 # position must be < 0 
 /gun/position 0 0. 32. mm
 /gun/direction 0 1 1
 /gun/polarization 1 0 0
-# /gps/ang/type iso
-/control/alias zDepth 15
-#/gps/pos/centre 0. 0. -{zDepth} mm
-#/gps/pos/type Volume
-#/gps/pos/shape Para
-#/gps/pos/halfx 50 mm
-#/gps/pos/halfy 50 mm
-#/gps/pos/halfz {zDepth} mm
 
 # muon
 #/gun/particle mu-
 #/gun/energy 3 GeV
 #/gun/position -75 -75 47.7 mm
 #/gun/direction 1 1 0
+
+################################################################################
+# gps
+################################################################################
+#/gps/particle ion
+#/gps/ion 47 111 0 0.
+#/gps/particle proton
+/gps/particle gamma
+/gps/energy 100. keV
+/gps/position 0 0 -1 mm
+/gps/direction 0 0 1
+# /gps/ang/type iso
+#/gps/pos/centre 0. 0. -{zDepth} mm
+#/gps/pos/type Volume
+#/gps/pos/shape Para
+#/gps/pos/halfx 50 mm
+#/gps/pos/halfy 50 mm
+#/gps/pos/halfz {zDepth} mm
 
 ################################################################################
 # other visualization settings
@@ -144,4 +154,4 @@
 /vis/modeling/trajectories/create/drawByParticleID
 /vis/modeling/trajectories/drawByParticleID-0/set gamma blue
 
-/tracking/verbose 2
+/tracking/verbose 0
