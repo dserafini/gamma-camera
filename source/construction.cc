@@ -30,7 +30,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	hole_length = 30.*mm;
 	septa_thickness = 1.*mm; // 2*mm;
 	hole_thickness = 2.*mm; // 3*mm;
-	case_side = 10.*cm; // fixed but not necessarily precise
+	case_side = 39.*mm; // fixed but not necessarily precise
 	collimator_posX = 0.*mm;
 	collimator_posY = 0.*mm;
 	
@@ -186,21 +186,58 @@ void MyDetectorConstruction::DefineMaterialsOpticalProperties()
 	// in experiment we use GAGG:Ce with higher light output (HL) from epic crystal
 	// https://www.epic-crystal.com/scintillation-crystals/gaggce-crystal.html
 	G4double refractiveIndexGAGG[nEntries] = {1.91,1.91};
-	G4double absorptionLengthGAGG[nEntries] = {645.*mm,645.*mm};
+	G4double absorptionLengthGAGG[nEntries] = {645.*m,645.*m};
 
 	G4MaterialPropertiesTable* mptGAGG = new G4MaterialPropertiesTable();
 
 	mptGAGG->AddProperty("RINDEX", PhotonEnergy, refractiveIndexGAGG, nEntries);
 	mptGAGG->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthGAGG, nEntries);
 
-	G4double ScintEnergy[10] = {1.77*eV, 1.84*eV, 1.91*eV, 1.98*eV, 2.07*eV, 2.16*eV, 2.25*eV, 2.36*eV, 2.48*eV, 2.61*eV};
+	// G4double ScintEnergy[10] = {1.77*eV, 1.84*eV, 1.91*eV, 1.98*eV, 2.07*eV, 2.16*eV, 2.25*eV, 2.36*eV, 2.48*eV, 2.61*eV};
 	// = inv of [475, 500, 525, 550, 575, 600, 625, 650, 675, 700] nm
+	// with [0.08, 0.8, 0.99, 0.82, 0.58, 0.34, 0.24, 0.16, 0.12, 0.08]
 	// Wavelength of Emission Peak is 530 nm (= 2.34 eV)
-	G4double ScintFast[10] = {0.08, 0.8, 0.99, 0.82, 0.58, 0.34, 0.24, 0.16, 0.12, 0.08};
+	// G4double ScintFast[10] = {0.08, 0.12, 0.16, 0.24, 0.34, 0.58, 0.82, 0.99, 0.8, 0.08};
 
-	mptGAGG->AddProperty("SCINTILLATIONCOMPONENT1",ScintEnergy, ScintFast, 10);
+	// set Proper pdf for scintillation
+	// https://www.advatech-uk.co.uk/gagg_ce.html
+	const G4int scintArraySize = 49;
+	G4double ScintEnergy[scintArraySize] = {1.77*eV, 1.84*eV, 1.91*eV, 1.95*eV, 1.99*eV, 2.02*eV, 2.05*eV, 
+											2.07*eV, 2.09*eV, 2.10*eV, 2.12*eV, 2.13*eV, 2.15*eV, 2.16*eV, 
+											2.18*eV, 2.19*eV, 2.21*eV, 2.22*eV, 2.24*eV, 2.26*eV, 2.28*eV, 
+											2.29*eV, 2.32*eV, 2.38*eV, 2.44*eV, 2.45*eV, 2.46*eV, 2.47*eV, 
+											2.48*eV, 2.48*eV, 2.48*eV, 2.49*eV, 2.49*eV, 2.50*eV, 2.51*eV, 
+											2.51*eV, 2.51*eV, 2.52*eV, 2.52*eV, 2.53*eV, 2.54*eV, 2.54*eV, 
+											2.56*eV, 2.57*eV, 2.58*eV, 2.59*eV, 2.61*eV, 2.63*eV, 2.66*eV};
 
-	mptGAGG->AddConstProperty("SCINTILLATIONYIELD", 54000/MeV);
+	G4double ScintFast[scintArraySize] = {0.08*eV, 0.12*eV, 0.16*eV, 0.2*eV, 0.24*eV, 0.28*eV, 0.32*eV, 
+											0.36*eV, 0.4*eV, 0.44*eV, 0.48*eV, 0.52*eV, 0.56*eV, 0.6*eV, 
+											0.64*eV, 0.68*eV, 0.72*eV, 0.76*eV, 0.8*eV, 0.84*eV, 0.88*eV, 
+											0.92*eV, 0.96*eV, 1*eV, 0.96*eV, 0.92*eV, 0.88*eV, 0.84*eV, 
+											0.8*eV, 0.76*eV, 0.72*eV, 0.68*eV, 0.64*eV, 0.6*eV, 0.56*eV, 
+											0.52*eV, 0.48*eV, 0.44*eV, 0.4*eV, 0.36*eV, 0.32*eV, 0.28*eV, 
+											0.24*eV, 0.2*eV, 0.16*eV, 0.12*eV, 0.08*eV, 0.04*eV, 0*eV};
+
+	// box pdf for the scintillation process wavelength distribution
+	// const G4int scintArraySize = 63;
+	// G4double ScintEnergy[scintArraySize] = {1.38*eV, 1.39*eV, 1.41*eV, 1.43*eV, 1.44*eV, 1.46*eV, 1.48*eV, 1.49*eV, 1.51*eV,
+	// 							1.53*eV, 1.55*eV, 1.57*eV, 1.59*eV, 1.61*eV, 1.63*eV, 1.65*eV, 1.68*eV, 1.70*eV, 
+	// 							1.72*eV, 1.75*eV, 1.77*eV, 1.80*eV, 1.82*eV, 1.85*eV, 1.88*eV, 1.91*eV, 1.94*eV, 
+	// 							1.97*eV, 2.00*eV, 2.03*eV, 2.07*eV, 2.10*eV, 2.14*eV, 2.18*eV, 2.21*eV, 2.25*eV, 
+	// 							2.30*eV, 2.34*eV, 2.38*eV, 2.43*eV, 2.48*eV, 2.53*eV, 2.58*eV, 2.64*eV, 2.70*eV, 
+	// 							2.76*eV, 2.82*eV, 2.88*eV, 2.95*eV, 3.02*eV, 3.10*eV, 3.18*eV, 3.26*eV, 3.35*eV, 
+	// 							3.44*eV, 3.54*eV, 3.65*eV, 3.76*eV, 3.88*eV, 4.00*eV, 4.13*eV, 4.28*eV, 4.43*eV};
+	// G4double ScintFast[scintArraySize] = {0.527, 0.515, 0.504, 0.492, 0.481, 0.470, 0.459, 0.448, 0.437, 0.427, 0.416, 0.406, 
+	// 							0.396, 0.386, 0.376, 0.366, 0.356, 0.347, 0.337, 0.328, 0.319, 0.310, 0.301, 
+	// 							0.292, 0.283, 0.275, 0.266, 0.258, 0.250, 0.242, 0.234, 0.226, 0.219, 0.211, 
+	// 							0.204, 0.197, 0.190, 0.183, 0.176, 0.169, 0.163, 0.156, 0.150, 0.144, 0.138, 
+	// 							0.132, 0.126, 0.120, 0.115, 0.109, 0.104, 0.099, 0.094, 0.089, 0.084, 0.080, 
+	// 							0.075, 0.071, 0.067, 0.063, 0.059, 0.055, 0.051};
+
+	// mptGAGG->AddProperty("SCINTILLATIONCOMPONENT1",ScintEnergy, ScintFast, 10);
+	mptGAGG->AddProperty("SCINTILLATIONCOMPONENT1",ScintEnergy, ScintFast, scintArraySize);
+
+	mptGAGG->AddConstProperty("SCINTILLATIONYIELD", 54/keV); // 54000 photons/MeV = 54 photons/keV
 	mptGAGG->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
 	mptGAGG->AddConstProperty("RESOLUTIONSCALE", 1.0);
 	mptGAGG->AddConstProperty("SCINTILLATIONTIMECONSTANT1",150.0*ns);
@@ -226,15 +263,16 @@ void MyDetectorConstruction::DefineMaterialsOpticalProperties()
 	// https://www.hamamatsu.com/eu/en/product/optical-sensors/mppc/mppc_mppc-array.html
 	// S14161-3050HS-04, window of
 	G4double refractiveIndexSilicon[nEntries] = {1.57,1.57};
-	G4double absorptionLengthSilicon[nEntries] = {1e-8*m,1*m}; // per silicon dioxide
+	G4double absorptionLengthSilicon[nEntries] = {1e-8*m,1e-8*m}; // per silicon dioxide
 	G4MaterialPropertiesTable* mptSilicon = new G4MaterialPropertiesTable();
 	mptSilicon->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSilicon, nEntries);
 	mptSilicon->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthSilicon, nEntries);
 	materialSilicon->SetMaterialPropertiesTable(mptSilicon);
 
 	// silicon rubber
+	// https://eljentechnology.com/products/accessories/ej-560
 	G4double refractiveIndexSiliconRubber[nEntries] = {1.43,1.43};
-	G4double absorptionLengthSiliconRubber[nEntries] = {18.98*mm,18.98*mm};
+	G4double absorptionLengthSiliconRubber[nEntries] = {32.3*m,32.3*m}; // {32.3*mm,32.3*mm};
 	G4MaterialPropertiesTable* mptSiliconRubber = new G4MaterialPropertiesTable();
 	mptSiliconRubber->AddProperty("RINDEX", PhotonEnergy, refractiveIndexSiliconRubber, nEntries);
 	mptSiliconRubber->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthSiliconRubber, nEntries);
@@ -512,7 +550,7 @@ void MyDetectorConstruction::ConstructEpicPixelScintillator()
 	scinti_pixel_size = scinti_gagg_side + scinti_septa_thickness; // 1.2 * mm
 	scinti_hole_thickness = scinti_gagg_side;
 	scinti_hole_length = scinti_pixel_depth;
-	scinti_holes_number = 23; // 23
+	scinti_holes_number = Scintillator::matchstick_side_number; // 23
 	scinti_reflector_thickness = 0.2 * mm;
 	scinti_aluminum_thickness = 0.03 * mm;
 	slab_depth = scinti_case_depth;
@@ -597,6 +635,7 @@ void MyDetectorConstruction::ConstructSlabDetector()
 	fScoringDetector = logicDetector;
 }
 
+
 void MyDetectorConstruction::ConstructHamaPixelDetector()
 {
 	G4cout << "MyDetectorConstruction::ConstructHamaPixelDetector" << G4endl;
@@ -605,7 +644,9 @@ void MyDetectorConstruction::ConstructHamaPixelDetector()
 	det_pwb_case_thickness = 1.35 * mm;
 	det_seal_side = det_pwb_case_side;
 	det_seal_thickness = 0.15 * mm;
-	det_matrix_thickness = 0.2 * mm; // arbitrary looking at the technical drawing
+	det_front_thickness = 0.35 * mm; // arbitrary looking at the technical drawing
+	det_matrix_thickness = det_front_thickness;
+	det_back_thickness = det_pwb_case_thickness - det_front_thickness; // arbitrary looking at the technical drawing
 	det_channel_dead_space = Sipm::channel_dead_space; // 0.2 * mm;
 	det_channel_active_side = Sipm::det_channel_active_side; // 3.0 * mm;
 	det_channel_number = Sipm::channel_side_number; // 8
@@ -629,36 +670,18 @@ void MyDetectorConstruction::ConstructHamaPixelDetector()
 	G4cout << "det_pixels_number: " << det_pixels_number << " " << G4endl;
 	G4cout << "detector_side: " << detector_side / mm << " mm" << G4endl;
 
+	// case
+	G4cout << "defining the detector case" << G4endl;
 	solidDetectorPwbCase = new G4Box("solidDetectorPwbCase", det_pwb_case_side/2., det_pwb_case_side/2., det_pwb_case_thickness/2.);
 	logicDetectorPwbCase = new G4LogicalVolume(solidDetectorPwbCase, materialPlastic, "logicDetectorPwbCase");
-	new G4PVPlacement(0,  // no rotation
-		detector_centre_position,
-		logicDetectorPwbCase,             // its logical volume
-		"physDetectorPwbCase",           // its name
-		logicWorld,                  // its mother volume
-		false,                   // no boolean operations
-		0,                       // copy number
-		true); // checking overlaps
-	
-	// seal
-	G4cout << "defining the detector seal" << G4endl;
-	solidDetectorSeal = new G4Box("solidDetectorSeal", det_seal_side/2., det_seal_side/2., det_seal_thickness/2.);
-	logicDetectorSeal = new G4LogicalVolume(solidDetectorSeal, materialPlastic, "logicDetectorSeal");
-	new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0., - det_pwb_case_thickness/2. + det_seal_thickness/2.),
-		logicDetectorSeal,             // its logical volume
-		"physDetectorSeal",           // its name
-		logicDetectorPwbCase,                  // its mother volume
-		false,                   // no boolean operations
-		0,                       // copy number
-		true); // checking overlaps
-	
+	new G4PVPlacement(0, detector_centre_position, logicDetectorPwbCase, "physDetectorPwbCase", logicWorld, false, 0, true);
+
 	// matrix
 	G4cout << "defining the detector matrix container" << G4endl;
 	solidDetectorMatrix = new G4Box("solidDetectorMatrix", det_matrix_side/2., det_matrix_side/2., det_matrix_thickness/2.);
 	logicDetectorMatrix = new G4LogicalVolume(solidDetectorMatrix, materialPlastic, "logicDetectorMatrix");
-	physDetector = new G4PVPlacement(0, G4ThreeVector(0, 0, - det_pwb_case_thickness/2. + det_seal_thickness +det_matrix_thickness/2. ), logicDetectorMatrix, "physDetectorMatrix", logicDetectorPwbCase, false, 0, true);
-	
+	physDetector = new G4PVPlacement(0, G4ThreeVector(0, 0, - det_pwb_case_thickness/2. + det_front_thickness/2. ), logicDetectorMatrix, "physDetectorMatrix", logicDetectorPwbCase, false, 0, true);
+
 	// array
 	G4cout << "defining the detector array element" << G4endl;
 	solidDetectorArray = new G4Box("solidDetectorArray", det_matrix_side/2., det_channel_pitch/2., det_matrix_thickness/2.);
@@ -772,19 +795,33 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	G4OpticalSurface* opGaggDetectorSurface = new G4OpticalSurface("opGaggDetectorSurface");
 	opGaggDetectorSurface->SetModel(unified);
 	opGaggDetectorSurface->SetType(dielectric_dielectric);
-	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTfresnel);
+	opGaggDetectorSurface->SetMaterialPropertiesTable(MPTtransmitting);
+
+	// build fully Fresnel surface
+	G4OpticalSurface* opGaggCouplerSurface = new G4OpticalSurface("opGaggCouplerSurface");
+	opGaggCouplerSurface->SetModel(unified);
+	opGaggCouplerSurface->SetType(dielectric_dielectric);
+	opGaggCouplerSurface->SetFinish(polished); // ground would be more appropriated but requires time
+	opGaggCouplerSurface->SetMaterialPropertiesTable(MPTfresnel);
 
 
 	if(scintillatorExist)
 	{
 		// build reflective skin surface around the scintillator pixel hole
-		new G4LogicalSkinSurface("skin",fScoringScintillator, opGaggPlasticSurface);
+		new G4LogicalSkinSurface("skinGagg",fScoringScintillator, opGaggPlasticSurface);
+
+		// manually define gagg-reflector surface
+		// new G4LogicalBorderSurface("logicBorderGaggReflectorSurface", 
+//			physScintillatorPinhole, physScintillatorPixel, opGaggPlasticSurface);
+
+		// build reflective skin surface around the optical coupler
+		// new G4LogicalSkinSurface("skin",logicCoupler, opGaggPlasticSurface);
 
 		// manually define gagg-coupler and coupler-sipm surfaces
-		// new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
-		// 				physScoringScintillator, physCoupler, opGaggDetectorSurface);
-		// new G4LogicalBorderSurface("logicBorderCouplerDetectorSurface", 
-		//		physCoupler, physDetector, opGaggDetectorSurface);
+		new G4LogicalBorderSurface("logicBorderGaggCouplerSurface", 
+			physScintillatorPinhole, physCoupler, opGaggCouplerSurface);
+		new G4LogicalBorderSurface("logicBorderCouplerDetectorSurface", 
+			physCoupler, physDetectorPixel, opGaggDetectorSurface);
 	}
 }
 

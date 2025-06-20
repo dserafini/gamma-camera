@@ -74,7 +74,7 @@ private:
 	// detector pixel
 	G4Box *solidDetectorPixel, *solidDetectorFullPixel, *solidDetectorArray, *solidDetectorMatrix, *solidDetectorPwbCase, *solidDetectorSeal;
 	G4LogicalVolume *logicDetectorPixel, *logicDetectorFullPixel, *logicDetectorArray, *logicDetectorMatrix, *logicDetectorPwbCase, *logicDetectorSeal;
-	G4VPhysicalVolume *physDetectorPixel, *physDetectorFullPixel, *physDetectorMatrix;
+	G4VPhysicalVolume *physDetectorPixel, *physDetectorFullPixel, *physDetectorMatrix, *physDetectorPwbCase;
 
 	// collimator pixel
 	G4Box *solidCollimatorPinhole, *solidCollimatorPixel, *solidCollimatorArray, *solidCollimatorMatrix;
@@ -140,7 +140,7 @@ private:
 	G4ThreeVector detector_centre_position;
 	G4bool detSaveAllOpticals;
 	G4double det_pwb_case_side,	det_pwb_case_thickness,	det_seal_side, det_seal_thickness, det_matrix_side, det_matrix_thickness, det_channel_dead_space, det_channel_active_side;
-	G4double det_channel_number, det_channel_pitch;
+	G4double det_channel_number, det_channel_pitch, det_front_thickness, det_back_thickness;
 	
 	// Materials MOBY
 	G4Material* fVoxelMaterial;
