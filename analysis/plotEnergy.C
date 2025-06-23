@@ -51,7 +51,13 @@ void plotEnergy(TString file_name) {
     // mappa per fare il totale di conteggi per evento
     std::map<Int_t, EventMean> eventTotal;
 
-    // histo 2d per canali
+    // histo 2d per canali e 1d per cumulativo
+    Int_t nBinX = 5000;
+    Float_t startX = -.5;
+    Float_t endX = nBinX - startX;
+    TH1F *hEnergy = new TH1F("hEnergy","SiPM counts per event",nBinX,startX,endX);
+    hEnergy->GetXaxis()->SetTitle("dNumber");
+    hEnergy->GetYaxis()->SetTitle("Counts");
     TH2F *hChannelEnergy = new TH2F("hChannelEnergy","SiPM counts per event per channel",nBinX,startX,endX,64,-.5,63.5);
     hChannelEnergy->GetXaxis()->SetTitle("dNumber");
     hChannelEnergy->GetYaxis()->SetTitle("Channel");
@@ -73,21 +79,16 @@ void plotEnergy(TString file_name) {
     	anEvent.dX /= anEvent.nN;
     	anEvent.dY /= anEvent.nN;
     	eventTotal[event] = anEvent;
-    }
-    
-    Int_t nBinX = 5000;
-    Float_t startX = -.5;
-    Float_t endX = nBinsX - startX;
-    TH1F *hEnergy = new TH1F("hEnergy","SiPM counts per event",nBinX,startX,endX);
-    hEnergy->GetXaxis()->SetTitle("dNumber");
-    hEnergy->GetYaxis()->SetTitle("Counts");
-    
-    for (const auto& [event, anEvent] : eventTotal) {
-		// cout << anEvent.dX << " \t" << anEvent.dY << "\t" << anEvent.nN << endl;
     	hEnergy->Fill(anEvent.nN);
     }
 	cout << "hEnergy integral \t" << hEnergy->Integral() << endl;
     
+    TCanvas *c1 = new TCanvas("c1","c1");
+    c1->cd();
+	hChannelEnergy->SetStats(kFALSE);
+    hChannelEnergy->Draw("colz");
+	c1->SaveAs("hChannelEnergy.png");
+
     TCanvas *c2 = new TCanvas("c2","c2");
     c2->cd();
 	hEnergy->SetStats(kTRUE);
