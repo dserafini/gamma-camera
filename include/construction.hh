@@ -81,10 +81,14 @@ private:
 	G4LogicalVolume *logicCollimatorMatrix, *logicCollimatorPixel, *logicCollimatorArray, *logicCollimatorPinhole;
 	G4VPhysicalVolume *physCollimator, *physCollimatorMatrix;
 
+	// vial with water
+	G4Tubs *solidVial, *solidSolution;
+	G4LogicalVolume *logicVial, *logicSolution;
+
 	// materials
 	G4Material *materialAir, *materialTungsten, *materialPMT, *materialAluminum, *materialLanthanumBromide, *materialGAGG, *materialSilicon;
 	G4Material *materialPlastic, *materialBariumSulfate, *materialScintillatorReflector, *materialScintillatorCase;
-	G4Material *materialSiliconRubber, *materialOpticalCoupler;
+	G4Material *materialSiliconRubber, *materialOpticalCoupler, *materialWater;
 	G4Element *elLa, *elBr;
 
 	void DefineMaterials();
@@ -97,6 +101,7 @@ private:
 	void ConstructSlabDetector();
 	void ConstructCoupler();
 	void ConstructHamaPixelDetector();
+	void ConstructVial();
 	void SetVisualizationFeatures();
 
 	// we do not need to access the messenger from outside
@@ -141,6 +146,9 @@ private:
 	G4bool detSaveAllOpticals;
 	G4double det_pwb_case_side,	det_pwb_case_thickness,	det_seal_side, det_seal_thickness, det_matrix_side, det_matrix_thickness, det_channel_dead_space, det_channel_active_side;
 	G4double det_channel_number, det_channel_pitch, det_front_thickness, det_back_thickness;
+
+	// water in the vial
+	G4double vial_inner_diameter, vial_outer_diameter, vial_height, vial_base_thickness;
 	
 	// Materials MOBY
 	G4Material* fVoxelMaterial;

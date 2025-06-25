@@ -93,7 +93,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	mouseCollimatorDistance = 0.*mm;
 	HalfVoxelSize = 0.18*mm/2.;
 	HalfPhantomDepth = nVoxelZ*HalfVoxelSize;
-	
+
 	// define materials just once
 	DefineMaterials();
 	// Define MOBY materials
@@ -130,6 +130,7 @@ void MyDetectorConstruction::DefineMaterials()
 	materialPlastic = nist->FindOrBuildMaterial("G4_POLYETHYLENE");
 	materialSilicon = nist->FindOrBuildMaterial("G4_SILICON_DIOXIDE");
 	materialBariumSulfate = nist->FindOrBuildMaterial("G4_BARIUM_SULFATE");
+	materialWater = nist->FindOrBuildMaterial("G4_WATER");
 	materialScintillatorReflector = materialBariumSulfate;
 	materialScintillatorCase = materialAluminum;
 
@@ -258,6 +259,12 @@ void MyDetectorConstruction::DefineMaterialsOpticalProperties()
 	mptPlastic->AddProperty("RINDEX", PhotonEnergy, refractiveIndexPlastic, nEntries);
 	mptPlastic->AddProperty("ABSLENGTH", PhotonEnergy, absorptionLengthPlastic, nEntries);
 	materialPlastic->SetMaterialPropertiesTable(mptPlastic);
+	
+	// water
+	G4double refractiveIndexWater[nEntries] = {1,1};
+	G4MaterialPropertiesTable* mptWater = new G4MaterialPropertiesTable();
+	mptWater->AddProperty("RINDEX", PhotonEnergy, refractiveIndexWater, nEntries);
+	materialPlastic->SetMaterialPropertiesTable(mptWater);
 
 	// silicon
 	// https://www.hamamatsu.com/eu/en/product/optical-sensors/mppc/mppc_mppc-array.html
@@ -703,6 +710,23 @@ void MyDetectorConstruction::ConstructHamaPixelDetector()
 	fScoringDetector = logicDetectorPixel;
 }
 
+void MyDetectorConstruction::ConstructVial()
+{
+	vial_inner_diameter = 6*mm;
+	vial_outer_diameter = 8*mm;
+	vial_height = 20*mm; // arbitrary
+	vial_base_thickness = 1 * mm;
+
+	G4Tubs *solidVial = new G4Tubs("solidVial",0.,vial_outer_diameter/2.,vial_height/2.,0*deg,360*deg);
+	G4LogicalVolume *logicVial = new G4LogicalVolume(solidVial, materialPlastic, "logicVial");
+	new G4PVPlacement(0, G4ThreeVector(0,0,-vial_height/2.), logicVial, "physVial", logicWorld, false, 0, true);
+	
+	G4double solution_height = vial_height - vial_base_thickness*2;
+	G4Tubs *solidSolution = new G4Tubs("solidSolution",0*mm,vial_inner_diameter/2.,solution_height/2.,0*deg,360*deg);
+	G4LogicalVolume *logicSolution = new G4LogicalVolume(solidSolution, materialWater, "logicSolution");
+	new G4PVPlacement(0, G4ThreeVector(), logicSolution, "physSolution", logicVial, false, 0, true);
+}
+
 G4VPhysicalVolume* MyDetectorConstruction::Construct()
 {
 	G4cout << "MyDetectorConstruction::Construct" << G4endl;
@@ -738,6 +762,11 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 		ConstructMOBY();
 	else
 		G4cout << "not building MOBY" << G4endl;
+
+	if (true)
+	{
+		ConstructVial();
+	}
 
 	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
