@@ -21,7 +21,7 @@
 ################################################################################
 # change geometry detector
 ################################################################################
-/control/alias pThreshold 1000
+/control/alias pThreshold 0
 /detector/pixel matrix
 /detector/threshold {pThreshold}
 /analysis/ntuple/setActivation 5 True
