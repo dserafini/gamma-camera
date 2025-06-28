@@ -545,21 +545,21 @@ void MyDetectorConstruction::ConstructEpicPixelScintillator()
 	
 	// Real parameters
 	scinti_case_side = 27.86 * mm;
-	scinti_case_depth = 17.23 * mm;
-	scinti_outer_reflector_side = 27.80 * mm;
-	scinti_outer_reflector_depth = 17.20 * mm;
-	scinti_matrix_side = 27.60 * mm; // 1.2mm*23 = 27.60*mm
-	scinti_matrix_depth = Scintillator::gagg_thickness;
-	scinti_pixel_depth = scinti_matrix_depth;
-	scinti_gagg_side = Scintillator::gagg_side;
-	scinti_gagg_depth = scinti_pixel_depth;
-	scinti_septa_thickness = Scintillator::baso4_side;
-	scinti_pixel_size = scinti_gagg_side + scinti_septa_thickness; // 1.2 * mm
-	scinti_hole_thickness = scinti_gagg_side;
-	scinti_hole_length = scinti_pixel_depth;
-	scinti_holes_number = Scintillator::matchstick_side_number; // 23
 	scinti_reflector_thickness = 0.2 * mm;
 	scinti_aluminum_thickness = 0.03 * mm;
+	scinti_outer_reflector_depth = Scintillator::gagg_thickness + scinti_reflector_thickness;
+	scinti_case_depth = scinti_outer_reflector_depth + scinti_aluminum_thickness;
+	scinti_outer_reflector_side = 27.80 * mm;
+	scinti_gagg_side = Scintillator::gagg_side;
+	scinti_septa_thickness = Scintillator::baso4_side;
+	scinti_pixel_size = scinti_gagg_side + scinti_septa_thickness; // 1.2 * mm
+	scinti_holes_number = Scintillator::matchstick_side_number; // 23
+	scinti_matrix_side = scinti_pixel_size * scinti_holes_number; // 1.2mm*23 = 27.60*mm
+	scinti_matrix_depth = Scintillator::gagg_thickness;
+	scinti_pixel_depth = scinti_matrix_depth;
+	scinti_gagg_depth = scinti_pixel_depth;
+	scinti_hole_thickness = scinti_gagg_side;
+	scinti_hole_length = scinti_pixel_depth;
 	slab_depth = scinti_case_depth;
 	slab_side = scinti_case_side;
 
