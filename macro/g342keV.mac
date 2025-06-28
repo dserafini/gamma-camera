@@ -1,0 +1,57 @@
+/run/numberOfThreads 10
+
+################################################################################
+# define scintillator
+################################################################################
+
+/scintillator/pixel matrix
+
+################################################################################
+# define collimator
+################################################################################
+
+/collimator/exist 1
+/collimator/case_side 37. mm
+/collimator/hole_length 30. mm
+/collimator/septa_thickness 1. mm
+/collimator/hole_thickness 2. mm
+/collimator/positionX 0. mm
+/collimator/positionY 0. mm
+
+################################################################################
+# change geometry detector
+################################################################################
+/control/alias pThreshold 0
+/detector/pixel matrix
+/detector/threshold {pThreshold}
+/analysis/ntuple/setActivation 5 True
+
+################################################################################
+# change geometry moby
+################################################################################
+/moby/build no
+
+/run/reinitializeGeometry
+
+# initalize if not done in the main
+/run/initialize
+
+################################################################################
+# choose gps source
+################################################################################
+/particleSource/sourceType gps
+# Ag-111
+/gps/particle gamma
+/gps/position 0 0 -1 mm
+/gps/direction 0 0 1
+/gps/energy 342 keV
+
+################################################################################
+# tumore
+################################################################################
+/run/printProgress 1000
+
+#/tracking/verbose 2
+/control/alias nEvents 10000
+/analysis/setFileName g342keV.root
+/run/beamOn {nEvents}
