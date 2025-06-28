@@ -52,9 +52,9 @@ void plotEnergy(TString file_name) {
     std::map<Int_t, EventMean> eventTotal;
 
     // histo 2d per canali e 1d per cumulativo
-    Int_t nBinX = 5000;
+    Int_t nBinX = 500;
     Float_t startX = -.5;
-    Float_t endX = nBinX - startX;
+    Float_t endX = 5000 - startX;
     TH1F *hEnergy = new TH1F("hEnergy","SiPM counts per event",nBinX,startX,endX);
     hEnergy->GetXaxis()->SetTitle("dNumber");
     hEnergy->GetYaxis()->SetTitle("Counts");
@@ -92,6 +92,7 @@ void plotEnergy(TString file_name) {
     TCanvas *c2 = new TCanvas("c2","c2");
     c2->cd();
 	hEnergy->SetStats(kTRUE);
+    hEnergy->GetXaxis()->SetRangeUser(0,2000);
     hEnergy->Draw("");
 	c2->SaveAs("hEnergy.png");
     
