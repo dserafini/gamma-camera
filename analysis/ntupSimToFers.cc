@@ -130,6 +130,10 @@ void ntupSimToFers(TString file_in_name, TString file_out_name) {
     channelDataHG_b = fers_tree->Branch("channelDataHG", &channelDataHG);
     
     int evtcount=0;
+	int valThre = 80;
+	double calFactor = 7.7;
+	std::cout << "Threshold on one inner channel is " << valThre << std::endl;
+	std::cout << "Calibration factor is " << calFactor << std::endl;
     
     for (auto& [event, anEvent] : eventData) {
 		if (contieneChanValido(anEvent.chan, anEvent.val, valThre)) {
@@ -138,16 +142,14 @@ void ntupSimToFers(TString file_in_name, TString file_out_name) {
 			moltiplicaVal(anEvent.val, calFactor);
 
 			// fill tree
-    	trigID = event;
-	trigTime = 0;
-	channelID = &(anEvent.chan);
-	channelDataLG = &(anEvent.val);
-	channelDataHG = &(anEvent.val);
-// 	std::cout << " -- event: " << event;
-// 	for (auto& theval : anEvent.val) std::cout << " theval: " << theval;
-// 	std::cout << std::endl;
-        fers_tree->Fill();
-	evtcount++;
+			trigID = event;
+			trigTime = 0;
+			channelID = &(anEvent.chan);
+			channelDataLG = &(anEvent.val);
+			channelDataHG = &(anEvent.val);
+			fers_tree->Fill();
+			evtcount++;
+		}
     }
     
     fers_tree->Write();
@@ -159,4 +161,3 @@ void ntupSimToFers(TString file_in_name, TString file_out_name) {
     fileout->Close();
     return;
 }
-
