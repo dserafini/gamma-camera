@@ -807,7 +807,7 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	MPTfresnel->AddProperty("TRANSMITTANCE", ephoton, transmittance3);
 	
 	// define the material properties table for a test surface
-	std::vector<G4double> reflectivity4 = { .9, .9 };
+	std::vector<G4double> reflectivity4 = { .94, .94 };
 	std::vector<G4double> transmittance4 = { 0., 0. };
 	G4MaterialPropertiesTable* MPTtest = new G4MaterialPropertiesTable();
 	MPTtest->AddProperty("REFLECTIVITY", ephoton, reflectivity4);
