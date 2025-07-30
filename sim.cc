@@ -22,6 +22,11 @@
 // https://stackoverflow.com/questions/3024197/what-does-int-argc-char-argv-mean
 int main(int argc, char** argv)
 {
+	// set seed based on current time
+	// std::time_t currentTime = std::time(nullptr);
+	// G4Random::setTheSeed(static_cast<long>(currentTime));
+	// std::cout << "Random seed set to: " << currentTime << std::endl;
+	
 	// for multithreading
 	#ifdef G4MULTITHREADED
 		G4MTRunManager *runManager = new G4MTRunManager();
