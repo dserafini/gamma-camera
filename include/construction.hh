@@ -110,6 +110,7 @@ private:
 	G4GenericMessenger *fMessengerDetector;
 	G4GenericMessenger *fMessengerCoupler;
 	G4GenericMessenger *fMessengerMoby;
+	G4GenericMessenger *fMessengerVial;
 
 	G4LogicalVolume *fScoringScintillator, *fScoringDetector;
 	G4VPhysicalVolume *physScoringScintillator;
@@ -146,6 +147,10 @@ private:
 	G4bool detSaveAllOpticals;
 	G4double det_pwb_case_side,	det_pwb_case_thickness,	det_seal_side, det_seal_thickness, det_matrix_side, det_matrix_thickness, det_channel_dead_space, det_channel_active_side;
 	G4double det_channel_number, det_channel_pitch, det_front_thickness, det_back_thickness;
+
+	// vial
+	G4bool vialExist;
+	G4double vial_posX, vial_posY;
 
 	// water in the vial
 	G4double vial_inner_diameter, vial_outer_diameter, vial_height, vial_base_thickness;

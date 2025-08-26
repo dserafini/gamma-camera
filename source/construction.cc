@@ -94,6 +94,17 @@ MyDetectorConstruction::MyDetectorConstruction()
 	HalfVoxelSize = 0.18*mm/2.;
 	HalfPhantomDepth = nVoxelZ*HalfVoxelSize;
 
+	// vial commands
+	fMessengerVial = new G4GenericMessenger(this, "/vial/", "Vial Construction");
+	fMessengerVial->DeclareProperty("exist", vialExist, "true or false");
+	fMessengerVial->DeclarePropertyWithUnit("positionX", "mm", vial_posX, "X position of the vial");
+	fMessengerVial->DeclarePropertyWithUnit("positionY", "mm", vial_posY, "X position of the vial");
+
+	// vial parameters
+	vialExist = false;
+	vial_posX = 0;
+	vial_posY = 0;
+
 	// define materials just once
 	DefineMaterials();
 	// Define MOBY materials
@@ -115,6 +126,7 @@ MyDetectorConstruction::~MyDetectorConstruction()
 	delete fMessengerScintillator;
 	delete fMessengerDetector;
 	delete fMessengerCoupler;
+	delete fMessengerVial;
 }
 
 // to define material only once
@@ -719,7 +731,7 @@ void MyDetectorConstruction::ConstructVial()
 
 	G4Tubs *solidVial = new G4Tubs("solidVial",0.,vial_outer_diameter/2.,vial_height/2.,0*deg,360*deg);
 	G4LogicalVolume *logicVial = new G4LogicalVolume(solidVial, materialPlastic, "logicVial");
-	new G4PVPlacement(0, G4ThreeVector(0,0,-vial_height/2.), logicVial, "physVial", logicWorld, false, 0, true);
+	new G4PVPlacement(0, G4ThreeVector(vial_posX,vial_posY,-vial_height/2.), logicVial, "physVial", logicWorld, false, 0, true);
 	
 	G4double solution_height = vial_height - vial_base_thickness*2;
 	G4Tubs *solidSolution = new G4Tubs("solidSolution",0*mm,vial_inner_diameter/2.,solution_height/2.,0*deg,360*deg);
@@ -763,10 +775,8 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	else
 		G4cout << "not building MOBY" << G4endl;
 
-	if (true)
-	{
+	if (vialExist)
 		ConstructVial();
-	}
 
 	DefineOpticalSurfaceProperties();
 	// SetVisualizationFeatures();
