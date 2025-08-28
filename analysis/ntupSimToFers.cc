@@ -131,7 +131,7 @@ void ntupSimToFers(TString file_in_name, TString file_out_name) {
     
     int evtcount=0;
 	int valThre = 80;
-	double calFactor = 7.7;
+	double calFactor = 1.;
 	std::cout << "Threshold on one inner channel is " << valThre << std::endl;
 	std::cout << "Calibration factor is " << calFactor << std::endl;
     
