@@ -36,7 +36,7 @@
 ################################################################################
 /vial/exist true
 /vial/positionX 0. mm
-/control/alias vialDistY 10.
+/control/alias vialDistY 10
 /control/alias vialPosY -{vialDistY}
 /vial/positionY {vialPosY} mm
 
@@ -70,6 +70,6 @@
 /run/printProgress 100000000
 
 #/tracking/verbose 2
-/control/alias nEvents 1000000000
+/control/alias nEvents 2000000000
 /analysis/setFileName lenaVialwwaterPosm{vialDistY}mmSource.root
 /run/beamOn {nEvents}
