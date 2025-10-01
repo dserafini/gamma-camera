@@ -45,7 +45,11 @@
 ################################################################################
 /vial/exist true
 /vial/positionX 0. mm
-/vial/positionY -10. mm
+/vial/positionY 0. mm
+/vial/innerDiameter 6 mm
+/vial/outerDiameter 8 mm
+/vial/height 10 mm
+/vial/base 1 mm
 
 ################################################################################
 # reinitializeGeometry

@@ -36,9 +36,13 @@
 ################################################################################
 /vial/exist true
 /vial/positionX 0. mm
-/control/alias vialDistY 10
+/control/alias vialDistY 0.
 /control/alias vialPosY -{vialDistY}
 /vial/positionY {vialPosY} mm
+/vial/innerDiameter 12 mm
+/vial/outerDiameter 14 mm
+/vial/height 11 mm
+/vial/base 1 mm
 
 /run/reinitializeGeometry
 
@@ -55,7 +59,7 @@
 /gps/pos/type Volume
 /gps/pos/shape Cylinder
 # /gps/pos/centre 0 0 -6 mm
-/gps/pos/centre 0 {vialPosY} -1 mm
+/gps/pos/centre 0 {vialPosY} -6 mm
 /gps/pos/halfz 5 mm
 /gps/pos/radius 3 mm
 /gps/direction 0 0 1
@@ -71,5 +75,5 @@
 
 #/tracking/verbose 2
 /control/alias nEvents 2000000000
-/analysis/setFileName lenaVialwwaterPosm{vialDistY}mmSource.root
+/analysis/setFileName lenaVialBigwwaterPosm{vialDistY}mmSource.root
 /run/beamOn {nEvents}
