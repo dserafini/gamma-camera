@@ -99,11 +99,19 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerVial->DeclareProperty("exist", vialExist, "true or false");
 	fMessengerVial->DeclarePropertyWithUnit("positionX", "mm", vial_posX, "X position of the vial");
 	fMessengerVial->DeclarePropertyWithUnit("positionY", "mm", vial_posY, "X position of the vial");
+	fMessengerVial->DeclarePropertyWithUnit("innerDiameter", "mm", vial_inner_diameter, "inner radius of the vial");
+	fMessengerVial->DeclarePropertyWithUnit("outerDiameter", "mm", vial_outer_diameter, "outer radius of the vial");
+	fMessengerVial->DeclarePropertyWithUnit("height", "mm", vial_height, "half height of the vial");
+	fMessengerVial->DeclarePropertyWithUnit("base", "mm", vial_base_thickness, "half height of the vial");
 
 	// vial parameters
 	vialExist = false;
 	vial_posX = 0;
 	vial_posY = 0;
+	vial_inner_diameter = 6 * mm;
+	vial_outer_diameter = 8 * mm;
+	vial_height = 10 * mm;
+	vial_base_thickness = 1 * mm;
 
 	// define materials just once
 	DefineMaterials();
@@ -533,6 +541,54 @@ void MyDetectorConstruction::ConstructCollimator()
 	new G4PVPlacement(0, G4ThreeVector(), logicCollimatorPinhole, "physCollimatorPinhole", logicCollimatorPixel, false, 0, true);
 }
 
+void MyDetectorConstruction::ConstructSingleHoleCollimator()
+{
+    G4cout << "MyDetectorConstruction::ConstructSingleHoleCollimator" << G4endl;
+
+    // --- Parametri ---
+    G4double hole_size = hole_thickness;     // lato del foro (quadrato)
+
+    // Posizione (centrato come prima)
+    G4ThreeVector collimator_position = G4ThreeVector(collimator_posX, collimator_posY, +hole_length/2.);
+
+    // --- Solido esterno (blocco pieno) ---
+    G4cout << "Definisco il blocco di tungsteno del collimatore" << G4endl;
+    auto solidCollimatorBlock = new G4Box("solidCollimatorBlock",
+                                          case_side/2., case_side/2., hole_length/2.);
+
+    auto logicCollimatorBlock = new G4LogicalVolume(solidCollimatorBlock,
+                                                    materialTungsten,
+                                                    "logicCollimatorBlock");
+
+    new G4PVPlacement(0,
+                      collimator_position,
+                      logicCollimatorBlock,
+                      "physCollimatorBlock",
+                      logicWorld,
+                      false,
+                      0,
+                      true);
+
+    // --- Foro centrale ---
+    G4cout << "Definisco il foro centrale" << G4endl;
+    auto solidCollimatorHole = new G4Box("solidCollimatorHole",
+                                         hole_size/2., hole_size/2., hole_length/2.);
+
+    auto logicCollimatorHole = new G4LogicalVolume(solidCollimatorHole,
+                                                   materialAir,
+                                                   "logicCollimatorHole");
+
+    new G4PVPlacement(0,
+                      G4ThreeVector(),          // centrato nel blocco
+                      logicCollimatorHole,
+                      "physCollimatorHole",
+                      logicCollimatorBlock,
+                      false,
+                      0,
+                      true);
+}
+
+
 void MyDetectorConstruction::ConstructSlabScintillator()
 {
 	solidScintillator = new G4Box("solidScintillator", slab_side/2., slab_side/2., slab_depth/2.);
@@ -724,10 +780,10 @@ void MyDetectorConstruction::ConstructHamaPixelDetector()
 
 void MyDetectorConstruction::ConstructVial()
 {
-	vial_inner_diameter = 6*mm;
-	vial_outer_diameter = 8*mm;
-	vial_height = 20*mm; // arbitrary
-	vial_base_thickness = 1 * mm;
+	// vial_inner_diameter = 60*mm;
+	// vial_outer_diameter = 80*mm;
+	// vial_height = 20*mm; // arbitrary
+	// vial_base_thickness = 1 * mm;
 
 	G4Tubs *solidVial = new G4Tubs("solidVial",0.,vial_outer_diameter/2.,vial_height/2.,0*deg,360*deg);
 	G4LogicalVolume *logicVial = new G4LogicalVolume(solidVial, materialPlastic, "logicVial");
@@ -753,6 +809,7 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
 	G4cout << "Do I construct the collimator? " << collimatorExist << G4endl;
 	if(collimatorExist)
 		ConstructCollimator();
+		// ConstructSingleHoleCollimator();
 
 	if(scintillatorExist)
 	{

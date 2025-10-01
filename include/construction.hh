@@ -98,6 +98,7 @@ private:
 	void ConstructSlabScintillator();
 	void ConstructEpicPixelScintillator();
 	void ConstructCollimator();
+	void ConstructSingleHoleCollimator();
 	void ConstructSlabDetector();
 	void ConstructCoupler();
 	void ConstructHamaPixelDetector();
