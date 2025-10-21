@@ -31,6 +31,7 @@ MyRunAction::MyRunAction()
   man->CreateNtupleDColumn(Tuples::kScintillator, "fX"); // [mm]
   man->CreateNtupleDColumn(Tuples::kScintillator, "fY"); // [mm]
   man->CreateNtupleDColumn(Tuples::kScintillator, "fZ"); // [mm]
+  man->CreateNtupleIColumn(Tuples::kScintillator, "eventID"); // [1]
   
   // scintillation optical photons
   man->CreateNtupleIColumn(Tuples::kOptical, "pNumber"); // [1]

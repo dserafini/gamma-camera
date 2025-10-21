@@ -51,6 +51,9 @@ void MySensitiveScintillator::EndOfEvent(G4HCofThisEvent*)
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kGammaX, fPosition.getX()/mm); // [mm]
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kGammaY, fPosition.getY()/mm);
   man->FillNtupleDColumn(Tuples::kScintillator, TScintillator::kGammaZ, fPosition.getZ()/mm);
+
+  G4int thisEventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+	man->FillNtupleIColumn(Tuples::kScintillator, TScintillator::kEventID, thisEventID);
   
   return;
 }
