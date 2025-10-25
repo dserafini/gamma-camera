@@ -136,6 +136,7 @@ private:
 	G4double slab_depth, slab_side, scinti_pixel_size, scinti_septa_thickness, scinti_hole_thickness, scinti_hole_length;
 	G4double scinti_case_side, scinti_case_depth, scinti_outer_reflector_side, scinti_outer_reflector_depth, scinti_matrix_side, scinti_matrix_depth;
 	G4double scinti_pixel_depth, scinti_gagg_side, scinti_gagg_depth, scinti_reflector_thickness, scinti_aluminum_thickness;
+	G4double scintiRodReflectivity;
 	G4int scinti_holes_number;
 	G4bool scintillatorExist;
 	G4String scintiPixelNoSlab;

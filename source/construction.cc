@@ -41,6 +41,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerScintillator->DeclareProperty("pixel", scintiPixelNoSlab, "matrix or otherwise slab");
 	fMessengerScintillator->DeclarePropertyWithUnit("scinti_pixel_size", "mm", scinti_pixel_size, "Size of the scintillator pixels");
 	fMessengerScintillator->DeclareProperty("exist", scintillatorExist, "true or false");
+	fMessengerScintillator->DeclareProperty("surfaceReflectivity", scintiRodReflectivity, "factor from 0 to 1");
 	
 	// scintillator parameters
 	scintillatorExist = true; // by default the scintillator is built
@@ -51,6 +52,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	scinti_septa_thickness = 10*um;
 	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
 	fScoringScintillator = 0;
+	scintiRodReflectivity = 0.94;
 
 	// coupler commands
 	fMessengerCoupler = new G4GenericMessenger(this, "/coupler/", "Optical coupling element");
@@ -874,7 +876,8 @@ void MyDetectorConstruction::DefineOpticalSurfaceProperties()
 	MPTfresnel->AddProperty("TRANSMITTANCE", ephoton, transmittance3);
 	
 	// define the material properties table for a test surface
-	std::vector<G4double> reflectivity4 = { .94, .94 };
+	G4cout << "Reflectivity used in this run: " << scintiRodReflectivity << G4endl;
+	std::vector<G4double> reflectivity4 = { scintiRodReflectivity, scintiRodReflectivity }; // 0.94 default
 	std::vector<G4double> transmittance4 = { 0., 0. };
 	G4MaterialPropertiesTable* MPTtest = new G4MaterialPropertiesTable();
 	MPTtest->AddProperty("REFLECTIVITY", ephoton, reflectivity4);
