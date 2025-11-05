@@ -5,12 +5,14 @@
 ################################################################################
 
 /scintillator/pixel matrix
+/control/alias reflectivityPar 0.97
+/scintillator/surfaceReflectivity {reflectivityPar}
 
 ################################################################################
 # define collimator
 ################################################################################
 
-/collimator/exist 1
+/collimator/exist 0
 /collimator/case_side 37. mm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
@@ -34,12 +36,14 @@
 # change geometry vial
 ################################################################################
 /vial/exist true
-/vial/positionX 0. mm
 /control/alias vialDistY 0
 /control/alias vialPosY -{vialDistY}
+/control/alias vialDistX 0
+/control/alias vialPosX -{vialDistX}
+/vial/positionX {vialPosX} mm
 /vial/positionY {vialPosY} mm
-/vial/innerDiameter 6 mm
-/vial/outerDiameter 8 mm
+/vial/innerDiameter 12 mm
+/vial/outerDiameter 13 mm
 /vial/height 11 mm
 /vial/base 1 mm
 
@@ -57,14 +61,13 @@
 /gps/ion 47 111 0 0.
 /gps/pos/type Volume
 /gps/pos/shape Cylinder
-# /gps/pos/centre 0 0 -6 mm
-/gps/pos/centre 0 {vialPosY} -6 mm
+/gps/pos/centre {vialPosX} {vialPosY} -6 mm
 /gps/pos/halfz 5 mm
-/gps/pos/radius 3 mm
+/gps/pos/radius 6 mm
 /gps/direction 0 0 1
 /gps/energy 0 eV
 #/gps/particle gamma
-#/gps/energy 0 keV
+#/gps/energy 342 keV
 #/gps/ang/type iso
 
 ################################################################################
@@ -74,5 +77,5 @@
 
 #/tracking/verbose 2
 /control/alias nEvents 2000000000
-/analysis/setFileName lenaVialSmallwwater.root
+/analysis/setFileName lenaVialBigwwaterWideSource{nEvents}eventsReflectivity0p97.root
 /run/beamOn {nEvents}
