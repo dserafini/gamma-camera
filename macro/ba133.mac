@@ -74,42 +74,12 @@
 #/tracking/verbose 2
 /control/alias nEvents 200000000
 /analysis/setFileName Ba133{nEvents}eventsReflectivity0p97xPos{vialDistX}yPos{vialDistY}.root
-/run/beamOn {nEvents}
+#/run/beamOn {nEvents}
 
 
-/control/alias vialDistY 3
+/control/alias vialDistY 1.1
 /control/alias vialPosY -{vialDistY}
-/control/alias vialDistX 3
-/control/alias vialPosX -{vialDistX}
-/gps/position {vialPosX} {vialPosY} 0 mm
-/analysis/setFileName Ba133{nEvents}eventsReflectivity0p97xPos{vialDistX}yPos{vialDistY}.root
-/run/beamOn {nEvents}
-
-
-
-/control/alias vialDistY 10
-/control/alias vialPosY -{vialDistY}
-/control/alias vialDistX 10
-/control/alias vialPosX -{vialDistX}
-/gps/position {vialPosX} {vialPosY} 0 mm
-/analysis/setFileName Ba133{nEvents}eventsReflectivity0p97xPos{vialDistX}yPos{vialDistY}.root
-/run/beamOn {nEvents}
-
-
-
-/control/alias vialDistY 2
-/control/alias vialPosY -{vialDistY}
-/control/alias vialDistX 2
-/control/alias vialPosX -{vialDistX}
-/gps/position {vialPosX} {vialPosY} 0 mm
-/analysis/setFileName Ba133{nEvents}eventsReflectivity0p97xPos{vialDistX}yPos{vialDistY}.root
-/run/beamOn {nEvents}
-
-
-
-/control/alias vialDistY 1
-/control/alias vialPosY -{vialDistY}
-/control/alias vialDistX 1
+/control/alias vialDistX 1.1
 /control/alias vialPosX -{vialDistX}
 /gps/position {vialPosX} {vialPosY} 0 mm
 /analysis/setFileName Ba133{nEvents}eventsReflectivity0p97xPos{vialDistX}yPos{vialDistY}.root

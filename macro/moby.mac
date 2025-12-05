@@ -5,17 +5,15 @@
 ################################################################################
 
 /scintillator/pixel matrix
-# matrix or otherwise slab
-/scintillator/slab_side 22. mm
-/scintillator/slab_depth 26. mm
-/scintillator/scinti_pixel_size 1. mm
+/control/alias reflectivityPar 0.97
+/scintillator/surfaceReflectivity {reflectivityPar}
 
 ################################################################################
 # define collimator
 ################################################################################
 
 /collimator/exist 1
-/collimator/case_side 22. mm
+/collimator/case_side 37. mm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
 /collimator/hole_thickness 2. mm
@@ -25,12 +23,10 @@
 ################################################################################
 # change geometry detector
 ################################################################################
-/control/alias pThreshold 10
+/control/alias pThreshold 0
 /detector/pixel matrix
-/detector/det_pixel_size 3. mm
-/detector/det_side 24. mm
-/detector/fill_factor .74
 /detector/threshold {pThreshold}
+/coupler/thickness 2 mm
 
 ################################################################################
 # change geometry moby
@@ -59,7 +55,7 @@
 ################################################################################
 # choose general particle gun
 ################################################################################
-/particleSource/sourceType gun
+/particleSource/sourceType gps
 /gun/particle ion
 /gun/ion 47 111 0 0.
 /gun/energy 0. eV
@@ -78,7 +74,7 @@
 # tumore
 ################################################################################
 /control/alias nEvents 100000000
-/control/alias tumoradius .5
+/control/alias tumoradius 1
 /control/alias depth 10.0
 /control/alias xcentre 0.0
 
@@ -91,22 +87,19 @@
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
 /particleSource/sourceType gps
 /run/printProgress 1000000
+#/run/beamOn {nEvents}
+
+/control/alias xcentre 6.0
+/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
+/run/reinitializeGeometry
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
+#/run/beamOn {nEvents}
+
+/gps/pos/shape Para
+/gps/pos/centre 2 0. -{tumorDepth} mm
+/gps/pos/halfx 4 mm
+/gps/pos/halfy 5 mm
+/gps/pos/halfz 2 mm
+/control/alias nEvents 1909859317
+/analysis/setFileName tumorBack{nEvents}events{depth}mmZdepth.root
 /run/beamOn {nEvents}
-
-/control/alias xcentre 5.0
-/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
-/run/reinitializeGeometry
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
-#/run/beamOn {nEvents}
-
-/control/alias xcentre 10.0
-/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
-/run/reinitializeGeometry
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
-#/run/beamOn {nEvents}
-
-/control/alias xcentre 2.0
-/gps/pos/centre {xcentre} 0. -{tumorDepth} mm
-/run/reinitializeGeometry
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
-#/run/beamOn {nEvents}
