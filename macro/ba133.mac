@@ -12,7 +12,7 @@
 # define collimator
 ################################################################################
 
-/collimator/exist 1
+/collimator/exist 0
 /collimator/case_side 37. mm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
@@ -26,6 +26,8 @@
 /control/alias pThreshold 0
 /detector/pixel matrix
 /detector/threshold {pThreshold}
+/control/alias couplerThicknessMm 2
+/coupler/thickness {couplerThicknessMm} mm
 
 ################################################################################
 # change geometry moby
@@ -59,7 +61,7 @@
 # Ba-133
 /gps/particle ion
 /gps/ion 56 133 0 0.
-/gps/position {vialPosX} {vialPosY} 0 mm
+/gps/position {vialPosX} {vialPosY} -100 mm
 /gps/direction 0 0 1
 /gps/energy 0 eV
 #/gps/particle gamma
@@ -69,18 +71,9 @@
 ################################################################################
 # tumore
 ################################################################################
-/run/printProgress 10000000
+/run/printProgress 1000000
 
 #/tracking/verbose 2
-/control/alias nEvents 200000000
-/analysis/setFileName Ba133{nEvents}eventsReflectivity0p97xPos{vialDistX}yPos{vialDistY}.root
-#/run/beamOn {nEvents}
-
-
-/control/alias vialDistY 1.1
-/control/alias vialPosY -{vialDistY}
-/control/alias vialDistX 1.1
-/control/alias vialPosX -{vialDistX}
-/gps/position {vialPosX} {vialPosY} 0 mm
-/analysis/setFileName Ba133{nEvents}eventsReflectivity0p97xPos{vialDistX}yPos{vialDistY}.root
+/control/alias nEvents 100000000
+/analysis/setFileName Ba133_{nEvents}eventsReflectivity{reflectivityPar}coupling{couplerThicknessMm}mmXpos{vialDistX}yPos{vialDistY}zPos10cmNoCollFloodTest.root
 /run/beamOn {nEvents}

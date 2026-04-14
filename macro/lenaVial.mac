@@ -5,7 +5,7 @@
 ################################################################################
 
 /scintillator/pixel matrix
-/control/alias reflectivityPar 0.97
+/control/alias reflectivityPar 0.94
 /scintillator/surfaceReflectivity {reflectivityPar}
 
 ################################################################################
@@ -43,8 +43,11 @@
 /control/alias vialPosX {vialDistX}
 /vial/positionX {vialPosX} mm
 /vial/positionY {vialPosY} mm
-/vial/innerDiameter 6 mm
-/vial/outerDiameter 8 mm
+/control/alias sourceRadius 3 
+/control/multiply sourceDiameter {sourceRadius} 2 
+/control/add outerVialDiameter {sourceDiameter} 2 
+/vial/innerDiameter {sourceDiameter} mm
+/vial/outerDiameter {outerVialDiameter} mm
 /vial/height 11 mm
 /vial/base 1 mm
 
@@ -64,7 +67,7 @@
 /gps/pos/shape Cylinder
 /gps/pos/centre {vialPosX} {vialPosY} -6 mm
 /gps/pos/halfz 5 mm
-/gps/pos/radius 3 mm
+/gps/pos/radius {sourceRadius} mm
 /gps/direction 0 0 1
 /gps/energy 0 eV
 #/gps/particle gamma
@@ -78,5 +81,5 @@
 
 #/tracking/verbose 2
 /control/alias nEvents 2000000000
-/analysis/setFileName lenaVialSmallwwater{nEvents}eventsReflectivity0p97yPos{vialDistY}mmxPos{vialDistX}mm.root
+/analysis/setFileName lenaVialSourceDiameter{sourceDiameter}mmWwater{nEvents}eventsReflectivity{reflectivityPar}yPos{vialDistY}mmxPos{vialDistX}mmAttenuationLengthGagg645mm.root
 /run/beamOn {nEvents}

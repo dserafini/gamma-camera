@@ -1,16 +1,20 @@
-/run/numberOfThreads 10
+/run/numberOfThreads 1
 
 ################################################################################
 # define scintillator
 ################################################################################
 
 /scintillator/pixel matrix
+/control/alias reflectivityPar 0.9
+/scintillator/surfaceReflectivity {reflectivityPar}
+/control/alias slabDepthMm 17
+/scintillator/slab_depth {slabDepthMm} mm
 
 ################################################################################
 # define collimator
 ################################################################################
 
-/collimator/exist 1
+/collimator/exist 0
 /collimator/case_side 37. mm
 /collimator/hole_length 30. mm
 /collimator/septa_thickness 1. mm
@@ -24,12 +28,29 @@
 /control/alias pThreshold 0
 /detector/pixel matrix
 /detector/threshold {pThreshold}
-/analysis/ntuple/setActivation 5 True
+/coupler/thickness 2 mm
 
 ################################################################################
 # change geometry moby
 ################################################################################
-/moby/build no
+/moby/build yes
+/moby/voxelX 430
+/moby/distance 0. mm
+
+################################################################################
+# change geometry vial
+################################################################################
+/vial/exist false
+/control/alias vialDistY 0
+/control/alias vialPosY -{vialDistY}
+/control/alias vialDistX 0
+/control/alias vialPosX {vialDistX}
+/vial/positionX {vialPosX} mm
+/vial/positionY {vialPosY} mm
+/vial/innerDiameter 6 mm
+/vial/outerDiameter 8 mm
+/vial/height 11 mm
+/vial/base 1 mm
 
 /run/reinitializeGeometry
 
@@ -40,18 +61,24 @@
 # choose gps source
 ################################################################################
 /particleSource/sourceType gps
-# Ag-111
-/gps/particle gamma
+#/gps/pos/type Volume
+#/gps/pos/shape Cylinder
+#/gps/pos/centre {vialPosX} {vialPosY} -6 mm
+#/gps/pos/halfz 5 mm
+#/gps/pos/radius 3 mm
 /gps/position 0 0 -1 mm
 /gps/direction 0 0 1
-/gps/energy 342 keV
+/gps/particle gamma
+/control/alias gEnergyKeV 342
+/gps/energy {gEnergyKeV} keV
+#/gps/ang/type iso
 
 ################################################################################
 # tumore
 ################################################################################
-/run/printProgress 1000
+/run/printProgress 10
 
 #/tracking/verbose 2
-/control/alias nEvents 10000
-/analysis/setFileName g342keV.root
+/control/alias nEvents 1
+/analysis/setFileName g{gEnergyKeV}keV{nEvents}events{slabDepthMm}mmSlabDepth.root
 /run/beamOn {nEvents}

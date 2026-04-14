@@ -74,9 +74,9 @@
 # tumore
 ################################################################################
 /control/alias nEvents 100000000
-/control/alias tumoradius 1
+/control/alias tumoradius 2
 /control/alias depth 10.0
-/control/alias xcentre 0.0
+/control/alias xcentre -4.0
 
 /control/add tumorDepth {tumoradius} {depth}
 /control/multiply tumordiameter {tumoradius} 2
@@ -84,22 +84,22 @@
 /gps/pos/type Volume
 /gps/pos/shape Sphere
 /gps/pos/radius {tumoradius} mm
-/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth{pThreshold}pThre.root
+/analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
 /particleSource/sourceType gps
 /run/printProgress 1000000
-#/run/beamOn {nEvents}
+/run/beamOn {nEvents}
 
-/control/alias xcentre 6.0
+/control/alias xcentre 4.0
 /gps/pos/centre {xcentre} 0. -{tumorDepth} mm
 /run/reinitializeGeometry
 /analysis/setFileName tumor{tumordiameter}mmDiameter{nEvents}events{xcentre}mmXpos{depth}mmZdepth.root
-#/run/beamOn {nEvents}
+/run/beamOn {nEvents}
 
 /gps/pos/shape Para
-/gps/pos/centre 2 0. -{tumorDepth} mm
-/gps/pos/halfx 4 mm
-/gps/pos/halfy 5 mm
+/gps/pos/centre 0. 0. -{tumorDepth} mm
+/gps/pos/halfx 8 mm
+/gps/pos/halfy 4 mm
 /gps/pos/halfz 2 mm
-/control/alias nEvents 1909859317
+/control/alias nEvents 381971863
 /analysis/setFileName tumorBack{nEvents}events{depth}mmZdepth.root
 /run/beamOn {nEvents}
