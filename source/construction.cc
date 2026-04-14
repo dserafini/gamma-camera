@@ -233,13 +233,13 @@ void MyDetectorConstruction::DefineMaterialsOpticalProperties()
 											2.51*eV, 2.51*eV, 2.52*eV, 2.52*eV, 2.53*eV, 2.54*eV, 2.54*eV, 
 											2.56*eV, 2.57*eV, 2.58*eV, 2.59*eV, 2.61*eV, 2.63*eV, 2.66*eV};
 
-	G4double ScintFast[scintArraySize] = {0.08*eV, 0.12*eV, 0.16*eV, 0.2*eV, 0.24*eV, 0.28*eV, 0.32*eV, 
-											0.36*eV, 0.4*eV, 0.44*eV, 0.48*eV, 0.52*eV, 0.56*eV, 0.6*eV, 
-											0.64*eV, 0.68*eV, 0.72*eV, 0.76*eV, 0.8*eV, 0.84*eV, 0.88*eV, 
-											0.92*eV, 0.96*eV, 1*eV, 0.96*eV, 0.92*eV, 0.88*eV, 0.84*eV, 
-											0.8*eV, 0.76*eV, 0.72*eV, 0.68*eV, 0.64*eV, 0.6*eV, 0.56*eV, 
-											0.52*eV, 0.48*eV, 0.44*eV, 0.4*eV, 0.36*eV, 0.32*eV, 0.28*eV, 
-											0.24*eV, 0.2*eV, 0.16*eV, 0.12*eV, 0.08*eV, 0.04*eV, 0*eV};
+	G4double ScintFast[scintArraySize] = {0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 
+											0.36, 0.4, 0.44, 0.48, 0.52, 0.56, 0.6, 
+											0.64, 0.68, 0.72, 0.76, 0.8, 0.84, 0.88, 
+											0.92, 0.96, 1, 0.96, 0.92, 0.88, 0.84, 
+											0.8, 0.76, 0.72, 0.68, 0.64, 0.6, 0.56, 
+											0.52, 0.48, 0.44, 0.4, 0.36, 0.32, 0.28, 
+											0.24, 0.2, 0.16, 0.12, 0.08, 0.04, 0};
 
 	// box pdf for the scintillation process wavelength distribution
 	// const G4int scintArraySize = 63;
