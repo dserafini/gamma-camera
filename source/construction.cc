@@ -46,7 +46,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	// scintillator parameters
 	scintillatorExist = true; // by default the scintillator is built
 	slab_side  = case_side;
-	slab_depth = hole_length/3.;
+	slab_depth = 17.0*mm;
 	scintiPixelNoSlab = "matrix";
 	scinti_pixel_size = hole_thickness + septa_thickness;
 	scinti_septa_thickness = 10*um;
@@ -209,7 +209,7 @@ void MyDetectorConstruction::DefineMaterialsOpticalProperties()
 	// in experiment we use GAGG:Ce with higher light output (HL) from epic crystal
 	// https://www.epic-crystal.com/scintillation-crystals/gaggce-crystal.html
 	G4double refractiveIndexGAGG[nEntries] = {1.91,1.91};
-	G4double absorptionLengthGAGG[nEntries] = {645.*m,645.*m};
+	G4double absorptionLengthGAGG[nEntries] = {645.*mm,645.*mm};
 
 	G4MaterialPropertiesTable* mptGAGG = new G4MaterialPropertiesTable();
 
@@ -421,6 +421,7 @@ void MyDetectorConstruction::ConstructMOBY()
 
 	G4int i, j, k, n;
 	G4double HU;
+	G4long nVoxelsHUgt0 = 0;
 
     while (ctfile >> buffer)
     {
@@ -447,6 +448,7 @@ void MyDetectorConstruction::ConstructMOBY()
 	        	if (HU == 0) materialIDs[n] = 0; // air
 			else 
 			{
+				if (HU > 0) nVoxelsHUgt0++;
 				if (HU < 30) materialIDs[n] = 1; // lung
 				else 
 				{
@@ -460,6 +462,8 @@ void MyDetectorConstruction::ConstructMOBY()
 		}
 	}
  }
+
+ 	G4cout << "Numero di voxel con HU > 0: " << nVoxelsHUgt0 << G4endl;
 
     voxelizedPhantom->SetMaterialIndices(materialIDs);
 
@@ -617,7 +621,8 @@ void MyDetectorConstruction::ConstructEpicPixelScintillator()
 	scinti_case_side = 27.86 * mm;
 	scinti_reflector_thickness = 0.2 * mm;
 	scinti_aluminum_thickness = 0.03 * mm;
-	scinti_outer_reflector_depth = Scintillator::gagg_thickness + scinti_reflector_thickness;
+	// slab_depth = Scintillator::gagg_thickness
+	scinti_outer_reflector_depth = slab_depth + scinti_reflector_thickness;
 	scinti_case_depth = scinti_outer_reflector_depth + scinti_aluminum_thickness;
 	scinti_outer_reflector_side = 27.80 * mm;
 	scinti_gagg_side = Scintillator::gagg_side;
@@ -625,12 +630,11 @@ void MyDetectorConstruction::ConstructEpicPixelScintillator()
 	scinti_pixel_size = scinti_gagg_side + scinti_septa_thickness; // 1.2 * mm
 	scinti_holes_number = Scintillator::matchstick_side_number; // 23
 	scinti_matrix_side = scinti_pixel_size * scinti_holes_number; // 1.2mm*23 = 27.60*mm
-	scinti_matrix_depth = Scintillator::gagg_thickness;
+	scinti_matrix_depth = slab_depth;
 	scinti_pixel_depth = scinti_matrix_depth;
 	scinti_gagg_depth = scinti_pixel_depth;
 	scinti_hole_thickness = scinti_gagg_side;
 	scinti_hole_length = scinti_pixel_depth;
-	slab_depth = scinti_case_depth;
 	slab_side = scinti_case_side;
 
 	// check proper parameters
@@ -684,7 +688,7 @@ void MyDetectorConstruction::ConstructCoupler()
 	solidCoupler = new G4Box("solidScintillator", slab_side/2., slab_side/2., detector_scintillator_distance/2.);
 	logicCoupler = new G4LogicalVolume(solidCoupler, materialOpticalCoupler, "logicCoupler");
 	physCoupler = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance/2.),
+		G4ThreeVector(0.,0.,hole_length + scinti_case_depth + detector_scintillator_distance/2.),
 		logicCoupler,             // its logical volume
 		"physCoupler",           // its name
 		logicWorld,                  // its mother volume
@@ -736,7 +740,7 @@ void MyDetectorConstruction::ConstructHamaPixelDetector()
 	channel_dead_space = det_channel_dead_space;
 	det_pixel_active_size = det_channel_active_side;
 	detector_depth = det_pwb_case_thickness;
-	detector_centre_position = G4ThreeVector(0.,0.,hole_length + slab_depth + detector_scintillator_distance + detector_depth/2.);
+	detector_centre_position = G4ThreeVector(0.,0.,hole_length + scinti_case_depth + detector_scintillator_distance + detector_depth/2.);
 
 	// check proper parameters
 	G4cout << "det_pixel_size: " << det_pixel_size / mm << " mm" << G4endl;
