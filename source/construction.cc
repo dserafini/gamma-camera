@@ -59,7 +59,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerCoupler->DeclarePropertyWithUnit("thickness", "mm", detector_scintillator_distance, "Optical coupling distance");
 
 	// coupler parameters
-	detector_scintillator_distance = 1*mm;
+	detector_scintillator_distance = 2*mm;
 	
 	// detector commands
 	fMessengerDetector = new G4GenericMessenger(this, "/detector/", "Detector Construction");
