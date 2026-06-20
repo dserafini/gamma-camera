@@ -6,10 +6,13 @@
 ################################################################################
 /collimator/exist true
 /collimator/hole_length 30. mm
-/collimator/hole_thickness 15. mm
-/collimator/septa_thickness 5. mm
+#/collimator/hole_thickness 15. mm
+/collimator/hole_thickness 2. mm
+#/collimator/septa_thickness 5. mm
+/collimator/septa_thickness 1. mm
 #/collimator/case_side 10. cm
-/collimator/case_side 25. mm
+#/collimator/case_side 25. mm
+/collimator/case_side 37. mm
 /collimator/positionX 0. mm
 /collimator/positionY 0. mm
 
@@ -18,9 +21,10 @@
 ################################################################################
 /scintillator/exist true
 /scintillator/pixel matrix
-/scintillator/slab_side 24. mm
-/scintillator/slab_depth 26. mm
-/scintillator/scinti_pixel_size 3. mm
+#/scintillator/slab_side 24. mm
+#/scintillator/slab_depth 26. mm
+#/scintillator/scinti_pixel_size 3. mm
+/coupler/thickness 2 mm
 
 ################################################################################
 # change geometry detector
@@ -110,18 +114,34 @@
 # tell Geant4 to show the scene
 /vis/open OGL
 
+# section plane
+#/vis/viewer/set/sectionPlane  on  0.0  0.0  0.0  mm  1.0  0.0  0.0
+
+# cut away planes
+/vis/viewer/set/cutawayMode add
+/vis/viewer/addCutawayPlane 0 0 0 mm 1 0 0
+/vis/viewer/addCutawayPlane 0 0 0 mm 0 -1 0
+/vis/viewer/addCutawayPlane 0 0 47.20 mm 0 0 1
+
 # decide the initial position of the detector
-/vis/viewer/set/viewpointVector -1 0 -2
+/vis/viewer/set/viewpointVector -1 +.5 -2
 /vis/viewer/set/lightsVector -1 0 0
 
 # Specify style (surface, wireframe, auxiliary edges,...)
 /vis/viewer/set/style surface
-/vis/viewer/set/hiddenEdge true
+#/vis/viewer/set/style wireframe
+#/vis/viewer/set/style cloud
+#/vis/viewer/set/hiddenEdge true
+/vis/viewer/set/edge false
 # /vis/viewer/set/style wireframe
 # /vis/viewer/set/auxiliaryEdge true
 # /vis/viewer/set/lineSegmentsPerCircle 100
 /vis/viewer/colourByDensity 1 g/cm3 0.0001 1.5 12
 /vis/geometry/set/visibility logicWorld 0 false
+
+# mesh for too many volumes
+/vis/viewer/set/specialMeshRenderingOption
+/vis/viewer/set/specialMeshVolumes
 
 # tell Geant4 to draw the volumes
 /vis/drawVolume
