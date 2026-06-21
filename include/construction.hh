@@ -152,7 +152,7 @@ private:
 
 	// vial
 	G4bool vialExist;
-	G4double vial_posX, vial_posY;
+	G4double vial_posX, vial_posY, vial_base_posZ;
 
 	// water in the vial
 	G4double vial_inner_diameter, vial_outer_diameter, vial_height, vial_base_thickness;

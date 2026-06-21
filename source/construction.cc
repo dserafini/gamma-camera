@@ -101,6 +101,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerVial->DeclareProperty("exist", vialExist, "true or false");
 	fMessengerVial->DeclarePropertyWithUnit("positionX", "mm", vial_posX, "X position of the vial");
 	fMessengerVial->DeclarePropertyWithUnit("positionY", "mm", vial_posY, "X position of the vial");
+	fMessengerVial->DeclarePropertyWithUnit("positionZ", "mm", vial_base_posZ, "Z position of the vial base");
 	fMessengerVial->DeclarePropertyWithUnit("innerDiameter", "mm", vial_inner_diameter, "inner radius of the vial");
 	fMessengerVial->DeclarePropertyWithUnit("outerDiameter", "mm", vial_outer_diameter, "outer radius of the vial");
 	fMessengerVial->DeclarePropertyWithUnit("height", "mm", vial_height, "half height of the vial");
@@ -110,6 +111,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	vialExist = false;
 	vial_posX = 0;
 	vial_posY = 0;
+	vial_base_posZ = 0;
 	vial_inner_diameter = 6 * mm;
 	vial_outer_diameter = 8 * mm;
 	vial_height = 10 * mm;
@@ -793,7 +795,7 @@ void MyDetectorConstruction::ConstructVial()
 
 	G4Tubs *solidVial = new G4Tubs("solidVial",0.,vial_outer_diameter/2.,vial_height/2.,0*deg,360*deg);
 	G4LogicalVolume *logicVial = new G4LogicalVolume(solidVial, materialPlastic, "logicVial");
-	new G4PVPlacement(0, G4ThreeVector(vial_posX,vial_posY,-vial_height/2.), logicVial, "physVial", logicWorld, false, 0, true);
+	new G4PVPlacement(0, G4ThreeVector(vial_posX,vial_posY, vial_base_posZ - vial_height/2.), logicVial, "physVial", logicWorld, false, 0, true);
 	
 	G4double solution_height = vial_height - vial_base_thickness*2;
 	G4Tubs *solidSolution = new G4Tubs("solidSolution",0*mm,vial_inner_diameter/2.,solution_height/2.,0*deg,360*deg);
