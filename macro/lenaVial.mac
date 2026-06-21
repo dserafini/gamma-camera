@@ -41,23 +41,25 @@
 /control/alias vialPosY -{vialDistY}
 /control/alias vialDistX 0
 /control/alias vialPosX {vialDistX}
-/control/alias vialBaseDistZ 0
+/control/alias vialBaseDistZ 5
 /control/alias vialBasePosZ -{vialBaseDistZ}
 /vial/positionX {vialPosX} mm
 /vial/positionY {vialPosY} mm
+/vial/basePosZ {vialBasePosZ} mm
 /control/alias sourceRadius 3 
 /control/multiply sourceDiameter {sourceRadius} 2 
 /control/add outerVialDiameter {sourceDiameter} 2 
 /vial/innerDiameter {sourceDiameter} mm
 /vial/outerDiameter {outerVialDiameter} mm
-/control/alias vialHeight 20 
+/control/alias vialHeight 12 
 /control/alias vialBase 1 
-/control/add vialHeightWbase {vialHeight} 1 
-/control/multiply halfVialHeight {vialHeight} .5
-/vial/height {vialHeightWbase} mm
+/control/subtract vialHeightNoBase {vialHeight} {vialBase}
+/control/subtract liquidVialHeight {vialHeightNoBase} {vialBase}
+/control/multiply halfLiquidVialHeight {liquidVialHeight} .5
+/vial/height {vialHeight} mm
 /vial/base {vialBase} mm
+/control/multiply halfVialHeight {vialHeight} .5
 /control/add vialPosZ {vialBasePosZ} -{halfVialHeight}
-/vial/positionZ {vialBasePosZ} mm
 
 /run/reinitializeGeometry
 
@@ -74,7 +76,7 @@
 /gps/pos/type Volume
 /gps/pos/shape Cylinder
 /gps/pos/centre {vialPosX} {vialPosY} {vialPosZ} mm
-/gps/pos/halfz {halfVialHeight} mm
+/gps/pos/halfz {halfLiquidVialHeight} mm
 /gps/pos/radius {sourceRadius} mm
 /gps/direction 0 0 1
 /gps/energy 0 eV
@@ -88,6 +90,6 @@
 /run/printProgress 100000000
 
 #/tracking/verbose 2
-/control/alias nEvents 200000000
+/control/alias nEvents 200000
 /analysis/setFileName lenaVialSourceDiameter{sourceDiameter}mmWwater{nEvents}eventsReflectivity{reflectivityPar}yPos{vialDistY}mmxPos{vialDistX}mmzPos{vialBaseDistZ}mm.root
 /run/beamOn {nEvents}
