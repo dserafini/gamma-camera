@@ -100,7 +100,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerVial = new G4GenericMessenger(this, "/vial/", "Vial Construction");
 	fMessengerVial->DeclareProperty("exist", vialExist, "true or false");
 	fMessengerVial->DeclarePropertyWithUnit("positionX", "mm", vial_posX, "X position of the vial");
-	fMessengerVial->DeclarePropertyWithUnit("positionY", "mm", vial_posY, "X position of the vial");
+	fMessengerVial->DeclarePropertyWithUnit("positionY", "mm", vial_posY, "Y position of the vial");
 	fMessengerVial->DeclarePropertyWithUnit("positionZ", "mm", vial_base_posZ, "Z position of the vial base");
 	fMessengerVial->DeclarePropertyWithUnit("innerDiameter", "mm", vial_inner_diameter, "inner radius of the vial");
 	fMessengerVial->DeclarePropertyWithUnit("outerDiameter", "mm", vial_outer_diameter, "outer radius of the vial");
