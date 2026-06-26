@@ -11,7 +11,7 @@ NEVENTS="100000000"
 NEVENTSPROG=$(( NEVENTS / 1000 ))
 
 # scan Z (in cm nel nome, ma mm nella macro)
-for ZPOS in $(seq 0 1 10); do
+for ZPOS in $(seq 20 10 30); do
 
     echo ">>> [START] Z = ${ZPOS} mm"
 
