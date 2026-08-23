@@ -42,6 +42,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	fMessengerScintillator->DeclarePropertyWithUnit("scinti_pixel_size", "mm", scinti_pixel_size, "Size of the scintillator pixels");
 	fMessengerScintillator->DeclareProperty("exist", scintillatorExist, "true or false");
 	fMessengerScintillator->DeclareProperty("surfaceReflectivity", scintiRodReflectivity, "factor from 0 to 1");
+	fMessengerScintillator->DeclarePropertyWithUnit("collimatorDistance", "mm", coll_scinti_distance, "Distance collimator--scintillator");
 	
 	// scintillator parameters
 	scintillatorExist = true; // by default the scintillator is built
@@ -53,6 +54,7 @@ MyDetectorConstruction::MyDetectorConstruction()
 	scinti_hole_thickness = scinti_pixel_size - scinti_septa_thickness;
 	fScoringScintillator = 0;
 	scintiRodReflectivity = 0.94;
+	coll_scinti_distance = 0.;
 
 	// coupler commands
 	fMessengerCoupler = new G4GenericMessenger(this, "/coupler/", "Optical coupling element");
@@ -603,7 +605,7 @@ void MyDetectorConstruction::ConstructSlabScintillator()
 	logicScintillator = new G4LogicalVolume(solidScintillator, materialGAGG, "logicScintillator");
 
 	physScintillator = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,hole_length + slab_depth/2.),
+		G4ThreeVector(0.,0.,hole_length + coll_scinti_distance + slab_depth/2.),
 		logicScintillator,             // its logical volume
 		"physScintillator",           // its name
 		logicWorld,                  // its mother volume
@@ -648,7 +650,7 @@ void MyDetectorConstruction::ConstructEpicPixelScintillator()
 	G4cout << "defining the scintillator case" << G4endl;
 	solidScintillatorAluminumCase = new G4Box("solidScintillatorAluminumCase", scinti_case_side/2., scinti_case_side/2., scinti_case_depth/2.);
 	logicScintillatorAluminumCase = new G4LogicalVolume(solidScintillatorAluminumCase, materialAluminum, "logicScintillatorAluminumCase");
-	new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + scinti_case_depth/2.), logicScintillatorAluminumCase, "physScintillatorAluminumCase", logicWorld, false, 0, true);
+	new G4PVPlacement(0, G4ThreeVector(0.,0.,hole_length + coll_scinti_distance + scinti_case_depth/2.), logicScintillatorAluminumCase, "physScintillatorAluminumCase", logicWorld, false, 0, true);
 
 	// BaSO4 reflector case
 	G4cout << "defining the scintillator case" << G4endl;
@@ -690,7 +692,7 @@ void MyDetectorConstruction::ConstructCoupler()
 	solidCoupler = new G4Box("solidScintillator", slab_side/2., slab_side/2., detector_scintillator_distance/2.);
 	logicCoupler = new G4LogicalVolume(solidCoupler, materialOpticalCoupler, "logicCoupler");
 	physCoupler = new G4PVPlacement(0,  // no rotation
-		G4ThreeVector(0.,0.,hole_length + scinti_case_depth + detector_scintillator_distance/2.),
+		G4ThreeVector(0.,0.,hole_length + coll_scinti_distance + scinti_case_depth + detector_scintillator_distance/2.),
 		logicCoupler,             // its logical volume
 		"physCoupler",           // its name
 		logicWorld,                  // its mother volume
@@ -742,7 +744,7 @@ void MyDetectorConstruction::ConstructHamaPixelDetector()
 	channel_dead_space = det_channel_dead_space;
 	det_pixel_active_size = det_channel_active_side;
 	detector_depth = det_pwb_case_thickness;
-	detector_centre_position = G4ThreeVector(0.,0.,hole_length + scinti_case_depth + detector_scintillator_distance + detector_depth/2.);
+	detector_centre_position = G4ThreeVector(0.,0.,hole_length + coll_scinti_distance + scinti_case_depth + detector_scintillator_distance + detector_depth/2.);
 
 	// check proper parameters
 	G4cout << "det_pixel_size: " << det_pixel_size / mm << " mm" << G4endl;

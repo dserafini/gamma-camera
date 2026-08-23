@@ -131,6 +131,7 @@ private:
 	G4int holes_number;
 	G4bool collimatorExist;
 	G4double collimator_posX, collimator_posY;
+	G4double coll_scinti_distance;
 	
 	// scintillator
 	G4double slab_depth, slab_side, scinti_pixel_size, scinti_septa_thickness, scinti_hole_thickness, scinti_hole_length;

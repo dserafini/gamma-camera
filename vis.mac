@@ -21,6 +21,7 @@
 ################################################################################
 /scintillator/exist true
 /scintillator/pixel matrix
+/scintillator/collimatorDistance 5. mm
 #/scintillator/slab_side 24. mm
 #/scintillator/slab_depth 26. mm
 #/scintillator/scinti_pixel_size 3. mm
